@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TWINS</string>
+    <string name="play">PLAY</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="score">Score</string>
+</resources>
