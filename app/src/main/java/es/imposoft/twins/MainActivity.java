@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         cards = new Card[maxCards];
         fillArray();
         createCards();
+        showCards3Secs();
     }
 
 
@@ -41,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
     public void changeSprite(View view) {
         if(tapCounter == 0) startChronometer();
         if(restantMatches == 0) stopChronometer();
-        cards[randomPosition(maxCards)].turnCard();
+        for (int i = 0; i < cards.length; i++) {
+            if (cards[i].getCardButton().getId() == view.getId()) {
+                cards[i].turnCard();
+            }
+        }
         tapCounter++;
     }
 
@@ -53,10 +59,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void createCards() {
-        for (int i = 0; i < maxCards; i++)
-            cards[i] = new Card(buttons[i], context);
+    private void showCards3Secs() {
 
+    }
+
+    private void createCards() {
+        for (int i = 0; i < maxCards; i++) {
+            cards[i] = new Card(buttons[i], context);
+            cards[i].setFrontImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.emoji0));
+        }
     }
 
     private void stopChronometer() {

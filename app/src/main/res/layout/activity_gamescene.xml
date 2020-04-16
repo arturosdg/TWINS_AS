@@ -11,13 +11,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="startChronometer"
-            android:text="@string/start" />
-
         <Chronometer
             android:id="@+id/text_timer"
             android:layout_width="wrap_content"
@@ -25,13 +18,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
-
-        <Button
-            android:id="@+id/button_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="stopChronometer"
-            android:text="@string/stop" />
 
         <TextView
             android:id="@+id/text_score"

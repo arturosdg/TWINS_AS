@@ -31,7 +31,22 @@ public class Card {
         return new BitmapDrawable(contextScene.getResources(),frontImage);
     }
 
+    public void setFrontImage(Bitmap frontImage) {
+        this.frontImage = frontImage;
+        cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),frontImage));
+    }
+
+    public Button getCardButton() {
+        return cardButton;
+    }
+
     public boolean isTurned() { return turned; }
 
-    public void turnCard() { turned = !turned; }
+    public void turnCard() {
+        if (turned) {
+            cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),frontImage));
+        } else {
+            cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),backImage));
+        }
+        turned = !turned; }
 }
