@@ -1,5 +1,6 @@
 package es.imposoft.twins;
 
+import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -13,11 +14,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int maxCards;
     Button[] buttons;
+    public Context context;
+    public Card exampleCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startgame);
+
     }
 
     public void play(View view) {
@@ -25,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
         maxCards = 16;
         buttons = new Button[maxCards];
         fillArray();
+        exampleCard = new Card(buttons[0],context);
     }
 
     //Method change: cuando se descubre la ultima pareja, el chronometro se para
     public void stopChronometer(View view) {
         ((Chronometer) findViewById(R.id.text_timer)).stop();
+        buttons[0].setBackground(exampleCard.getBackImage());
     }
 
     //Method change: con el primer click en la carta es cuando se inicia el chronometro
@@ -41,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
-        //int[] aux = CardImageController.matchingCards(maxCards);
-        for(int i = 0; i < maxCards; i++)
-            //if (aux[ i ] == i || aux[ i ] == i / 2)
-                buttons[ i ].setBackgroundResource(R.drawable.boo);
+        System.out.println("Test " + view.getId());
+        if(view.getId() == buttons[0].getId()) {
+            //int[] aux = CardImageController.matchingCards(maxCards);
+            for (int i = 0; i < maxCards; i++)
+                //if (aux[ i ] == i || aux[ i ] == i / 2)
+                buttons[i].setBackgroundResource(R.drawable.boo);
+        }
     }
 
     private void fillArray(){
