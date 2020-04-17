@@ -11,8 +11,9 @@ public class Card {
 
     public Bitmap frontImage, backImage;
     public Button cardButton;
-    public boolean turned;
+    public boolean visible;
     public Context contextScene;
+
 
     public Card(Button button, Context context) {
         contextScene = context;
@@ -21,7 +22,7 @@ public class Card {
         backImage = bitBack;
         frontImage = bitFront;
         cardButton = button;
-        turned = false;
+        visible = false;
     }
 
     public Drawable getBackImage() {
@@ -33,20 +34,21 @@ public class Card {
 
     public void setFrontImage(Bitmap frontImage) {
         this.frontImage = frontImage;
-        cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),frontImage));
     }
 
     public Button getCardButton() {
         return cardButton;
     }
 
-    public boolean isTurned() { return turned; }
+    public boolean isVisible() { return visible; }
 
     public void turnCard() {
-        if (turned) {
+        if (!visible) {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),frontImage));
         } else {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),backImage));
         }
-        turned = !turned; }
+        visible = !visible;
+    }
+
 }

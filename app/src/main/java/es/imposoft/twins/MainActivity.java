@@ -6,10 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     int tapCounter;
     private int restantMatches;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +39,40 @@ public class MainActivity extends AppCompatActivity {
         cards = new Card[maxCards];
         fillArray();
         createCards();
-        showCards3Secs();
+        assignCardTheme("emoji");
     }
+
+
 
 
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
-        if(tapCounter == 0) startChronometer();
-        if(restantMatches == 0) stopChronometer();
-        for (int i = 0; i < cards.length; i++) {
-            if (cards[i].getCardButton().getId() == view.getId()) {
-                cards[i].turnCard();
+        if(tapCounter == 0) {
+            turnAllCards();
+
+            Handler secs3 = new Handler();
+            secs3.postDelayed(new Runnable() {
+                public void run() {
+                    turnAllCards();
+                    startChronometer();
+                }
+            }, 3000);
+
+        } else {
+            if (restantMatches == 0) stopChronometer();
+            for (Card card : cards) {
+                if (card.getCardButton().getId() == view.getId()) {
+                    card.turnCard();
+                }
             }
         }
         tapCounter++;
+    }
+
+    private void turnAllCards() {
+        for (int i = 0; i < cards.length; i++) {
+            cards[i].turnCard();
+        }
     }
 
     private void fillArray(){
@@ -59,14 +83,47 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showCards3Secs() {
 
+    /**
+     * Formato de nombre de imagen: "tema + numero"
+     * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
+     * (ya que tenemos 16 cartas)*/
+    private void assignCardTheme(String theme) {
+        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        for (int i = 0; i < cards.length; i++) {
+            numeros.add(i);
+        }
+
+        int aleatorio;
+        int posicion;
+        ArrayList<Card> barajadas = new ArrayList<Card>();
+
+        while (!numeros.isEmpty()) {
+            aleatorio = (int) (Math.random()*numeros.size());
+            posicion = numeros.get(aleatorio);
+            numeros.remove(aleatorio);
+
+            barajadas.add(cards[posicion]);
+
+        }
+
+        ArrayList<Integer> images = new ArrayList<Integer>();
+
+        for (int i = 0; i < 8; i++) {
+            images.add(getResources().getIdentifier(theme + i, "drawable", getPackageName()));
+
+        }
+
+        for (int i = 0; i < barajadas.size(); i++) {
+
+            barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
+        }
     }
 
     private void createCards() {
+
         for (int i = 0; i < maxCards; i++) {
             cards[i] = new Card(buttons[i], context);
-            cards[i].setFrontImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.emoji0));
         }
     }
 
