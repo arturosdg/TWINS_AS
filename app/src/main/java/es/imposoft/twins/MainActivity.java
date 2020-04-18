@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
-        if(tapCounter == 0) {
+        if(tapCounter == 0) {   // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
             turnAllCards();
-
+            //  Espera 3 segundos hasta que se vuelvan a girar
             Handler secs3 = new Handler();
             secs3.postDelayed(new Runnable() {
                 public void run() {
