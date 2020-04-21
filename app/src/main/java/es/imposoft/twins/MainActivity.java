@@ -2,6 +2,7 @@ package es.imposoft.twins;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Card[] cards;
     Context context;
     int tapCounter;
+    int score = 10;
     private int restantMatches;
     List<Card> pairs = new ArrayList<>();
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
         maxCards = 16;
+        score = 0;
         restantMatches = maxCards / 2;
         buttons = new Button[maxCards];
         cards = new Card[maxCards];
@@ -65,8 +68,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testScoreboard(View view){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        score = sp.getInt("Score", 0);
+
+        score += 10;
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("Score", score); //similar way you can push integer values
+        editor.commit();
+
         Intent intent = new Intent(MainActivity.this, Popup.class);
         intent.putExtra("TYPE", Popup.WindowType.SCOREBOARD);
+        intent.putExtra("SCORE",score);
         startActivityForResult(intent,1);
     }
 
