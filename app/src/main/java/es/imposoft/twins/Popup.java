@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.Button;
 
 public class Popup extends Activity {
+    enum WindowType{
+        WARNING,
+        SCOREBOARD
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popupwindow);
+        Bundle extras = getIntent().getExtras();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -20,24 +24,38 @@ public class Popup extends Activity {
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
-        getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
+        if(extras.get("TYPE") == WindowType.WARNING){
+            setContentView(R.layout.activity_popupwindow);
 
-        final Button acceptButton = findViewById(R.id.acceptButton);
+            getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
 
-        acceptButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent returnIntent = new Intent();
-                setResult(Activity.RESULT_OK, returnIntent);
-                finish();
-            }
-        });
+            final Button acceptButton = findViewById(R.id.acceptButton);
 
-        final Button cancelButton = findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+            acceptButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent returnIntent = new Intent();
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }
+            });
+
+            final Button cancelButton = findViewById(R.id.cancelButton);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        } else if(extras.get("TYPE") == WindowType.SCOREBOARD){
+            setContentView(R.layout.activity_popupscoreboard);
+            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.9));
+
+            final Button cancelButton = findViewById(R.id.cancelButton);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 
 
