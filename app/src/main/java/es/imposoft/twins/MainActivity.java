@@ -1,6 +1,7 @@
 package es.imposoft.twins;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -90,18 +91,19 @@ public class MainActivity extends AppCompatActivity {
                     card.turnCard();
                     pairs.add(card);
                     if(pairs.size() == 2) {
-                        if (pairs.get(0).getCardButton().getBackground().equals(pairs.get(1).getCardButton().getBackground())) {
+                        if (pairs.get(0).equals(pairs.get(1))) {
                             restantMatches--;
                             pairs.get(0).setPaired();
                             pairs.get(1).setPaired();
                             pairs.clear();
                         } else {
-                            Handler secs15 = new Handler();
-                            secs15.postDelayed(new Runnable() {
+                            Handler secs5 = new Handler();
+                            secs5.postDelayed(new Runnable() {
                                 public void run() {
                                     turnVisibleCards();
                                 }
-                            }, 1500);
+                            }, 500);
+                            pairs.clear();
                         }
                     }
                 }

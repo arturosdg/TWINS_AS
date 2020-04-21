@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
+
 public class Card {
 
     public Bitmap frontImage, backImage;
@@ -60,4 +62,8 @@ public class Card {
         }
     }
 
+
+    public boolean equals(Card card) {
+        return this.frontImage.equals(card.frontImage);
+    }
 }
