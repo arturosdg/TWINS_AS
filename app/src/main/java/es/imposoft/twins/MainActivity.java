@@ -15,6 +15,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     Card[] cards;
     Context context;
     int tapCounter;
+
+    int escore = 0, acertadosSeguidos = 0;
+    boolean anteriorAcertada = false;
+
     int score = 10;
     private int restantMatches;
     List<Card> pairs = new ArrayList<>();
@@ -108,8 +113,10 @@ public class MainActivity extends AppCompatActivity {
                             restantMatches--;
                             pairs.get(0).setPaired();
                             pairs.get(1).setPaired();
+                            actualizarControladorDePuntos(10);
                             pairs.clear();
                         } else {
+                            actualizarControladorDePuntos(-3);
                             Handler secs1 = new Handler();
                             secs1.postDelayed(new Runnable() {
                                 public void run() {
@@ -124,6 +131,21 @@ public class MainActivity extends AppCompatActivity {
         }
         tapCounter++;
         System.out.println(tapCounter + " parejas restantes:" + restantMatches);
+    }
+
+    private void actualizarControladorDePuntos(int aSumar) {
+        escore += aSumar;
+        if (aSumar < 0) {
+            anteriorAcertada = false;
+            acertadosSeguidos = 0;
+        } else {
+            if (anteriorAcertada) {
+                    escore += Math.pow(2, acertadosSeguidos);
+            }
+            acertadosSeguidos++;
+            anteriorAcertada = true;
+        }
+        ((TextView) findViewById(R.id.text_score)).setText("Score: " + escore);
     }
 
     private void turnAllCards() {
