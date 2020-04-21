@@ -51,8 +51,8 @@ public class Popup extends Activity {
             getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.9));
 
             final TextView score = findViewById(R.id.score);
-
-            score.setText(""+extras.get("SCORE"));
+            Scoreboard scoreboard = (Scoreboard) extras.get("SCORE");
+            score.setText(scoreboard.getHighscores().toString());
 
             final Button cancelButton = findViewById(R.id.cancelButton);
             cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +62,4 @@ public class Popup extends Activity {
             });
         }
     }
-
-
 }
