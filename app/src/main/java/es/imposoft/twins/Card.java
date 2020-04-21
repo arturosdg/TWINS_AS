@@ -11,7 +11,7 @@ public class Card {
 
     public Bitmap frontImage, backImage;
     public Button cardButton;
-    public boolean visible;
+    public boolean visible, isPaired;
     public Context contextScene;
 
 
@@ -23,6 +23,7 @@ public class Card {
         frontImage = bitFront;
         cardButton = button;
         visible = false;
+        isPaired = false;
     }
 
     public Drawable getBackImage() {
@@ -42,6 +43,8 @@ public class Card {
 
     public boolean isVisible() { return visible; }
 
+    public void setPaired() { isPaired = true; }
+
     public void turnCard() {
         if (!visible) {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),frontImage));
@@ -49,6 +52,12 @@ public class Card {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),backImage));
         }
         visible = !visible;
+    }
+    public void turnVisibleCards() {
+        if(visible && !isPaired)  {
+            cardButton.setBackground(new BitmapDrawable(contextScene.getResources(),backImage));
+            visible = !visible;
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package es.imposoft.twins;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     int tapCounter;
     private int restantMatches;
+    List<Card> pairs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,18 +77,42 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             if (restantMatches == 0) stopChronometer();
+            //for (Card card : cards) {
             for (Card card : cards) {
                 if (card.getCardButton().getId() == view.getId()) {
                     card.turnCard();
+                    pairs.add(card);
+                    if(pairs.size() == 2) {
+                        if (pairs.get(0).getCardButton().getBackground().equals(pairs.get(1).getCardButton().getBackground())) {
+                            restantMatches--;
+                            pairs.get(0).setPaired();
+                            pairs.get(1).setPaired();
+                            pairs.clear();
+                        } else {
+                            Handler secs15 = new Handler();
+                            secs15.postDelayed(new Runnable() {
+                                public void run() {
+                                    turnVisibleCards();
+                                }
+                            }, 1500);
+                        }
+                    }
                 }
             }
         }
         tapCounter++;
+        System.out.println(tapCounter + " parejas restantes:" + restantMatches);
     }
 
     private void turnAllCards() {
         for (int i = 0; i < cards.length; i++) {
             cards[i].turnCard();
+        }
+    }
+
+    private void turnVisibleCards() {
+        for (int i = 0; i < cards.length; i++) {
+            cards[i].turnVisibleCards();
         }
     }
 
@@ -116,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             aleatorio = (int) (Math.random()*numeros.size());
             posicion = numeros.get(aleatorio);
             numeros.remove(aleatorio);
-
             barajadas.add(cards[posicion]);
 
         }
@@ -125,17 +151,13 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 8; i++) {
             images.add(getResources().getIdentifier(theme + i, "drawable", getPackageName()));
-
         }
-
         for (int i = 0; i < barajadas.size(); i++) {
-
             barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
         }
     }
 
     private void createCards() {
-
         for (int i = 0; i < maxCards; i++) {
             cards[i] = new Card(buttons[i], context);
         }
