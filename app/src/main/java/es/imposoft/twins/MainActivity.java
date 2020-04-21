@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
                             pairs.get(1).setPaired();
                             pairs.clear();
                         } else {
-                            Handler secs5 = new Handler();
-                            secs5.postDelayed(new Runnable() {
+                            Handler secs1 = new Handler();
+                            secs1.postDelayed(new Runnable() {
                                 public void run() {
                                     turnVisibleCards();
                                 }
-                            }, 500);
+                            }, 1500);
                             pairs.clear();
                         }
                     }
