@@ -1,7 +1,6 @@
 package es.imposoft.twins;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFinishPressed(View view){
-        startActivityForResult(new Intent(MainActivity.this, Popup.class),0);
+        Intent intent = new Intent(MainActivity.this, Popup.class);
+        intent.putExtra("TYPE", Popup.WindowType.WARNING);
+        startActivityForResult(intent,0);
     }
 
     @Override
@@ -60,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_startgame);
             }
         }
+    }
+
+    public void testScoreboard(View view){
+        Intent intent = new Intent(MainActivity.this, Popup.class);
+        intent.putExtra("TYPE", Popup.WindowType.SCOREBOARD);
+        startActivityForResult(intent,1);
     }
 
     @SuppressLint("WrongViewCast")

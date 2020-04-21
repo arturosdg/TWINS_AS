@@ -7,10 +7,30 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <TextView
-                android:text="Prueba de Ventana"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="47dp" android:background="#FF9800" android:textAlignment="center"
+                android:gravity="center">
+            <TextView
+                    android:text="Advertencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="31dp" android:id="@+id/textView" android:textSize="24sp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="306dp">
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"/>
+            <TextView
+                    android:text="Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp" android:id="@+id/textView2" android:textSize="24sp"
+                    android:textAlignment="center"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

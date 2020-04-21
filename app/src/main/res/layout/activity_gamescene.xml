@@ -21,7 +21,7 @@
 
         <TextView
                 android:id="@+id/text_score"
-                android:layout_width="302dp"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -29,8 +29,13 @@
                 android:text="@string/score"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
         <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/testButton" android:layout_weight="1"
+                android:onClick="testScoreboard"/>
+        <Button
                 android:text="Finalizar"
-                android:layout_width="192dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/finishButton" android:layout_weight="1"
                 android:onClick="onFinishPressed"/>
     </LinearLayout>
