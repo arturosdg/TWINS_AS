@@ -1,5 +1,7 @@
 package es.imposoft.twins;
 
+import android.content.Intent;
+import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     int tapCounter;
     private int restantMatches;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -42,8 +43,21 @@ public class MainActivity extends AppCompatActivity {
         assignCardTheme("emoji");
     }
 
+    public void onFinishPressed(View view){
+        startActivityForResult(new Intent(MainActivity.this, Popup.class),0);
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                setContentView(R.layout.activity_startgame);
+            }
+        }
+    }
 
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
