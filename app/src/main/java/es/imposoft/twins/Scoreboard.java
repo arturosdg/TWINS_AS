@@ -24,7 +24,7 @@ public class Scoreboard implements Parcelable {
         Collections.sort(highscores);
         int size = highscores.size();
         if(size>3) {
-            highscores = highscores.subList(size - MAX_SCORES+1, size);
+            highscores = highscores.subList(size - MAX_SCORES, size);
         }
         return highscores;
     }

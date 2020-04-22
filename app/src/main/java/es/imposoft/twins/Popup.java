@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.*;
 
 public class Popup extends Activity {
     enum WindowType{
@@ -48,11 +47,16 @@ public class Popup extends Activity {
             });
         } else if(extras.get("TYPE") == WindowType.SCOREBOARD){
             setContentView(R.layout.activity_popupscoreboard);
-            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.9));
+            ListView scoreList = findViewById(R.id.scoreList);
 
-            final TextView score = findViewById(R.id.score);
             Scoreboard scoreboard = (Scoreboard) extras.get("SCORE");
-            score.setText(scoreboard.getHighscores().toString());
+
+            final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, scoreboard.getHighscores());
+
+            scoreList.setAdapter(arrayAdapter);
+            arrayAdapter.notifyDataSetChanged();
+
+            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.9));
 
             final Button cancelButton = findViewById(R.id.cancelButton);
             cancelButton.setOnClickListener(new View.OnClickListener() {
