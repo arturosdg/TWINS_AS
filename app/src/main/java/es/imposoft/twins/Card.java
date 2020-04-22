@@ -45,7 +45,10 @@ public class Card {
 
     public boolean isVisible() { return visible; }
 
-    public void setPaired() { isPaired = true; }
+    public void setPaired() {
+        isPaired = true;
+        cardButton.setClickable(false);
+    }
 
     public void turnCard() {
         if (!visible) {

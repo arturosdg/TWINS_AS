@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     int tapCounter;
     Scoreboard scoreboard;
 
-    int acertadosSeguidos = 0;
-    boolean anteriorAcertada = false;
+    int acertadosSeguidos;
+    boolean anteriorAcertada;
 
-    int score = 0;
+    int score;
     private int restantMatches;
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
 
+        tapCounter = 0;
         maxCards = 16;
         restantMatches = maxCards / 2;
 
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         score = 0;
         scoreboard = new Scoreboard();
+
+        acertadosSeguidos = 0;
+        anteriorAcertada = false;
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sp);
@@ -111,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             }, 3000);
 
         } else {
-            if (restantMatches == 0) stopChronometer();
-            //for (Card card : cards) {
             for (Card card : cards) {
                 if (card.getCardButton().getId() == view.getId()) {
                     card.turnCard();
@@ -124,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                             pairs.get(1).setPaired();
                             actualizarControladorDePuntos(10);
                             pairs.clear();
+                            stopChronometer();
                         } else {
                             actualizarControladorDePuntos(-3);
                             Handler secs1 = new Handler();
@@ -132,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                                     turnVisibleCards();
                                 }
                             }, 1500);
-
                             pairs.clear();
                         }
                     }
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         tapCounter++;
-        System.out.println(tapCounter + " parejas restantes:" + restantMatches);
+        System.out.println(restantMatches);
     }
 
     private void actualizarControladorDePuntos(int aSumar) {
@@ -159,15 +161,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void turnAllCards() {
-        for (int i = 0; i < cards.length; i++) {
-            cards[i].turnCard();
+        for (Card card : cards) {
+            card.turnCard();
         }
         setClickable(buttons);
     }
 
     private void turnVisibleCards() {
-        for (int i = 0; i < cards.length; i++) {
-            cards[i].turnVisibleCards();
+        for (Card card : cards) {
+            card.turnVisibleCards();
         }
     }
 
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopChronometer() {
-        ((Chronometer) findViewById(R.id.text_timer)).stop();
+        if(restantMatches == 0) ((Chronometer) findViewById(R.id.text_timer)).stop();
     }
 
     private void startChronometer() {
@@ -227,14 +229,9 @@ public class MainActivity extends AppCompatActivity {
         ((Chronometer) findViewById(R.id.text_timer)).start();
     }
 
-    private static int randomPosition(int maxPos) {
-        return (int) (Math.random() * (maxPos));
-    }
-
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) { b.setClickable(isClickable); }
         isClickable = !isClickable;
     }
-
 
 }
