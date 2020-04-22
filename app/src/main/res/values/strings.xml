@@ -4,4 +4,5 @@
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="score">Score</string>
+    <string name="finalizar">Finalizar</string>
 </resources>

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content" android:id="@+id/testButton" android:layout_weight="1"
                 android:onClick="testScoreboard"/>
         <Button
-                android:text="Finalizar"
+                android:text="@string/finalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/finishButton" android:layout_weight="1"
                 android:onClick="onFinishPressed"/>
@@ -49,7 +49,7 @@
 
         <Button
             android:id="@+id/imgPos0"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -58,7 +58,7 @@
 
         <Button
             android:id="@+id/imgPos1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -67,7 +67,7 @@
 
         <Button
             android:id="@+id/imgPos2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -76,7 +76,7 @@
 
         <Button
             android:id="@+id/imgPos3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -94,7 +94,7 @@
 
         <Button
             android:id="@+id/imgPos4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -103,7 +103,7 @@
 
         <Button
             android:id="@+id/imgPos5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -112,7 +112,7 @@
 
         <Button
             android:id="@+id/imgPos6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -121,7 +121,7 @@
 
         <Button
             android:id="@+id/imgPos7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -138,7 +138,7 @@
 
         <Button
             android:id="@+id/imgPos8"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -147,7 +147,7 @@
 
         <Button
             android:id="@+id/imgPos9"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -156,7 +156,7 @@
 
         <Button
             android:id="@+id/imgPos10"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -165,7 +165,7 @@
 
         <Button
             android:id="@+id/imgPos11"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -182,7 +182,7 @@
 
         <Button
             android:id="@+id/imgPos12"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -191,7 +191,7 @@
 
         <Button
             android:id="@+id/imgPos13"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -200,7 +200,7 @@
 
         <Button
             android:id="@+id/imgPos14"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
@@ -209,7 +209,7 @@
 
         <Button
             android:id="@+id/imgPos15"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
