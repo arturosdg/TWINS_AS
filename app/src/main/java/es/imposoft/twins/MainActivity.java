@@ -2,6 +2,7 @@ package es.imposoft.twins;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     Card[] cards;
     Context context;
     int tapCounter;
+    Scoreboard scoreboard;
+
+    int acertadosSeguidos = 0;
+    boolean anteriorAcertada = false;
+
+    int score = 0;
     private int restantMatches;
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
@@ -38,13 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
+
         maxCards = 16;
         restantMatches = maxCards / 2;
+
         buttons = new Button[maxCards];
         cards = new Card[maxCards];
         isClickable = false;
+
+        score = 0;
+        scoreboard = new Scoreboard();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        scoreboard.loadHighscores(sp);
+
         fillArray();
         createCards();
+
         assignCardTheme("emoji");
     }
 
@@ -67,8 +85,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testScoreboard(View view){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        scoreboard.addScore(score);
+        scoreboard.saveHighscores(sp);
+
         Intent intent = new Intent(MainActivity.this, Popup.class);
+        intent.putExtra("SCORE",scoreboard);
         intent.putExtra("TYPE", Popup.WindowType.SCOREBOARD);
+
         startActivityForResult(intent,1);
     }
 
@@ -97,8 +122,10 @@ public class MainActivity extends AppCompatActivity {
                             restantMatches--;
                             pairs.get(0).setPaired();
                             pairs.get(1).setPaired();
+                            actualizarControladorDePuntos(10);
                             pairs.clear();
                         } else {
+                            actualizarControladorDePuntos(-3);
                             Handler secs1 = new Handler();
                             secs1.postDelayed(new Runnable() {
                                 public void run() {
@@ -114,6 +141,21 @@ public class MainActivity extends AppCompatActivity {
         }
         tapCounter++;
         System.out.println(tapCounter + " parejas restantes:" + restantMatches);
+    }
+
+    private void actualizarControladorDePuntos(int aSumar) {
+        score += aSumar;
+        if (aSumar < 0) {
+            anteriorAcertada = false;
+            acertadosSeguidos = 0;
+        } else {
+            if (anteriorAcertada) {
+                    score += Math.pow(2, acertadosSeguidos);
+            }
+            acertadosSeguidos++;
+            anteriorAcertada = true;
+        }
+        ((TextView) findViewById(R.id.text_score)).setText("Score: " + score);
     }
 
     private void turnAllCards() {

@@ -4,8 +4,16 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+            android:text="PUNTUACION"
+            android:layout_width="match_parent"
+            android:layout_height="55dp" android:id="@+id/textView3" android:layout_gravity="center"
+            android:gravity="center" android:textSize="24sp" android:textStyle="bold"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="503dp" android:id="@+id/scoreList"/>
     <Button
-            android:text="Button"
+            android:text="Cerrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/cancelButton"/>
 </LinearLayout>
