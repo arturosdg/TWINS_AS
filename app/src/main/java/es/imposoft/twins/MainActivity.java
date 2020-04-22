@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, Popup.class);
         intent.putExtra("SCORE",scoreboard);
+        intent.putExtra("LAST",score);
         intent.putExtra("TYPE", Popup.WindowType.SCOREBOARD);
 
         startActivityForResult(intent,1);
