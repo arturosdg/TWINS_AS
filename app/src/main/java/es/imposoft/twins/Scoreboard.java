@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import java.util.*;
 
 public class Scoreboard implements Parcelable {
-    List<Integer> highscores;
+    private List<Integer> highscores;
     private int MAX_SCORES = 3;
 
     public Scoreboard(){
@@ -39,6 +39,7 @@ public class Scoreboard implements Parcelable {
         {
             highscores.add(sp.getInt("Status_" + i, 0));
         }
+
         mEdit1.clear();
         mEdit1.commit();
     }
