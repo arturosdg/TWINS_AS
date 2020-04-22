@@ -66,4 +66,6 @@ public class Card {
     public boolean equals(Card card) {
         return this.frontImage.sameAs(card.frontImage);
     }
+
+
 }

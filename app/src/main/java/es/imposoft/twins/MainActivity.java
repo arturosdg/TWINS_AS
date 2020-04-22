@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     int tapCounter;
     private int restantMatches;
+    private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
 
     @Override
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         restantMatches = maxCards / 2;
         buttons = new Button[maxCards];
         cards = new Card[maxCards];
+        isClickable = false;
         fillArray();
         createCards();
         assignCardTheme("emoji");
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                     turnVisibleCards();
                                 }
                             }, 1500);
+
                             pairs.clear();
                         }
                     }
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < cards.length; i++) {
             cards[i].turnCard();
         }
+        setClickable(buttons);
     }
 
     private void turnVisibleCards() {
@@ -184,4 +188,11 @@ public class MainActivity extends AppCompatActivity {
     private static int randomPosition(int maxPos) {
         return (int) (Math.random() * (maxPos));
     }
+
+    private void setClickable(Button[] buttons) {
+        for (Button b: buttons) { b.setClickable(isClickable); }
+        isClickable = !isClickable;
+    }
+
+
 }
