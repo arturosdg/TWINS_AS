@@ -3,7 +3,7 @@ package es.imposoft.twins;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.PopupWindow;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    Chronometer chronoTimer;
+
     private int maxCards;
     Button[] buttons;
     Card[] cards;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
 
+    long timeWhenStopped;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -47,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
 
+        chronoTimer = findViewById(R.id.text_timer);
+        timeWhenStopped = 0;
+        
         pauseTapCounter = 0;
         tapCounter = 0;
         maxCards = 16;
@@ -243,14 +250,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startChronometer() {
-        ((Chronometer) findViewById(R.id.text_timer)).setBase(SystemClock.elapsedRealtime());
-        System.out.println(((Chronometer) findViewById(R.id.text_timer)).getContentDescription());
+        chronoTimer.setBase(SystemClock.elapsedRealtime());
         //((Chronometer) findViewById(R.id.text_timer)).setCountDown(true);
-        ((Chronometer) findViewById(R.id.text_timer)).start();
-    }
-
-    private void restartChronometer() {
-        ((Chronometer) findViewById(R.id.text_timer)).start();
+        chronoTimer.start();
     }
 
     private void setClickable(Button[] buttons) {
@@ -262,8 +264,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pauseGame(View view) {
-        if(pauseTapCounter % 2 == 0) stopChronometer();
-        else restartChronometer();
+        if(pauseTapCounter % 2 == 0) {
+            timeWhenStopped = (chronoTimer.getBase() - SystemClock.elapsedRealtime());
+            chronoTimer.stop();
+        }
+        else {
+            chronoTimer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+            chronoTimer.start();
+        }
         pauseTapCounter++;
     }
 
