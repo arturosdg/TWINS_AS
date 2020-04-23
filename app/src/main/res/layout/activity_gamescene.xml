@@ -40,7 +40,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="pauseGame"
             android:text="@string/pause"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText" 
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/finishButton"

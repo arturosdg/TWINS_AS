@@ -81,13 +81,13 @@ public class Popup extends Activity {
 
         int maxStars = 0;
 
-        if(score<10){
+        if(score<8){
             maxStars = 1;
-        } else if(score<25){
+        } else if(score<20){
             maxStars = 2;
-        } else if(score<75){
+        } else if(score<40){
             maxStars = 3;
-        } else if(score<150){
+        } else if(score<60){
             maxStars = 4;
         } else {
             maxStars = 5;
