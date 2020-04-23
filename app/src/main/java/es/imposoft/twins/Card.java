@@ -20,7 +20,7 @@ public class Card {
     public Card(Button button, Context context) {
         contextScene = context;
         Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.unknown),
-               bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.boo);
+               bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.unknown);
         backImage = bitBack;
         frontImage = bitFront;
         cardButton = button;
@@ -44,6 +44,8 @@ public class Card {
     }
 
     public boolean isVisible() { return visible; }
+
+    public boolean isPaired() { return isPaired; }
 
     public void setPaired() {
         isPaired = true;

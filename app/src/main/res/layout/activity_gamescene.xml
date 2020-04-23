@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:screenOrientation="portrait">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,23 +22,28 @@
 
         <TextView
             android:id="@+id/text_score"
-            android:layout_width="134dp"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/score"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
         <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/testButton" android:layout_weight="1"
-                android:onClick="testScoreboard"/>
+            android:id="@+id/button_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="pauseGame"
+            android:text="@string/pause" />
+
         <Button
                 android:text="@string/finalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/finishButton" android:layout_weight="1"
                 android:onClick="onFinishPressed"/>
+
     </LinearLayout>
 
     <LinearLayout

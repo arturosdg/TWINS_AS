@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button[] buttons;
     Card[] cards;
     Context context;
-    int tapCounter;
+    int tapCounter, pauseTapCounter;
     Scoreboard scoreboard;
 
     int acertadosSeguidos;
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
 
+        pauseTapCounter = 0;
         tapCounter = 0;
         maxCards = 16;
         restantMatches = maxCards / 2;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void testScoreboard(View view){
+    public void testScoreboard(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         scoreboard.addScore(score);
@@ -117,35 +118,40 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             for (Card card : cards) {
-                if (card.getCardButton().getId() == view.getId()) {
-                    card.turnCard();
-                    pairs.add(card);
-                    if(pairs.size() == 2) {
-                        if (pairs.get(0).equals(pairs.get(1))) {
-                            restantMatches--;
-                            pairs.get(0).setPaired();
-                            pairs.get(1).setPaired();
-                            actualizarControladorDePuntos(10);
-                            pairs.clear();
-                            stopChronometer();
-                        } else {
-                            actualizarControladorDePuntos(-3);
-                            Handler secs1 = new Handler();
-                            secs1.postDelayed(new Runnable() {
-                                public void run() {
-                                    turnVisibleCards();
-                                }
-                            }, 1500);
-                            pairs.clear();
+                    if (card.getCardButton().getId() == view.getId()) {
+                        card.turnCard();
+                        card.getCardButton().setClickable(false);
+                        pairs.add(card);
+                        if (pairs.size() == 2) {
+                            //setClickable(buttons);
+                            if (pairs.get(0).equals(pairs.get(1))) {
+                                restantMatches--;
+                                pairs.get(0).setPaired();
+                                pairs.get(1).setPaired();
+                                actualizarControladorDePuntos(10);
+                                pairs.clear();
+                                stopChronometer();
+                            } else {
+                                actualizarControladorDePuntos(-3);
+                                Handler secs1 = new Handler();
+                                secs1.postDelayed(new Runnable() {
+                                    public void run() {
+                                        turnVisibleCards();
+                                    }
+                                }, 1000);
+                                pairs.get(0).getCardButton().setClickable(true);
+                                pairs.get(1).getCardButton().setClickable(true);
+                                pairs.clear();
+                            }
+                            //setClickable(buttons);
                         }
                     }
-                }
             }
         }
         tapCounter++;
-        System.out.println(restantMatches);
     }
 
+    @SuppressLint("SetTextI18n")
     private void actualizarControladorDePuntos(int aSumar) {
         score += aSumar;
         if (aSumar < 0) {
@@ -188,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
      * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
      * (ya que tenemos 16 cartas)*/
     private void assignCardTheme(String theme) {
-        ArrayList<Integer> numeros = new ArrayList<Integer>();
+        ArrayList<Integer> numeros = new ArrayList<>();
         for (int i = 0; i < cards.length; i++) {
             numeros.add(i);
         }
@@ -222,17 +228,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopChronometer() {
-        if(restantMatches == 0) ((Chronometer) findViewById(R.id.text_timer)).stop();
+        if(restantMatches == 0) {
+            ((Chronometer) findViewById(R.id.text_timer)).stop();
+            Handler secs1 = new Handler();
+            secs1.postDelayed(new Runnable() {
+                public void run() {
+                    testScoreboard();
+                }
+            }, 1000);
+        }
     }
 
     private void startChronometer() {
         ((Chronometer) findViewById(R.id.text_timer)).setBase(SystemClock.elapsedRealtime());
+        System.out.println(((Chronometer) findViewById(R.id.text_timer)).getContentDescription());
+        //((Chronometer) findViewById(R.id.text_timer)).setCountDown(true);
+        ((Chronometer) findViewById(R.id.text_timer)).start();
+    }
+
+    private void restartChronometer() {
         ((Chronometer) findViewById(R.id.text_timer)).start();
     }
 
     private void setClickable(Button[] buttons) {
-        for (Button b: buttons) { b.setClickable(isClickable); }
+        for (Button b: buttons) {
+            if(getButton(b).isPaired()) {}
+            else b.setClickable(isClickable);
+        }
         isClickable = !isClickable;
     }
 
+    public void pauseGame(View view) {
+        if(pauseTapCounter % 2 == 0) stopChronometer();
+        else restartChronometer();
+        pauseTapCounter++;
+    }
+
+    private Card getButton(Button button) {
+        for (Card c : cards) {
+            if(c.getCardButton() == button) return c;
+        }
+        return null;
+    }
 }

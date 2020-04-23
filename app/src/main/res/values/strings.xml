@@ -5,4 +5,6 @@
     <string name="start">Start</string>
     <string name="score">Score</string>
     <string name="finalizar">Finalizar</string>
+    <string name="scores">Scores</string>
+    <string name="pause">Pause</string>
 </resources>
