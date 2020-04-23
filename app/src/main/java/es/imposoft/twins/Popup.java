@@ -56,7 +56,7 @@ public class Popup extends Activity {
             scoreList.setAdapter(arrayAdapter);
             arrayAdapter.notifyDataSetChanged();
 
-            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.9));
+            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
             int score = (int) extras.get("LAST");
             TextView currentScore = findViewById(R.id.currentScore);
