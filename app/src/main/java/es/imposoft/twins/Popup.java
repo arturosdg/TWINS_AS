@@ -24,7 +24,8 @@ public class Popup extends Activity {
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
-        if(extras.get("TYPE") == WindowType.WARNING){
+        if(extras.get("TYPE") == WindowType.WARNING)
+        {
             setContentView(R.layout.activity_popupwindow);
 
             getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
@@ -45,7 +46,9 @@ public class Popup extends Activity {
                     finish();
                 }
             });
-        } else if(extras.get("TYPE") == WindowType.SCOREBOARD){
+        }
+        else if(extras.get("TYPE") == WindowType.SCOREBOARD)
+        {
             setContentView(R.layout.activity_popupscoreboard);
             ListView scoreList = findViewById(R.id.scoreList);
 

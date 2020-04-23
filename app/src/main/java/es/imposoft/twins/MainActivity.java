@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFinishPressed(View view){
+        //Se pide una ventana popup de tipo warning al finalizar la partida
         Intent intent = new Intent(MainActivity.this, Popup.class);
         intent.putExtra("TYPE", Popup.WindowType.WARNING);
         startActivityForResult(intent,0);
@@ -89,17 +90,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
         super.onActivityResult(requestCode, resultCode, data);
+        // Nos devuelve a la ventana principal cuando finalizamos la partida
         if (requestCode == 0) {
-            // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 setContentView(R.layout.activity_startgame);
             }
         }
     }
 
-    public void testScoreboard(){
+    public void showScoreboard(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         scoreboard.addScore(score);
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
             Handler secs1 = new Handler();
             secs1.postDelayed(new Runnable() {
                 public void run() {
-                    testScoreboard();
+                    showScoreboard();
                 }
             }, 1000);
         }
