@@ -16,6 +16,8 @@
             android:id="@+id/text_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
@@ -35,14 +37,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
             android:onClick="pauseGame"
-            android:text="@string/pause" />
+            android:text="@string/pause"
+            android:textColor="@color/colorText" />
 
         <Button
-                android:text="@string/finalizar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/finishButton" android:layout_weight="1"
-                android:onClick="onFinishPressed"/>
+            android:id="@+id/finishButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="onFinishPressed"
+            android:shadowColor="#FFFFFF"
+            android:text="@string/finalizar"
+            android:textColor="@color/colorText" />
 
     </LinearLayout>
 

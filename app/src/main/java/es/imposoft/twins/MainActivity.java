@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Scoreboard scoreboard;
 
     int acertadosSeguidos;
-    boolean anteriorAcertada;
+    boolean anteriorAcertada, pausedGame;
 
     int score;
     private int restantMatches;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         buttons = new Button[maxCards];
         cards = new Card[maxCards];
         isClickable = false;
+        pausedGame = false;
 
         score = 0;
         scoreboard = new Scoreboard();
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             for (Card card : cards) {
-                if(visibleCards < 2)
+                if(visibleCards < 2 && !pausedGame)
                     if (card.getCardButton().getId() == view.getId()) {
                         card.turnCard();
                         visibleCards++;
@@ -258,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startChronometer() {
         chronoTimer.setBase(SystemClock.elapsedRealtime());
-        //((Chronometer) findViewById(R.id.text_timer)).setCountDown(true);
+        //if game mode requires ((Chronometer) findViewById(R.id.text_timer)).setCountDown(true);
         chronoTimer.start();
     }
 
@@ -274,10 +275,12 @@ public class MainActivity extends AppCompatActivity {
         if(pauseTapCounter % 2 == 0) {
             timeWhenStopped = (chronoTimer.getBase() - SystemClock.elapsedRealtime());
             chronoTimer.stop();
+            pausedGame = !pausedGame;
         }
         else {
             chronoTimer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
             chronoTimer.start();
+            pausedGame = !pausedGame;
         }
         pauseTapCounter++;
     }
