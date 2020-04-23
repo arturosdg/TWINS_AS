@@ -119,9 +119,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             for (Card card : cards) {
                     if (card.getCardButton().getId() == view.getId()) {
-                        card.turnCard();
-                        card.getCardButton().setClickable(false);
-                        pairs.add(card);
+                        if(pairs.size()<2) {
+                            card.turnCard();
+                            card.getCardButton().setClickable(false);
+                            pairs.add(card);
+                        }
                         if (pairs.size() == 2) {
                             //setClickable(buttons);
                             if (pairs.get(0).equals(pairs.get(1))) {
