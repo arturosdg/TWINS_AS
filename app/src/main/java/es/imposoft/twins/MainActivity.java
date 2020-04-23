@@ -2,8 +2,10 @@ package es.imposoft.twins;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button[] buttons;
     Card[] cards;
     Context context;
-    int tapCounter, pauseTapCounter;
+    int tapCounter, pauseTapCounter, visibleCards;
     Scoreboard scoreboard;
 
     int acertadosSeguidos;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         tapCounter = 0;
         maxCards = 16;
         restantMatches = maxCards / 2;
+        visibleCards = 0;
 
         buttons = new Button[maxCards];
         cards = new Card[maxCards];
@@ -111,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("WrongViewCast")
-    public void changeSprite(View view) {
-        if(tapCounter == 0) {   // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
+    public void changeSprite(final View view) {
+        // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
+        if(tapCounter == 0) {
             turnAllCards();
             //  Espera 3 segundos hasta que se vuelvan a girar
             Handler secs3 = new Handler();
@@ -125,34 +129,38 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             for (Card card : cards) {
+                if(visibleCards < 2)
                     if (card.getCardButton().getId() == view.getId()) {
-                        if(pairs.size()<2) {
-                            card.turnCard();
-                            card.getCardButton().setClickable(false);
+                        card.turnCard();
+                        visibleCards++;
+                        card.getCardButton().setClickable(false);
+                        if(pairs.size()<2)  {
                             pairs.add(card);
                         }
                         if (pairs.size() == 2) {
-                            //setClickable(buttons);
                             if (pairs.get(0).equals(pairs.get(1))) {
                                 restantMatches--;
                                 pairs.get(0).setPaired();
                                 pairs.get(1).setPaired();
                                 actualizarControladorDePuntos(10);
                                 pairs.clear();
+                                visibleCards = 0;
                                 stopChronometer();
                             } else {
                                 actualizarControladorDePuntos(-3);
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
                                     public void run() {
                                         turnVisibleCards();
+                                        visibleCards = 0;
                                     }
                                 }, 1000);
                                 pairs.get(0).getCardButton().setClickable(true);
                                 pairs.get(1).getCardButton().setClickable(true);
+
                                 pairs.clear();
                             }
-                            //setClickable(buttons);
                         }
                     }
             }
