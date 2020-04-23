@@ -1,50 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="#00646464" android:visibility="visible">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00646464"
+    android:visibility="visible">
 
     <LinearLayout
-            android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="47dp" android:background="#FF9800" android:textAlignment="center"
-                android:gravity="center">
+            android:layout_height="50dp"
+            android:background="#FF9800"
+            android:gravity="clip_horizontal|center|clip_vertical"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
             <TextView
-                    android:text="Advertencia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="31dp" android:id="@+id/textView" android:textSize="24sp"
-                    android:textStyle="bold"/>
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:text="@string/advertencia"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
+                android:textStyle="bold" />
         </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/textoAdvertencia"
                 android:layout_width="match_parent"
-                android:layout_height="306dp">
-            <Space
+                android:layout_height="306dp"
+                android:orientation="vertical">
+
+                <Space
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"/>
-            <TextView
-                    android:text="Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="270dp" android:id="@+id/textView2" android:textSize="24sp"
-                    android:textAlignment="center"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_advertencia"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <Button
-                    android:text="Aceptar"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/acceptButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/acceptButton" android:layout_weight="1"
-                    android:onClick="acceptPressed"/>
-            <Button
-                    android:text="Cancelar"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="acceptPressed"
+                    android:text="@string/aceptar"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+                <Button
+                    android:id="@+id/cancelButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/cancelButton" android:layout_weight="1"
-                    android:onClick="cancelPressed"/>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cancelPressed"
+                    android:text="@string/cancelar"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
     </LinearLayout>
 </RelativeLayout>

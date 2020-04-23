@@ -7,4 +7,8 @@
     <string name="finalizar">Finalizar</string>
     <string name="scores">Scores</string>
     <string name="pause">Pause</string>
+    <string name="advertencia">Advertencia</string>
+    <string name="texto_advertencia">Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

@@ -25,6 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Chronometer chronoTimer;
+    Button pauseButton;
 
     private int maxCards;
     Button[] buttons;
@@ -53,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         setContentView(R.layout.activity_gamescene);
 
+        pauseButton = findViewById(R.id.button_pause);
+        pauseButton.setVisibility(View.INVISIBLE);
+
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
         
@@ -80,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         createCards();
 
         assignCardTheme("emoji");
+
+
     }
 
     public void onFinishPressed(View view){
@@ -125,10 +131,12 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     turnAllCards();
                     startChronometer();
+                    pauseButton.setVisibility(View.VISIBLE);
                 }
             }, 3000);
 
         } else {
+
             for (Card card : cards) {
                 if(visibleCards < 2 && !pausedGame)
                     if (card.getCardButton().getId() == view.getId()) {

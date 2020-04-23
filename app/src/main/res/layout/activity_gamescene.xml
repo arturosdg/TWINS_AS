@@ -40,8 +40,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="pauseGame"
             android:text="@string/pause"
-            android:textColor="@color/colorText" 
-            android:visibility="invisible"/>
+            android:textColor="@color/colorText"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         <Button
             android:id="@+id/finishButton"
@@ -52,7 +52,8 @@
             android:onClick="onFinishPressed"
             android:shadowColor="#FFFFFF"
             android:text="@string/finalizar"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
     </LinearLayout>
 
