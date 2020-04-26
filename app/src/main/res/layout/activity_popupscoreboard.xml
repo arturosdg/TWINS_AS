@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"/>
     <TextView
-            android:text="TOP PUNTUACIONES"
+            android:text="TOP 3"
             android:layout_width="match_parent"
             android:layout_height="55dp" android:id="@+id/textView3" android:layout_gravity="center"
             android:gravity="center" android:textSize="24sp" android:textStyle="bold" android:background="#BBDAFF"/>

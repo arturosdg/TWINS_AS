@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             acertadosSeguidos++;
             anteriorAcertada = true;
         }
-        ((TextView) findViewById(R.id.text_score)).setText("Score: " + score);
+        ((TextView) findViewById(R.id.text_score)).setText("Puntos: " + score);
     }
 
     private void turnAllCards() {
