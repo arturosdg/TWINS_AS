@@ -21,12 +21,18 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="230dp">
+        <Space
+                android:layout_width="2dp"
+                android:layout_height="169dp" android:layout_weight="1"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="220dp" android:id="@+id/firstCard" android:layout_weight="1"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="220dp" android:id="@+id/secondCard" android:layout_weight="1"/>
+        <Space
+                android:layout_width="wrap_content"
+                android:layout_height="171dp" android:layout_weight="1"/>
     </LinearLayout>
     <Button
             android:text="@string/cancelar"
