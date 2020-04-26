@@ -103,17 +103,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Nos devuelve informacion de las ventanas de popup
+        // Method executed from the popup window
         switch (requestCode){
             case 0:
+                //Called from the finish game popup
                 if (resultCode == RESULT_OK) {
                     setContentView(R.layout.activity_startgame);
                 }
             case 2:
+                //Called from the options menu
                 if (resultCode == RESULT_OK) {
                     Bundle returnInfo = data.getExtras();
                     int chosenCard = (Integer) returnInfo.get("CARD");
-                    //TODO METODO QUE CAMBIA DE BARAJA SEGUN EL INT DE CHOSEN CARD
+                    //TODO METODO QUE CAMBIA DE BARAJA SEGUN EL INT DE CHOSEN CARD DEVUELVE 1 (IZQUIERDA) O 2 (DERECHA)
                 }
         }
     }
