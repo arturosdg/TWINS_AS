@@ -67,7 +67,7 @@ public class Scoreboard implements Parcelable {
         }
     }
 
-    public String getStars(int score){
+    public String getStarsFromScore(int score){
         String stars = "";
 
         int maxStars = 0;
