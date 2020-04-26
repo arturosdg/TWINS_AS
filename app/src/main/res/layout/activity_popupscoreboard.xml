@@ -1,51 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/gameStars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/puntuacion"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:textSize="30sp"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:id="@+id/starsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="36sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gameScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameStars"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="@string/puntos"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@color/grey"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/currentScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/zero"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@color/grey" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+    </LinearLayout>
 
     <TextView
-            android:text="PUNTUACION"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView4" android:gravity="center"
-            android:textSize="30sp" android:textStyle="bold"/>
-    <Space
-            android:layout_width="match_parent"
-            android:layout_height="23dp"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/starsText" android:gravity="center"
-            android:textSize="36sp"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <TextView
-                android:text="Puntos:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_weight="1"
-                android:gravity="right" android:textSize="24sp"/>
-        <TextView
-                android:text="0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/currentScore" android:layout_weight="1"
-                android:textSize="24sp"/>
-    </LinearLayout>
-    <Space
-            android:layout_width="match_parent"
-            android:layout_height="32dp"/>
-    <TextView
-            android:text="TOP 3"
-            android:layout_width="match_parent"
-            android:layout_height="55dp" android:id="@+id/textView3" android:layout_gravity="center"
-            android:gravity="center" android:textSize="24sp" android:textStyle="bold" android:background="#BBDAFF"/>
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/gameScore"
+        android:layout_marginTop="0dp"
+        android:background="#BBDAFF"
+        android:gravity="center"
+        android:text="@string/top_scores"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
+        android:textColor="@color/grey"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <ListView
-            android:layout_width="match_parent"
-            android:layout_height="173dp" android:id="@+id/scoreList"
-    />
+        android:id="@+id/scoreList"
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:layout_above="@id/cancelButton"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="0dp" />
+
     <Button
-            android:text="Cerrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/cancelButton"/>
-</LinearLayout>
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:text="@string/cerrar"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"/>
+</RelativeLayout>
