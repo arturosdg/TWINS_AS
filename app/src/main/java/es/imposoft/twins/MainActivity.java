@@ -88,8 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onOptionsPressed(View view){
+        Intent intent = new Intent(MainActivity.this, Popup.class);
+        intent.putExtra("TYPE", Popup.WindowType.OPTIONS);
+        startActivityForResult(intent,2);
+    }
+
     public void onFinishPressed(View view){
-        //Se pide una ventana popup de tipo warning al finalizar la partida
         Intent intent = new Intent(MainActivity.this, Popup.class);
         intent.putExtra("TYPE", Popup.WindowType.WARNING);
         startActivityForResult(intent,0);
@@ -98,11 +103,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Nos devuelve a la ventana principal cuando finalizamos la partida
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-                setContentView(R.layout.activity_startgame);
-            }
+        // Nos devuelve informacion de las ventanas de popup
+        switch (requestCode){
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    setContentView(R.layout.activity_startgame);
+                }
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    Bundle returnInfo = data.getExtras();
+                    int chosenCard = (Integer) returnInfo.get("CARD");
+                    //TODO METODO QUE CAMBIA DE BARAJA SEGUN EL INT DE CHOSEN CARD
+                }
         }
     }
 

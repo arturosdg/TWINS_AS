@@ -10,13 +10,14 @@ import android.widget.*;
 public class Popup extends Activity {
     enum WindowType{
         WARNING,
-        SCOREBOARD
+        SCOREBOARD,
+        OPTIONS
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
+        Bundle windowInfo = getIntent().getExtras();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -24,78 +25,86 @@ public class Popup extends Activity {
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
-        if(extras.get("TYPE") == WindowType.WARNING)
-        {
-            setContentView(R.layout.activity_popupwindow);
+        Button cancelButton;
+        Button acceptButton;
+        switch ((WindowType) windowInfo.get("TYPE")){
+            case WARNING:
+                setContentView(R.layout.activity_popupwindow);
+                getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
 
-            getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
+                acceptButton = findViewById(R.id.acceptButton);
 
-            final Button acceptButton = findViewById(R.id.acceptButton);
+                acceptButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }
+                });
 
-            acceptButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent returnIntent = new Intent();
-                    setResult(Activity.RESULT_OK, returnIntent);
-                    finish();
-                }
-            });
+                cancelButton = findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
 
-            final Button cancelButton = findViewById(R.id.cancelButton);
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+                break;
+            case SCOREBOARD:
+                setContentView(R.layout.activity_popupscoreboard);
+                getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
+
+                ListView scoreList = findViewById(R.id.scoreList);
+                Scoreboard scoreboard = (Scoreboard) windowInfo.get("SCORE");
+
+                final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
+                scoreList.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
+
+                int score = (int) windowInfo.get("LAST");
+                TextView currentScore = findViewById(R.id.currentScore);
+                TextView currentStars = findViewById(R.id.starsText);
+                currentScore.setText("" + score);
+                currentStars.setText(""+scoreboard.getStars(score));
+
+                cancelButton = findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+                break;
+            case OPTIONS:
+                setContentView(R.layout.activity_popupoptions);
+                acceptButton = findViewById(R.id.acceptButton);
+
+                Button firstCard = findViewById(R.id.firstCard);
+                Button secondCard = findViewById(R.id.secondCard);
+
+                acceptButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+
+                firstCard.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        returnIntent.putExtra("CARD",1);
+                        finish();
+                    }
+                });
+
+                secondCard.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("CARD",2);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }
+                });
+                break;
         }
-        else if(extras.get("TYPE") == WindowType.SCOREBOARD)
-        {
-            setContentView(R.layout.activity_popupscoreboard);
-            ListView scoreList = findViewById(R.id.scoreList);
-
-            Scoreboard scoreboard = (Scoreboard) extras.get("SCORE");
-
-            final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
-
-            scoreList.setAdapter(arrayAdapter);
-            arrayAdapter.notifyDataSetChanged();
-
-            getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
-
-            int score = (int) extras.get("LAST");
-            TextView currentScore = findViewById(R.id.currentScore);
-            TextView currentStars = findViewById(R.id.starsText);
-            currentScore.setText("" + score);
-            currentStars.setText(""+getStars(score));
-
-            final Button cancelButton = findViewById(R.id.cancelButton);
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        }
-    }
-
-    private String getStars(int score){
-        String stars = "";
-
-        int maxStars = 0;
-
-        if(score<8){
-            maxStars = 1;
-        } else if(score<20){
-            maxStars = 2;
-        } else if(score<40){
-            maxStars = 3;
-        } else if(score<60){
-            maxStars = 4;
-        } else {
-            maxStars = 5;
-        }
-
-        for(int i=1;i<=maxStars;i++){
-            stars += "⭐";
-        }
-        return stars;
     }
 }

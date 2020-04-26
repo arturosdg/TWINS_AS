@@ -67,6 +67,29 @@ public class Scoreboard implements Parcelable {
         }
     }
 
+    public String getStars(int score){
+        String stars = "";
+
+        int maxStars = 0;
+
+        if(score<8){
+            maxStars = 1;
+        } else if(score<20){
+            maxStars = 2;
+        } else if(score<40){
+            maxStars = 3;
+        } else if(score<60){
+            maxStars = 4;
+        } else {
+            maxStars = 5;
+        }
+
+        for(int i=1;i<=maxStars;i++){
+            stars += "⭐";
+        }
+        return stars;
+    }
+
     @Override
     public int describeContents() {
         return 0;
