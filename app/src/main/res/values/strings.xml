@@ -11,4 +11,9 @@
     <string name="texto_advertencia">Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="top_scores">TOP 3</string>
+    <string name="zero">0</string>
+    <string name="puntos">Puntos:</string>
+    <string name="puntuacion">PUNTUACIÓN</string>
 </resources>

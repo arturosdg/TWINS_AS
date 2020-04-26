@@ -28,12 +28,9 @@ public class Card {
         isPaired = false;
     }
 
-    public Drawable getBackImage() {
-        return new BitmapDrawable(contextScene.getResources(),backImage);
-    }
-    public Drawable getFrontImage() {
-        return new BitmapDrawable(contextScene.getResources(),frontImage);
-    }
+    public Bitmap getBackImage() { return backImage; }
+
+    public Bitmap getFrontImage() { return frontImage; }
 
     public void setFrontImage(Bitmap frontImage) {
         this.frontImage = frontImage;
@@ -67,9 +64,8 @@ public class Card {
         }
     }
 
-
     public boolean equals(Card card) {
-        return this.frontImage.sameAs(card.frontImage);
+        return this.getFrontImage().sameAs(card.getFrontImage());
     }
 
 
