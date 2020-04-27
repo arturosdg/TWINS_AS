@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button[] buttons;
     Card[] cards;
     Context context;
-    int tapCounter, pauseTapCounter, visibleCards;
+    int tapCounter, pauseTapCounter, visibleCards, themeCard = 1;
     Scoreboard scoreboard;
 
     int acertadosSeguidos;
@@ -82,10 +82,21 @@ public class MainActivity extends AppCompatActivity {
 
         fillArray();
         createCards();
+        implantThemeCard();
 
-        assignCardTheme("emoji");
 
 
+    }
+
+    private void implantThemeCard() {
+        switch (themeCard) {
+            case 1:
+                assignCardTheme("emoji");
+                break;
+            case 2:
+                assignCardTheme("coche");
+                break;
+        }
     }
 
     public void onOptionsPressed(View view){
@@ -120,9 +131,22 @@ public class MainActivity extends AppCompatActivity {
                         if (returnInfo.containsKey("CARD")) {
                             chosenCard = (Integer) returnInfo.get("CARD");
                         }
-                        //TODO METODO QUE CAMBIA DE BARAJA SEGUN EL INT DE CHOSEN CARD DEVUELVE 1 (IZQUIERDA) O 2 (DERECHA)
+                        changeCardDesign(chosenCard);
                     }
             }
+        }
+    }
+
+    private void changeCardDesign(int choosenCard) {
+        switch (choosenCard) {
+            case 1:
+                themeCard = 1;
+                break;
+            case 2:
+                themeCard = 2;
+                break;
+            default:
+                System.err.println("Error - doesn't exist this baraja");
         }
     }
 
