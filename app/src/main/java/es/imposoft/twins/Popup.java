@@ -37,6 +37,7 @@ public class Popup extends Activity {
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",0);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }
@@ -45,6 +46,8 @@ public class Popup extends Activity {
                 cancelButton = findViewById(R.id.cancelButton);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
                         finish();
                     }
                 });
@@ -65,11 +68,13 @@ public class Popup extends Activity {
                 TextView currentScore = findViewById(R.id.currentScore);
                 TextView currentStars = findViewById(R.id.starsText);
                 currentScore.setText("" + score);
-                currentStars.setText(""+scoreboard.getStars(score));
+                currentStars.setText(""+scoreboard.getStarsFromScore(score));
 
                 cancelButton = findViewById(R.id.cancelButton);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
                         finish();
                     }
                 });
@@ -83,6 +88,8 @@ public class Popup extends Activity {
 
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
                         finish();
                     }
                 });
@@ -91,6 +98,7 @@ public class Popup extends Activity {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
+                        returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("CARD",1);
                         finish();
                     }
@@ -100,6 +108,7 @@ public class Popup extends Activity {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra("CARD",2);
+                        returnIntent.putExtra("WINDOW",-1);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }
