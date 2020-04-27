@@ -108,7 +108,7 @@ public class Popup extends Activity {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra("CARD",2);
-                        returnIntent.putExtra("WINDOW",-1);
+                        returnIntent.putExtra("WINDOW",2);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }
