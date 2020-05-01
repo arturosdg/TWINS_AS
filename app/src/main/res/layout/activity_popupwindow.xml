@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#FF9800"
+            android:background="@color/colorPrimary"
             android:gravity="clip_horizontal|center|clip_vertical"
             android:orientation="vertical"
             android:textAlignment="center">
@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="31dp"
                 android:text="@string/advertencia"
+                android:textColor="@color/colorText"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -63,6 +64,8 @@
                     android:layout_weight="1"
                     android:onClick="acceptPressed"
                     android:text="@string/aceptar"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/colorText"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
                 <Button
@@ -72,6 +75,8 @@
                     android:layout_weight="1"
                     android:onClick="cancelPressed"
                     android:text="@string/cancelar"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/colorText"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
             </LinearLayout>
