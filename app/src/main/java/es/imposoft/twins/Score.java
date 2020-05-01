@@ -11,7 +11,7 @@ public class Score {
         Hara la parte fija del algoritmo.
         Las subclases haran el calculo de la puntuacion en funcion del modo de juego seleccionado
      */
-    //Este deberia ser el metodo abstracto a implementar
+    //Este deberia ser el metodo abstracto a implementar en las subclases
     private void actualizarControladorDePuntos(int aSumar) {
         score += aSumar;
         if (aSumar < 0) {

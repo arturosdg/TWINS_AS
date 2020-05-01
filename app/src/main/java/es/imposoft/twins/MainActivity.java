@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startgame);
     }
 
-    public void play(View view) {
+    public void playByGameModes(View view) {
         setContentView(R.layout.activity_gamescene);
 
         pauseButton = findViewById(R.id.button_pause);
@@ -343,4 +343,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
+
 }
