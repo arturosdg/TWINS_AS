@@ -16,4 +16,7 @@
     <string name="zero">0</string>
     <string name="puntos">Puntos:</string>
     <string name="puntuacion">PUNTUACIÓN</string>
+    <string name="juego_estandar">Juego Estandar</string>
+    <string name="juego_libre">Juego Libre</string>
+    <string name="niveles">Niveles</string>
 </resources>
