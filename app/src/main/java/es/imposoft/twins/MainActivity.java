@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         createCards();
         implantThemeCard();
 
-
-
     }
 
     private void implantThemeCard() {
