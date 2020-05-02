@@ -18,6 +18,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SelectionGameModeActivity">
+        </activity>
+
+        <activity android:name=".GameActivity">
+        </activity>
+
         <activity android:name=".Popup"
                   android:theme = "@style/AppTheme.PopupWindow"
         ></activity>

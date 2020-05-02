@@ -24,7 +24,7 @@ import java.util.List;
 import es.imposoft.twins.components.GameMode;
 
 public class GameActivity extends AppCompatActivity {
-
+    private static int themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
 
@@ -45,7 +45,10 @@ public class GameActivity extends AppCompatActivity {
 
     long timeWhenStopped;
 
-    public void playByGameModes(View view, GameMode gameMode) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamescene4x4);
 
         pauseButton = findViewById(R.id.button_pause);
@@ -76,7 +79,6 @@ public class GameActivity extends AppCompatActivity {
 
         fillArray();
         createCards();
-
     }
 
     public void showScoreboard(){
@@ -94,7 +96,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @SuppressLint("WrongViewCast")
-    public void changeSprite(final View view) {
+    public void changeSprite(View view) {
         // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
         if(tapCounter == 0) {
             turnAllCards();
@@ -109,7 +111,6 @@ public class GameActivity extends AppCompatActivity {
             }, 3000);
 
         } else {
-
             for (Card card : cards) {
                 if(visibleCards < 2 && !pausedGame)
                     if (card.getCardButton().getId() == view.getId()) {
@@ -219,6 +220,12 @@ public class GameActivity extends AppCompatActivity {
         isClickable = !isClickable;
     }
 
+    public void onFinishPressed(View view){
+        Intent intent = new Intent(GameActivity.this, Popup.class);
+        intent.putExtra("TYPE", Popup.WindowType.WARNING);
+        startActivityForResult(intent,0);
+    }
+
     public void pauseGame(View view) {
         if(pauseTapCounter % 2 == 0) {
             timeWhenStopped = (chronoTimer.getBase() - SystemClock.elapsedRealtime());
@@ -238,5 +245,78 @@ public class GameActivity extends AppCompatActivity {
             if(c.getCardButton() == button) return c;
         }
         return null;
+    }
+
+
+    /**
+     * Formato de nombre de imagen: "tema + numero"
+     * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
+     * (ya que tenemos 16 cartas)*/
+    private void assignCardTheme(String theme) {
+        ArrayList<Integer> numeros = new ArrayList<>();
+        for (int i = 0; i < cards.length; i++) {
+            numeros.add(i);
+        }
+
+        int aleatorio;
+        int posicion;
+        ArrayList<Card> barajadas = new ArrayList<Card>();
+
+        while (!numeros.isEmpty()) {
+            aleatorio = (int) (Math.random()*numeros.size());
+            posicion = numeros.get(aleatorio);
+            numeros.remove(aleatorio);
+            barajadas.add(cards[posicion]);
+
+        }
+
+        ArrayList<Integer> images = new ArrayList<Integer>();
+
+        for (int i = 0; i < 8; i++) {
+            images.add(getResources().getIdentifier(theme + i, "drawable", getPackageName()));
+        }
+        for (int i = 0; i < barajadas.size(); i++) {
+            barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Method executed from the popup window
+
+        if (data != null) {
+            switch ((Integer) data.getExtras().get("WINDOW")) {
+                case 0:
+                    //Called from the finish game popup
+                    if (resultCode == RESULT_OK) {
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                case 2:
+                    //Called from the options menu
+                    if (resultCode == RESULT_OK) {
+                        Bundle returnInfo = data.getExtras();
+                        int chosenCard = -1;
+                        if (returnInfo.containsKey("CARD")) {
+                            chosenCard = (Integer) returnInfo.get("CARD");
+                        }
+                        changeCardDesign(chosenCard);
+                    }
+            }
+        }
+    }
+
+    private void changeCardDesign(int choosenCard) {
+        switch (choosenCard) {
+            case 1:
+                themeCard = 1;
+                break;
+            case 2:
+                themeCard = 2;
+                break;
+            default:
+                System.err.println("Error - doesn't exist this baraja");
+        }
     }
 }

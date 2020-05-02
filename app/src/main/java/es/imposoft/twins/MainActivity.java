@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static int themeCard;
-    Card[] cards;
     Context context;
 
     @Override
@@ -36,33 +33,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playByGameModes(View view) {
-        setContentView(R.layout.activity_selectgamemode);
+        Intent intent = new Intent(this,SelectionGameModeActivity.class);
+        startActivity(intent);
     }
-
-    /*
-    public void implantThemeCard() {
-        switch (themeCard) {
-            case 1:
-                assignCardTheme("emoji");
-                break;
-            case 2:
-                assignCardTheme("coche");
-                break;
-        }
-    }
-    */
-
 
     public void onOptionsPressed(View view){
         Intent intent = new Intent(MainActivity.this, Popup.class);
         intent.putExtra("TYPE", Popup.WindowType.OPTIONS);
         startActivityForResult(intent,2);
-    }
-
-    public void onFinishPressed(View view){
-        Intent intent = new Intent(MainActivity.this, Popup.class);
-        intent.putExtra("TYPE", Popup.WindowType.WARNING);
-        startActivityForResult(intent,0);
     }
 
     @Override
@@ -85,55 +63,9 @@ public class MainActivity extends AppCompatActivity {
                         if (returnInfo.containsKey("CARD")) {
                             chosenCard = (Integer) returnInfo.get("CARD");
                         }
-                        changeCardDesign(chosenCard);
+                        //changeCardDesign(chosenCard); //TODO PASAR DATOS DE LAS OPCIONES ENTRE VENTANAS
                     }
             }
         }
     }
-
-    private void changeCardDesign(int choosenCard) {
-        switch (choosenCard) {
-            case 1:
-                themeCard = 1;
-                break;
-            case 2:
-                themeCard = 2;
-                break;
-            default:
-                System.err.println("Error - doesn't exist this baraja");
-        }
-    }
-
-    /**
-     * Formato de nombre de imagen: "tema + numero"
-     * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
-     * (ya que tenemos 16 cartas)*/
-    private void assignCardTheme(String theme) {
-        ArrayList<Integer> numeros = new ArrayList<>();
-        for (int i = 0; i < cards.length; i++) {
-            numeros.add(i);
-        }
-
-        int aleatorio;
-        int posicion;
-        ArrayList<Card> barajadas = new ArrayList<Card>();
-
-        while (!numeros.isEmpty()) {
-            aleatorio = (int) (Math.random()*numeros.size());
-            posicion = numeros.get(aleatorio);
-            numeros.remove(aleatorio);
-            barajadas.add(cards[posicion]);
-
-        }
-
-        ArrayList<Integer> images = new ArrayList<Integer>();
-
-        for (int i = 0; i < 8; i++) {
-            images.add(getResources().getIdentifier(theme + i, "drawable", getPackageName()));
-        }
-        for (int i = 0; i < barajadas.size(); i++) {
-            barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
-        }
-    }
-
 }
