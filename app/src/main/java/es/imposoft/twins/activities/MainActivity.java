@@ -1,26 +1,13 @@
-package es.imposoft.twins;
+package es.imposoft.twins.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.preference.PreferenceManager;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import es.imposoft.twins.R;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
@@ -33,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playByGameModes(View view) {
-        Intent intent = new Intent(this,SelectionGameModeActivity.class);
+        Intent intent = new Intent(this, SelectionGameModeActivity.class);
         startActivity(intent);
     }
 
     public void onOptionsPressed(View view){
-        Intent intent = new Intent(MainActivity.this, Popup.class);
-        intent.putExtra("TYPE", Popup.WindowType.OPTIONS);
+        Intent intent = new Intent(MainActivity.this, PopupActivity.class);
+        intent.putExtra("TYPE", PopupActivity.WindowType.OPTIONS);
         startActivityForResult(intent,2);
     }
 

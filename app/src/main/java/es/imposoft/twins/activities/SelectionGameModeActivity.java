@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import es.imposoft.twins.R;
 import es.imposoft.twins.components.GameMode;
-import es.imposoft.twins.gametypes.Game;
 
 public class SelectionGameModeActivity extends AppCompatActivity {
 
@@ -38,11 +38,13 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void playCasualGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("GAMEMODE",GameMode.CASUAL);
         startActivity(intent);
     }
 
     public void playStandardGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("GAMEMODE",GameMode.STANDARD);
         startActivity(intent);
     }
 

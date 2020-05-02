@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import es.imposoft.twins.R;
+import es.imposoft.twins.activities.SelectionGameModeActivity;
 
 public class SelectLevelActivity extends AppCompatActivity {
     private final int MAX_LEVELS = 5;
@@ -27,6 +29,7 @@ public class SelectLevelActivity extends AppCompatActivity {
     }
 
     public void goToLevel(View view) {
+        //intent.putExtra("GAMEMODE",GameMode.LEVEL1);
     }
 
     private void fillArray(){

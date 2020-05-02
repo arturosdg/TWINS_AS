@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,7 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.imposoft.twins.components.GameMode;
+import com.google.gson.Gson;
+import es.imposoft.twins.Card;
+import es.imposoft.twins.R;
+import es.imposoft.twins.Scoreboard;
 
 public class GameActivity extends AppCompatActivity {
     private static int themeCard;
@@ -91,10 +94,11 @@ public class GameActivity extends AppCompatActivity {
         scoreboard.addScore(score);
         scoreboard.saveHighscores(sp);
 
-        Intent intent = new Intent(GameActivity.this, Popup.class);
-        intent.putExtra("SCORE",scoreboard);
-        intent.putExtra("LAST",score);
-        intent.putExtra("TYPE", Popup.WindowType.SCOREBOARD);
+        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        Gson gson = new Gson();
+        String gscoreboard = gson.toJson(scoreboard);
+        intent.putExtra("SCORE",gscoreboard);
+        intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
 
         startActivityForResult(intent,1);
     }
@@ -225,8 +229,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onFinishPressed(View view){
-        Intent intent = new Intent(GameActivity.this, Popup.class);
-        intent.putExtra("TYPE", Popup.WindowType.WARNING);
+        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
         startActivityForResult(intent,0);
     }
 

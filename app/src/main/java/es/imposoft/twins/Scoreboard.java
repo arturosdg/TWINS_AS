@@ -5,18 +5,22 @@ import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import com.google.gson.Gson;
 
 import java.util.*;
 
-public class Scoreboard implements Parcelable {
+public class Scoreboard {
     private List<Integer> highscores;
     private int MAX_SCORES = 3;
+    private int lastScore;
 
     public Scoreboard(){
+        lastScore = 0;
         highscores = new ArrayList();
     }
 
     public void addScore(int newScore){
+        lastScore = newScore;
         highscores.add(newScore);
     }
 
@@ -90,31 +94,7 @@ public class Scoreboard implements Parcelable {
         return stars;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public int getLastScore() {
+        return lastScore;
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (highscores == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeList(highscores);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Scoreboard> CREATOR = new Parcelable.Creator<Scoreboard>() {
-        @Override
-        public Scoreboard createFromParcel(Parcel in) {
-            return new Scoreboard(in);
-        }
-
-        @Override
-        public Scoreboard[] newArray(int size) {
-            return new Scoreboard[size];
-        }
-    };
 }
