@@ -15,6 +15,14 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     GameMode gameModeSelected;
     Context context;
 
+    //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
+    /*
+        Director director = new Director();
+        ConcreteBuilderLevel levelBuilder =  new ConcreteBuilderLevel();
+        director.constructStandardGame(levelBuilder);
+        Game partida = levelBuilder.getResult();
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -23,21 +31,19 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     }
 
     public void openLevelsLayout(View view) {
-        setContentView(R.layout.activity_gamescene4x4);
-        gameModeSelected = GameMode.LEVELS;
-        System.out.println("TEST");
+        Intent intent = new Intent(this, GameActivity.class);
+        //intent.putExtra(partida);
+        startActivity(intent);
     }
 
     public void playCasualGame(View view) {
-        setContentView(R.layout.activity_gamescene4x4);
-        gameModeSelected = GameMode.CASUAL;
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 
     public void playStandardGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
-        //setContentView(R.layout.activity_gamescene4x4);
-        //gameModeSelected = GameMode.STANDARD;
     }
 
     public void goBack(View view) {

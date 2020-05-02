@@ -47,8 +47,12 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Bundle windowInfo = getIntent().getExtras();
+        //windowInfo.get("GAME")
+        //Segun parametros hacer una inicializacion u otra
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_gamescene4x4);
 
         pauseButton = findViewById(R.id.button_pause);
