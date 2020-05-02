@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (data != null) {
             switch ((Integer) data.getExtras().get("WINDOW")) {
-                case 0:
-                    //Called from the finish game popup
-                    if (resultCode == RESULT_OK) {
-                        setContentView(R.layout.activity_startgame);
-                    }
                 case 2:
                     //Called from the options menu
                     if (resultCode == RESULT_OK) {

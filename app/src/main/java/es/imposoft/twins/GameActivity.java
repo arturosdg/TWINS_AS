@@ -297,21 +297,13 @@ public class GameActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                     }
-                case 2:
-                    //Called from the options menu
-                    if (resultCode == RESULT_OK) {
-                        Bundle returnInfo = data.getExtras();
-                        int chosenCard = -1;
-                        if (returnInfo.containsKey("CARD")) {
-                            chosenCard = (Integer) returnInfo.get("CARD");
-                        }
-                        changeCardDesign(chosenCard);
-                    }
             }
         }
     }
 
     private void changeCardDesign(int choosenCard) {
+
+        //Conectar el changeCardDesign del MainActivity con este, seguramente pasando datos mediante la clase Game
         switch (choosenCard) {
             case 1:
                 themeCard = 1;
