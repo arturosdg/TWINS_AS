@@ -1,5 +1,8 @@
 package es.imposoft.twins;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -9,8 +12,18 @@ public class SelectLevelActivity extends AppCompatActivity {
     private final int MAX_LEVELS = 5;
     private int level;
     private Button[] levelButtons;
+    Context context;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_selectlevel);
+    }
 
     public void goBack(View view) {
+        Intent intent = new Intent(this, SelectionGameModeActivity.class);
+        startActivity(intent);
     }
 
     public void goToLevel(View view) {

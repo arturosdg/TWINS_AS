@@ -24,6 +24,9 @@
         <activity android:name=".GameActivity">
         </activity>
 
+        <activity android:name=".SelectLevelActivity">
+        </activity>
+
         <activity android:name=".Popup"
                   android:theme = "@style/AppTheme.PopupWindow"
         ></activity>

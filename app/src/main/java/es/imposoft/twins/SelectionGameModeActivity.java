@@ -31,7 +31,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     }
 
     public void openLevelsLayout(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, SelectLevelActivity.class);
         //intent.putExtra(partida);
         startActivity(intent);
     }
