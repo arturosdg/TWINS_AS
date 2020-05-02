@@ -1,6 +1,7 @@
 package es.imposoft.twins.builders;
 
 import es.imposoft.twins.components.Chronometer;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 
 public class ConcreteBuilderLevel implements LevelBuilder {
@@ -9,6 +10,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int minScore;
     private int cardAmount;
     private int revealSeconds;
+    //private GameMode gameMode;
 
     @Override
     public void setChronometer(int seconds, Chronometer type) {
@@ -30,6 +32,8 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     public void setRevealTime(int tiempo) {
         this.revealSeconds = tiempo;
     }
+
+    //public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
 
     public Game getResult(){
         return new Game(seconds,  chronometerType, minScore, cardAmount, revealSeconds);
