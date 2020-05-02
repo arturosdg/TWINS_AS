@@ -22,6 +22,20 @@ public class Director {
         builder.setMinScore(5);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
-        builder.setChronometer(90, Chronometer.NONE);
+        builder.setChronometer(90, Chronometer.DESCENDING);
+    }
+
+    public void constructLevel2(ConcreteBuilderLevel builder){
+        builder.setMinScore(5);
+        builder.setCardAmount(16);
+        builder.setRevealTime(3);
+        builder.setChronometer(90, Chronometer.DESCENDING);
+    }
+
+    public void constructLevel3(ConcreteBuilderLevel builder){
+        builder.setMinScore(5);
+        builder.setCardAmount(16);
+        builder.setRevealTime(3);
+        builder.setChronometer(90, Chronometer.DESCENDING);
     }
 }
