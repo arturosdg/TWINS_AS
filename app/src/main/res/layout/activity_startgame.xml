@@ -6,41 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo3_45" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
             android:id="@+id/button_play"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="play"
-            android:text="Jugar"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="playByGameModes"
+            android:text="@string/jugar_modo_juego"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            app:layout_constraintVertical_bias="0.39"/>
-    <Button
+            android:textColor="@color/colorText" />
+
+        <Space
+            android:id="@+id/space1"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
             android:id="@+id/button_options"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="onOptionsPressed"
-            android:text="Opciones"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/opciones"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            app:layout_constraintVertical_bias="0.499" app:layout_constraintHorizontal_bias="0.501"/>
-    <TextView
-            android:text="TWINS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView8" android:textSize="36sp"
-            android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="149dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="150dp" android:layout_marginTop="100dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textColor="@color/colorText" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
