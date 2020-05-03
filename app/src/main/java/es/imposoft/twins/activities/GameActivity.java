@@ -58,7 +58,6 @@ public class GameActivity extends AppCompatActivity {
         Game game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
         System.out.println(game.printGame());
 
-
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
