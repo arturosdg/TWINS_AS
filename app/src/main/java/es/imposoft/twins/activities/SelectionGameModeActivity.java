@@ -16,9 +16,9 @@ import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
 
-public class SelectionGameModeActivity extends AppCompatActivity {
 
-    GameMode gameModeSelected;
+
+public class SelectionGameModeActivity extends AppCompatActivity {
     Context context;
 
     //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity

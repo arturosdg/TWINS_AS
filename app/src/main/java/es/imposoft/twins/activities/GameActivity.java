@@ -28,6 +28,7 @@ import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
 
 public class GameActivity extends AppCompatActivity {
+
     private static int themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
@@ -56,7 +57,6 @@ public class GameActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Game game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
         System.out.println(game.printGame());
-
 
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
