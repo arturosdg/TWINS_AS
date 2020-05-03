@@ -21,9 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.imposoft.twins.components.GameMode;
 
 public class GameActivity extends AppCompatActivity {
+
     private static int themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
