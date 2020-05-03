@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
+import es.imposoft.twins.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
@@ -30,6 +31,7 @@ import es.imposoft.twins.gametypes.Game;
 public class GameActivity extends AppCompatActivity {
 
     private static int themeCard;
+    Deck themeCard2;
     Chronometer chronoTimer;
     Button pauseButton;
 
@@ -50,12 +52,16 @@ public class GameActivity extends AppCompatActivity {
 
     long timeWhenStopped;
 
+    Game game;
+    Gson gson;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle windowInfo = getIntent().getExtras();
 
-        Gson gson = new Gson();
-        Game game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
+        gson = new Gson();
+        game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
         System.out.println(game.printGame());
 
         context = getApplicationContext();
@@ -68,10 +74,11 @@ public class GameActivity extends AppCompatActivity {
 
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
+        setChronometerType();
 
         pauseTapCounter = 0;
         tapCounter = 0;
-        maxCards = 16;
+        maxCards = game.getCardAmount();
         restantMatches = maxCards / 2;
         visibleCards = 0;
 
@@ -91,6 +98,9 @@ public class GameActivity extends AppCompatActivity {
 
         fillArray();
         createCards();
+        themeCard2 = game.getDeck();
+        System.out.println(themeCard2.toString());
+        assignCardTheme(themeCard2);
     }
 
     public void showScoreboard(){
@@ -116,6 +126,7 @@ public class GameActivity extends AppCompatActivity {
             //  Espera 3 segundos hasta que se vuelvan a girar
             Handler secs3 = new Handler();
             secs3.postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 public void run() {
                     turnAllCards();
                     startChronometer();
@@ -219,9 +230,13 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void startChronometer() {
         chronoTimer.setBase(SystemClock.elapsedRealtime());
-        //if game mode requires ((Chronometer) findViewById(R.id.text_timer)).setCountDown(true);
+        if (chronoTimer.isCountDown()) {
+            long countDownTime = game.getSeconds() * 1000;
+            chronoTimer.setBase(SystemClock.elapsedRealtime() + countDownTime);
+        }
         chronoTimer.start();
     }
 
@@ -265,7 +280,7 @@ public class GameActivity extends AppCompatActivity {
      * Formato de nombre de imagen: "tema + numero"
      * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
      * (ya que tenemos 16 cartas)*/
-    private void assignCardTheme(String theme) {
+    private void assignCardTheme(Deck theme) {
         ArrayList<Integer> numeros = new ArrayList<>();
         for (int i = 0; i < cards.length; i++) {
             numeros.add(i);
@@ -286,7 +301,7 @@ public class GameActivity extends AppCompatActivity {
         ArrayList<Integer> images = new ArrayList<Integer>();
 
         for (int i = 0; i < 8; i++) {
-            images.add(getResources().getIdentifier(theme + i, "drawable", getPackageName()));
+            images.add(getResources().getIdentifier(theme.toString().toLowerCase() + i, "drawable", getPackageName()));
         }
         for (int i = 0; i < barajadas.size(); i++) {
             barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
@@ -322,6 +337,22 @@ public class GameActivity extends AppCompatActivity {
                 break;
             default:
                 System.err.println("Error - doesn't exist this baraja");
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void setChronometerType(){
+        switch(game.getChronometerType()) {
+            case NONE:
+                chronoTimer.setVisibility(View.GONE);
+                break;
+            case NORMAL:
+                chronoTimer.setVisibility(View.VISIBLE);
+                break;
+            case DESCENDING:
+                chronoTimer.setVisibility(View.VISIBLE);
+                chronoTimer.setCountDown(true);
+                break;
         }
     }
 }

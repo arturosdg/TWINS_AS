@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import es.imposoft.twins.Deck;
 import es.imposoft.twins.R;
+import es.imposoft.twins.director.Director;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void playByGameModes(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
-        intent.putExtra("THEME",cardTheme);
+        intent.putExtra("THEME", cardTheme);
         startActivity(intent);
     }
 

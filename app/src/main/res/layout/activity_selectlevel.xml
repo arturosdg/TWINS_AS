@@ -46,11 +46,8 @@
         android:adjustViewBounds="true"
         android:background="#FFFFFF"
         android:translationY="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_levels"
-        app:srcCompat="@drawable/fondoniveles2" />
+        app:srcCompat="@drawable/fondoniveles2"
+        tools:layout_editor_absoluteY="79dp" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -92,11 +89,11 @@
                 android:background="@drawable/unknown"
                 android:onClick="goToLevel"
                 android:text="2"
+                android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.876"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_level1"
-                android:textColor="@color/colorText"/>
+                app:layout_constraintTop_toBottomOf="@+id/button_level1" />
 
             <Button
                 android:id="@+id/button_level3"
@@ -105,13 +102,13 @@
                 android:background="@drawable/unknown"
                 android:onClick="goToLevel"
                 android:text="3"
+                android:textColor="@color/colorText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.253"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_level2"
-                app:layout_constraintVertical_bias="0.045"
-                android:textColor="@color/colorText"/>
+                app:layout_constraintVertical_bias="0.045" />
 
             <Button
                 android:id="@+id/button_level4"
@@ -121,11 +118,11 @@
                 android:background="@drawable/unknown"
                 android:onClick="goToLevel"
                 android:text="4"
+                android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.711"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_level3"
-                android:textColor="@color/colorText"/>
+                app:layout_constraintTop_toBottomOf="@+id/button_level3" />
 
             <Button
                 android:id="@+id/button_level5"
@@ -136,9 +133,9 @@
                 android:background="@drawable/unknown"
                 android:onClick="goToLevel"
                 android:text="5"
+                android:textColor="@color/colorText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_level4"
-                android:textColor="@color/colorText"/>
+                app:layout_constraintTop_toBottomOf="@+id/button_level4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

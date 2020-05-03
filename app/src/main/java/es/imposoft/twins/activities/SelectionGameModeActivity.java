@@ -20,6 +20,8 @@ import es.imposoft.twins.gametypes.Game;
 
 public class SelectionGameModeActivity extends AppCompatActivity {
     Context context;
+    Deck deck;
+    Game game;
 
     //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
     /*
@@ -37,7 +39,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_selectgamemode);
 
         Bundle windowInfo = getIntent().getExtras();
-        Deck deck = (Deck) windowInfo.get("THEME");
+        deck = (Deck) windowInfo.get("THEME");
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
     }
@@ -51,10 +53,10 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 
         director.constructCasualGame(levelBuilder);
-        Game partida = levelBuilder.getResult();
+        game = levelBuilder.getResult();
 
         Gson gson = new Gson();
-        String newGame = gson.toJson(partida);
+        String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
 
         startActivity(intent);
@@ -62,13 +64,13 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void playStandardGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("GAMEMODE",GameMode.STANDARD);
+        //intent.putExtra("GAMEMODE",GameMode.STANDARD);
 
         director.constructStandardGame(levelBuilder);
-        Game partida = levelBuilder.getResult();
+        game = levelBuilder.getResult();
 
         Gson gson = new Gson();
-        String newGame = gson.toJson(partida);
+        String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
 
         startActivity(intent);
