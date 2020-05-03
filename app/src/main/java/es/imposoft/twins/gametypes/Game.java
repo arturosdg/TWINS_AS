@@ -20,6 +20,30 @@ public class Game {
         this.deck = deck;
     }
 
+    public int getSeconds(){
+        return seconds;
+    }
+
+    public Chronometer getChronometerType(){
+        return chronometerType;
+    }
+
+    public int getMinScore(){
+        return minScore;
+    }
+
+    public int getCardAmount(){
+        return cardAmount;
+    }
+
+    public int getRevealSeconds(){
+        return revealSeconds;
+    }
+
+    public Deck getDeck(){
+        return deck;
+    }
+    
     public String printGame() {
         return "game lasts " + seconds +
                 " with chronometer " + chronometerType
