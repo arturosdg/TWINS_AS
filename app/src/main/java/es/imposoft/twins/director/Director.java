@@ -14,7 +14,7 @@ public class Director {
         builder.setMinScore(0);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
-        builder.setChronometer(45, Chronometer.DESCENDING);
+        builder.setChronometer(45, Chronometer.NORMAL);
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
@@ -26,23 +26,26 @@ public class Director {
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
+        builder.setCardTheme(deck);
         builder.setMinScore(5);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
-        builder.setChronometer(90, Chronometer.DESCENDING);
+        builder.setChronometer(40, Chronometer.DESCENDING);
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
+        builder.setCardTheme(deck);
         builder.setMinScore(5);
         builder.setCardAmount(16);
-        builder.setRevealTime(3);
-        builder.setChronometer(90, Chronometer.DESCENDING);
+        builder.setRevealTime(2);
+        builder.setChronometer(35, Chronometer.DESCENDING);
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
+        builder.setCardTheme(deck);
         builder.setMinScore(5);
         builder.setCardAmount(16);
-        builder.setRevealTime(3);
-        builder.setChronometer(90, Chronometer.DESCENDING);
+        builder.setRevealTime(1);
+        builder.setChronometer(30, Chronometer.DESCENDING);
     }
 }

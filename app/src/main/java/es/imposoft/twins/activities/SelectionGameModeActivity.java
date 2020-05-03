@@ -46,6 +46,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void openLevelsLayout(View view) {
         Intent intent = new Intent(this, SelectLevelActivity.class);
+        intent.putExtra("THEME", deck);
         startActivity(intent);
         this.finish();
     }
@@ -66,7 +67,6 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void playStandardGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        //intent.putExtra("GAMEMODE",GameMode.STANDARD);
 
         director.constructStandardGame(levelBuilder);
         game = levelBuilder.getResult();

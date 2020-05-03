@@ -102,7 +102,6 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         fillArray();
         createCards();
         themeCard = game.getDeck();
-        System.out.println(themeCard.toString());
         assignCardTheme(themeCard);
 
 
