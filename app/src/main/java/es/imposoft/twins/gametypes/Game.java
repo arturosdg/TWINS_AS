@@ -43,7 +43,7 @@ public class Game {
     public Deck getDeck(){
         return deck;
     }
-    
+
     public String printGame() {
         return "game lasts " + seconds +
                 " with chronometer " + chronometerType
