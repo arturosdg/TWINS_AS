@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
+import com.google.gson.Gson;
+import es.imposoft.twins.R;
+import es.imposoft.twins.Scoreboard;
 
-public class Popup extends Activity {
-    enum WindowType{
+public class PopupActivity extends Activity {
+    public enum WindowType{
         WARNING,
         SCOREBOARD,
         OPTIONS
@@ -58,13 +61,14 @@ public class Popup extends Activity {
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
                 ListView scoreList = findViewById(R.id.scoreList);
-                Scoreboard scoreboard = (Scoreboard) windowInfo.get("SCORE");
+                Gson gson = new Gson();
+                Scoreboard scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
                 final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
 
-                int score = (int) windowInfo.get("LAST");
+                int score = scoreboard.getLastScore();
                 TextView currentScore = findViewById(R.id.currentScore);
                 TextView currentStars = findViewById(R.id.starsText);
                 currentScore.setText("" + score);
