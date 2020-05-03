@@ -91,4 +91,8 @@ public class Scoreboard {
     public int getLastScore() {
         return lastScore;
     }
+
+    public String getSmileys() {
+        return "\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14";
+    }
 }

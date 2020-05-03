@@ -123,6 +123,21 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         startActivityForResult(intent,1);
     }
 
+    public void showGameOver(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        //scoreboard.addScore(score);
+        scoreboard.saveHighscores(sp);
+
+        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        Gson gson = new Gson();
+        String gscoreboard = gson.toJson(scoreboard);
+        intent.putExtra("SCORE",gscoreboard);
+        intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
+
+        startActivityForResult(intent,1);
+    }
+
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
         // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
@@ -252,11 +267,16 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if (timeWhenStarted + countDownTime == SystemClock.elapsedRealtime()) {
+                if (timeWhenStarted + countDownTime <= SystemClock.elapsedRealtime()) {
                     chronoTimer.stop();
                     Toast.makeText(context,
                             "time reached", Toast.LENGTH_SHORT).show();
-                    showScoreboard();
+                    Handler secs1 = new Handler();
+                    secs1.postDelayed(new Runnable() {
+                        public void run() {
+                            showGameOver();
+                        }
+                    }, 1000);
                 }
             }
         });

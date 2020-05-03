@@ -14,8 +14,13 @@ public class PopupActivity extends Activity {
     public enum WindowType{
         WARNING,
         SCOREBOARD,
-        OPTIONS
+        OPTIONS,
+        GAMEOVER
     }
+
+    ListView scoreList;
+    Gson gson;
+    Scoreboard scoreboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -60,9 +65,9 @@ public class PopupActivity extends Activity {
                 setContentView(R.layout.activity_popupscoreboard);
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
-                ListView scoreList = findViewById(R.id.scoreList);
-                Gson gson = new Gson();
-                Scoreboard scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
+                scoreList = findViewById(R.id.scoreList);
+                gson = new Gson();
+                scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
                 final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter);
@@ -114,6 +119,30 @@ public class PopupActivity extends Activity {
                         returnIntent.putExtra("CARD",2);
                         returnIntent.putExtra("WINDOW",2);
                         setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }
+                });
+                break;
+            case GAMEOVER:
+                setContentView(R.layout.activity_popupgameover);
+                getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
+
+                scoreList = findViewById(R.id.scoreList);
+                gson = new Gson();
+                scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
+
+                final ArrayAdapter<Integer> arrayAdapter2 = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
+                scoreList.setAdapter(arrayAdapter2);
+                arrayAdapter2.notifyDataSetChanged();
+
+                TextView currentSmileys = findViewById(R.id.smileysText);
+                currentSmileys.setText(""+ scoreboard.getSmileys());
+
+                cancelButton = findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
                         finish();
                     }
                 });
