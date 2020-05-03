@@ -1,5 +1,6 @@
 package es.imposoft.twins.builders;
 
+import es.imposoft.twins.Deck;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
@@ -10,6 +11,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int minScore;
     private int cardAmount;
     private int revealSeconds;
+    private Deck deck;
     //private GameMode gameMode;
 
     @Override
@@ -29,13 +31,16 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     }
 
     @Override
-    public void setRevealTime(int tiempo) {
-        this.revealSeconds = tiempo;
+    public void setRevealTime(int gameTime) {
+        this.revealSeconds = gameTime;
     }
+
+    @Override
+    public void setCardTheme(Deck deck) { this.deck = deck; }
 
     //public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
 
     public Game getResult(){
-        return new Game(seconds,  chronometerType, minScore, cardAmount, revealSeconds);
+        return new Game(seconds,  chronometerType, minScore, cardAmount, revealSeconds, deck);
     }
 }

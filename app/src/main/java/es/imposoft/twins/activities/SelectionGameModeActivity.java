@@ -7,8 +7,14 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import es.imposoft.twins.Deck;
 import es.imposoft.twins.R;
+import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.GameMode;
+import es.imposoft.twins.director.Director;
+import es.imposoft.twins.gametypes.Game;
 
 public class SelectionGameModeActivity extends AppCompatActivity {
 
@@ -22,29 +28,49 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         director.constructStandardGame(levelBuilder);
         Game partida = levelBuilder.getResult();
      */
-
+    private Director director;
+    private ConcreteBuilderLevel levelBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selectgamemode);
+
+        Bundle windowInfo = getIntent().getExtras();
+        Deck deck = (Deck) windowInfo.get("THEME");
+        director = new Director(deck);
+        levelBuilder =  new ConcreteBuilderLevel();
     }
 
     public void openLevelsLayout(View view) {
         Intent intent = new Intent(this, SelectLevelActivity.class);
-        //intent.putExtra(partida);
         startActivity(intent);
     }
 
     public void playCasualGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("GAMEMODE",GameMode.CASUAL);
+
+        director.constructCasualGame(levelBuilder);
+        Game partida = levelBuilder.getResult();
+
+        Gson gson = new Gson();
+        String newGame = gson.toJson(partida);
+        intent.putExtra("GAME",newGame);
+
         startActivity(intent);
     }
 
     public void playStandardGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("GAMEMODE",GameMode.STANDARD);
+
+        director.constructStandardGame(levelBuilder);
+        Game partida = levelBuilder.getResult();
+
+        Gson gson = new Gson();
+        String newGame = gson.toJson(partida);
+        intent.putExtra("GAME",newGame);
+
         startActivity(intent);
     }
 

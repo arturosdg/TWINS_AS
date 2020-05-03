@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import es.imposoft.twins.Card;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.gametypes.Game;
 
 public class GameActivity extends AppCompatActivity {
     private static int themeCard;
@@ -50,9 +51,13 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Bundle windowInfo = getIntent().getExtras();
-        //windowInfo.get("GAME")
-        //Segun parametros hacer una inicializacion u otra
+        Bundle windowInfo = getIntent().getExtras();
+
+        Gson gson = new Gson();
+        Game game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
+        System.out.println(game.printGame());
+
+
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 

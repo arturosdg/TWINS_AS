@@ -7,20 +7,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import es.imposoft.twins.Deck;
 import es.imposoft.twins.R;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
+    Deck cardTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startgame);
+        cardTheme = Deck.EMOJI;
     }
 
     public void playByGameModes(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
+        intent.putExtra("THEME",cardTheme);
         startActivity(intent);
     }
 
@@ -45,7 +49,14 @@ public class MainActivity extends AppCompatActivity {
                         if (returnInfo.containsKey("CARD")) {
                             chosenCard = (Integer) returnInfo.get("CARD");
                         }
-                        //changeCardDesign(chosenCard); //TODO PASAR DATOS DE LAS OPCIONES ENTRE VENTANAS
+                        switch (chosenCard){
+                            case 1:
+                                cardTheme = Deck.EMOJI;
+                                break;
+                            case 2:
+                                cardTheme = Deck.CARS;
+                                break;
+                        }
                     }
             }
         }

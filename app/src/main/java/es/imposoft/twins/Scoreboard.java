@@ -13,8 +13,15 @@ public class Scoreboard {
     private List<Integer> highscores;
     private int MAX_SCORES = 3;
     private int lastScore;
+    private int id = 0;
 
     public Scoreboard(){
+        lastScore = 0;
+        highscores = new ArrayList();
+    }
+
+    public Scoreboard(int id){
+        this.id = id;
         lastScore = 0;
         highscores = new ArrayList();
     }
@@ -36,39 +43,26 @@ public class Scoreboard {
 
     public void loadHighscores(SharedPreferences sp) {
         highscores.clear();
-        int size = sp.getInt("Status_size", 0);
-        SharedPreferences.Editor mEdit1 = sp.edit();
+        if(sp.getString("SCORE"+id,null) != null){
+            Gson gson = new Gson();
+            Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE"+id,null),Scoreboard.class);
 
-        for(int i=0;i<size;i++)
-        {
-            highscores.add(sp.getInt("Status_" + i, 0));
+            SharedPreferences.Editor mEdit1 = sp.edit();
+            highscores = scoreboard.getHighscores();
+
+            mEdit1.clear();
+            mEdit1.commit();
         }
-
-        mEdit1.clear();
-        mEdit1.commit();
     }
 
     public void saveHighscores(SharedPreferences sp) {
         SharedPreferences.Editor mEdit1 = sp.edit();
         getHighscores();
-        /* sKey is an array */
-        mEdit1.putInt("Status_size", highscores.size());
 
-        for(int i=0;i<highscores.size();i++)
-        {
-            mEdit1.remove("Status_" + i);
-            mEdit1.putInt("Status_" + i, highscores.get(i));
-        }
+        Gson gson = new Gson();
+        String gscoreboard = gson.toJson(this);
+        mEdit1.putString("SCORE"+id, gscoreboard);
         mEdit1.commit();
-    }
-
-    protected Scoreboard(Parcel in) {
-        if (in.readByte() == 0x01) {
-            highscores = new ArrayList<Integer>();
-            in.readList(highscores, Integer.class.getClassLoader());
-        } else {
-            highscores = null;
-        }
     }
 
     public String getStarsFromScore(int score){
