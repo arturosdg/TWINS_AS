@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +29,9 @@ import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity<chronoTimer> extends AppCompatActivity {
 
-    private static int themeCard;
-    Deck themeCard2;
+    Deck themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
 
@@ -50,15 +50,17 @@ public class GameActivity extends AppCompatActivity {
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
 
-    long timeWhenStopped;
+    long timeWhenStarted, timeWhenStopped;
 
+    Bundle windowInfo;
     Game game;
     Gson gson;
+    private long countDownTime;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Bundle windowInfo = getIntent().getExtras();
+        windowInfo = getIntent().getExtras();
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
@@ -74,6 +76,7 @@ public class GameActivity extends AppCompatActivity {
 
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
+        countDownTime = game.getSeconds() * 1000; //seconds to milliseconds
         setChronometerType();
 
         pauseTapCounter = 0;
@@ -98,9 +101,12 @@ public class GameActivity extends AppCompatActivity {
 
         fillArray();
         createCards();
-        themeCard2 = game.getDeck();
-        System.out.println(themeCard2.toString());
-        assignCardTheme(themeCard2);
+        themeCard = game.getDeck();
+        System.out.println(themeCard.toString());
+        assignCardTheme(themeCard);
+
+
+
     }
 
     public void showScoreboard(){
@@ -130,6 +136,7 @@ public class GameActivity extends AppCompatActivity {
                 public void run() {
                     turnAllCards();
                     startChronometer();
+                    isTimeOver();
                     pauseButton.setVisibility(View.VISIBLE);
                 }
             }, 3000);
@@ -173,6 +180,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         tapCounter++;
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -220,7 +228,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void stopChronometer() {
         if(restantMatches == 0) {
-            ((Chronometer) findViewById(R.id.text_timer)).stop();
+            chronoTimer.stop();
             Handler secs1 = new Handler();
             secs1.postDelayed(new Runnable() {
                 public void run() {
@@ -233,25 +241,26 @@ public class GameActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void startChronometer() {
         chronoTimer.setBase(SystemClock.elapsedRealtime());
+        timeWhenStarted = chronoTimer.getBase();
         if (chronoTimer.isCountDown()) {
-            long countDownTime = game.getSeconds() * 1000;
-            chronoTimer.setBase(SystemClock.elapsedRealtime() + countDownTime);
+            chronoTimer.setBase(timeWhenStarted + countDownTime);
         }
         chronoTimer.start();
     }
 
-    private void setClickable(Button[] buttons) {
-        for (Button b: buttons) {
-            if(getButton(b).isPaired()) {}
-            else b.setClickable(isClickable);
-        }
-        isClickable = !isClickable;
-    }
 
-    public void onFinishPressed(View view){
-        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
-        startActivityForResult(intent,0);
+    private void isTimeOver(){
+        chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if (timeWhenStarted + countDownTime == SystemClock.elapsedRealtime()) {
+                    chronoTimer.stop();
+                    Toast.makeText(context,
+                            "time reached", Toast.LENGTH_SHORT).show();
+                    showScoreboard();
+                }
+            }
+        });
     }
 
     public void pauseGame(View view) {
@@ -268,6 +277,20 @@ public class GameActivity extends AppCompatActivity {
         pauseTapCounter++;
     }
 
+    private void setClickable(Button[] buttons) {
+        for (Button b: buttons) {
+            if(getButton(b).isPaired()) {}
+            else b.setClickable(isClickable);
+        }
+        isClickable = !isClickable;
+    }
+
+    public void onFinishPressed(View view){
+        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
+        startActivityForResult(intent,0);
+    }
+
     private Card getButton(Button button) {
         for (Card c : cards) {
             if(c.getCardButton() == button) return c;
@@ -281,38 +304,33 @@ public class GameActivity extends AppCompatActivity {
      * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
      * (ya que tenemos 16 cartas)*/
     private void assignCardTheme(Deck theme) {
-        ArrayList<Integer> numeros = new ArrayList<>();
-        for (int i = 0; i < cards.length; i++) {
-            numeros.add(i);
-        }
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < cards.length; i++) numbers.add(i);
 
-        int aleatorio;
-        int posicion;
-        ArrayList<Card> barajadas = new ArrayList<Card>();
+        int aleatory;
+        int position;
+        ArrayList<Card> shuffled = new ArrayList<Card>();
 
-        while (!numeros.isEmpty()) {
-            aleatorio = (int) (Math.random()*numeros.size());
-            posicion = numeros.get(aleatorio);
-            numeros.remove(aleatorio);
-            barajadas.add(cards[posicion]);
-
+        while (!numbers.isEmpty()) {
+            aleatory = (int) (Math.random()*numbers.size());
+            position = numbers.get(aleatory);
+            numbers.remove(aleatory);
+            shuffled.add(cards[position]);
         }
 
         ArrayList<Integer> images = new ArrayList<Integer>();
-
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
             images.add(getResources().getIdentifier(theme.toString().toLowerCase() + i, "drawable", getPackageName()));
-        }
-        for (int i = 0; i < barajadas.size(); i++) {
-            barajadas.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
-        }
+
+        for (int i = 0; i < shuffled.size(); i++)
+            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Method executed from the popup window
-
         if (data != null) {
             switch ((Integer) data.getExtras().get("WINDOW")) {
                 case 0:
@@ -322,21 +340,6 @@ public class GameActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
             }
-        }
-    }
-
-    private void changeCardDesign(int choosenCard) {
-
-        //Conectar el changeCardDesign del MainActivity con este, seguramente pasando datos mediante la clase Game
-        switch (choosenCard) {
-            case 1:
-                themeCard = 1;
-                break;
-            case 2:
-                themeCard = 2;
-                break;
-            default:
-                System.err.println("Error - doesn't exist this baraja");
         }
     }
 

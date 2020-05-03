@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
         intent.putExtra("THEME", cardTheme);
         startActivity(intent);
+        this.finish();
     }
 
     public void onOptionsPressed(View view){

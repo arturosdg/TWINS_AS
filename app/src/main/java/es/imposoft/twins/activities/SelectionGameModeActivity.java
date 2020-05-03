@@ -47,6 +47,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     public void openLevelsLayout(View view) {
         Intent intent = new Intent(this, SelectLevelActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     public void playCasualGame(View view) {
@@ -60,6 +61,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         intent.putExtra("GAME",newGame);
 
         startActivity(intent);
+        this.finish();
     }
 
     public void playStandardGame(View view) {
@@ -74,11 +76,13 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         intent.putExtra("GAME",newGame);
 
         startActivity(intent);
+        this.finish();
     }
 
     public void goBack(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
 }

@@ -26,10 +26,12 @@ public class SelectLevelActivity extends AppCompatActivity {
     public void goBack(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     public void goToLevel(View view) {
         //intent.putExtra("GAMEMODE",GameMode.LEVEL1);
+
     }
 
     private void fillArray(){
