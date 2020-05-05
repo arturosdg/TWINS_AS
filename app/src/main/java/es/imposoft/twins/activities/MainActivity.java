@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
-import es.imposoft.twins.director.Director;
 
 public class MainActivity extends AppCompatActivity {
     Context context;

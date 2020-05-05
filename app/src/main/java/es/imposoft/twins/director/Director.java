@@ -1,6 +1,6 @@
 package es.imposoft.twins.director;
 
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.Chronometer;
 

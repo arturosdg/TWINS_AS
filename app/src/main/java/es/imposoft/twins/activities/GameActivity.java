@@ -24,7 +24,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;

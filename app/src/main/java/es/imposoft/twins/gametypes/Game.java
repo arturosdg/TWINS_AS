@@ -1,6 +1,6 @@
 package es.imposoft.twins.gametypes;
 
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.Chronometer;
 
 public class Game {

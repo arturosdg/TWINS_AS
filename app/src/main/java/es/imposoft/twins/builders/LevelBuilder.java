@@ -1,8 +1,7 @@
 package es.imposoft.twins.builders;
 
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.Chronometer;
-import es.imposoft.twins.components.GameMode;
 
 public interface LevelBuilder {
     void setChronometer(int seconds, Chronometer type); //Poner un tiempo no un int

@@ -10,9 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import es.imposoft.twins.Deck;
+import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
-import es.imposoft.twins.activities.SelectionGameModeActivity;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
