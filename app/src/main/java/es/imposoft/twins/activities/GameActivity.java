@@ -30,7 +30,6 @@ import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
 
 public class GameActivity<chronoTimer> extends AppCompatActivity {
-
     Deck themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
@@ -65,7 +64,6 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
         System.out.println(game.printGame());
-
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -153,7 +151,7 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
                     isTimeOver();
                     pauseButton.setVisibility(View.VISIBLE);
                 }
-            }, 3000);
+            }, game.getRevealSeconds()*1000);
 
         } else {
             for (Card card : cards) {
