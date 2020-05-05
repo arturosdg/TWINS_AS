@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.plantilla;
 
 import android.widget.TextView;
 

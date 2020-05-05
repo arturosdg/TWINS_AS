@@ -168,12 +168,12 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
                                 restantMatches--;
                                 pairs.get(0).setPaired();
                                 pairs.get(1).setPaired();
-                                actualizarControladorDePuntos(10);
+                                actualizarControladorDePuntos(10);//si acierta
                                 pairs.clear();
                                 visibleCards = 0;
                                 stopChronometer();
                             } else {
-                                actualizarControladorDePuntos(-3);
+                                actualizarControladorDePuntos(-3);//si falla
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
                                     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -194,6 +194,9 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         tapCounter++;
 
     }
+
+    /**
+     * Si crono = DESCENDENTE / NONE -> */
 
     @SuppressLint("SetTextI18n")
     private void actualizarControladorDePuntos(int aSumar) {
