@@ -20,6 +20,7 @@ public class Game {
         this.cardAmount = cardAmount;
         this.revealSeconds = revealSeconds;
         this.deck = deck;
+        //this.scoreManager = scoreManager;
         this.gameMode = gameMode;
     }
 
@@ -47,7 +48,9 @@ public class Game {
         return deck;
     }
 
-    public GameMode getGameMode() { return gameMode;}
+    public GameMode getGameMode() { return gameMode; }
+
+    //public AbstractScore getScoreManager() { return scoreManager; }
 
     public String printGame() {
         return "game lasts " + seconds +

@@ -95,7 +95,6 @@ public class GameActivity extends AppCompatActivity {
         scoreboard = new Scoreboard();
         getScoreManager();
 
-
         acertadosSeguidos = 0;
         anteriorAcertada = false;
 
@@ -133,6 +132,20 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case 24:
                 setContentView(R.layout.activity_gamescene4x6);
+                break;
+        }
+    }
+
+    private void getScoreManager() {
+        switch(game.getGameMode()) {
+            case CASUAL:
+                scoreManager = new ScoreFree();
+                break;
+            case LEVELS:
+                scoreManager = new ScoreLevels();
+                break;
+            case STANDARD:
+                scoreManager = new ScoreStandard();
                 break;
         }
     }
@@ -204,7 +217,8 @@ public class GameActivity extends AppCompatActivity {
                                 pairs.clear();
                                 visibleCards = 0;
                                 stopChronometer();
-                            } else {anteriorAcertada = false;
+                            } else {
+                                anteriorAcertada = false;
                                 updateScore();//si falla
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
@@ -226,7 +240,10 @@ public class GameActivity extends AppCompatActivity {
         tapCounter++;
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateScore() {
+    /**
+     * Si crono = DESCENDENTE / NONE -> */
         score = scoreManager.updateScore(anteriorAcertada);
         ((TextView) findViewById(R.id.text_score)).setText("Puntos: " + score);
     }

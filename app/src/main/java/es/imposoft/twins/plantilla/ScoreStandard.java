@@ -12,7 +12,6 @@ public class ScoreStandard extends AbstractScore {
     }
 
     void assignPoints() {
-
         if (isCorrect()) {
             toAdd = 10; //si acierta
         } else {
@@ -21,21 +20,21 @@ public class ScoreStandard extends AbstractScore {
     }
 
     void calculateAndSetScore(){
-        int res = getScore();
+        score = getScore();
 
-        res += toAdd;
+        score += toAdd;
         if (!isCorrect()) {
             lastCorrect = false;
             successesFollowed = 0;
         } else {
             if (lastCorrect) {
-                res += Math.pow(2, successesFollowed);
+                score += Math.pow(2, successesFollowed);
             }
             successesFollowed++;
             lastCorrect = true;
         }
 
-        setScore(res);
+        setScore(score);
     }
 
 }
