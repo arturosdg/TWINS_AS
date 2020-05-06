@@ -2,11 +2,13 @@ package es.imposoft.twins.plantilla;
 
 public class ScoreLevels extends AbstractScore {
 
-    private int score;
-    private boolean correct;
+    public ScoreLevels() { super(); }
 
-    public ScoreLevels() {
-        super();
+    public int updateScore(boolean correct) {
+        setCorrect(correct);
+        assignPoints();
+        calculateAndSetScore();
+        return score;
     }
 
     void assignPoints() {
@@ -21,12 +23,12 @@ public class ScoreLevels extends AbstractScore {
      *INDEPENDIENTES se le restan 5 puntos mas*/
 
     void calculateAndSetScore(){
-        int res = getScore();
+        score = getScore();
 
-        res += toAdd;
+        score += toAdd;
         if (!isCorrect()) {
             if (!lastCorrect && successesFollowed < 0) {
-                res += -5;
+                score += -5;
                 successesFollowed = 0;
             } else {
                 successesFollowed = -1;
@@ -36,7 +38,7 @@ public class ScoreLevels extends AbstractScore {
         } else {
 
             if (lastCorrect && successesFollowed > 0) {
-                res += 15;
+                score += 15;
                 successesFollowed = 0;
             } else {
                 successesFollowed = 1;
@@ -44,6 +46,6 @@ public class ScoreLevels extends AbstractScore {
             lastCorrect = true;
         }
 
-        setScore(res);
+        setScore(score);
     }
 }

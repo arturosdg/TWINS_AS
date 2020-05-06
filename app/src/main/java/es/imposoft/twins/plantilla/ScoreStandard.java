@@ -2,11 +2,13 @@ package es.imposoft.twins.plantilla;
 
 public class ScoreStandard extends AbstractScore {
 
-    private int score;
-    private boolean correct;
+    public ScoreStandard() { super(); }
 
-    public ScoreStandard() {
-        super();
+    public int updateScore(boolean correct) {
+        setCorrect(correct);
+        assignPoints();
+        calculateAndSetScore();
+        return score;
     }
 
     void assignPoints() {
@@ -18,21 +20,21 @@ public class ScoreStandard extends AbstractScore {
     }
 
     void calculateAndSetScore(){
-        int res = getScore();
+        score = getScore();
 
-        res += toAdd;
+        score += toAdd;
         if (!isCorrect()) {
             lastCorrect = false;
             successesFollowed = 0;
         } else {
             if (lastCorrect) {
-                res += Math.pow(2, successesFollowed);
+                score += Math.pow(2, successesFollowed);
             }
             successesFollowed++;
             lastCorrect = true;
         }
 
-        setScore(res);
+        setScore(score);
     }
 
 }

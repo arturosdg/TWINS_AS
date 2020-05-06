@@ -29,6 +29,9 @@ import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.AbstractScore;
+import es.imposoft.twins.plantilla.ScoreFree;
+import es.imposoft.twins.plantilla.ScoreLevels;
+import es.imposoft.twins.plantilla.ScoreStandard;
 
 public class GameActivity<chronoTimer> extends AppCompatActivity {
     Deck themeCard;
@@ -92,7 +95,7 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
 
         score = 0;
         scoreboard = new Scoreboard();
-        scoreManager = game.getScoreManager();
+        getScoreManager();
 
         acertadosSeguidos = 0;
         anteriorAcertada = false;
@@ -107,6 +110,20 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
 
 
 
+    }
+
+    private void getScoreManager() {
+        switch(game.getGameMode()) {
+            case CASUAL:
+                scoreManager = new ScoreFree();
+                break;
+            case LEVELS:
+                scoreManager = new ScoreLevels();
+                break;
+            case STANDARD:
+                scoreManager = new ScoreStandard();
+                break;
+        }
     }
 
     public void showScoreboard(){
@@ -171,11 +188,13 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
                                 restantMatches--;
                                 pairs.get(0).setPaired();
                                 pairs.get(1).setPaired();
+                                anteriorAcertada = true;
                                 actualizarControladorDePuntos();//si acierta
                                 pairs.clear();
                                 visibleCards = 0;
                                 stopChronometer();
                             } else {
+                                anteriorAcertada = false;
                                 actualizarControladorDePuntos();//si falla
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
@@ -203,18 +222,7 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void actualizarControladorDePuntos() {
-        /*score += aSumar;
-        if (aSumar < 0) {
-            anteriorAcertada = false;
-            acertadosSeguidos = 0;
-        } else {
-            if (anteriorAcertada) {
-                score += Math.pow(2, acertadosSeguidos);
-            }
-            acertadosSeguidos++;
-            anteriorAcertada = true;
-        }*/
-        scoreManager.updateScore(anteriorAcertada);
+        score = scoreManager.updateScore(anteriorAcertada);
         ((TextView) findViewById(R.id.text_score)).setText("Puntos: " + score);
     }
 

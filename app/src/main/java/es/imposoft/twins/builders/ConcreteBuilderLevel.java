@@ -2,6 +2,7 @@ package es.imposoft.twins.builders;
 
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.Chronometer;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.AbstractScore;
 
@@ -13,6 +14,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int revealSeconds;
     private Deck deck;
     private AbstractScore scoreManager;
+    private GameMode gameMode;
     //private GameMode gameMode;
 
     @Override
@@ -39,11 +41,11 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     @Override
     public void setCardTheme(Deck deck) { this.deck = deck; }
 
-    //public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
+    public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
 
-    public void setScoreManager(AbstractScore scoreManager) { this.scoreManager = scoreManager; }
+    //public void setScoreManager(AbstractScore scoreManager) { this.scoreManager = scoreManager; }
 
     public Game getResult(){
-        return new Game(seconds,  chronometerType, minScore, cardAmount, revealSeconds, deck, scoreManager);
+        return new Game(seconds,  chronometerType, minScore, cardAmount, revealSeconds, deck, gameMode);
     }
 }

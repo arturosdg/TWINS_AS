@@ -2,11 +2,14 @@ package es.imposoft.twins.plantilla;
 
 public class ScoreFree extends AbstractScore {
 
-    private int score;
-    private boolean correct;
+    public ScoreFree() { super(); }
 
-    public ScoreFree() {
-        super();
+    public int updateScore(boolean correct) {
+        //score = getScore();
+        setCorrect(correct);
+        assignPoints();
+        calculateAndSetScore();
+        return score;
     }
 
     void assignPoints() {
@@ -18,8 +21,8 @@ public class ScoreFree extends AbstractScore {
     }
 
     void calculateAndSetScore(){
-        int res = getScore();
-        res += toAdd;
-        setScore(res);
+        score = getScore();
+        score += toAdd;
+        setScore(score);
     }
 }
