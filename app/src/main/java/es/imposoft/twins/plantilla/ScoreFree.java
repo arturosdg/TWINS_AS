@@ -2,8 +2,15 @@ package es.imposoft.twins.plantilla;
 
 public class ScoreFree extends AbstractScore {
 
-    void assignPoints() {
+    private int score;
+    private boolean correct;
 
+    public ScoreFree() {
+        score = super.getScore();
+        correct = super.isCorrect();
+    }
+
+    void assignPoints() {
         if (isCorrect()) {
             toAdd = 15; //si acierta
         } else {
@@ -13,9 +20,7 @@ public class ScoreFree extends AbstractScore {
 
     void calculateAndSetScore(){
         int res = getScore();
-
         res += toAdd;
-
         setScore(res);
     }
 }

@@ -2,6 +2,7 @@ package es.imposoft.twins.gametypes;
 
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.Chronometer;
+import es.imposoft.twins.plantilla.AbstractScore;
 
 public class Game {
     private final int seconds;
@@ -10,14 +11,16 @@ public class Game {
     private final int cardAmount;
     private final int revealSeconds;
     private final Deck deck;
+    private final AbstractScore scoreManager;
 
-    public Game(int seconds, Chronometer chronometerType,int minScore,int cardAmount,int revealSeconds, Deck deck){
+    public Game(int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, Deck deck, AbstractScore scoreManager){
         this.seconds = seconds;
         this.chronometerType = chronometerType;
         this.minScore = minScore;
         this.cardAmount = cardAmount;
         this.revealSeconds = revealSeconds;
         this.deck = deck;
+        this.scoreManager = scoreManager;
     }
 
     public int getSeconds(){
@@ -43,6 +46,8 @@ public class Game {
     public Deck getDeck(){
         return deck;
     }
+
+    public AbstractScore getScoreManager() { return scoreManager; }
 
     public String printGame() {
         return "game lasts " + seconds +

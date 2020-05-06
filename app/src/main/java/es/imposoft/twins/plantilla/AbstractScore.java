@@ -2,9 +2,13 @@ package es.imposoft.twins.plantilla;
 
 public abstract class AbstractScore {
 
-    private int score = 0;
-    private boolean correct = false;
+    private int score;
+    private boolean correct;
 
+    public AbstractScore() {
+        score = 0;
+        correct = false;
+    }
 
     protected boolean lastCorrect = false;
     protected int successesFollowed = 0;

@@ -2,8 +2,15 @@ package es.imposoft.twins.plantilla;
 
 public class ScoreStandard extends AbstractScore {
 
-    void assignPoints() {
+    private int score;
+    private boolean correct;
 
+    public ScoreStandard() {
+        score = super.getScore();
+        correct = super.isCorrect();
+    }
+
+    void assignPoints() {
         if (isCorrect()) {
             toAdd = 10; //si acierta
         } else {
