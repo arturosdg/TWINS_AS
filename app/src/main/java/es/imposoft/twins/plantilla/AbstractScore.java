@@ -2,18 +2,27 @@ package es.imposoft.twins.plantilla;
 
 public abstract class AbstractScore {
 
-    private int score = 0;
-    private boolean correct = false;
+    int score;
+    private boolean correct;
 
 
-    protected boolean lastCorrect = false;
-    protected int successesFollowed = 0;
-    protected int toAdd = 0;
+    protected boolean lastCorrect;
+    protected int successesFollowed;
+    protected int toAdd;
 
-    public void updateScore(boolean correct) {
+    public AbstractScore(){
+        score = 0;
+        correct = false;
+        lastCorrect = false;
+        successesFollowed = 0;
+        toAdd = 0;
+    }
+
+    public int updateScore(boolean correct) {
         setCorrect(correct);
         assignPoints();
         calculateAndSetScore();
+        return score;
     }
 
 

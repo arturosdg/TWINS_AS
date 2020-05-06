@@ -28,8 +28,9 @@ import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.gametypes.Game;
+import es.imposoft.twins.plantilla.*;
 
-public class GameActivity<chronoTimer> extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
     Deck themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
@@ -54,6 +55,7 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
     Bundle windowInfo;
     Game game;
     Gson gson;
+    AbstractScore scoreManager;
     private long countDownTime;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -67,7 +69,8 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_gamescene4x4);
+        //setContentView(R.layout.activity_gamescene4x4);
+        selectLayout();
 
         pauseButton = findViewById(R.id.button_pause);
         pauseButton.setVisibility(View.INVISIBLE);
@@ -90,6 +93,8 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
 
         score = 0;
         scoreboard = new Scoreboard();
+        getScoreManager();
+
 
         acertadosSeguidos = 0;
         anteriorAcertada = false;
@@ -102,8 +107,34 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         themeCard = game.getDeck();
         assignCardTheme(themeCard);
 
+    }
 
+    private void getScoreManager() {
+        switch(game.getGameMode()) {
+            case CASUAL:
+                scoreManager = new ScoreFree();
+                break;
+            case LEVELS:
+                scoreManager = new ScoreLevels();
+                break;
+            case STANDARD:
+                scoreManager = new ScoreStandard();
+                break;
+        }
+    }
 
+    private void selectLayout() {
+        switch (game.getCardAmount()) {
+            case 16:
+                setContentView(R.layout.activity_gamescene4x4);
+                break;
+            case 20:
+                setContentView(R.layout.activity_gamescene4x5);
+                break;
+            case 24:
+                setContentView(R.layout.activity_gamescene4x6);
+                break;
+        }
     }
 
     public void showScoreboard(){
@@ -168,12 +199,13 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
                                 restantMatches--;
                                 pairs.get(0).setPaired();
                                 pairs.get(1).setPaired();
-                                actualizarControladorDePuntos(10);//si acierta
+                                anteriorAcertada = true;
+                                updateScore();//si acierta
                                 pairs.clear();
                                 visibleCards = 0;
                                 stopChronometer();
-                            } else {
-                                actualizarControladorDePuntos(-3);//si falla
+                            } else {anteriorAcertada = false;
+                                updateScore();//si falla
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
                                     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -192,25 +224,10 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
             }
         }
         tapCounter++;
-
     }
 
-    /**
-     * Si crono = DESCENDENTE / NONE -> */
-
-    @SuppressLint("SetTextI18n")
-    private void actualizarControladorDePuntos(int aSumar) {
-        score += aSumar;
-        if (aSumar < 0) {
-            anteriorAcertada = false;
-            acertadosSeguidos = 0;
-        } else {
-            if (anteriorAcertada) {
-                score += Math.pow(2, acertadosSeguidos);
-            }
-            acertadosSeguidos++;
-            anteriorAcertada = true;
-        }
+    private void updateScore() {
+        score = scoreManager.updateScore(anteriorAcertada);
         ((TextView) findViewById(R.id.text_score)).setText("Puntos: " + score);
     }
 
