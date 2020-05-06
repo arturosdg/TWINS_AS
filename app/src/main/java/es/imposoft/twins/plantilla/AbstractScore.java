@@ -23,8 +23,6 @@ public abstract class AbstractScore {
         return score;
     }
 
-    public abstract int updateScore(boolean lastCorrect);
-
     abstract void calculateAndSetScore();
 
     abstract void assignPoints();

@@ -136,20 +136,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void getScoreManager() {
-        switch(game.getGameMode()) {
-            case CASUAL:
-                scoreManager = new ScoreFree();
-                break;
-            case LEVELS:
-                scoreManager = new ScoreLevels();
-                break;
-            case STANDARD:
-                scoreManager = new ScoreStandard();
-                break;
-        }
-    }
-
     public void showScoreboard(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
