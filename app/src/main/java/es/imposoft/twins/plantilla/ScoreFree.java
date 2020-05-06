@@ -6,8 +6,7 @@ public class ScoreFree extends AbstractScore {
     private boolean correct;
 
     public ScoreFree() {
-        score = super.getScore();
-        correct = super.isCorrect();
+        super();
     }
 
     void assignPoints() {

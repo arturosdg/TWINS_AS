@@ -6,8 +6,7 @@ public class ScoreLevels extends AbstractScore {
     private boolean correct;
 
     public ScoreLevels() {
-        score = super.getScore();
-        correct = super.isCorrect();
+        super();
     }
 
     void assignPoints() {
