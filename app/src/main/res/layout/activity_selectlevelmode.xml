@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/background"
+        android:id="@+id/iv_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_goBack"
-        app:srcCompat="@drawable/fondoniveles2" />
+        app:srcCompat="@drawable/backgroundlevels" />
 
     <Space
         android:id="@+id/space1"
@@ -34,7 +34,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/space1"
-        app:layout_constraintTop_toTopOf="@id/background">
+        app:layout_constraintTop_toTopOf="@id/iv_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

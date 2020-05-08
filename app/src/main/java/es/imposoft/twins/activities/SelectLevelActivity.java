@@ -2,9 +2,15 @@ package es.imposoft.twins.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,14 +37,29 @@ public class SelectLevelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selectlevel);
+        //setContentView(R.layout.activity_selectlevel);
 
         Bundle windowInfo = getIntent().getExtras();
         deck = (Deck) windowInfo.get("THEME");
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
+
+
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_selectlevel);
+        /* adapt the image to the size of the display */
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
+                getResources(),R.drawable.backgroundlevels),size.x,size.y,true);
+        /* fill the background ImageView with the resized image */
+        ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
+        iv_background.setImageBitmap(bmp);
+
         fillArray();
-        System.out.println(levelButtons.toString());
     }
 
     public void goBack(View view) {
@@ -51,7 +72,6 @@ public class SelectLevelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
 
         createLevelSelected(view.getId());
-        //director.constructLevel1(levelBuilder);
         game = levelBuilder.getResult();
 
         Gson gson = new Gson();
