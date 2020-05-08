@@ -69,7 +69,6 @@ public class GameActivity extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        //setContentView(R.layout.activity_gamescene4x4);
         selectLayout();
 
         pauseButton = findViewById(R.id.button_pause);
@@ -162,7 +161,6 @@ public class GameActivity extends AppCompatActivity {
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
-
         startActivityForResult(intent,1);
     }
 
@@ -359,7 +357,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         ArrayList<Integer> images = new ArrayList<Integer>();
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < maxCards/2; i++)
             images.add(getResources().getIdentifier(theme.toString().toLowerCase() + i, "drawable", getPackageName()));
 
         for (int i = 0; i < shuffled.size(); i++)

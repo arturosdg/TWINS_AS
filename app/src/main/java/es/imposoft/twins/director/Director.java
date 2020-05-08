@@ -26,7 +26,7 @@ public class Director {
     public void constructCasualGame(ConcreteBuilderLevel builder){
         builder.setCardTheme(deck);
         builder.setMinScore(0);
-        builder.setCardAmount(16);
+        builder.setCardAmount(20);
         builder.setRevealTime(3);
         builder.setChronometer(90, Chronometer.NONE);
         //builder.setScoreManager(new ScoreFree());

@@ -44,9 +44,13 @@ public class PopupActivity extends Activity {
 
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent();
+                        /*Intent returnIntent = new Intent();
                         returnIntent.putExtra("WINDOW",0);
                         setResult(Activity.RESULT_OK, returnIntent);
+                        finish();*/
+                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(returnIntent);
                         finish();
                     }
                 });
@@ -82,8 +86,13 @@ public class PopupActivity extends Activity {
                 cancelButton = findViewById(R.id.cancelButton);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);
+                        /*Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",0);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();*/
+                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(returnIntent);
                         finish();
                     }
                 });
@@ -141,8 +150,9 @@ public class PopupActivity extends Activity {
                 cancelButton = findViewById(R.id.cancelButton);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);
+                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(returnIntent);
                         finish();
                     }
                 });
