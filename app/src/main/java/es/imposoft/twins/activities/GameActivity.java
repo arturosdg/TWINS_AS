@@ -56,7 +56,6 @@ public class GameActivity extends AppCompatActivity {
     Game game;
     Gson gson;
     AbstractScore scoreManager;
-    private long countDownTime;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -76,7 +75,6 @@ public class GameActivity extends AppCompatActivity {
 
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
-        countDownTime = game.getSeconds() * 1000; //seconds to milliseconds
         setChronometerType();
 
         pauseTapCounter = 0;
@@ -166,12 +164,10 @@ public class GameActivity extends AppCompatActivity {
 
     @SuppressLint("WrongViewCast")
     public void changeSprite(View view) {
-        // La primera vez que el jugador toca la pantalla, se giran todas las cartas.
         if(tapCounter == 0) {
             turnAllCards();
-            //  Espera 3 segundos hasta que se vuelvan a girar
-            Handler secs3 = new Handler();
-            secs3.postDelayed(new Runnable() {
+            Handler revealTime = new Handler();
+            revealTime.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 public void run() {
                     turnAllCards();
@@ -267,7 +263,7 @@ public class GameActivity extends AppCompatActivity {
                 public void run() {
                     showScoreboard();
                 }
-            }, 1000);
+            }, 800);
         }
     }
 
@@ -276,7 +272,7 @@ public class GameActivity extends AppCompatActivity {
         chronoTimer.setBase(SystemClock.elapsedRealtime());
         timeWhenStarted = chronoTimer.getBase();
         if (chronoTimer.isCountDown()) {
-            chronoTimer.setBase(timeWhenStarted + countDownTime);
+            chronoTimer.setBase(timeWhenStarted + (game.getSeconds() * 1000));
         }
         chronoTimer.start();
     }
@@ -286,10 +282,8 @@ public class GameActivity extends AppCompatActivity {
         chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if (timeWhenStarted + countDownTime <= SystemClock.elapsedRealtime()) {
+                if (timeWhenStarted + (game.getSeconds() * 1000) <= SystemClock.elapsedRealtime()) {
                     chronoTimer.stop();
-                    Toast.makeText(context,
-                            "time reached", Toast.LENGTH_SHORT).show();
                     Handler secs1 = new Handler();
                     secs1.postDelayed(new Runnable() {
                         public void run() {
