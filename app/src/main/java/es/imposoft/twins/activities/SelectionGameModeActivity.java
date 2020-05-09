@@ -20,6 +20,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     Context context;
     Deck deck;
     Game game;
+    Bundle windowInfo;
 
     //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
     /*
@@ -36,15 +37,37 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selectgamemode);
 
-        Bundle windowInfo = getIntent().getExtras();
+        windowInfo = getIntent().getExtras();
         deck = (Deck) windowInfo.get("THEME");
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
+<<<<<<< Updated upstream
+=======
+
+
+
+
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_selectgamemode);
+        /* adapt the image to the size of the display */
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
+                getResources(),R.drawable.background),size.x,size.y,true);
+        /* fill the background ImageView with the resized image */
+        ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
+        iv_background.setImageBitmap(bmp);
+>>>>>>> Stashed changes
     }
 
     public void openLevelsLayout(View view) {
         Intent intent = new Intent(this, SelectLevelActivity.class);
         intent.putExtra("THEME", deck);
+        if(getIntent().getIntegerArrayListExtra("LEVEL") != null)
+            intent.putIntegerArrayListExtra("SUCCEEDED", getIntent().getIntegerArrayListExtra("LEVEL"));
         startActivity(intent);
         this.finish();
     }

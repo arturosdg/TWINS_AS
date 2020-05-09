@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +23,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
+import es.imposoft.twins.SucceededLevels;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.AbstractScore;
 import es.imposoft.twins.plantilla.ScoreFree;
@@ -44,6 +45,7 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
     Context context;
     int tapCounter, pauseTapCounter, visibleCards;
     Scoreboard scoreboard;
+    SucceededLevels succeededLevels;
 
     int acertadosSeguidos;
     boolean anteriorAcertada, pausedGame;
@@ -59,7 +61,12 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
     Game game;
     Gson gson;
     AbstractScore scoreManager;
+<<<<<<< Updated upstream
     private long countDownTime;
+=======
+    int levelPlayed;
+    GameMode gameMode;
+>>>>>>> Stashed changes
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -68,11 +75,16 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
-        System.out.println(game.printGame());
+        if(windowInfo.get("LEVEL") != null) { levelPlayed = (int) windowInfo.get("LEVEL"); }
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
+<<<<<<< Updated upstream
         setContentView(R.layout.activity_gamescene4x4);
+=======
+        selectLayout();
+        gameMode = game.getGameMode();
+>>>>>>> Stashed changes
 
         pauseButton = findViewById(R.id.button_pause);
         pauseButton.setVisibility(View.INVISIBLE);
@@ -97,19 +109,26 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         scoreboard = new Scoreboard();
         getScoreManager();
 
+        succeededLevels =  new SucceededLevels();
+        //succeededLevels = getIntent().getIntegerArrayListExtra("SUCCEEDED"); //new SucceededLevels();
+
         acertadosSeguidos = 0;
         anteriorAcertada = false;
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sp);
+        succeededLevels.loadSuccedeedLevels(sp);
 
         fillArray();
         createCards();
         themeCard = game.getDeck();
         assignCardTheme(themeCard);
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
     }
 
     private void getScoreManager() {
@@ -138,13 +157,19 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
 
+        if(isLevelMode()) {
+            succeededLevels.addSuccedeedLevel(levelPlayed);
+            succeededLevels.saveSucceededLevels(sp);
+            String glevels = gson.toJson(succeededLevels);
+            intent.putExtra("LEVEL", glevels);
+        }
+
         startActivityForResult(intent,1);
     }
 
     public void showGameOver(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        //scoreboard.addScore(score);
         scoreboard.saveHighscores(sp);
 
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
@@ -390,4 +415,6 @@ public class GameActivity<chronoTimer> extends AppCompatActivity {
                 break;
         }
     }
+
+    private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
 }
