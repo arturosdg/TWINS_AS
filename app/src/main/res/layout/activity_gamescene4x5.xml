@@ -24,24 +24,31 @@
 
         <TextView
             android:id="@+id/text_score"
-            android:layout_width="129dp"
+            android:layout_width="99dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Puntos: 0"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+        <Button
+            android:id="@+id/button_restart"
+            android:layout_width="18dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/reiniciar"
+            android:onClick="reiniciar" />
 
         <Button
             android:id="@+id/button_pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="21dp"
+            android:layout_height="35dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/pause_stop"
             android:onClick="pauseGame"
-            android:text="Pausar"
-            android:textColor="@color/colorText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
 
         <Button
             android:id="@+id/finishButton"
