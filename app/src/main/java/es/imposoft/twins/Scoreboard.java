@@ -1,13 +1,12 @@
 package es.imposoft.twins;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.preference.PreferenceManager;
+
 import com.google.gson.Gson;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Scoreboard {
     private List<Integer> highscores;

@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +23,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
+import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.*;
 
@@ -50,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
     private int restantMatches;
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
+    int tapErrors;
 
     long timeWhenStarted, timeWhenStopped;
 
@@ -57,6 +59,11 @@ public class GameActivity extends AppCompatActivity {
     Game game;
     Gson gson;
     AbstractScore scoreManager;
+    SucceededLevel succeededLevels;
+
+    SharedPreferences sharedPreferences;
+    private GameMode gameMode;
+    int levelPlayed;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -65,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
-        System.out.println(game.printGame());
+        if(windowInfo.get("LEVEL") != null) { levelPlayed = (int) windowInfo.get("LEVEL"); }
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -83,6 +90,7 @@ public class GameActivity extends AppCompatActivity {
 
         pauseTapCounter = 0;
         tapCounter = 0;
+        tapErrors = 0;
         maxCards = game.getCardAmount();
         restantMatches = maxCards / 2;
         visibleCards = 0;
@@ -92,16 +100,22 @@ public class GameActivity extends AppCompatActivity {
         isClickable = false;
         pausedGame = false;
 
+        gameMode = game.getGameMode();
+
         score = 0;
-        scoreboard = new Scoreboard();
+        scoreboard = new Scoreboard(game.getId());
         getScoreManager();
 
         acertadosSeguidos = 0;
         anteriorAcertada = false;
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        scoreboard.loadHighscores(sp);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        scoreboard.loadHighscores(sharedPreferences);
+        if(isLevelMode()) {
+            succeededLevels = new SucceededLevel(gameMode.ordinal());
+            succeededLevels.loadSuccedeedLevels(sharedPreferences);
+        }
         fillArray();
         createCards();
         themeCard = game.getDeck();
@@ -110,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void getScoreManager() {
-        switch(game.getGameMode()) {
+        switch(gameMode) {
             case CASUAL:
                 scoreManager = new ScoreFree();
                 break;
@@ -138,31 +152,38 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void showScoreboard(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
-        scoreboard.saveHighscores(sp);
-
+        scoreboard.saveHighscores(sharedPreferences);
+        if(isLevelMode()) {
+            if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
+                succeededLevels.addSuccedeedLevel(levelPlayed);
+                succeededLevels.saveSucceededLevels(sharedPreferences);
+                String glevels = gson.toJson(succeededLevels);
+            }
+        }
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        Gson gson = new Gson();
+        gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
-
         startActivityForResult(intent,1);
     }
 
     public void showGameOver(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        //scoreboard.addScore(score);
-        scoreboard.saveHighscores(sp);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        scoreboard.saveHighscores(sharedPreferences);
 
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        Gson gson = new Gson();
+        gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
+        if(isLevelMode()) {
+            succeededLevels.saveSucceededLevels(sharedPreferences);
+        }
+
         startActivityForResult(intent,1);
     }
 
@@ -180,8 +201,9 @@ public class GameActivity extends AppCompatActivity {
                     pauseButton.setVisibility(View.VISIBLE);
                     restartButton.setVisibility(View.VISIBLE);
                 }
-            }, game.getRevealSeconds()*1000);
-
+            }, game.getRevealSeconds() * 1000);
+        } else if(tapErrors >= 20){
+            showGameOver();
         } else {
             for (Card card : cards) {
                 if(visibleCards < 2 && !pausedGame)
@@ -203,6 +225,7 @@ public class GameActivity extends AppCompatActivity {
                                 visibleCards = 0;
                                 stopChronometer();
                             } else {
+                                tapErrors++;
                                 anteriorAcertada = false;
                                 updateScore();//si falla
                                 Handler secs1 = new Handler();
@@ -249,7 +272,6 @@ public class GameActivity extends AppCompatActivity {
     private void fillArray(){
         for(int i = 0; i < maxCards; i++) {
             int imageID = getResources().getIdentifier("imgPos" + i,"id", getPackageName());
-            //int buttonID = getResources().getIdentifier("imgPos" + i,"id", getPackageName());
             buttons[i] = findViewById(imageID);
         }
     }
@@ -269,6 +291,7 @@ public class GameActivity extends AppCompatActivity {
                     showScoreboard();
                 }
             }, 800);
+            pausedGame = true;
         }
     }
 
@@ -327,8 +350,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) {
-            if(getButton(b).isPaired()) {}
-            else b.setClickable(isClickable);
+            if(!getButton(b).isPaired()) b.setClickable(isClickable);
         }
         isClickable = !isClickable;
     }
@@ -406,4 +428,6 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
 }
