@@ -18,7 +18,6 @@ public class ScoreLevels extends AbstractScore {
             toAdd = -2; //si falla
         }
     }
-
     /**cuando acierta dos seguidas INDEPENDIENTES se le suman 15 puntos mas y si falla dos seguidas
      *INDEPENDIENTES se le restan 5 puntos mas*/
 
