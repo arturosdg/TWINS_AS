@@ -24,7 +24,6 @@ public class PopupActivity extends Activity {
     ListView scoreList;
     Gson gson;
     Scoreboard scoreboard;
-    SucceededLevel succeededLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

@@ -24,6 +24,7 @@ import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
 
@@ -46,7 +47,6 @@ public class SelectLevelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_selectlevel);
 
         Bundle windowInfo = getIntent().getExtras();
         deck = (Deck) windowInfo.get("THEME");
@@ -69,10 +69,9 @@ public class SelectLevelActivity extends AppCompatActivity {
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
 
-        //Gson gson = new Gson();
-        succeededLevels = new SucceededLevel();
+
+        succeededLevels = new SucceededLevel(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //succeededLevels = gson.fromJson(sp.getString("LEVEL" + id, null), SucceededLevel.class);
         succeededLevels.loadSuccedeedLevels(sp);
         if(succeededLevels != null) levels = succeededLevels.getSuccedeedLevels();
         if(succeededLevels != null) succeededLevels.saveSucceededLevels(sp);
@@ -98,7 +97,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
         intent.putExtra("LEVEL", level);
-        //String glevels = gson.toJson(succeededLevels);
+        String glevels = gson.toJson(succeededLevels);
 
         startActivity(intent);
         this.finish();

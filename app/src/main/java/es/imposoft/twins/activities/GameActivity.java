@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,24 +94,22 @@ public class GameActivity extends AppCompatActivity {
         isClickable = false;
         pausedGame = false;
 
-        score = 0;
-        scoreboard = new Scoreboard();
-        getScoreManager();
-        succeededLevels = new SucceededLevel();
-
         gameMode = game.getGameMode();
+
+        score = 0;
+        scoreboard = new Scoreboard(gameMode.ordinal());
+        getScoreManager();
 
         acertadosSeguidos = 0;
         anteriorAcertada = false;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
-        succeededLevels.loadSuccedeedLevels(sharedPreferences);
-        /*
-        int id = 0;
-        if(succeededLevels != null)
-            succeededLevels = gson.fromJson(sharedPreferences.getString("LEVEL" + id, null), SucceededLevel.class);
-        */
+        if(isLevelMode()) {
+            succeededLevels = new SucceededLevel(gameMode.ordinal());
+            succeededLevels.loadSuccedeedLevels(sharedPreferences);
+        }
         fillArray();
         createCards();
         themeCard = game.getDeck();
@@ -121,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void getScoreManager() {
-        switch(game.getGameMode()) {
+        switch(gameMode) {
             case CASUAL:
                 scoreManager = new ScoreFree();
                 break;
@@ -150,14 +147,15 @@ public class GameActivity extends AppCompatActivity {
 
     public void showScoreboard(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
         scoreboard.saveHighscores(sharedPreferences);
         if(isLevelMode()) {
             if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
                 succeededLevels.addSuccedeedLevel(levelPlayed);
                 succeededLevels.saveSucceededLevels(sharedPreferences);
+                String glevels = gson.toJson(succeededLevels);
             }
-            //String glevels = gson.toJson(succeededLevels);
         }
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
         gson = new Gson();
@@ -168,6 +166,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void showGameOver(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.saveHighscores(sharedPreferences);
 
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
@@ -177,8 +176,6 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
         if(isLevelMode()) {
             succeededLevels.saveSucceededLevels(sharedPreferences);
-            String glevels = gson.toJson(succeededLevels);
-            intent.putExtra("LEVEL", glevels);
         }
 
         startActivityForResult(intent,1);
@@ -266,7 +263,6 @@ public class GameActivity extends AppCompatActivity {
     private void fillArray(){
         for(int i = 0; i < maxCards; i++) {
             int imageID = getResources().getIdentifier("imgPos" + i,"id", getPackageName());
-            //int buttonID = getResources().getIdentifier("imgPos" + i,"id", getPackageName());
             buttons[i] = findViewById(imageID);
         }
     }
@@ -286,6 +282,7 @@ public class GameActivity extends AppCompatActivity {
                     showScoreboard();
                 }
             }, 800);
+            pausedGame = true;
         }
     }
 
@@ -333,8 +330,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) {
-            if(getButton(b).isPaired()) {}
-            else b.setClickable(isClickable);
+            if(!getButton(b).isPaired()) b.setClickable(isClickable);
         }
         isClickable = !isClickable;
     }
