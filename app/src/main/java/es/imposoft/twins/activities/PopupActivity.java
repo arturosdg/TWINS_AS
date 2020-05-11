@@ -2,16 +2,13 @@ package es.imposoft.twins.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
-import es.imposoft.twins.SucceededLevel;
 
 public class PopupActivity extends Activity {
     public enum WindowType{
@@ -107,6 +104,26 @@ public class PopupActivity extends Activity {
 
                 Button firstCard = findViewById(R.id.firstCard);
                 Button secondCard = findViewById(R.id.secondCard);
+                Button soundButtonOn = findViewById(R.id.soundButtonOn);
+                Button soundButtonOff = findViewById(R.id.soundButtonOn);
+
+                soundButtonOn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
+                        returnIntent.putExtra("SOUND",true);
+                        finish();
+                    }
+                });
+
+                soundButtonOff.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);
+                        returnIntent.putExtra("SOUND",false);
+                        finish();
+                    }
+                });
 
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {

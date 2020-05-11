@@ -81,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
                                 cardTheme = Deck.CARS;
                                 break;
                         }
+
+                        boolean chosenVolume = true;
+                        if (returnInfo.containsKey("SOUND")) {
+                            chosenVolume = (Boolean) returnInfo.get("SOUND");
+                        }
+                        if (chosenVolume == true) {
+                            //TODO ACTIVAR VOLUMEN
+                        } else if (chosenVolume == false) {
+                            //TODO DESACTIVAR VOLUMEN
+                        }
                     }
             }
         }

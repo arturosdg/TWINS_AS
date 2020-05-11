@@ -64,12 +64,54 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sonido:"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="78dp"
+            android:layout_height="44dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/soundButtonOn"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="ON"
+            android:textColor="@color/colorText" />
+
+        <Button
+            android:id="@+id/soundButtonOff"
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="OFF"
+            android:textColor="@color/colorText" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/acceptButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/cancelar"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/colorText"/>
+        android:text="@string/cancelar"
+        android:textColor="@color/colorText" />
+
 </LinearLayout>
