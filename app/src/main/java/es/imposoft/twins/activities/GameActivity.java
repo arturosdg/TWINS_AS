@@ -49,6 +49,7 @@ public class GameActivity extends AppCompatActivity {
     private int restantMatches;
     private boolean isClickable;
     List<Card> pairs = new ArrayList<>();
+    int tapErrors;
 
     long timeWhenStarted, timeWhenStopped;
 
@@ -79,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
 
         pauseTapCounter = 0;
         tapCounter = 0;
+        tapErrors = 0;
         maxCards = game.getCardAmount();
         restantMatches = maxCards / 2;
         visibleCards = 0;
@@ -89,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
         pausedGame = false;
 
         score = 0;
-        scoreboard = new Scoreboard();
+        scoreboard = new Scoreboard(game.getId());
         getScoreManager();
 
         acertadosSeguidos = 0;
@@ -175,8 +177,9 @@ public class GameActivity extends AppCompatActivity {
                     isTimeOver();
                     pauseButton.setVisibility(View.VISIBLE);
                 }
-            }, game.getRevealSeconds()*1000);
-
+            }, game.getRevealSeconds() * 1000);
+        } else if(tapErrors >= 20){
+            showGameOver();
         } else {
             for (Card card : cards) {
                 if(visibleCards < 2 && !pausedGame)
@@ -198,6 +201,7 @@ public class GameActivity extends AppCompatActivity {
                                 visibleCards = 0;
                                 stopChronometer();
                             } else {
+                                tapErrors++;
                                 anteriorAcertada = false;
                                 updateScore();//si falla
                                 Handler secs1 = new Handler();

@@ -12,8 +12,10 @@ public class Game {
     private final int revealSeconds;
     private final Deck deck;
     private final GameMode gameMode;
+    private final int id;
 
-    public Game(int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, Deck deck, GameMode gameMode){
+    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, Deck deck, GameMode gameMode){
+        this.id = id;
         this.seconds = seconds;
         this.chronometerType = chronometerType;
         this.minScore = minScore;
@@ -23,6 +25,8 @@ public class Game {
         //this.scoreManager = scoreManager;
         this.gameMode = gameMode;
     }
+
+    public int getId(){ return id;}
 
     public int getSeconds(){
         return seconds;

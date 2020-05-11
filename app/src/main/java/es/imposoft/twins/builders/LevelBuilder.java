@@ -13,4 +13,5 @@ public interface LevelBuilder {
     void setCardTheme(Deck deck);
     //void setScoreManager(AbstractScore scoreManager);
     void setGameMode(GameMode gameMode);
+    void setId(int levelId);
 }

@@ -8,6 +8,9 @@ public class ScoreStandard extends AbstractScore {
         setCorrect(correct);
         assignPoints();
         calculateAndSetScore();
+        if(score<0){
+            score = 0;
+        }
         return score;
     }
 

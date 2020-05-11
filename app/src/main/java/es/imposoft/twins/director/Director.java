@@ -21,6 +21,7 @@ public class Director {
         builder.setChronometer(45, Chronometer.NORMAL);
         //builder.setScoreManager(new ScoreStandard());
         builder.setGameMode(GameMode.STANDARD);
+        builder.setId(1);
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
@@ -31,6 +32,7 @@ public class Director {
         builder.setChronometer(90, Chronometer.NONE);
         //builder.setScoreManager(new ScoreFree());
         builder.setGameMode(GameMode.CASUAL);
+        builder.setId(2);
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
@@ -41,25 +43,28 @@ public class Director {
         builder.setChronometer(60, Chronometer.DESCENDING);
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
+        builder.setId(3);
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
         builder.setCardTheme(deck);//Deck.CARS
         builder.setMinScore(5);//25
-        builder.setCardAmount(16);//20
+        builder.setCardAmount(20);//20
         builder.setRevealTime(2);
         builder.setChronometer(50, Chronometer.DESCENDING);
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
+        builder.setId(4);
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
         builder.setCardTheme(deck);//Deck.EMOJI
         builder.setMinScore(5);//55
-        builder.setCardAmount(16);//24
+        builder.setCardAmount(24);//24
         builder.setRevealTime(1);
         builder.setChronometer(40, Chronometer.DESCENDING);
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
+        builder.setId(5);
     }
 }
