@@ -182,6 +182,7 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
         if(isLevelMode()) {
             succeededLevels.saveSucceededLevels(sharedPreferences);
+            String glevels = gson.toJson(succeededLevels);
         }
 
         startActivityForResult(intent,1);

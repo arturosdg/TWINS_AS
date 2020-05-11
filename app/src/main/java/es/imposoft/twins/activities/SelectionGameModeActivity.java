@@ -40,11 +40,11 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_selectgamemode);
 
         Bundle windowInfo = getIntent().getExtras();
 
-        if(windowInfo.get("THEME") != null) { deck = (Deck) windowInfo.get("THEME"); }
-        else { deck = Deck.EMOJI; }
+        deck = (Deck) windowInfo.get("THEME");
 
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
@@ -102,6 +102,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void goBack(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("THEME", deck);
         startActivity(intent);
         this.finish();
     }

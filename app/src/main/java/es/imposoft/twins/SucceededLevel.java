@@ -36,7 +36,7 @@ public class SucceededLevel {
             SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id, null), SucceededLevel.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
-            succedeedLevels = levels.getSuccedeedLevels();
+            succedeedLevels = levels.getSuccedeedLevels(); 
 
             mEdit1.clear();
             mEdit1.commit();

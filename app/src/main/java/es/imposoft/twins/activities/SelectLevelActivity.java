@@ -38,7 +38,6 @@ public class SelectLevelActivity extends AppCompatActivity {
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
     Game game;
-    int id;
 
     SucceededLevel succeededLevels;
     List<Integer> levels;
@@ -49,11 +48,12 @@ public class SelectLevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Bundle windowInfo = getIntent().getExtras();
+
         deck = (Deck) windowInfo.get("THEME");
+
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
 
-        id = 0;
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -83,6 +83,7 @@ public class SelectLevelActivity extends AppCompatActivity {
 
     public void goBack(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
+        intent.putExtra("THEME", deck);
         startActivity(intent);
         this.finish();
     }
