@@ -105,12 +105,13 @@ public class PopupActivity extends Activity {
                 Button firstCard = findViewById(R.id.firstCard);
                 Button secondCard = findViewById(R.id.secondCard);
                 Button soundButtonOn = findViewById(R.id.soundButtonOn);
-                Button soundButtonOff = findViewById(R.id.soundButtonOn);
+                Button soundButtonOff = findViewById(R.id.soundButtonOff);
 
                 soundButtonOn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("SOUND",true);
                         finish();
                     }
@@ -119,7 +120,8 @@ public class PopupActivity extends Activity {
                 soundButtonOff.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("SOUND",false);
                         finish();
                     }
