@@ -38,7 +38,6 @@ public class SucceededLevel {
             SharedPreferences.Editor mEdit1 = sp.edit();
             succedeedLevels = levels.getSuccedeedLevels(); 
 
-            mEdit1.clear();
             mEdit1.commit();
         }
     }

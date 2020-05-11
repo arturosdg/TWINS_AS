@@ -83,7 +83,7 @@ public class SelectLevelActivity extends AppCompatActivity {
 
     public void goBack(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
-        intent.putExtra("THEME", deck);
+        intent.putExtra("THEME",deck);
         startActivity(intent);
         this.finish();
     }

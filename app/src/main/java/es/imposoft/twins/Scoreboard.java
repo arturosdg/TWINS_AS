@@ -49,7 +49,6 @@ public class Scoreboard {
             SharedPreferences.Editor mEdit1 = sp.edit();
             highscores = scoreboard.getHighscores();
 
-            mEdit1.clear();
             mEdit1.commit();
         }
     }
