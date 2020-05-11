@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     Deck themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
+    Button restartButton;
 
     private int maxCards;
     Button[] buttons;
@@ -72,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
 
         pauseButton = findViewById(R.id.button_pause);
         pauseButton.setVisibility(View.INVISIBLE);
+
+        restartButton = findViewById(R.id.button_restart);
+        restartButton.setVisibility(View.INVISIBLE);
 
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
@@ -174,6 +178,7 @@ public class GameActivity extends AppCompatActivity {
                     startChronometer();
                     isTimeOver();
                     pauseButton.setVisibility(View.VISIBLE);
+                    restartButton.setVisibility(View.VISIBLE);
                 }
             }, game.getRevealSeconds()*1000);
 
@@ -307,6 +312,17 @@ public class GameActivity extends AppCompatActivity {
             pausedGame = !pausedGame;
         }
         pauseTapCounter++;
+    }
+
+    public void reiniciar(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+
+        Gson gson = new Gson();
+        String newGame = gson.toJson(game);
+        intent.putExtra("GAME",newGame);
+
+        startActivity(intent);
+        this.finish();
     }
 
     private void setClickable(Button[] buttons) {
