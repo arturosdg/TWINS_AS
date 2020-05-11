@@ -24,9 +24,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
+import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.*;
 
@@ -56,6 +58,11 @@ public class GameActivity extends AppCompatActivity {
     Game game;
     Gson gson;
     AbstractScore scoreManager;
+    SucceededLevel succeededLevels;
+
+    SharedPreferences sharedPreferences;
+    private GameMode gameMode;
+    int levelPlayed;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -64,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
-        System.out.println(game.printGame());
+        if(windowInfo.get("LEVEL") != null) { levelPlayed = (int) windowInfo.get("LEVEL"); }
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -91,13 +98,21 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         scoreboard = new Scoreboard();
         getScoreManager();
+        succeededLevels = new SucceededLevel();
+
+        gameMode = game.getGameMode();
 
         acertadosSeguidos = 0;
         anteriorAcertada = false;
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        scoreboard.loadHighscores(sp);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        scoreboard.loadHighscores(sharedPreferences);
+        succeededLevels.loadSuccedeedLevels(sharedPreferences);
+        /*
+        int id = 0;
+        if(succeededLevels != null)
+            succeededLevels = gson.fromJson(sharedPreferences.getString("LEVEL" + id, null), SucceededLevel.class);
+        */
         fillArray();
         createCards();
         themeCard = game.getDeck();
@@ -134,31 +149,38 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void showScoreboard(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
-        scoreboard.saveHighscores(sp);
-
+        scoreboard.saveHighscores(sharedPreferences);
+        if(isLevelMode()) {
+            if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
+                succeededLevels.addSuccedeedLevel(levelPlayed);
+                succeededLevels.saveSucceededLevels(sharedPreferences);
+            }
+            //String glevels = gson.toJson(succeededLevels);
+        }
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        Gson gson = new Gson();
+        gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
-
         startActivityForResult(intent,1);
     }
 
     public void showGameOver(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        //scoreboard.addScore(score);
-        scoreboard.saveHighscores(sp);
+        scoreboard.saveHighscores(sharedPreferences);
 
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        Gson gson = new Gson();
+        gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
+        if(isLevelMode()) {
+            succeededLevels.saveSucceededLevels(sharedPreferences);
+            String glevels = gson.toJson(succeededLevels);
+            intent.putExtra("LEVEL", glevels);
+        }
+
         startActivityForResult(intent,1);
     }
 
@@ -390,4 +412,6 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
 }

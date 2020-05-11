@@ -2,13 +2,16 @@ package es.imposoft.twins.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.SucceededLevel;
 
 public class PopupActivity extends Activity {
     public enum WindowType{
@@ -21,6 +24,7 @@ public class PopupActivity extends Activity {
     ListView scoreList;
     Gson gson;
     Scoreboard scoreboard;
+    SucceededLevel succeededLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -72,6 +76,7 @@ public class PopupActivity extends Activity {
                 scoreList = findViewById(R.id.scoreList);
                 gson = new Gson();
                 scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
+
 
                 final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter);

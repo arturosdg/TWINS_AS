@@ -2,10 +2,12 @@ package es.imposoft.twins.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.util.List;
+
+import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
@@ -24,7 +29,7 @@ import es.imposoft.twins.gametypes.Game;
 
 public class SelectLevelActivity extends AppCompatActivity {
     private final int MAX_LEVELS = 5;
-    private int level;
+    int level;
     private Button[] levelButtons = new Button[MAX_LEVELS];
     Context context;
 
@@ -32,6 +37,10 @@ public class SelectLevelActivity extends AppCompatActivity {
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
     Game game;
+    int id;
+
+    SucceededLevel succeededLevels;
+    List<Integer> levels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         director = new Director(deck);
         levelBuilder =  new ConcreteBuilderLevel();
 
+        id = 0;
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -59,7 +69,17 @@ public class SelectLevelActivity extends AppCompatActivity {
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
 
+        //Gson gson = new Gson();
+        succeededLevels = new SucceededLevel();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //succeededLevels = gson.fromJson(sp.getString("LEVEL" + id, null), SucceededLevel.class);
+        succeededLevels.loadSuccedeedLevels(sp);
+        if(succeededLevels != null) levels = succeededLevels.getSuccedeedLevels();
+        if(succeededLevels != null) succeededLevels.saveSucceededLevels(sp);
+
         fillArray();
+        initializeLevelButtons();
+        setPlayableLevels();
     }
 
     public void goBack(View view) {
@@ -77,6 +97,8 @@ public class SelectLevelActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
+        intent.putExtra("LEVEL", level);
+        //String glevels = gson.toJson(succeededLevels);
 
         startActivity(intent);
         this.finish();
@@ -92,9 +114,28 @@ public class SelectLevelActivity extends AppCompatActivity {
     }
 
     private void createLevelSelected(int id) {
-        if(id == levelButtons[0].getId()) director.constructLevel1(levelBuilder);
-        else if (id == levelButtons[1].getId()) director.constructLevel2(levelBuilder);
-        else if (id == levelButtons[2].getId()) director.constructLevel3(levelBuilder);
-        else director.constructLevel1(levelBuilder);
+        if(id == levelButtons[0].getId()) { director.constructLevel1(levelBuilder); level = 1; }
+        else if (id == levelButtons[1].getId()) { director.constructLevel2(levelBuilder); level = 2; }
+        else if (id == levelButtons[2].getId()) { director.constructLevel3(levelBuilder); level = 3; }
+        else if (id == levelButtons[3].getId()) { director.constructLevel3(levelBuilder); level = 4; }
+        else  { director.constructLevel3(levelBuilder); level = 5; }
+    }
+
+    private void setPlayableLevels() {
+        if(levels != null) {
+            for (int i = 0; i <= levels.size(); i++) {
+                levelButtons[ i ].setClickable(true);
+            }
+            for (Integer i : levels) {
+                levelButtons[ i - 1 ].setClickable(true);
+                levelButtons[ i - 1 ].setBackground(getDrawable(R.drawable.emoji8));
+            }
+        }
+
+    }
+
+    private void initializeLevelButtons() {
+        for (int i = 1; i < levelButtons.length; i++)
+            levelButtons[i].setClickable(false);
     }
 }
