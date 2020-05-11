@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
@@ -106,6 +107,7 @@ public class GameActivity extends AppCompatActivity {
         anteriorAcertada = false;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
         if(isLevelMode()) {
