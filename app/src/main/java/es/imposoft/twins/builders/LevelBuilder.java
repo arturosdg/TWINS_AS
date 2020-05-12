@@ -3,6 +3,7 @@ package es.imposoft.twins.builders;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.GameMode;
+import es.imposoft.twins.components.GameType;
 import es.imposoft.twins.plantilla.AbstractScore;
 
 public interface LevelBuilder {
@@ -13,5 +14,6 @@ public interface LevelBuilder {
     void setCardTheme(Deck deck);
     //void setScoreManager(AbstractScore scoreManager);
     void setGameMode(GameMode gameMode);
+    void setGameType(GameType gameType);
     void setId(int levelId);
 }

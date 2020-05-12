@@ -4,6 +4,7 @@ import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.GameMode;
+import es.imposoft.twins.components.GameType;
 
 public class Director {
 
@@ -22,6 +23,7 @@ public class Director {
         //builder.setScoreManager(new ScoreStandard());
         builder.setGameMode(GameMode.STANDARD);
         builder.setId(1);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
@@ -33,6 +35,7 @@ public class Director {
         //builder.setScoreManager(new ScoreFree());
         builder.setGameMode(GameMode.CASUAL);
         builder.setId(2);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
@@ -44,6 +47,7 @@ public class Director {
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(3);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
@@ -55,6 +59,7 @@ public class Director {
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(4);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
@@ -66,6 +71,7 @@ public class Director {
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(5);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructLevel4(ConcreteBuilderLevel builder){
@@ -77,6 +83,7 @@ public class Director {
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(6);
+        builder.setGameType(GameType.NORMAL);
     }
 
     public void constructLevel5(ConcreteBuilderLevel builder){
@@ -88,5 +95,6 @@ public class Director {
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
+        builder.setGameType(GameType.NORMAL);
     }
 }
