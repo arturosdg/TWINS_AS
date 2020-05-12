@@ -8,6 +8,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -15,17 +18,25 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import java.io.IOException;
+
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
     Deck cardTheme;
+    MediaPlayer song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
+
+            song = MediaPlayer.create(MainActivity.this, R.raw.twinscancion);
+
+
+
 
         cardTheme = Deck.EMOJI;
 
@@ -42,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
+
+
+
     }
 
     public void playByGameModes(View view) {
@@ -87,10 +101,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (chosenVolume) {
                             System.out.println("Test true");
-                            //TODO ACTIVAR VOLUMEN
+
+                            if(!song.isPlaying()) song.start();
                         } else if (!chosenVolume) {
                             System.out.println("Test false");
-                            //TODO DESACTIVAR VOLUMEN
+                            song.release();
                         }
                     }
             }
