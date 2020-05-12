@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Elige tu baraja:"
+        android:text="@string/elige_baraja"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -69,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Sonido:"
+        android:text="@string/sonido"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -89,7 +89,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="ON"
+                android:text="@string/on"
                 android:textColor="@color/colorText" />
 
             <Button
@@ -99,7 +99,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="OFF"
+                android:text="@string/off"
                 android:textColor="@color/colorText" />
         </LinearLayout>
 

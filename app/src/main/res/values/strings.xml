@@ -24,4 +24,8 @@
     <string name="jugar_tipo_partida">Jugar por Tipo de partida</string>
     <string name="opciones">Opciones</string>
     <string name="gameover">HAS PERDIDO</string>
+    <string name="elige_baraja">Elige tu baraja:</string>
+    <string name="sonido">Sonido:</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
 </resources>

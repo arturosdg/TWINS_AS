@@ -205,7 +205,7 @@ public class GameActivity extends AppCompatActivity {
                     restartButton.setVisibility(View.VISIBLE);
                 }
             }, game.getRevealSeconds() * 1000);
-        } else if(tapErrors >= 20){
+        } else if(tapErrors >= 5){
             showGameOver();
         } else {
             for (Card card : cards) {
@@ -291,9 +291,10 @@ public class GameActivity extends AppCompatActivity {
             Handler secs1 = new Handler();
             secs1.postDelayed(new Runnable() {
                 public void run() {
-                    showScoreboard();
+                    if(score >= game.getMinScore()) showScoreboard();
+                    else showGameOver();
                 }
-            }, 800);
+            }, 650);
             pausedGame = true;
         }
     }
@@ -359,6 +360,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onFinishPressed(View view){
+
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
         intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
         startActivityForResult(intent,0);
