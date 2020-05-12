@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -202,8 +203,6 @@ public class GameActivity extends AppCompatActivity {
                     restartButton.setVisibility(View.VISIBLE);
                 }
             }, game.getRevealSeconds() * 1000);
-        } else if(tapErrors >= 5){
-            showGameOver();
         } else {
             for (Card card : cards) {
                 if(visibleCards < 2 && !pausedGame)
@@ -224,7 +223,6 @@ public class GameActivity extends AppCompatActivity {
                                 pairs.clear();
                                 visibleCards = 0;
                                 //tapErrors = 0;
-                                stopChronometer();
                             } else {
                                 tapErrors++;
                                 anteriorAcertada = false;
@@ -247,6 +245,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         tapCounter++;
+        stopChronometer();
     }
 
     @SuppressLint("SetTextI18n")
@@ -284,9 +283,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void stopChronometer() {
+        Handler secs1 = new Handler();
+        if(tapErrors == 5) secs1.postDelayed(new Runnable() {
+            public void run() {
+                showGameOver();
+            }
+        }, 650);
         if(restantMatches == 0) {
             chronoTimer.stop();
-            Handler secs1 = new Handler();
             secs1.postDelayed(new Runnable() {
                 public void run() {
                     if(score >= game.getMinScore()) showScoreboard();
@@ -412,6 +416,8 @@ public class GameActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                     }
+                case -1:
+                    pauseGame(findViewById(android.R.id.content));
             }
         }
     }

@@ -94,7 +94,7 @@ public class PopupActivity extends Activity {
                 //Show the score on the scoreboard and the stars
                 int score = scoreboard.getLastScore();
                 currentScore.setText("" + score);
-                currentStars.setText(""+scoreboard.getStarsFromScore(score));
+                currentStars.setText("" + scoreboard.getStarsFromScore(score));
 
                 //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {

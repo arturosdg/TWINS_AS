@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_startgame);
-        cardTheme = Deck.EMOJI;
 
+        cardTheme = Deck.EMOJI;
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -86,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
                         if (returnInfo.containsKey("SOUND")) {
                             chosenVolume = (Boolean) returnInfo.get("SOUND");
                         }
-                        if (chosenVolume == true) {
+                        if (chosenVolume) {
                             System.out.println("Test true");
                             //TODO ACTIVAR VOLUMEN
-                        } else if (chosenVolume == false) {
+                        } else if (!chosenVolume) {
                             System.out.println("Test false");
                             //TODO DESACTIVAR VOLUMEN
                         }
