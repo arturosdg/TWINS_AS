@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.PreferenceChangeEvent;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
@@ -67,10 +65,13 @@ public class GameActivity extends AppCompatActivity {
     private GameMode gameMode;
     int levelPlayed;
 
+    Handler timeHandler;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         windowInfo = getIntent().getExtras();
+        timeHandler = new Handler();
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
@@ -192,8 +193,7 @@ public class GameActivity extends AppCompatActivity {
     public void changeSprite(View view) {
         if(tapCounter == 0) {
             turnAllCards();
-            Handler revealTime = new Handler();
-            revealTime.postDelayed(new Runnable() {
+            timeHandler.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 public void run() {
                     turnAllCards();
@@ -283,15 +283,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void stopChronometer() {
-        Handler secs1 = new Handler();
-        if(tapErrors == 5) secs1.postDelayed(new Runnable() {
+        if(tapErrors == 5) timeHandler.postDelayed(new Runnable() {
             public void run() {
                 showGameOver();
             }
         }, 650);
         if(restantMatches == 0) {
             chronoTimer.stop();
-            secs1.postDelayed(new Runnable() {
+            timeHandler.postDelayed(new Runnable() {
                 public void run() {
                     if(score >= game.getMinScore()) showScoreboard();
                     else showGameOver();
@@ -416,8 +415,6 @@ public class GameActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                     }
-                case -1:
-                    pauseGame(findViewById(android.R.id.content));
             }
         }
     }
