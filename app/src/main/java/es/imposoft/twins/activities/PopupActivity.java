@@ -27,27 +27,31 @@ public class PopupActivity extends Activity {
         super.onCreate(savedInstanceState);
         Bundle windowInfo = getIntent().getExtras();
 
+        //Display information for future resizing.
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
+        //Basic buttons common to all Popups
         Button cancelButton;
         Button acceptButton;
+
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:
+                //We change the screen showed
                 setContentView(R.layout.activity_popupwindow);
-                getWindow().setLayout((int) (screenWidth*.8), (int) (screenHeight*.6));
 
+                //Resize the screen
+                changeWindowSize(screenHeight,0.8,screenWidth,0.6);
+
+                //Find the buttons on the scene
                 acceptButton = findViewById(R.id.acceptButton);
+                cancelButton = findViewById(R.id.cancelButton);
 
+                //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        /*Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",0);
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();*/
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
@@ -55,7 +59,7 @@ public class PopupActivity extends Activity {
                     }
                 });
 
-                cancelButton = findViewById(R.id.cancelButton);
+                //If the user cancels, he will keep playing
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -66,31 +70,35 @@ public class PopupActivity extends Activity {
 
                 break;
             case SCOREBOARD:
+                //We change the screen showed
                 setContentView(R.layout.activity_popupscoreboard);
-                getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
+                //Resize the screen
+                changeWindowSize(screenHeight,0.85,screenWidth,0.67);
+
+                //We load the scoreboard from the saved data
                 scoreList = findViewById(R.id.scoreList);
                 gson = new Gson();
                 scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
-
+                //Set data for the scoreboard results to show centered
                 final ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
 
-                int score = scoreboard.getLastScore();
+                //Find all items from the scene
                 TextView currentScore = findViewById(R.id.currentScore);
                 TextView currentStars = findViewById(R.id.starsText);
+                cancelButton = findViewById(R.id.cancelButton);
+
+                //Show the score on the scoreboard and the stars
+                int score = scoreboard.getLastScore();
                 currentScore.setText("" + score);
                 currentStars.setText(""+scoreboard.getStarsFromScore(score));
 
-                cancelButton = findViewById(R.id.cancelButton);
+                //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        /*Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",0);
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();*/
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
@@ -99,14 +107,17 @@ public class PopupActivity extends Activity {
                 });
                 break;
             case OPTIONS:
+                //We change the screen showed
                 setContentView(R.layout.activity_popupoptions);
-                acceptButton = findViewById(R.id.acceptButton);
 
+                //Find all items from the scene
+                acceptButton = findViewById(R.id.acceptButton);
                 Button firstCard = findViewById(R.id.firstCard);
                 Button secondCard = findViewById(R.id.secondCard);
                 Button soundButtonOn = findViewById(R.id.soundButtonOn);
                 Button soundButtonOff = findViewById(R.id.soundButtonOff);
 
+                //Called when the user selects Sound ON
                 soundButtonOn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -117,6 +128,7 @@ public class PopupActivity extends Activity {
                     }
                 });
 
+                //Called when the user selects Sound OFF
                 soundButtonOff.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -127,6 +139,7 @@ public class PopupActivity extends Activity {
                     }
                 });
 
+                //When the user clicks the accept button he will close the options menu
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -135,6 +148,7 @@ public class PopupActivity extends Activity {
                     }
                 });
 
+                //If the user selects first card, we change the sprites
                 firstCard.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -145,6 +159,7 @@ public class PopupActivity extends Activity {
                     }
                 });
 
+                //If the user selects second card, we change the sprites
                 secondCard.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
@@ -156,21 +171,30 @@ public class PopupActivity extends Activity {
                 });
                 break;
             case GAMEOVER:
+                //We change the screen showed
                 setContentView(R.layout.activity_popupgameover);
+
+                //Resize the screen
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
+                //Load the scoreboard from saved data
                 scoreList = findViewById(R.id.scoreList);
                 gson = new Gson();
                 scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
+                //Set data for the scoreboard results to show centered
                 final ArrayAdapter<Integer> arrayAdapter2 = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter2);
                 arrayAdapter2.notifyDataSetChanged();
 
+                //Find all elements in the scene
                 TextView currentSmileys = findViewById(R.id.smileysText);
+                cancelButton = findViewById(R.id.cancelButton);
+
+                //Change the scoreboard stars to other emoji
                 currentSmileys.setText(""+ scoreboard.getSmileys());
 
-                cancelButton = findViewById(R.id.cancelButton);
+                //If he cancels the window, we go back to the main class
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
@@ -181,5 +205,9 @@ public class PopupActivity extends Activity {
                 });
                 break;
         }
+    }
+
+    public void changeWindowSize(int screenHeight, double widthFactor, int screenWidth, double heightFactor){
+        getWindow().setLayout((int) (screenWidth*widthFactor), (int) (screenHeight*heightFactor));
     }
 }
