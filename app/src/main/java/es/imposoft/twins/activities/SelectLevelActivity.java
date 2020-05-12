@@ -117,14 +117,15 @@ public class SelectLevelActivity extends AppCompatActivity {
         if(id == levelButtons[0].getId()) { director.constructLevel1(levelBuilder); level = 1; }
         else if (id == levelButtons[1].getId()) { director.constructLevel2(levelBuilder); level = 2; }
         else if (id == levelButtons[2].getId()) { director.constructLevel3(levelBuilder); level = 3; }
-        else if (id == levelButtons[3].getId()) { director.constructLevel3(levelBuilder); level = 4; }
-        else  { director.constructLevel3(levelBuilder); level = 5; }
+        else if (id == levelButtons[3].getId()) { director.constructLevel4(levelBuilder); level = 4; }
+        else  { director.constructLevel5(levelBuilder); level = 5; }
     }
 
     private void setPlayableLevels() {
         if(levels != null) {
             for (int i = 0; i <= levels.size(); i++) {
                 levelButtons[ i ].setClickable(true);
+                levelButtons[i].setBackground(getDrawable(R.drawable.unknown));
             }
             for (Integer i : levels) {
                 levelButtons[ i - 1 ].setClickable(true);
@@ -135,7 +136,9 @@ public class SelectLevelActivity extends AppCompatActivity {
     }
 
     private void initializeLevelButtons() {
-        for (int i = 1; i < levelButtons.length; i++)
+        for (int i = 1; i < levelButtons.length; i++) {
             levelButtons[i].setClickable(false);
+            levelButtons[i].setBackground(getDrawable(R.drawable.levelblocked));
+        }
     }
 }

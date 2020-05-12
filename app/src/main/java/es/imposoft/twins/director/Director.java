@@ -36,7 +36,7 @@ public class Director {
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
-        builder.setCardTheme(deck);//Deck.EMOJI
+        builder.setCardTheme(Deck.EMOJI);
         builder.setMinScore(5);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
@@ -47,9 +47,9 @@ public class Director {
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
-        builder.setCardTheme(deck);//Deck.CARS
-        builder.setMinScore(5);//25
-        builder.setCardAmount(20);//20
+        builder.setCardTheme(Deck.CARS);
+        builder.setMinScore(25);
+        builder.setCardAmount(16);
         builder.setRevealTime(2);
         builder.setChronometer(50, Chronometer.DESCENDING);
         //builder.setScoreManager(new ScoreLevels());
@@ -58,13 +58,35 @@ public class Director {
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
-        builder.setCardTheme(deck);//Deck.EMOJI
-        builder.setMinScore(5);//55
-        builder.setCardAmount(24);//24
-        builder.setRevealTime(1);
-        builder.setChronometer(40, Chronometer.DESCENDING);
+        builder.setCardTheme(Deck.EMOJI);
+        builder.setMinScore(30);
+        builder.setCardAmount(20);
+        builder.setRevealTime(2);
+        builder.setChronometer(60, Chronometer.DESCENDING);
         //builder.setScoreManager(new ScoreLevels());
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(5);
+    }
+
+    public void constructLevel4(ConcreteBuilderLevel builder){
+        builder.setCardTheme(Deck.CARS);//Deck.EMOJI
+        builder.setMinScore(55);
+        builder.setCardAmount(20);
+        builder.setRevealTime(1);
+        builder.setChronometer(50, Chronometer.DESCENDING);
+        //builder.setScoreManager(new ScoreLevels());
+        builder.setGameMode(GameMode.LEVELS);
+        builder.setId(6);
+    }
+
+    public void constructLevel5(ConcreteBuilderLevel builder){
+        builder.setCardTheme(Deck.EMOJI);//Deck.EMOJI
+        builder.setMinScore(50);
+        builder.setCardAmount(24);
+        builder.setRevealTime(1);
+        builder.setChronometer(50, Chronometer.DESCENDING);
+        //builder.setScoreManager(new ScoreLevels());
+        builder.setGameMode(GameMode.LEVELS);
+        builder.setId(7);
     }
 }
