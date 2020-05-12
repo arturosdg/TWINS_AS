@@ -111,8 +111,6 @@ public class GameActivity extends AppCompatActivity {
         anteriorAcertada = false;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
         if(isLevelMode()) {
             succeededLevels = new SucceededLevel(gameMode.ordinal());
@@ -155,7 +153,6 @@ public class GameActivity extends AppCompatActivity {
 
     public void showScoreboard(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
         scoreboard.saveHighscores(sharedPreferences);
         if(isLevelMode()) {
@@ -223,14 +220,15 @@ public class GameActivity extends AppCompatActivity {
                                 pairs.get(0).setPaired();
                                 pairs.get(1).setPaired();
                                 anteriorAcertada = true;
-                                updateScore();//si acierta
+                                updateScore();
                                 pairs.clear();
                                 visibleCards = 0;
+                                //tapErrors = 0;
                                 stopChronometer();
                             } else {
                                 tapErrors++;
                                 anteriorAcertada = false;
-                                updateScore();//si falla
+                                updateScore();
                                 Handler secs1 = new Handler();
                                 secs1.postDelayed(new Runnable() {
                                     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -360,7 +358,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onFinishPressed(View view){
-
+        pauseGame(view);
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
         intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
         startActivityForResult(intent,0);

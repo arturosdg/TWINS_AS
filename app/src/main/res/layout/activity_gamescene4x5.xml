@@ -26,10 +26,12 @@
             android:id="@+id/text_score"
             android:layout_width="99dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Puntos: 0"
+            android:text="@string/puntos_0"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
         <Button
