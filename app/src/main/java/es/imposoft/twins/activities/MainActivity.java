@@ -33,10 +33,7 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-            song = MediaPlayer.create(MainActivity.this, R.raw.twinscancion);
-
-
-
+        song = MediaPlayer.create(MainActivity.this, R.raw.twinscancion);
 
         cardTheme = Deck.EMOJI;
 
@@ -53,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
-
-
 
     }
 
@@ -101,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (chosenVolume) {
                             System.out.println("Test true");
-
                             if(!song.isPlaying()) song.start();
+
                         } else if (!chosenVolume) {
                             System.out.println("Test false");
                             song.release();

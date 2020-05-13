@@ -36,6 +36,7 @@ public class GameActivity extends AppCompatActivity {
     Chronometer chronoTimer;
     Button pauseButton;
     Button restartButton;
+    TextView scoreText;
 
     private int maxCards;
     Button[] buttons;
@@ -66,6 +67,7 @@ public class GameActivity extends AppCompatActivity {
     int levelPlayed;
 
     Handler timeHandler;
+    Intent intent;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -86,6 +88,8 @@ public class GameActivity extends AppCompatActivity {
 
         restartButton = findViewById(R.id.button_restart);
         restartButton.setVisibility(View.INVISIBLE);
+
+        scoreText = findViewById(R.id.text_score);
 
         chronoTimer = findViewById(R.id.text_timer);
         timeWhenStopped = 0;
@@ -157,18 +161,21 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
         scoreboard.saveHighscores(sharedPreferences);
-        if(isLevelMode()) {
-            if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
-                succeededLevels.addSuccedeedLevel(levelPlayed);
-                succeededLevels.saveSucceededLevels(sharedPreferences);
-                String glevels = gson.toJson(succeededLevels);
-            }
-        }
-        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+
+        intent = new Intent(GameActivity.this, PopupActivity.class);
         gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
+        if(isLevelMode()) {
+            if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
+                succeededLevels.addSuccedeedLevel(levelPlayed);
+            }
+            succeededLevels.saveSucceededLevels(sharedPreferences);
+            String glevels = gson.toJson(succeededLevels);
+            intent.putExtra("LEVELMODE", true);
+            intent.putExtra("THEME",themeCard);
+        }
         startActivityForResult(intent,1);
     }
 
@@ -176,7 +183,7 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.saveHighscores(sharedPreferences);
 
-        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        intent = new Intent(GameActivity.this, PopupActivity.class);
         gson = new Gson();
         String gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
@@ -184,8 +191,9 @@ public class GameActivity extends AppCompatActivity {
         if(isLevelMode()) {
             succeededLevels.saveSucceededLevels(sharedPreferences);
             String glevels = gson.toJson(succeededLevels);
+            intent.putExtra("LEVELMODE", true);
+            intent.putExtra("THEME",themeCard);
         }
-
         startActivityForResult(intent,1);
     }
 
@@ -222,7 +230,7 @@ public class GameActivity extends AppCompatActivity {
                                 updateScore();
                                 pairs.clear();
                                 visibleCards = 0;
-                                //tapErrors = 0;
+                                tapErrors = 0;
                             } else {
                                 tapErrors++;
                                 anteriorAcertada = false;
@@ -253,7 +261,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Si crono = DESCENDENTE / NONE -> */
         score = scoreManager.updateScore(anteriorAcertada);
-        ((TextView) findViewById(R.id.text_score)).setText("Puntos: " + score);
+        scoreText.setText("Puntos: " + score);
     }
 
     private void turnAllCards() {
@@ -364,6 +372,10 @@ public class GameActivity extends AppCompatActivity {
         pauseGame(view);
         Intent intent = new Intent(GameActivity.this, PopupActivity.class);
         intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
+        if(isLevelMode()) {
+            intent.putExtra("LEVELMODE", true);
+            intent.putExtra("THEME", themeCard);
+        }
         startActivityForResult(intent,0);
     }
 
