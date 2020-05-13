@@ -42,8 +42,10 @@ public class PopupActivity extends Activity {
         Button cancelButton;
         Button acceptButton;
 
-        isLevelMode = (boolean) windowInfo.get("LEVELMODE");
-        deck = (Deck) windowInfo.get("THEME");
+        if (windowInfo.get("THEME") != null) {
+            isLevelMode = (boolean) windowInfo.get("LEVELMODE");
+            deck = (Deck) windowInfo.get("THEME");
+        }
 
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:

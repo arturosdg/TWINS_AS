@@ -6,10 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="android:windowFullscreen">true</item>
 
-    <style name="AppTheme.PopupWindow">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">false</item>
-    </style>
+        <!-- <item name="windowNoTitle">true</item> -->
+   </style>
+
+   <style name="AppTheme.PopupWindow">
+       <item name="android:windowIsTranslucent">true</item>
+       <item name="android:windowCloseOnTouchOutside">false</item>
+   </style>
+
+   <style name="generalnotitle" parent="Theme.AppCompat.Light.NoActionBar">
+       <item name="android:windowFullscreen">true</item>
+       <item name="windowNoTitle">true</item>
+   </style>
 </resources>
