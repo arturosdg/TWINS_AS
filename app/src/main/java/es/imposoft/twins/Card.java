@@ -16,10 +16,12 @@ public class Card {
 
     public Card(Button button, Context context) {
         contextScene = context;
-        Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.unknown),
+
+        Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.background2),
                bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.cars0);
         backImage = bitBack;
         frontImage = bitFront;
+
         cardButton = button;
         visible = false;
         isPaired = false;
@@ -33,13 +35,17 @@ public class Card {
         this.frontImage = frontImage;
     }
 
+    public void setBackImage(Bitmap backImage) {
+        this.backImage = backImage;
+    }
+
     public Button getCardButton() {
         return cardButton;
     }
 
     public boolean isVisible() { return visible; }
 
-    public boolean isPaired() { return isPaired; }
+    public boolean getPaired() { return isPaired; }
 
     public void setPaired() {
         isPaired = true;

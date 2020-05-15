@@ -42,10 +42,8 @@ public class PopupActivity extends Activity {
         Button cancelButton;
         Button acceptButton;
 
-        if (windowInfo.get("THEME") != null) {
-            isLevelMode = (boolean) windowInfo.get("LEVELMODE");
-            deck = (Deck) windowInfo.get("THEME");
-        }
+        deck = (Deck) windowInfo.get("THEME");
+
 
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:
@@ -62,11 +60,11 @@ public class PopupActivity extends Activity {
                 //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
-                        if(isLevelMode) {
+                        Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
+                        if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
-                            returnIntent.putExtra("THEME", deck);
                         }
+                        returnIntent.putExtra("THEME", deck);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -76,8 +74,6 @@ public class PopupActivity extends Activity {
                 //If the user cancels, he will keep playing
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        /*Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);*/
                         finish();
                     }
                 });
@@ -113,11 +109,11 @@ public class PopupActivity extends Activity {
                 //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
-                        if(isLevelMode) {
+                        Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
+                        if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
-                            returnIntent.putExtra("THEME", deck);
                         }
+                        returnIntent.putExtra("THEME", deck);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -215,11 +211,11 @@ public class PopupActivity extends Activity {
                 //If he cancels the window, we go back to the main class
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
-                        if(isLevelMode) {
+                        Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
+                        if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
-                            returnIntent.putExtra("THEME", deck);
                         }
+                        returnIntent.putExtra("THEME", deck);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();

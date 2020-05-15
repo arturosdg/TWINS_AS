@@ -5,7 +5,6 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,22 +12,20 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
 import es.imposoft.twins.SucceededLevel;
+import es.imposoft.twins.components.Baraja;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
@@ -45,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
 
     private int maxCards;
     Button[] buttons;
-    Card[] cards;
+    ArrayList<Card> cards;
     Context context;
     int tapCounter, pauseTapCounter, visibleCards;
     Scoreboard scoreboard;
@@ -111,7 +108,7 @@ public class GameActivity extends AppCompatActivity {
         visibleCards = 0;
 
         buttons = new Button[maxCards];
-        cards = new Card[maxCards];
+        cards = new ArrayList<>(maxCards);
         isClickable = false;
         pausedGame = false;
 
@@ -134,39 +131,10 @@ public class GameActivity extends AppCompatActivity {
         gscoreboard = ""; glevels = "";
 
         fillArray();
-        createCards();
         themeCard = game.getDeck();
-        assignCardTheme(themeCard);
+        Baraja baraja =  new Baraja();
+        baraja.assignCardTheme(themeCard, cards, game, buttons, context);
 
-    }
-
-    private void getScoreManager() {
-        switch(gameMode) {
-            case CASUAL:
-                scoreManager = new ScoreFree();
-                break;
-            case LEVELS:
-                scoreManager = new ScoreLevels();
-                break;
-            case STANDARD:
-                scoreManager = new ScoreStandard();
-                break;
-        }
-    }
-
-    private void selectLayout() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        switch (game.getCardAmount()) {
-            case 16:
-                setContentView(R.layout.activity_gamescene4x4);
-                break;
-            case 20:
-                setContentView(R.layout.activity_gamescene4x5);
-                break;
-            case 24:
-                setContentView(R.layout.activity_gamescene4x6);
-                break;
-        }
     }
 
     public void showScoreboard(){
@@ -179,6 +147,8 @@ public class GameActivity extends AppCompatActivity {
         gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
+        intent.putExtra("THEME",themeCard);
+        intent.putExtra("LEVELMODE", false);
         if(isLevelMode()) {
             if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
                 succeededLevels.addSuccedeedLevel(levelPlayed);
@@ -186,7 +156,6 @@ public class GameActivity extends AppCompatActivity {
             succeededLevels.saveSucceededLevels(sharedPreferences);
             glevels = gson.toJson(succeededLevels);
             intent.putExtra("LEVELMODE", true);
-            intent.putExtra("THEME",themeCard);
         }
         startActivityForResult(intent,1);
     }
@@ -200,11 +169,12 @@ public class GameActivity extends AppCompatActivity {
         gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
+        intent.putExtra("THEME",themeCard);
+        intent.putExtra("LEVELMODE", false);
         if(isLevelMode()) {
             succeededLevels.saveSucceededLevels(sharedPreferences);
             glevels = gson.toJson(succeededLevels);
             intent.putExtra("LEVELMODE", true);
-            intent.putExtra("THEME",themeCard);
         }
         startActivityForResult(intent,1);
     }
@@ -247,8 +217,7 @@ public class GameActivity extends AppCompatActivity {
                                 tapErrors++;
                                 anteriorAcertada = false;
                                 updateScore();
-                                Handler secs1 = new Handler();
-                                secs1.postDelayed(new Runnable() {
+                                timeHandler.postDelayed(new Runnable() {
                                     @RequiresApi(api = Build.VERSION_CODES.M)
                                     public void run() {
                                         turnVisibleCards();
@@ -296,12 +265,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void createCards() {
-        for (int i = 0; i < maxCards; i++) {
-            cards[i] = new Card(buttons[i], context);
-        }
-    }
-
     private void stopChronometer() {
         if(tapErrors == 5) timeHandler.postDelayed(new Runnable() {
             public void run() {
@@ -316,7 +279,6 @@ public class GameActivity extends AppCompatActivity {
                     else showGameOver();
                 }
             }, 650);
-            pausedGame = true;
         }
     }
 
@@ -330,19 +292,17 @@ public class GameActivity extends AppCompatActivity {
         chronoTimer.start();
     }
 
-
     private void isTimeOver(){
         chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 if (timeWhenStarted + (game.getSeconds() * 1000) <= SystemClock.elapsedRealtime()) {
                     chronoTimer.stop();
-                    Handler secs1 = new Handler();
-                    secs1.postDelayed(new Runnable() {
+                    timeHandler.postDelayed(new Runnable() {
                         public void run() {
                             showGameOver();
                         }
-                    }, 1000);
+                    }, 650);
                 }
             }
         });
@@ -363,32 +323,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void restart(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-
+        intent = new Intent(this, GameActivity.class);
         Gson gson = new Gson();
         String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
-
         startActivity(intent);
         this.finish();
-    }
-
-    private void setClickable(Button[] buttons) {
-        for (Button b: buttons) {
-            if(!getButton(b).isPaired()) b.setClickable(isClickable);
-        }
-        isClickable = !isClickable;
-    }
-
-    public void onFinishPressed(View view){
-        pauseGame(view);
-        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
-        intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
-        if(isLevelMode()) {
-            intent.putExtra("LEVELMODE", true);
-            intent.putExtra("THEME", themeCard);
-        }
-        startActivityForResult(intent,0);
     }
 
     private Card getButton(Button button) {
@@ -397,34 +337,23 @@ public class GameActivity extends AppCompatActivity {
         }
         return null;
     }
-
-
-    /**
-     * Formato de nombre de imagen: "tema + numero"
-     * los numeros de las barajas seran (de momento) como minimo del 0 - 7 (incluidos)
-     * (ya que tenemos 16 cartas)*/
-    private void assignCardTheme(Deck theme) {
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < cards.length; i++) numbers.add(i);
-
-        int aleatory;
-        int position;
-        ArrayList<Card> shuffled = new ArrayList<Card>();
-
-        while (!numbers.isEmpty()) {
-            aleatory = (int) (Math.random()*numbers.size());
-            position = numbers.get(aleatory);
-            numbers.remove(aleatory);
-            shuffled.add(cards[position]);
+    private void setClickable(Button[] buttons) {
+        for (Button b: buttons) {
+            if(!getButton(b).getPaired()) b.setClickable(isClickable);
         }
+        isClickable = !isClickable;
+    }
 
-        ArrayList<Integer> images = new ArrayList<Integer>();
-        for (int i = 0; i < maxCards/2; i++)
-            images.add(getResources().getIdentifier(theme.toString().toLowerCase() + i, "drawable", getPackageName()));
-
-        for (int i = 0; i < shuffled.size(); i++)
-            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i/2)));
-
+    public void onFinishPressed(View view){
+        pauseGame(view);
+        Intent intent = new Intent(GameActivity.this, PopupActivity.class);
+        intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
+        intent.putExtra("THEME", themeCard);
+        intent.putExtra("LEVELMODE", false);
+        if(isLevelMode()) {
+            intent.putExtra("LEVELMODE", true);
+        }
+        startActivityForResult(intent,0);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -443,5 +372,33 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void getScoreManager() {
+        switch(gameMode) {
+            case CASUAL:
+                scoreManager = new ScoreFree();
+                break;
+            case LEVELS:
+                scoreManager = new ScoreLevels();
+                break;
+            case STANDARD:
+                scoreManager = new ScoreStandard();
+                break;
+        }
+    }
+
+    private void selectLayout() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        switch (game.getCardAmount()) {
+            case 16:
+                setContentView(R.layout.activity_gamescene4x4);
+                break;
+            case 20:
+                setContentView(R.layout.activity_gamescene4x5);
+                break;
+            case 24:
+                setContentView(R.layout.activity_gamescene4x6);
+                break;
+        }
+    }
     private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
 }
