@@ -30,6 +30,9 @@
         <activity android:name=".activities.SelectLevelActivity">
         </activity>
 
+        <activity android:name=".activities.BackgroundMusicActivity">
+        </activity>
+
         <activity android:name=".activities.PopupActivity"
                   android:theme="@style/AppTheme.PopupWindow"
         ></activity>

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 
 import java.io.IOException;
 
+import es.imposoft.twins.MusicService;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
 
@@ -33,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        song = MediaPlayer.create(MainActivity.this, R.raw.twinscancion);
+        Intent intent = new Intent(this, BackgroundMusicActivity.class);
+        startService(intent);
+        //this.finish();
+
+        MusicService ms = MusicService.getInstance(getApplicationContext());
+        ms.startMusic();
 
         cardTheme = Deck.EMOJI;
 
