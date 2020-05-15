@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
 
-
-
     }
 
     public void playByGameModes(View view) {
@@ -104,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (chosenVolume) {
                             System.out.println("Test true");
-
                             if(!song.isPlaying()) song.start();
+
                         } else if (!chosenVolume) {
                             System.out.println("Test false");
                             song.release();

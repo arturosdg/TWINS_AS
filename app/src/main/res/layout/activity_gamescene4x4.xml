@@ -17,17 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
         <TextView
             android:id="@+id/text_score"
-            android:layout_width="78dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
@@ -37,19 +35,20 @@
         <Button
             android:id="@+id/button_restart"
             android:layout_width="1dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/reiniciar"
-            android:onClick="reiniciar" />
+            android:background="@drawable/replay_button_foreground"
+            android:backgroundTint="#6200EE"
+            android:onClick="restart" />
 
         <Button
             android:id="@+id/button_pause"
-            android:layout_width="3dp"
-            android:layout_height="35dp"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/pause_stop"
+            android:background="@drawable/pause_button_foreground"
+            android:backgroundTint="#6200EE"
             android:onClick="pauseGame"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@color/colorText" />
 
         <Button
@@ -61,8 +60,8 @@
             android:onClick="onFinishPressed"
             android:shadowColor="#FFFFFF"
             android:text="@string/finalizar"
-            android:textColor="@color/colorText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
 
     </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.widget.*;
 import com.google.gson.Gson;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.components.Deck;
 
 public class PopupActivity extends Activity {
     public enum WindowType{
@@ -21,11 +22,15 @@ public class PopupActivity extends Activity {
     ListView scoreList;
     Gson gson;
     Scoreboard scoreboard;
+    Bundle windowInfo;
+
+    Deck deck;
+    boolean isLevelMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        Bundle windowInfo = getIntent().getExtras();
+        windowInfo = getIntent().getExtras();
 
         //Display information for future resizing.
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -36,6 +41,11 @@ public class PopupActivity extends Activity {
         //Basic buttons common to all Popups
         Button cancelButton;
         Button acceptButton;
+
+        if (windowInfo.get("THEME") != null) {
+            isLevelMode = (boolean) windowInfo.get("LEVELMODE");
+            deck = (Deck) windowInfo.get("THEME");
+        }
 
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:
@@ -53,6 +63,10 @@ public class PopupActivity extends Activity {
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        if(isLevelMode) {
+                            returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                            returnIntent.putExtra("THEME", deck);
+                        }
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -62,8 +76,8 @@ public class PopupActivity extends Activity {
                 //If the user cancels, he will keep playing
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("WINDOW",-1);
+                        /*Intent returnIntent = new Intent();
+                        returnIntent.putExtra("WINDOW",-1);*/
                         finish();
                     }
                 });
@@ -100,6 +114,10 @@ public class PopupActivity extends Activity {
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        if(isLevelMode) {
+                            returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                            returnIntent.putExtra("THEME", deck);
+                        }
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -198,6 +216,10 @@ public class PopupActivity extends Activity {
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent(getBaseContext(), MainActivity.class);
+                        if(isLevelMode) {
+                            returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                            returnIntent.putExtra("THEME", deck);
+                        }
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
