@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, BackgroundMusicActivity.class);
         startService(intent);
-        //this.finish();
 
         ms = MusicService.getInstance(getApplicationContext());
         ms.startMusic();

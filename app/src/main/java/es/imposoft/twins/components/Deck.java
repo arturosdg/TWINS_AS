@@ -6,12 +6,12 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import es.imposoft.twins.Card;
+import es.imposoft.twins.Card.ConcreteCard;
 import es.imposoft.twins.gametypes.Game;
 
 public class Deck {
-    //Context context;
-    ArrayList<Card> shuffled;
+
+    ArrayList<ConcreteCard> shuffled;
     ArrayList<Integer> numbers, images;
     int random, position;
 
@@ -22,10 +22,10 @@ public class Deck {
         numbers = new ArrayList<>();
     }
 
-    public void assignCardTheme(DeckTheme theme, ArrayList<Card> cards, Game game, Button[] buttons, Context context) {
+    public void assignCardTheme(DeckTheme theme, ArrayList<ConcreteCard> concreteCards, Game game, Button[] buttons, Context context) {
         for (int i = 0; i < game.getCardAmount(); i++) numbers.add(i);
         for (int i = 0; i < game.getCardAmount(); i++)
-            cards.add(new Card(buttons[ i ], context));
+            concreteCards.add(new ConcreteCard(buttons[ i ], context));
 
         for (int i = 0; i < game.getCardAmount() / 2; i++)
             images.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + i, "drawable", context.getPackageName()));
@@ -34,7 +34,7 @@ public class Deck {
             random = (int) (Math.random() * numbers.size());
             position = numbers.get(random);
             numbers.remove(random);
-            shuffled.add(cards.get(position));
+            shuffled.add(concreteCards.get(position));
         }
 
         for (int i = 0; i < shuffled.size(); i++) {
