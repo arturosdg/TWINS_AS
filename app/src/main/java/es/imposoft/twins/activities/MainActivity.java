@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     DeckTheme cardTheme;
     MediaPlayer song;
+    MusicService ms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,10 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
         //this.finish();
 
-        MusicService ms = MusicService.getInstance(getApplicationContext());
+        ms = MusicService.getInstance(getApplicationContext());
         ms.startMusic();
-
         cardTheme = DeckTheme.EMOJI;
 
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_startgame);
@@ -79,9 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     if (resultCode == RESULT_OK) {
                         Bundle returnInfo = data.getExtras();
                         int chosenCard = -1;
-                        if (returnInfo.containsKey("CARD")) {
+                        if (returnInfo.containsKey("CARD"))
                             chosenCard = (Integer) returnInfo.get("CARD");
-                        }
                         switch (chosenCard){
                             case 1:
                                 cardTheme = DeckTheme.EMOJI;
@@ -90,18 +88,16 @@ public class MainActivity extends AppCompatActivity {
                                 cardTheme = DeckTheme.CARS;
                                 break;
                         }
-
-                        boolean chosenVolume = true;
-                        if (returnInfo.containsKey("SOUND")) {
-                            chosenVolume = (Boolean) returnInfo.get("SOUND");
-                        }
-                        if (chosenVolume) {
-                            System.out.println("Test true");
-                            if(!song.isPlaying()) song.start();
-
-                        } else if (!chosenVolume) {
-                            System.out.println("Test false");
-                            song.release();
+                        int chosenVolume = -1;
+                        if (returnInfo.containsKey("SOUND"))
+                            chosenVolume = (int) returnInfo.get("SOUND");
+                        switch (chosenVolume){
+                            case 1:
+                                ms.startMusic();
+                                break;
+                            case 2:
+                                ms.stopMusic();
+                                break;
                         }
                     }
             }

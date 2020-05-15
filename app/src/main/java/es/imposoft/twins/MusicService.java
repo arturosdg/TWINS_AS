@@ -11,6 +11,7 @@ public class MusicService {
 
     private MusicService(Context context) {
         this.context = context;
+        //player = MediaPlayer.create(context, R.raw.twinscancion);
     }
 
     public static MusicService getInstance(Context context) {
@@ -20,16 +21,16 @@ public class MusicService {
         return instance;
     }
 
-    public void startMusic(){
+    public void startMusic() {
         player = MediaPlayer.create(context, R.raw.twinscancion);
+        //if(!player.isPlaying()) {
         player.setLooping(true); // Set looping
-        player.setVolume(100,100);
+        player.setVolume(100, 100);
         player.start();
+        //}
     }
 
-    public void stopMusic(){
-        if(player.isPlaying()) {
-            player.stop();
-        }
+    public void stopMusic() {
+        if (player.isPlaying()) player.stop();
     }
 }

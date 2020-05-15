@@ -13,6 +13,7 @@ public class BackgroundMusicActivity extends AppCompatActivity {
     private static BackgroundMusicActivity instance;
 
     private static WeakReference<Context> sContextReference;
+    MusicService musicService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,6 @@ public class BackgroundMusicActivity extends AppCompatActivity {
     }
 
     public void startSingleton(Context context){
-        MusicService musicService = MusicService.getInstance(context);
+        musicService = MusicService.getInstance(context);
     }
 }

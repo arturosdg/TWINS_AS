@@ -27,6 +27,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     Context context;
     DeckTheme deckTheme;
     Game game;
+    Bundle windowInfo;
 
     //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
     /*
@@ -43,13 +44,10 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_selectgamemode);
 
-        Bundle windowInfo = getIntent().getExtras();
-
+        windowInfo = getIntent().getExtras();
         deckTheme = (DeckTheme) windowInfo.get("THEME");
-
         director = new Director(deckTheme);
         levelBuilder =  new ConcreteBuilderLevel();
-
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

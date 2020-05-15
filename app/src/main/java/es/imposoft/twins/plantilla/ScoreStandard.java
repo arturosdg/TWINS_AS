@@ -24,19 +24,16 @@ public class ScoreStandard extends AbstractScore {
 
     void calculateAndSetScore(){
         score = getScore();
-
         score += toAdd;
         if (!isCorrect()) {
             lastCorrect = false;
             successesFollowed = 0;
         } else {
-            if (lastCorrect) {
+            if (lastCorrect)
                 score += Math.pow(2, successesFollowed);
-            }
             successesFollowed++;
             lastCorrect = true;
         }
-
         setScore(score);
     }
 

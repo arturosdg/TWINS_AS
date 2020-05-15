@@ -1,7 +1,6 @@
 package es.imposoft.twins.activities;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,25 +36,19 @@ import es.imposoft.twins.plantilla.*;
 public class GameActivity extends AppCompatActivity {
     DeckTheme themeCard;
     Chronometer chronoTimer;
-    Button pauseButton;
-    Button restartButton;
+    Button pauseButton, restartButton;
     TextView scoreText;
 
-    private int maxCards;
+    int maxCards, visibleCards, restantMatches;
     Button[] buttons;
     ArrayList<Card> cards;
     Context context;
-    int tapCounter, pauseTapCounter, visibleCards;
+    int tapCounter, pauseTapCounter, tapErrors;
     Scoreboard scoreboard;
+    int score, levelPlayed;
 
-    int acertadosSeguidos;
-    boolean anteriorAcertada, pausedGame;
-
-    int score;
-    private int restantMatches;
-    private boolean isClickable;
+    boolean previousCorrect, pausedGame, isClickable;
     List<Card> pairs = new ArrayList<>();
-    int tapErrors;
 
     long timeWhenStarted, timeWhenStopped;
 
@@ -67,14 +60,11 @@ public class GameActivity extends AppCompatActivity {
     Deck deck;
 
     SharedPreferences sharedPreferences;
-    private GameMode gameMode;
-    int levelPlayed;
-
+    GameMode gameMode;
+    MusicService bg;
     Handler timeHandler;
     Intent intent;
-    private String gscoreboard;
-    private String glevels;
-    ActionBar mToolbar;
+    private String gscoreboard, glevels;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -88,43 +78,14 @@ public class GameActivity extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        selectLayout();
-
-        pauseButton = findViewById(R.id.button_pause);
-        pauseButton.setVisibility(View.INVISIBLE);
-
-        restartButton = findViewById(R.id.button_restart);
-        restartButton.setVisibility(View.INVISIBLE);
-
-        scoreText = findViewById(R.id.text_score);
-
-        chronoTimer = findViewById(R.id.text_timer);
-        timeWhenStopped = 0;
-        setChronometerType();
-
-        pauseTapCounter = 0;
-        tapCounter = 0;
-        tapErrors = 0;
-        maxCards = game.getCardAmount();
-        restantMatches = maxCards / 2;
-        visibleCards = 0;
-
-        buttons = new Button[maxCards];
-        cards = new ArrayList<>(maxCards);
-        isClickable = false;
-        pausedGame = false;
-
-        MusicService bg = MusicService.getInstance(getApplicationContext());
+        bg = MusicService.getInstance(getApplicationContext());
         bg.stopMusic();
 
-        gameMode = game.getGameMode();
-
-        score = 0;
-        scoreboard = new Scoreboard(game.getId());
+        selectLayout();
+        findAndFillViewParametres();
+        initializeVariables();
+        setChronometerType();
         getScoreManager();
-
-        acertadosSeguidos = 0;
-        anteriorAcertada = false;
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
@@ -133,13 +94,8 @@ public class GameActivity extends AppCompatActivity {
             succeededLevels.loadSuccedeedLevels(sharedPreferences);
         }
 
-        gscoreboard = ""; glevels = "";
-
-        fillArray();
-        themeCard = game.getDeckTheme();
-        deck =  new Deck();
+        fillButtonsArray();
         deck.assignCardTheme(themeCard, cards, game, buttons, context);
-
     }
 
     public void showScoreboard(){
@@ -191,11 +147,7 @@ public class GameActivity extends AppCompatActivity {
             timeHandler.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 public void run() {
-                    turnAllCards();
-                    startChronometer();
-                    isTimeOver();
-                    pauseButton.setVisibility(View.VISIBLE);
-                    restartButton.setVisibility(View.VISIBLE);
+                    startGame();
                 }
             }, game.getRevealSeconds() * 1000);
         } else {
@@ -205,36 +157,8 @@ public class GameActivity extends AppCompatActivity {
                         card.turnCard();
                         visibleCards++;
                         card.getCardButton().setClickable(false);
-                        if(pairs.size()<2)  {
-                            pairs.add(card);
-                        }
-                        if (pairs.size() == 2) {
-                            if (pairs.get(0).equals(pairs.get(1))) {
-                                restantMatches--;
-                                pairs.get(0).setPaired();
-                                pairs.get(1).setPaired();
-                                anteriorAcertada = true;
-                                updateScore();
-                                pairs.clear();
-                                visibleCards = 0;
-                                tapErrors = 0;
-                            } else {
-                                tapErrors++;
-                                anteriorAcertada = false;
-                                updateScore();
-                                timeHandler.postDelayed(new Runnable() {
-                                    @RequiresApi(api = Build.VERSION_CODES.M)
-                                    public void run() {
-                                        turnVisibleCards();
-                                        visibleCards = 0;
-                                    }
-                                }, 1000);
-                                pairs.get(0).getCardButton().setClickable(true);
-                                pairs.get(1).getCardButton().setClickable(true);
-
-                                pairs.clear();
-                            }
-                        }
+                        if(pairs.size()<2) pairs.add(card);
+                        if(pairs.size() == 2) setPaired();
                     }
             }
         }
@@ -242,11 +166,18 @@ public class GameActivity extends AppCompatActivity {
         stopChronometer();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void startGame() {
+        turnAllCards();
+        startChronometer();
+        isTimeOver();
+        pauseButton.setVisibility(View.VISIBLE);
+        restartButton.setVisibility(View.VISIBLE);
+    }
+
     @SuppressLint("SetTextI18n")
     private void updateScore() {
-    /**
-     * Si crono = DESCENDENTE / NONE -> */
-        score = scoreManager.updateScore(anteriorAcertada);
+        score = scoreManager.updateScore(previousCorrect);
         scoreText.setText("Puntos: " + score);
     }
 
@@ -263,11 +194,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void fillArray(){
-        for(int i = 0; i < maxCards; i++) {
-            int imageID = getResources().getIdentifier("imgPos" + i,"id", getPackageName());
-            buttons[i] = findViewById(imageID);
-        }
+    private void fillButtonsArray(){
+        for(int i = 0; i < maxCards; i++)
+            buttons[i] = findViewById(getResources().getIdentifier("imgPos" + i,"id", getPackageName()));
     }
 
     private void stopChronometer() {
@@ -336,15 +265,10 @@ public class GameActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private Card getButton(Button button) {
-        for (Card c : cards) {
-            if(c.getCardButton() == button) return c;
-        }
-        return null;
-    }
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) {
-            if(!getButton(b).getPaired()) b.setClickable(isClickable);
+            for (Card c : cards)
+                if(c.getCardButton() == b) b.setClickable(isClickable);
         }
         isClickable = !isClickable;
     }
@@ -406,4 +330,58 @@ public class GameActivity extends AppCompatActivity {
         }
     }
     private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
+
+    private void findAndFillViewParametres() {
+        pauseButton = findViewById(R.id.button_pause);
+        pauseButton.setVisibility(View.INVISIBLE);
+        restartButton = findViewById(R.id.button_restart);
+        restartButton.setVisibility(View.INVISIBLE);
+        scoreText = findViewById(R.id.text_score);
+        chronoTimer = findViewById(R.id.text_timer);
+    }
+
+    private void initializeVariables() {
+        timeWhenStopped = 0;
+        pauseTapCounter = 0;
+        tapCounter = 0;
+        tapErrors = 0;
+        maxCards = game.getCardAmount();
+        restantMatches = maxCards / 2;
+        visibleCards = 0;
+        buttons = new Button[maxCards];
+        cards = new ArrayList<>(maxCards);
+        isClickable = false;
+        pausedGame = false;
+        deck =  new Deck();
+        gameMode = game.getGameMode();
+        score = 0;
+        scoreboard = new Scoreboard(game.getId());
+        previousCorrect = false;
+        gscoreboard = ""; glevels = "";
+        themeCard = game.getDeckTheme();
+    }
+
+    private void setPaired() {
+        if (pairs.get(0).equals(pairs.get(1))) {
+            for (Card c : pairs) c.setPaired();
+            restantMatches--;
+            previousCorrect = true;
+            updateScore();
+            visibleCards = 0;
+            tapErrors = 0;
+        } else {
+            tapErrors++;
+            previousCorrect = false;
+            updateScore();
+            timeHandler.postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                public void run() {
+                    turnVisibleCards();
+                    visibleCards = 0;
+                }
+            }, 1000);
+            for (Card c : pairs) c.getCardButton().setClickable(true);
+        }
+        pairs.clear();
+    }
 }

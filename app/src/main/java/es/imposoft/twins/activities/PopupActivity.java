@@ -137,7 +137,7 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
                         returnIntent.putExtra("WINDOW",2);
-                        returnIntent.putExtra("SOUND",true);
+                        returnIntent.putExtra("SOUND",1);
                         finish();
                     }
                 });
@@ -148,7 +148,7 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
                         returnIntent.putExtra("WINDOW",2);
-                        returnIntent.putExtra("SOUND",false);
+                        returnIntent.putExtra("SOUND",2);
                         finish();
                     }
                 });
