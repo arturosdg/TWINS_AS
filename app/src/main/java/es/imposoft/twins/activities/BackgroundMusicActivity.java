@@ -10,10 +10,7 @@ import java.lang.ref.WeakReference;
 import es.imposoft.twins.MusicService;
 
 public class BackgroundMusicActivity extends AppCompatActivity {
-    private static BackgroundMusicActivity instance;
-
-    private static WeakReference<Context> sContextReference;
-    MusicService musicService;
+    public MusicService musicService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

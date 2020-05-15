@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
 
         bg = MusicService.getInstance(getApplicationContext());
         bg.stopMusic();
+        bg.startGameMusic();
 
         selectLayout();
         findAndFillViewParametres();
