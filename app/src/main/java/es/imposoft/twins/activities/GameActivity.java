@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import es.imposoft.twins.Card;
+import es.imposoft.twins.MusicService;
 import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.R;
@@ -102,6 +103,9 @@ public class GameActivity extends AppCompatActivity {
         cards = new Card[maxCards];
         isClickable = false;
         pausedGame = false;
+
+        MusicService bg = MusicService.getInstance(getApplicationContext());
+        bg.stopMusic();
 
         gameMode = game.getGameMode();
 
