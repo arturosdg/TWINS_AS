@@ -27,16 +27,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Basic Android stuff
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
+        //Launch the music service
         Intent intent = new Intent(this, BackgroundMusicActivity.class);
         startService(intent);
 
+        //Start the music
         ms = MusicService.getInstance(getApplicationContext());
         ms.startMusic();
+
+        //Set default card theme
         cardTheme = DeckTheme.EMOJI;
 
+        //Set the screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_startgame);
@@ -92,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
                             chosenVolume = (int) returnInfo.get("SOUND");
                         switch (chosenVolume){
                             case 1:
-                                ms.startMusic();
+                                ms.enableMusic();
                                 break;
                             case 2:
-                                ms.stopMusic();
+                                ms.disableMusic();
                                 break;
                         }
                     }
