@@ -26,8 +26,8 @@ import com.google.gson.Gson;
 import es.imposoft.twins.Card;
 import es.imposoft.twins.MusicService;
 import es.imposoft.twins.SucceededLevel;
-import es.imposoft.twins.components.Baraja;
 import es.imposoft.twins.components.Deck;
+import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.components.GameMode;
@@ -35,7 +35,7 @@ import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.plantilla.*;
 
 public class GameActivity extends AppCompatActivity {
-    Deck themeCard;
+    DeckTheme themeCard;
     Chronometer chronoTimer;
     Button pauseButton;
     Button restartButton;
@@ -64,6 +64,7 @@ public class GameActivity extends AppCompatActivity {
     Gson gson;
     AbstractScore scoreManager;
     SucceededLevel succeededLevels;
+    Deck deck;
 
     SharedPreferences sharedPreferences;
     private GameMode gameMode;
@@ -135,9 +136,9 @@ public class GameActivity extends AppCompatActivity {
         gscoreboard = ""; glevels = "";
 
         fillArray();
-        themeCard = game.getDeck();
-        Baraja baraja =  new Baraja();
-        baraja.assignCardTheme(themeCard, cards, game, buttons, context);
+        themeCard = game.getDeckTheme();
+        deck =  new Deck();
+        deck.assignCardTheme(themeCard, cards, game, buttons, context);
 
     }
 

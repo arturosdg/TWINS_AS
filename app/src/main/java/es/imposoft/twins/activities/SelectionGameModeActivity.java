@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -16,8 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import es.imposoft.twins.MusicService;
-import es.imposoft.twins.components.Deck;
+import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.director.Director;
@@ -27,7 +25,7 @@ import es.imposoft.twins.gametypes.Game;
 
 public class SelectionGameModeActivity extends AppCompatActivity {
     Context context;
-    Deck deck;
+    DeckTheme deckTheme;
     Game game;
 
     //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
@@ -47,9 +45,9 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
         Bundle windowInfo = getIntent().getExtras();
 
-        deck = (Deck) windowInfo.get("THEME");
+        deckTheme = (DeckTheme) windowInfo.get("THEME");
 
-        director = new Director(deck);
+        director = new Director(deckTheme);
         levelBuilder =  new ConcreteBuilderLevel();
 
 
@@ -70,7 +68,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void openLevelsLayout(View view) {
         Intent intent = new Intent(this, SelectLevelActivity.class);
-        intent.putExtra("THEME", deck);
+        intent.putExtra("THEME", deckTheme);
         startActivity(intent);
         this.finish();
     }
@@ -105,7 +103,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
     public void goBack(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("THEME", deck);
+        intent.putExtra("THEME", deckTheme);
         startActivity(intent);
         this.finish();
     }

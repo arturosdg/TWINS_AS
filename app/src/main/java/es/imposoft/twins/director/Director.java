@@ -2,20 +2,20 @@ package es.imposoft.twins.director;
 
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.Chronometer;
-import es.imposoft.twins.components.Deck;
+import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.components.GameType;
 
 public class Director {
 
-    private Deck deck;
+    private DeckTheme deckTheme;
 
-    public Director(Deck deck){
-        this.deck = deck;
+    public Director(DeckTheme deckTheme){
+        this.deckTheme = deckTheme;
     }
 
     public void constructStandardGame(ConcreteBuilderLevel builder){
-        builder.setCardTheme(deck);
+        builder.setCardTheme(deckTheme);
         builder.setMinScore(0);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
@@ -27,7 +27,7 @@ public class Director {
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
-        builder.setCardTheme(deck);
+        builder.setCardTheme(deckTheme);
         builder.setMinScore(0);
         builder.setCardAmount(20);
         builder.setRevealTime(3);
@@ -39,7 +39,7 @@ public class Director {
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
-        builder.setCardTheme(Deck.EMOJI);
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(5);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
@@ -51,7 +51,7 @@ public class Director {
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
-        builder.setCardTheme(Deck.CARS);
+        builder.setCardTheme(DeckTheme.CARS);
         builder.setMinScore(25);
         builder.setCardAmount(16);
         builder.setRevealTime(2);
@@ -63,7 +63,7 @@ public class Director {
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
-        builder.setCardTheme(Deck.EMOJI);
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(30);
         builder.setCardAmount(20);
         builder.setRevealTime(2);
@@ -75,7 +75,7 @@ public class Director {
     }
 
     public void constructLevel4(ConcreteBuilderLevel builder){
-        builder.setCardTheme(Deck.CARS);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.CARS);//Deck.EMOJI
         builder.setMinScore(55);
         builder.setCardAmount(20);
         builder.setRevealTime(1);
@@ -87,7 +87,7 @@ public class Director {
     }
 
     public void constructLevel5(ConcreteBuilderLevel builder){
-        builder.setCardTheme(Deck.EMOJI);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
         builder.setMinScore(50);
         builder.setCardAmount(24);
         builder.setRevealTime(1);

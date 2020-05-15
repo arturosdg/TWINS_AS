@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +21,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import es.imposoft.twins.SucceededLevel;
-import es.imposoft.twins.components.Deck;
+import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.GameMode;
@@ -35,7 +34,7 @@ public class SelectLevelActivity extends AppCompatActivity {
     private Button[] levelButtons = new Button[MAX_LEVELS];
     Context context;
 
-    Deck deck;
+    DeckTheme deckTheme;
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
     Game game;
@@ -50,9 +49,9 @@ public class SelectLevelActivity extends AppCompatActivity {
 
         Bundle windowInfo = getIntent().getExtras();
 
-        deck = (Deck) windowInfo.get("THEME");
+        deckTheme = (DeckTheme) windowInfo.get("THEME");
 
-        director = new Director(deck);
+        director = new Director(deckTheme);
         levelBuilder =  new ConcreteBuilderLevel();
 
 
@@ -84,7 +83,7 @@ public class SelectLevelActivity extends AppCompatActivity {
 
     public void goBack(View view) {
         Intent intent = new Intent(this, SelectionGameModeActivity.class);
-        intent.putExtra("THEME",deck);
+        intent.putExtra("THEME", deckTheme);
         startActivity(intent);
         this.finish();
     }

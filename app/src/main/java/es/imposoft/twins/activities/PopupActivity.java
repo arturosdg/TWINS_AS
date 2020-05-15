@@ -9,7 +9,7 @@ import android.widget.*;
 import com.google.gson.Gson;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
-import es.imposoft.twins.components.Deck;
+import es.imposoft.twins.components.DeckTheme;
 
 public class PopupActivity extends Activity {
     public enum WindowType{
@@ -24,7 +24,7 @@ public class PopupActivity extends Activity {
     Scoreboard scoreboard;
     Bundle windowInfo;
 
-    Deck deck;
+    DeckTheme deckTheme;
     boolean isLevelMode;
 
     @Override
@@ -42,7 +42,7 @@ public class PopupActivity extends Activity {
         Button cancelButton;
         Button acceptButton;
 
-        deck = (Deck) windowInfo.get("THEME");
+        deckTheme = (DeckTheme) windowInfo.get("THEME");
 
 
         switch ((WindowType) windowInfo.get("TYPE")){
@@ -64,7 +64,7 @@ public class PopupActivity extends Activity {
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
                         }
-                        returnIntent.putExtra("THEME", deck);
+                        returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -113,7 +113,7 @@ public class PopupActivity extends Activity {
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
                         }
-                        returnIntent.putExtra("THEME", deck);
+                        returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
@@ -215,7 +215,7 @@ public class PopupActivity extends Activity {
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
                         }
-                        returnIntent.putExtra("THEME", deck);
+                        returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(returnIntent);
                         finish();
