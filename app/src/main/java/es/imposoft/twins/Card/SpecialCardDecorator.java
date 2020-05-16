@@ -10,6 +10,6 @@ public class SpecialCardDecorator extends CardDecorator {
         super.setPoints(setPointsExtended(points));
     }
     private int setPointsExtended(int points) {
-        return points = points * 2;
+        return points * 2;
     }
 }

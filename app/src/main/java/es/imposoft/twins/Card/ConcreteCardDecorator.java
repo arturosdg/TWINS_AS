@@ -11,6 +11,6 @@ public class ConcreteCardDecorator extends CardDecorator {
         super.setPoints(setPointsExtended(points));
     }
     private int setPointsExtended(int points) {
-        return points = points + 5;
+        return points/2 + 5;
     }
 }

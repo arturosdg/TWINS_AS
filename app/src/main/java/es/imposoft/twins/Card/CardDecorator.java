@@ -49,4 +49,14 @@ public class CardDecorator implements Card {
     public void setPoints(int points) {
         card.setPoints(points);
     }
+
+    @Override
+    public boolean isSpecial() {
+        return card.isSpecial();
+    }
+
+    @Override
+    public void setSpecial(boolean special) {
+        card.setSpecial(special);
+    }
 }

@@ -14,4 +14,6 @@ public interface Card {
     boolean equals(ConcreteCard concreteCard);
     int getPoints();
     void setPoints(int points);
+    boolean isSpecial();
+    void setSpecial(boolean special);
 }

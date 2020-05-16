@@ -12,7 +12,7 @@ public class ConcreteCard implements Card {
 
     Bitmap frontImage, backImage;
     Button cardButton;
-    boolean visible, isPaired;
+    boolean visible, isPaired, special;
     Context contextScene;
     int points;
 
@@ -28,6 +28,7 @@ public class ConcreteCard implements Card {
         cardButton = button;
         visible = false;
         isPaired = false;
+        special = false;
     }
 
     public Bitmap getFrontImage() {
@@ -75,5 +76,15 @@ public class ConcreteCard implements Card {
         return points;
     }
 
-    public void setPoints(int points) { this.points = points; }
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void setSpecial(boolean special) {
+        this.special = special;
+    }
+
+    public boolean isSpecial() {
+        return special;
+    }
 }

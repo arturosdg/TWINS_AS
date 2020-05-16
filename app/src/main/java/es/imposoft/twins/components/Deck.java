@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.gametypes.Game;
@@ -16,7 +15,7 @@ public class Deck {
     ArrayList<Integer> numbers, images;
     int random, position, cards;
     //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
-    final int MAX_CARD_DESIGNS = 12;
+    int MAX_CARD_DESIGNS = 12;
 
     //Crearemos las barajas de cartas, y llamaremos a un metodo de esta clase para crear el tablero
     public Deck() {
@@ -50,11 +49,24 @@ public class Deck {
     }
 
     private ArrayList<Integer> randomList() {
-        List<Integer> aux = new ArrayList<>();
-        while(aux.size() <= cards/2) {
-            random = (int) (Math.random() * MAX_CARD_DESIGNS);
-            if(!aux.contains(random)) { aux.add(random); }
+        ArrayList<Integer> aux = new ArrayList<>();
+        if (cards == 24) {
+            for (int i = 0; i < cards / 2; i++)
+                aux.add(i);
+        } else {
+            while (aux.size() <= cards / 2) {
+                random = (int) (Math.random() * MAX_CARD_DESIGNS);
+                if (!aux.contains(random)) {
+                    aux.add(random);
+                }
+            }
         }
-        return (ArrayList<Integer>) aux;
+        return aux;
+    }
+
+    //Por cada carta especial que ganemos, este valor se incrementara.
+    // Las cartas especiales son iguales para ambos tipos de DeckTheme
+    private void incrementMaxCardsDesign() {
+        MAX_CARD_DESIGNS++;
     }
 }

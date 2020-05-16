@@ -125,7 +125,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         if(levels != null) {
             for (int i = 0; i <= levels.size(); i++) {
                 levelButtons[ i ].setClickable(true);
-                levelButtons[i].setBackground(getDrawable(R.drawable.unknown));
+                levelButtons[i].setBackground(getDrawable(R.drawable.background5));
             }
             for (Integer i : levels) {
                 levelButtons[ i - 1 ].setClickable(true);
@@ -138,7 +138,7 @@ public class SelectLevelActivity extends AppCompatActivity {
     private void initializeLevelButtons() {
         for (int i = 1; i < levelButtons.length; i++) {
             levelButtons[i].setClickable(false);
-            levelButtons[i].setBackground(getDrawable(R.drawable.levelblocked));
+            levelButtons[i].setBackground(getDrawable(R.drawable.backgroundlevelblocked));
         }
     }
 }
