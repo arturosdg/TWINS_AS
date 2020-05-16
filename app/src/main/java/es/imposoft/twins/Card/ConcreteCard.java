@@ -1,4 +1,4 @@
-package es.imposoft.twins.Card;
+package es.imposoft.twins.card;
 
 import android.content.Context;
 import android.graphics.Bitmap;

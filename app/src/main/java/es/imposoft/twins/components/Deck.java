@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import es.imposoft.twins.Card.ConcreteCard;
+import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.gametypes.Game;
 
 public class Deck {

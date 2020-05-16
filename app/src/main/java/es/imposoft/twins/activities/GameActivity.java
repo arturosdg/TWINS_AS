@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import es.imposoft.twins.Card.ConcreteCard;
+
+import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.MusicService;
 import es.imposoft.twins.SucceededLevel;
 import es.imposoft.twins.components.Deck;
@@ -31,7 +32,7 @@ import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
-import es.imposoft.twins.plantilla.*;
+import es.imposoft.twins.prototype.*;
 
 public class GameActivity extends AppCompatActivity {
     DeckTheme themeCard;
@@ -177,8 +178,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateScore() {
-        score = scoreManager.updateScore(previousCorrect);
+    private void updateScore(ConcreteCard card) {
+        score = scoreManager.updateScore(previousCorrect, card);
         scoreText.setText("Puntos: " + score);
     }
 
@@ -305,7 +306,7 @@ public class GameActivity extends AppCompatActivity {
     private void getScoreManager() {
         switch(gameMode) {
             case CASUAL:
-                scoreManager = new ScoreFree();
+                scoreManager = new ScoreCasual();
                 break;
             case LEVELS:
                 scoreManager = new ScoreLevels();
@@ -367,13 +368,13 @@ public class GameActivity extends AppCompatActivity {
             for (ConcreteCard c : pairs) c.setPaired();
             restantMatches--;
             previousCorrect = true;
-            updateScore();
+            updateScore(pairs.get(0));
             visibleCards = 0;
             tapErrors = 0;
         } else {
             tapErrors++;
             previousCorrect = false;
-            updateScore();
+            updateScore(pairs.get(0));
             timeHandler.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 public void run() {

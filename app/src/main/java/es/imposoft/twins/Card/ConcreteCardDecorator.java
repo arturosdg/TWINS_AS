@@ -1,4 +1,4 @@
-package es.imposoft.twins.Card;
+package es.imposoft.twins.card;
 
 public class ConcreteCardDecorator extends CardDecorator {
 
@@ -8,6 +8,9 @@ public class ConcreteCardDecorator extends CardDecorator {
 
     @Override
     public void setPoints(int points) {
-        super.setPoints(points);
+        super.setPoints(setPointsExtended(points));
+    }
+    private int setPointsExtended(int points) {
+        return points = points + 5;
     }
 }

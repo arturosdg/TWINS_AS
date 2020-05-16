@@ -1,8 +1,6 @@
-package es.imposoft.twins.Card;
+package es.imposoft.twins.card;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.widget.Button;
 
 public class CardDecorator implements Card {
