@@ -61,7 +61,7 @@ public class GameActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     GameMode gameMode;
-    MusicService bg;
+    MusicService musicEngine;
     Handler timeHandler;
     Intent intent;
     private String gscoreboard, glevels;
@@ -78,9 +78,13 @@ public class GameActivity extends AppCompatActivity {
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        bg = MusicService.getInstance(getApplicationContext());
-        bg.stopMusic();
-        bg.startGameMusic();
+        musicEngine = MusicService.getInstance(getApplicationContext());
+        musicEngine.stopMusic();
+        musicEngine.startGameMusic(game.getSong());
+
+        /*Reproducir un sonido por encima:
+        musicEngine.startExtraSound(R.raw.sonidoareproducir);
+         */
 
         selectLayout();
         findAndFillViewParametres();
@@ -103,6 +107,8 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.addScore(score);
         scoreboard.saveHighscores(sharedPreferences);
+
+        musicEngine.stopMusic();
 
         intent = new Intent(GameActivity.this, PopupActivity.class);
         gson = new Gson();

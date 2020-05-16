@@ -16,6 +16,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private GameMode gameMode;
     private int levelId;
     private GameType gameType;
+    private int song;
 
     @Override
     public void setChronometer(int seconds, Chronometer type) {
@@ -51,7 +52,12 @@ public class ConcreteBuilderLevel implements LevelBuilder {
         this.levelId = levelId;
     }
 
+    @Override
+    public void setSong(int song) {
+        this.song = song;
+    }
+
     public Game getResult(){
-        return new Game(levelId, seconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType);
+        return new Game(levelId, seconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song);
     }
 }

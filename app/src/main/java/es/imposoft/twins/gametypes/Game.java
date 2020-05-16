@@ -15,8 +15,10 @@ public class Game {
     private final GameMode gameMode;
     private final int id;
     private GameType gameType;
+    private int song;
 
-    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode, GameType gameType){
+    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode, GameType gameType,int song){
+        this.song = song;
         this.id = id;
         this.seconds = seconds;
         this.chronometerType = chronometerType;
@@ -56,6 +58,10 @@ public class Game {
     }
 
     public GameMode getGameMode() { return gameMode; }
+
+    public int getSong(){
+        return song;
+    }
 
     //public AbstractScore getScoreManager() { return scoreManager; }
 
