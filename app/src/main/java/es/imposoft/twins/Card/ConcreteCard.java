@@ -28,7 +28,6 @@ public class ConcreteCard implements Card {
         cardButton = button;
         visible = false;
         isPaired = false;
-        points = 0;
     }
 
     public Bitmap getFrontImage() {
