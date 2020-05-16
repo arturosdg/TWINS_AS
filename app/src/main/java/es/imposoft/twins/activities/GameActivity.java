@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import es.imposoft.twins.SucceededChallenges;
 import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.MusicService;
 import es.imposoft.twins.SucceededLevel;
@@ -46,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
     Context context;
     int tapCounter, pauseTapCounter, tapErrors;
     Scoreboard scoreboard;
-    int score, levelPlayed;
+    int score, levelPlayed, challengePlayed;
 
     boolean previousCorrect, pausedGame, isClickable;
     List<ConcreteCard> pairs = new ArrayList<>();
@@ -58,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
     Gson gson;
     AbstractScore scoreManager;
     SucceededLevel succeededLevels;
+    private SucceededChallenges succeededChallenges;
     Deck deck;
 
     SharedPreferences sharedPreferences;
@@ -75,7 +77,13 @@ public class GameActivity extends AppCompatActivity {
 
         gson = new Gson();
         game = gson.fromJson((String) windowInfo.get("GAME"),Game.class);
-        if(windowInfo.get("LEVEL") != null) { levelPlayed = (int) windowInfo.get("LEVEL"); }
+
+        if(windowInfo.get("LEVEL") != null) {
+            levelPlayed = (int) windowInfo.get("LEVEL");
+        } else if(windowInfo.get("CHALLENGE") != null){
+            challengePlayed = (int) windowInfo.get("CHALLENGE");
+        }
+
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -98,6 +106,9 @@ public class GameActivity extends AppCompatActivity {
         if(isLevelMode()) {
             succeededLevels = new SucceededLevel(gameMode.ordinal());
             succeededLevels.loadSuccedeedLevels(sharedPreferences);
+        } else if(isChallengeMode()){
+            succeededChallenges = new SucceededChallenges();
+            succeededChallenges.loadChallenges(sharedPreferences);
         }
 
         fillButtonsArray();
@@ -124,6 +135,13 @@ public class GameActivity extends AppCompatActivity {
             }
             succeededLevels.saveSucceededLevels(sharedPreferences);
             glevels = gson.toJson(succeededLevels);
+            intent.putExtra("LEVELMODE", true);
+        } else if(isChallengeMode()){
+            if(!succeededChallenges.getSuccedeedChallenges().contains(challengePlayed)) {
+                succeededChallenges.addSuccedeedChallenges(challengePlayed);
+            }
+            succeededChallenges.saveChallenges(sharedPreferences);
+            glevels = gson.toJson(succeededChallenges);
             intent.putExtra("LEVELMODE", true);
         }
         startActivityForResult(intent,1);
@@ -338,6 +356,8 @@ public class GameActivity extends AppCompatActivity {
         }
     }
     private boolean isLevelMode() { return gameMode.equals(GameMode.LEVELS); }
+
+    private boolean isChallengeMode() { return gameMode.equals(GameMode.CHALLENGE);}
 
     private void findAndFillViewParametres() {
         pauseButton = findViewById(R.id.button_pause);

@@ -105,4 +105,43 @@ public class Director {
 
         builder.setSong(R.raw.is_alive_rap);
     }
+
+    //Tiempo justo challenge
+    public void constructChallenge1(ConcreteBuilderLevel builder) {
+        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setMinScore(50);
+        builder.setCardAmount(24);
+        builder.setRevealTime(1);
+        builder.setChronometer(50, Chronometer.DESCENDING);
+        builder.setGameMode(GameMode.LEVELS);
+        builder.setId(7);
+        builder.setGameType(GameType.NORMAL);
+        builder.setSong(R.raw.is_alive_rap);
+    }
+
+    //Perfecto challenge
+    public void constructChallenge2(ConcreteBuilderLevel builder) {
+        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setMinScore(50);
+        builder.setCardAmount(24);
+        builder.setRevealTime(1);
+        builder.setChronometer(50, Chronometer.DESCENDING);
+        builder.setGameMode(GameMode.LEVELS);
+        builder.setId(7);
+        builder.setGameType(GameType.NORMAL);
+        builder.setSong(R.raw.is_alive_rap);
+    }
+
+    //Mixed decks challenge
+    public void constructChallenge3(ConcreteBuilderLevel builder) {
+        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setMinScore(50);
+        builder.setCardAmount(24);
+        builder.setRevealTime(1);
+        builder.setChronometer(50, Chronometer.DESCENDING);
+        builder.setGameMode(GameMode.LEVELS);
+        builder.setId(7);
+        builder.setGameType(GameType.NORMAL);
+        builder.setSong(R.raw.is_alive_rap);
+    }
 }

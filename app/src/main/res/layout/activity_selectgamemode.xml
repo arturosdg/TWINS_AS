@@ -64,6 +64,21 @@
             android:textColor="@color/colorText"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
+        <Space
+            android:id="@+id/space2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/button_challengeGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="openChallengeLayout"
+            android:text="@string/desafios"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
+
     </LinearLayout>
 
     <ImageButton
