@@ -64,6 +64,13 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void openChallengeLayout(View view) {
+        Intent intent = new Intent(this, SelectChallengeActivity.class);
+        intent.putExtra("THEME", deckTheme);
+        startActivity(intent);
+        this.finish();
+    }
+
     public void playCasualGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
 

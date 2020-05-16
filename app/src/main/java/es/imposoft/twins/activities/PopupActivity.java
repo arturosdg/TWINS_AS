@@ -7,6 +7,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
+
+import es.imposoft.twins.MusicService;
 import es.imposoft.twins.R;
 import es.imposoft.twins.Scoreboard;
 import es.imposoft.twins.components.DeckTheme;
@@ -60,6 +62,9 @@ public class PopupActivity extends Activity {
                 //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
+                        musicEngine.stopMusic();
+                        musicEngine.startGameMusic(R.raw.twinscancion);
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);

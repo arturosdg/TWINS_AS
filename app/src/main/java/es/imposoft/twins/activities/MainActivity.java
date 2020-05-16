@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Start the music
         ms = MusicService.getInstance(getApplicationContext());
-        ms.startMusic();
+        ms.startGameMusic(R.raw.twinscancion);
 
         //Set default card theme
         cardTheme = DeckTheme.EMOJI;

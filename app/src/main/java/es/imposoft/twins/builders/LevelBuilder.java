@@ -15,4 +15,5 @@ public interface LevelBuilder {
     void setGameMode(GameMode gameMode);
     void setGameType(GameType gameType);
     void setId(int levelId);
+    void setSong(int song);
 }

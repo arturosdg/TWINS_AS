@@ -2,13 +2,15 @@ package es.imposoft.twins;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 
 public class MusicService {
     private static MusicService instance;
-    public String value;
     public Context context;
     public MediaPlayer player;
+    public MediaPlayer auxPlayer;
     public boolean isEnabled;
+    public int lastSong;
 
     private MusicService(Context context) {
         this.context = context;
@@ -21,14 +23,6 @@ public class MusicService {
             instance = new MusicService(context);
         }
         return instance;
-    }
-
-    public void startMusic() {
-        if(!player.isPlaying() & isEnabled) {
-            player.setLooping(true); // Set looping
-            player.setVolume(100, 100);
-            player.start();
-        }
     }
 
     public void stopMusic() {
@@ -45,38 +39,24 @@ public class MusicService {
     public void enableMusic(){
         if(!isEnabled){
             isEnabled = true;
-            //TODO restore last song
-            player = MediaPlayer.create(context, R.raw.twinscancion);
-            startMusic();
+            startGameMusic(lastSong);
         }
     }
 
-    public void startGameMusic() {
+    public void startGameMusic(int musicLink) {
         if(!player.isPlaying() & isEnabled) {
-            player = MediaPlayer.create(context, R.raw.is_alive_rap);
+            lastSong = musicLink;
+            player = MediaPlayer.create(context, musicLink);
             player.setLooping(true); // Set looping
             player.setVolume(50, 50);
             player.start();
         }
     }
 
-    public void startCountdownMusci(){
-        if(!player.isPlaying() & isEnabled) {
-            //TODO put countdown clock music
-            player = MediaPlayer.create(context, R.raw.is_alive_rap);
-            player.setLooping(true); // Set looping
-            player.setVolume(50, 50);
-            player.start();
-        }
-    }
-
-    public void startMatchedSound(){
-        if(!player.isPlaying() & isEnabled) {
-            //TODO put matched card sound
-            player = MediaPlayer.create(context, R.raw.is_alive_rap);
-            player.setLooping(true); // Set looping
-            player.setVolume(50, 50);
-            player.start();
-        }
+    public void startExtraSound(int testUri){
+        auxPlayer = MediaPlayer.create(context,testUri);
+        auxPlayer.setLooping(false);
+        auxPlayer.setVolume(50, 50);
+        auxPlayer.start();
     }
 }
