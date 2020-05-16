@@ -18,7 +18,7 @@ public class Director {
     public void constructStandardGame(ConcreteBuilderLevel builder){
         builder.setCardTheme(deckTheme);
         builder.setMinScore(0);
-        builder.setCardAmount(16);
+        builder.setCardAmount(20);
         builder.setRevealTime(3);
         builder.setChronometer(45, Chronometer.NORMAL);
         builder.setGameMode(GameMode.STANDARD);

@@ -28,16 +28,9 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     DeckTheme deckTheme;
     Game game;
     Bundle windowInfo;
-
-    //TODO Crear aqui con el director una partida segun el modo de juego seleccionada y pasarselo a GameActivity
-    /*
-        Director director = new Director();
-        ConcreteBuilderLevel levelBuilder =  new ConcreteBuilderLevel();
-        director.constructStandardGame(levelBuilder);
-        Game partida = levelBuilder.getResult();
-     */
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -58,7 +51,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.background),size.x,size.y,true);
+                getResources(),R.drawable.gamebackground),size.x,size.y,true);
         /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
