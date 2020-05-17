@@ -27,7 +27,6 @@ public class PopupActivity extends Activity {
     Bundle windowInfo;
 
     DeckTheme deckTheme;
-    boolean isLevelMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -68,6 +67,9 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                        }
+                        else if ((boolean) windowInfo.get("CHALLENGE")) {
+                            returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
                         }
                         returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -117,6 +119,9 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                        }
+                        else if ((boolean) windowInfo.get("CHALLENGE")) {
+                            returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
                         }
                         returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -219,6 +224,9 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
+                        }
+                        else if ((boolean) windowInfo.get("CHALLENGE")) {
+                            returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
                         }
                         returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

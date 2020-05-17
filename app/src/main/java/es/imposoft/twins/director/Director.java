@@ -113,7 +113,7 @@ public class Director {
         builder.setCardAmount(24);
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
-        builder.setGameMode(GameMode.LEVELS);
+        builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.is_alive_rap);
@@ -126,7 +126,7 @@ public class Director {
         builder.setCardAmount(24);
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
-        builder.setGameMode(GameMode.LEVELS);
+        builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.is_alive_rap);
@@ -139,7 +139,7 @@ public class Director {
         builder.setCardAmount(24);
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
-        builder.setGameMode(GameMode.LEVELS);
+        builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.is_alive_rap);

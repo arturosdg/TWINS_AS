@@ -129,6 +129,7 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
         intent.putExtra("THEME",themeCard);
         intent.putExtra("LEVELMODE", false);
+        intent.putExtra("CHALLENGE", false);
         if(isLevelMode()) {
             if(!succeededLevels.getSuccedeedLevels().contains(levelPlayed)) {
                 succeededLevels.addSuccedeedLevel(levelPlayed);
@@ -142,7 +143,7 @@ public class GameActivity extends AppCompatActivity {
             }
             succeededChallenges.saveChallenges(sharedPreferences);
             glevels = gson.toJson(succeededChallenges);
-            intent.putExtra("LEVELMODE", true);
+            intent.putExtra("CHALLENGE", true);
         }
         startActivityForResult(intent,1);
     }
@@ -158,10 +159,16 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
         intent.putExtra("THEME",themeCard);
         intent.putExtra("LEVELMODE", false);
+        intent.putExtra("CHALLENGE", false);
         if(isLevelMode()) {
             succeededLevels.saveSucceededLevels(sharedPreferences);
             glevels = gson.toJson(succeededLevels);
             intent.putExtra("LEVELMODE", true);
+        }
+        else if(isChallengeMode()){
+            succeededChallenges.saveChallenges(sharedPreferences);
+            glevels = gson.toJson(succeededChallenges);
+            intent.putExtra("CHALLENGE", true);
         }
         startActivityForResult(intent,1);
     }
@@ -305,8 +312,11 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("TYPE", PopupActivity.WindowType.WARNING);
         intent.putExtra("THEME", themeCard);
         intent.putExtra("LEVELMODE", false);
+        intent.putExtra("CHALLENGE", false);
         if(isLevelMode()) {
             intent.putExtra("LEVELMODE", true);
+        } else if (isChallengeMode()) {
+            intent.putExtra("CHALLENGE", true);
         }
         startActivityForResult(intent,0);
     }
@@ -337,6 +347,9 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case STANDARD:
                 scoreManager = new ScoreStandard();
+                break;
+            case CHALLENGE:
+                scoreManager = new ScoreChallenges();
                 break;
         }
     }
