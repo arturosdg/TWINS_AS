@@ -64,7 +64,7 @@ public class PopupActivity extends Activity {
                     public void onClick(View v) {
                         MusicService musicEngine = MusicService.getInstance(getApplicationContext());
                         musicEngine.stopMusic();
-                        musicEngine.startGameMusic(R.raw.twinscancion);
+                        musicEngine.startGameMusic(R.raw.menusong);
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
@@ -114,6 +114,10 @@ public class PopupActivity extends Activity {
                 //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
+                        musicEngine.stopMusic();
+                        musicEngine.startGameMusic(R.raw.menusong);
+
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
@@ -216,6 +220,10 @@ public class PopupActivity extends Activity {
                 //If he cancels the window, we go back to the main class
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
+                        musicEngine.stopMusic();
+                        musicEngine.startGameMusic(R.raw.menusong);
+                        
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);

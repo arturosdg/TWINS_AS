@@ -14,7 +14,7 @@ public class MusicService {
 
     private MusicService(Context context) {
         this.context = context;
-        player = MediaPlayer.create(context, R.raw.twinscancion);
+        player = MediaPlayer.create(context, R.raw.menusong);
         isEnabled = true;
     }
 

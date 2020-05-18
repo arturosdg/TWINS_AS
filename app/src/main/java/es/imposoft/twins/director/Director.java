@@ -25,7 +25,7 @@ public class Director {
         builder.setId(1);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.partidaestandar);
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
@@ -38,7 +38,7 @@ public class Director {
         builder.setId(2);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.musicapartidalibre);
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
@@ -51,7 +51,7 @@ public class Director {
         builder.setId(3);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.niveltranquilo);
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
@@ -64,7 +64,7 @@ public class Director {
         builder.setId(4);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.nivelintensito);
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
@@ -77,7 +77,7 @@ public class Director {
         builder.setId(5);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.nivel3);
     }
 
     public void constructLevel4(ConcreteBuilderLevel builder){
@@ -90,7 +90,7 @@ public class Director {
         builder.setId(6);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.nivel3);
     }
 
     public void constructLevel5(ConcreteBuilderLevel builder){
@@ -103,7 +103,7 @@ public class Director {
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
 
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.nivel3);
     }
 
     //Tiempo justo challenge
@@ -116,7 +116,7 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.desafiotiempo);
     }
 
     //Perfecto challenge
@@ -129,7 +129,7 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.desafioperfecto2);
     }
 
     //Mixed decks challenge
@@ -142,6 +142,6 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
-        builder.setSong(R.raw.is_alive_rap);
+        builder.setSong(R.raw.desafiodosbarajas);
     }
 }
