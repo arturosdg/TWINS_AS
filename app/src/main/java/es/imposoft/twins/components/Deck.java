@@ -48,6 +48,33 @@ public class Deck {
         }
     }
 
+    public void assign2CardThemes(DeckTheme theme, DeckTheme theme2, ArrayList<ConcreteCard> concreteCards, Game game, Button[] buttons, Context context) {
+        cards = game.getCardAmount();
+        numbers = randomList();
+        for (int i = 0; i < cards / 2; i++) {
+            if(i % 2 == 0)
+                images.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+            else
+                images.add(context.getResources().getIdentifier(theme2.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+        }
+        numbers.clear();
+        for (int i = 0; i < cards; i++) {
+            numbers.add(i);
+            concreteCards.add(new ConcreteCard(buttons[ i ], context));
+        }
+
+        while (!numbers.isEmpty()) {
+            random = (int) (Math.random() * numbers.size());
+            position = numbers.remove(random);
+            shuffled.add(concreteCards.get(position));
+        }
+
+        for (int i = 0; i < shuffled.size(); i++) {
+            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i / 2)));
+            shuffled.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+        }
+    }
+
     private ArrayList<Integer> randomList() {
         ArrayList<Integer> aux = new ArrayList<>();
         if (cards == 24) {
