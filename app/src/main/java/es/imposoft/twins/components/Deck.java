@@ -2,19 +2,15 @@ package es.imposoft.twins.components;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.preference.PreferenceManager;
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import es.imposoft.twins.SucceededChallenges;
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
-import es.imposoft.twins.card.ConcreteCardDecorator;
 import es.imposoft.twins.card.SpecialCardDecorator;
 import es.imposoft.twins.gametypes.Game;
 
@@ -56,7 +52,14 @@ public class Deck {
         //Asignamos las cartas normales aleatoriamente entre las existentes
         numbers = randomList();
         for (int i = 0; i < (cards - totalChallenges ) / 2; i++) {
-            imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+            //TODO hacer comprobacion de si es el juego de dosBarajas
+            if(game.getId() == 10) {
+                if(i % 2 == 0)
+                    imagesNormal.add(context.getResources().getIdentifier(DeckTheme.EMOJI.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+                else
+                    imagesNormal.add(context.getResources().getIdentifier(DeckTheme.CARS.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+            } else
+                imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
         }
 
         //Images es un array con una imagen de cada una de las que hay que asignar

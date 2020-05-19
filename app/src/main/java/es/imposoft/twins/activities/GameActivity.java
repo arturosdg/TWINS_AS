@@ -111,6 +111,7 @@ public class GameActivity extends AppCompatActivity {
             succeededChallenges = new SucceededChallenges();
             succeededChallenges.loadChallenges(sharedPreferences);
             deck.addChallengesWon(succeededChallenges.getSuccedeedChallenges());
+            scoreText.setText("");
         }
 
         fillButtonsArray();
@@ -171,6 +172,7 @@ public class GameActivity extends AppCompatActivity {
             succeededChallenges.saveChallenges(sharedPreferences);
             glevels = gson.toJson(succeededChallenges);
             intent.putExtra("CHALLENGE", true);
+
         }
         startActivityForResult(intent,1);
     }
@@ -212,8 +214,10 @@ public class GameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void updateScore(Card card) {
-        score = scoreManager.updateScore(previousCorrect, card);
-        scoreText.setText("Puntos: " + score);
+        if(!isChallengeMode()) {
+            score = scoreManager.updateScore(previousCorrect, card);
+            scoreText.setText("Puntos: " + score);
+        }
     }
 
     private void turnAllCards() {
@@ -409,21 +413,15 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setPaired() {
-        System.out.println(pairs.get(0).getFrontImage());
-        System.out.println(pairs.get(1).getFrontImage());
         if (pairs.get(0).equals(pairs.get(1))) {
-            System.out.println("Test aqui estas");
             for (Card c : pairs) c.setPaired();
             restantMatches--;
             previousCorrect = true;
-            updateScore(pairs.get(0));
             visibleCards = 0;
             tapErrors = 0;
         } else {
-            System.out.println("Test alla estas");
             tapErrors++;
             previousCorrect = false;
-            updateScore(pairs.get(0));
             timeHandler.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 public void run() {
@@ -433,6 +431,7 @@ public class GameActivity extends AppCompatActivity {
             }, 1000);
             for (Card c : pairs) c.getCardButton().setClickable(true);
         }
+        updateScore(pairs.get(0));
         pairs.clear();
     }
 }
