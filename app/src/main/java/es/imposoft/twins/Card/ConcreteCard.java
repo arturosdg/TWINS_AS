@@ -20,12 +20,10 @@ public class ConcreteCard implements Card {
 
     public ConcreteCard(Button button, Context context) {
         contextScene = context;
-
         Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.background2),
                 bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.cars0);
         backImage = bitBack;
         frontImage = bitFront;
-
         cardButton = button;
         visible = false;
         isPaired = false;

@@ -40,6 +40,7 @@ public class SelectChallengeActivity extends AppCompatActivity {
     private int currentChallenge;
     private final int MAX_CHALLENGES = 3;
     private Button[] challengeButtons = new Button[MAX_CHALLENGES];
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,19 @@ public class SelectChallengeActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
+        /*Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
+                getResources(),R.drawable.bg),size.x,size.y,true);
+        /* fill the background ImageView with the resized image 
+        ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
+        iv_background.setImageBitmap(bmp);*/
 
         succeededChallenges = new SucceededChallenges(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         succeededChallenges.loadChallenges(sp);
-        if(succeededChallenges != null) challenges = succeededChallenges.getSuccedeedChallenges();
-        if(succeededChallenges != null) succeededChallenges.saveChallenges(sp);
+        if(succeededChallenges != null) {
+            challenges = succeededChallenges.getSuccedeedChallenges();
+            succeededChallenges.saveChallenges(sp);
+        }
 
         fillArray();
     }
@@ -76,14 +84,14 @@ public class SelectChallengeActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        Intent intent = new Intent(this, SelectionGameModeActivity.class);
+        intent = new Intent(this, SelectionGameModeActivity.class);
         intent.putExtra("THEME", deckTheme);
         startActivity(intent);
         this.finish();
     }
 
     public void goToLevel(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
+        intent = new Intent(this, GameActivity.class);
 
         createChallengeSelected(view.getId());
         game = levelBuilder.getResult();
