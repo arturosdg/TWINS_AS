@@ -15,16 +15,15 @@ public class ConcreteCard implements Card {
     boolean visible, isPaired, special;
     Context contextScene;
     int points;
+    String cardName;
 
 
     public ConcreteCard(Button button, Context context) {
         contextScene = context;
-
         Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.background2),
                 bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.cars0);
         backImage = bitBack;
         frontImage = bitFront;
-
         cardButton = button;
         visible = false;
         isPaired = false;
@@ -70,6 +69,7 @@ public class ConcreteCard implements Card {
 
     public boolean equals(ConcreteCard concreteCard) {
         return this.getFrontImage().sameAs(concreteCard.getFrontImage());
+        //return this.cardName.equals(concreteCard.cardName);
     }
 
     public int getPoints() {

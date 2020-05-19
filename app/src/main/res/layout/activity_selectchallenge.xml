@@ -46,6 +46,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="317dp"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -64,6 +67,9 @@
                 android:id="@+id/button_level1"
                 android:layout_width="96dp"
                 android:layout_height="124dp"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/background5"
                 android:baselineAligned="false"
                 android:onClick="goToLevel"
@@ -73,7 +79,7 @@
                 tools:layout_editor_absoluteY="56dp" />
 
             <Space
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -81,6 +87,9 @@
                 android:id="@+id/button_level2"
                 android:layout_width="96dp"
                 android:layout_height="124dp"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/background5"
                 android:baselineAligned="false"
                 android:onClick="goToLevel"
@@ -98,6 +107,9 @@
             android:id="@+id/button_level3"
             android:layout_width="96dp"
             android:layout_height="124dp"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/background5"
             android:onClick="goToLevel"
             android:text="3"
