@@ -14,6 +14,7 @@ import java.util.List;
 import es.imposoft.twins.SucceededChallenges;
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
+import es.imposoft.twins.card.ConcreteCardDecorator;
 import es.imposoft.twins.card.SpecialCardDecorator;
 import es.imposoft.twins.gametypes.Game;
 
@@ -82,13 +83,13 @@ public class Deck {
         imagesChallenges.addAll(imagesChallenges);
 
         for (Card cardToAsign: concreteCards) {
-            if (cardToAsign instanceof  ConcreteCard) {
+            if (cardToAsign instanceof SpecialCardDecorator) {
                 System.out.println("test aqui" + imagesChallenges.get(0));
                 int actualImage = imagesChallenges.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
                 cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(actualImage);
-            } else if(cardToAsign instanceof SpecialCardDecorator) {
+            } else if(cardToAsign instanceof ConcreteCardDecorator) {
                 int actualImage = imagesNormal.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
                 cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
