@@ -138,7 +138,7 @@ public class Director {
         builder.setId(9);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafioperfecto2);
-        builder.setMaxFails(0);
+        builder.setMaxFails(1);
     }
 
     //Mixed decks challenge
