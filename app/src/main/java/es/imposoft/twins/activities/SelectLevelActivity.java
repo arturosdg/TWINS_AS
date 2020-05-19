@@ -42,6 +42,8 @@ public class SelectLevelActivity extends AppCompatActivity {
     SucceededLevel succeededLevels;
     List<Integer> levels;
 
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -64,7 +66,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.backgroundlevels),size.x,size.y,true);
+                getResources(),R.drawable.backgroundforest),size.x,size.y,true);
         /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
@@ -73,8 +75,10 @@ public class SelectLevelActivity extends AppCompatActivity {
         succeededLevels = new SucceededLevel(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         succeededLevels.loadSuccedeedLevels(sp);
-        if(succeededLevels != null) levels = succeededLevels.getSuccedeedLevels();
-        if(succeededLevels != null) succeededLevels.saveSucceededLevels(sp);
+        if(succeededLevels != null) {
+            levels = succeededLevels.getSuccedeedLevels();
+            succeededLevels.saveSucceededLevels(sp);
+        }
 
         fillArray();
         initializeLevelButtons();
@@ -82,14 +86,14 @@ public class SelectLevelActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        Intent intent = new Intent(this, SelectionGameModeActivity.class);
+        intent = new Intent(this, SelectionGameModeActivity.class);
         intent.putExtra("THEME", deckTheme);
         startActivity(intent);
         this.finish();
     }
 
     public void goToLevel(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
+        intent = new Intent(this, GameActivity.class);
 
         createLevelSelected(view.getId());
         game = levelBuilder.getResult();
