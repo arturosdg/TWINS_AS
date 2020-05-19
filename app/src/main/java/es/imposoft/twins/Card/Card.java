@@ -8,10 +8,12 @@ public interface Card {
     void setFrontImage(Bitmap frontImage);
     void setBackImage(Bitmap backImage);
     Button getCardButton();
+    void setFrontName(String name);
+    String getFrontName();
     void setPaired();
     void turnCard();
     void turnVisibleCards();
-    boolean equals(ConcreteCard concreteCard);
+    boolean equals(Card concreteCard);
     int getPoints();
     void setPoints(int points);
     boolean isSpecial();

@@ -6,6 +6,7 @@ import android.widget.Button;
 public class CardDecorator implements Card {
 
     private Card card;
+    private String frontName;
 
     public CardDecorator(Card card) { this.card = card; }
 
@@ -25,6 +26,16 @@ public class CardDecorator implements Card {
         return card.getCardButton();
     }
 
+    @Override
+    public void setFrontName(String name) {
+        this.frontName = name;
+    }
+
+    @Override
+    public String getFrontName() {
+        return frontName;
+    }
+
     public void setPaired() {
         card.setPaired();
     }
@@ -37,8 +48,9 @@ public class CardDecorator implements Card {
         card.turnVisibleCards();
     }
 
-    public boolean equals(ConcreteCard concreteCard) {
-        return card.equals(concreteCard);
+    public boolean equals(Card concreteCard) {
+        System.out.println(this.getFrontName() + " a " + concreteCard.getFrontName());
+        return this.getFrontName().equals(concreteCard.getFrontName());
     }
 
     public int getPoints() {

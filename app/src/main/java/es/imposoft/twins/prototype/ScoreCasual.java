@@ -1,12 +1,13 @@
 package es.imposoft.twins.prototype;
 
+import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
 
 public class ScoreCasual extends AbstractScore {
 
     public ScoreCasual() { super(); }
 
-    public int updateScore(boolean correct, ConcreteCard card) {
+    public int updateScore(boolean correct, Card card) {
         setCorrect(correct);
         assignPoints();
         calculateAndSetScore();

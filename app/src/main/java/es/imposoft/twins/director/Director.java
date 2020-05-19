@@ -116,10 +116,10 @@ public class Director {
     //Tiempo justo challenge
     public void constructChallenge1(ConcreteBuilderLevel builder) {
         builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
-        builder.setMinScore(50);
-        builder.setCardAmount(24);
-        builder.setRevealTime(1);
-        builder.setChronometer(50, Chronometer.DESCENDING);
+        builder.setMinScore(0);
+        builder.setCardAmount(16);
+        builder.setRevealTime(3);
+        builder.setChronometer(120, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(8);
         builder.setGameType(GameType.NORMAL);

@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import es.imposoft.twins.SucceededChallenges;
+import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.MusicService;
 import es.imposoft.twins.SucceededLevel;
@@ -43,14 +44,14 @@ public class GameActivity extends AppCompatActivity {
 
     int maxCards, visibleCards, restantMatches;
     Button[] buttons;
-    ArrayList<ConcreteCard> concreteCards;
+    ArrayList<Card> concreteCards;
     Context context;
     int tapCounter, pauseTapCounter, tapErrors, maxErrors;
     Scoreboard scoreboard;
     int score, levelPlayed, challengePlayed;
 
     boolean previousCorrect, pausedGame, isClickable;
-    List<ConcreteCard> pairs = new ArrayList<>();
+    List<Card> pairs = new ArrayList<>();
 
     long timeWhenStarted, timeWhenStopped;
 
@@ -109,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
         } else if(isChallengeMode()){
             succeededChallenges = new SucceededChallenges();
             succeededChallenges.loadChallenges(sharedPreferences);
+            deck.addChallengesWon(succeededChallenges.getSuccedeedChallenges());
         }
 
         fillButtonsArray();
@@ -184,7 +186,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }, game.getRevealSeconds() * 1000);
         } else {
-            for (ConcreteCard concreteCard : concreteCards) {
+            for (Card concreteCard : concreteCards) {
                 if(visibleCards < 2 && !pausedGame)
                     if (concreteCard.getCardButton().getId() == view.getId()) {
                         concreteCard.turnCard();
@@ -209,20 +211,20 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateScore(ConcreteCard card) {
+    private void updateScore(Card card) {
         score = scoreManager.updateScore(previousCorrect, card);
         scoreText.setText("Puntos: " + score);
     }
 
     private void turnAllCards() {
-        for (ConcreteCard concreteCard : concreteCards) {
+        for (Card concreteCard : concreteCards) {
             concreteCard.turnCard();
         }
         setClickable(buttons);
     }
 
     private void turnVisibleCards() {
-        for (ConcreteCard concreteCard : concreteCards) {
+        for (Card concreteCard : concreteCards) {
             concreteCard.turnVisibleCards();
         }
     }
@@ -301,7 +303,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) {
-            for (ConcreteCard c : concreteCards)
+            for (Card c : concreteCards)
                 if(c.getCardButton() == b) b.setClickable(isClickable);
         }
         isClickable = !isClickable;
@@ -407,14 +409,18 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setPaired() {
+        System.out.println(pairs.get(0).getFrontImage());
+        System.out.println(pairs.get(1).getFrontImage());
         if (pairs.get(0).equals(pairs.get(1))) {
-            for (ConcreteCard c : pairs) c.setPaired();
+            System.out.println("Test aqui estas");
+            for (Card c : pairs) c.setPaired();
             restantMatches--;
             previousCorrect = true;
             updateScore(pairs.get(0));
             visibleCards = 0;
             tapErrors = 0;
         } else {
+            System.out.println("Test alla estas");
             tapErrors++;
             previousCorrect = false;
             updateScore(pairs.get(0));
@@ -425,7 +431,7 @@ public class GameActivity extends AppCompatActivity {
                     visibleCards = 0;
                 }
             }, 1000);
-            for (ConcreteCard c : pairs) c.getCardButton().setClickable(true);
+            for (Card c : pairs) c.getCardButton().setClickable(true);
         }
         pairs.clear();
     }

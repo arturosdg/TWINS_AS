@@ -19,7 +19,7 @@ public abstract class AbstractScore {
         toAdd = 0;
     }
 
-    public int updateScore(boolean correct, ConcreteCard card) {
+    public int updateScore(boolean correct, Card card) {
         setCorrect(correct);
         assignPoints();
         calculateAndSetScore();

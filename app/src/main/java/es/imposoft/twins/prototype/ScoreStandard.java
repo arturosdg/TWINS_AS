@@ -1,5 +1,6 @@
 package es.imposoft.twins.prototype;
 
+import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.CardDecorator;
 import es.imposoft.twins.card.ConcreteCard;
 import es.imposoft.twins.card.ConcreteCardDecorator;
@@ -12,7 +13,7 @@ public class ScoreStandard extends AbstractScore {
         super();
     }
 
-    public int updateScore(boolean correct, ConcreteCard card) {
+    public int updateScore(boolean correct, Card card) {
         if(card.isSpecial()) cardDecorator = new SpecialCardDecorator(card);
         else cardDecorator = new ConcreteCardDecorator(card);
         setCorrect(correct);

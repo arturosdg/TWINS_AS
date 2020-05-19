@@ -2,17 +2,26 @@ package es.imposoft.twins.components;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
+import es.imposoft.twins.SucceededChallenges;
+import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
+import es.imposoft.twins.card.SpecialCardDecorator;
 import es.imposoft.twins.gametypes.Game;
 
 public class Deck {
 
-    ArrayList<ConcreteCard> shuffled;
+    ArrayList<Card> shuffled;
     ArrayList<Integer> numbers, images;
+    List<Integer> challengesWon;
+    ArrayList<Integer> newCards;
     int random, position, cards;
     //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
     int MAX_CARD_DESIGNS = 12;
@@ -22,29 +31,62 @@ public class Deck {
         shuffled = new ArrayList<>();
         images = new ArrayList<>();
         numbers = new ArrayList<>();
+        newCards = new ArrayList<>();
     }
 
-    public void assignCardTheme(DeckTheme theme, ArrayList<ConcreteCard> concreteCards, Game game, Button[] buttons, Context context) {
+    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
+        //Cargamos el total de cartas
         cards = game.getCardAmount();
+
+        int totalChallenges = 0;
+
+        //Si hemos ganado algun challenge, solo se cargaran las cartas que toca
+        if(challengesWon != null){
+            totalChallenges = challengesWon.size()*2;
+
+            //Asignamos las cartas de desafios
+            for(int i = 0; i < challengesWon.size(); i++){
+                images.add(context.getResources().getIdentifier("challengecard" + i, "drawable", context.getPackageName()));
+            }
+        }
+
+        //Asignamos las cartas normales aleatoriamente entre las existentes
         numbers = randomList();
-        for (int i = 0; i < cards / 2; i++) {
+        for (int i = 0; i < (cards - totalChallenges ) / 2; i++) {
             images.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
         }
+
+        //Images es un array con una imagen de cada una de las que hay que asignar
+
         numbers.clear();
-        for (int i = 0; i < cards; i++) {
-            numbers.add(i);
-            concreteCards.add(new ConcreteCard(buttons[ i ], context));
+
+        //Creamos todas las cartas contando las de desafios
+        for(int i = 0; i < cards; i++){
+            if(i<totalChallenges){
+                //newCards.add(i);
+                ConcreteCard normalCard = new ConcreteCard(buttons[i], context);
+                SpecialCardDecorator specialCard = new SpecialCardDecorator(normalCard);
+                concreteCards.add(specialCard);
+            } else {
+                //numbers.add(i);
+                concreteCards.add(new ConcreteCard(buttons[i], context));
+            }
         }
 
-        while (!numbers.isEmpty()) {
-            random = (int) (Math.random() * numbers.size());
-            position = numbers.remove(random);
-            shuffled.add(concreteCards.get(position));
-        }
+        //Ya tenemos todas las cartas creadas pero sin la imagen asignada
 
-        for (int i = 0; i < shuffled.size(); i++) {
-            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i / 2)));
-            shuffled.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+        Collections.shuffle(concreteCards);
+
+        /*ArrayList<Integer> auxlist = new ArrayList<>();
+        for(int i = 0; i< images.size();i++){
+            auxlist.add(images.get(i));
+        }*/
+        images.addAll(images);
+
+        for (int i = 0; i < concreteCards.size(); i++) {
+            concreteCards.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i)));
+            concreteCards.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+            concreteCards.get(i).setFrontName(images.get(i).toString());
         }
     }
 
@@ -70,7 +112,7 @@ public class Deck {
         }
 
         for (int i = 0; i < shuffled.size(); i++) {
-            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i / 2)));
+            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i)));
             shuffled.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
         }
     }
@@ -91,9 +133,7 @@ public class Deck {
         return aux;
     }
 
-    //Por cada carta especial que ganemos, este valor se incrementara.
-    // Las cartas especiales son iguales para ambos tipos de DeckTheme
-    private void incrementMaxCardsDesign() {
-        MAX_CARD_DESIGNS++;
+    public void addChallengesWon(List<Integer> succedeedChallenges) {
+        this.challengesWon = succedeedChallenges;
     }
 }
