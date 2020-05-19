@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,7 @@ import es.imposoft.twins.gametypes.Game;
 public class Deck {
 
     ArrayList<Card> shuffled;
-    ArrayList<Integer> numbers, images;
+    ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
     List<Integer> challengesWon;
     ArrayList<Integer> newCards;
     int random, position, cards;
@@ -29,7 +30,8 @@ public class Deck {
     //Crearemos las barajas de cartas, y llamaremos a un metodo de esta clase para crear el tablero
     public Deck() {
         shuffled = new ArrayList<>();
-        images = new ArrayList<>();
+        imagesNormal = new ArrayList<>();
+        imagesChallenges = new ArrayList<>();
         numbers = new ArrayList<>();
         newCards = new ArrayList<>();
     }
@@ -46,20 +48,21 @@ public class Deck {
 
             //Asignamos las cartas de desafios
             for(int i = 0; i < challengesWon.size(); i++){
-                images.add(context.getResources().getIdentifier("challengecard" + i, "drawable", context.getPackageName()));
+                imagesChallenges.add(context.getResources().getIdentifier("challengecard" + i, "drawable", context.getPackageName()));
             }
         }
 
         //Asignamos las cartas normales aleatoriamente entre las existentes
         numbers = randomList();
         for (int i = 0; i < (cards - totalChallenges ) / 2; i++) {
-            images.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+            imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
         }
 
         //Images es un array con una imagen de cada una de las que hay que asignar
 
         numbers.clear();
 
+        Collections.shuffle(Arrays.asList(buttons));
         //Creamos todas las cartas contando las de desafios
         for(int i = 0; i < cards; i++){
             if(i<totalChallenges){
@@ -75,45 +78,22 @@ public class Deck {
 
         //Ya tenemos todas las cartas creadas pero sin la imagen asignada
 
-        Collections.shuffle(concreteCards);
+        imagesNormal.addAll(imagesNormal);
+        imagesChallenges.addAll(imagesChallenges);
 
-        /*ArrayList<Integer> auxlist = new ArrayList<>();
-        for(int i = 0; i< images.size();i++){
-            auxlist.add(images.get(i));
-        }*/
-        images.addAll(images);
-
-        for (int i = 0; i < concreteCards.size(); i++) {
-            concreteCards.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i)));
-            concreteCards.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-            concreteCards.get(i).setFrontName(images.get(i).toString());
-        }
-    }
-
-    public void assign2CardThemes(DeckTheme theme, DeckTheme theme2, ArrayList<ConcreteCard> concreteCards, Game game, Button[] buttons, Context context) {
-        cards = game.getCardAmount();
-        numbers = randomList();
-        for (int i = 0; i < cards / 2; i++) {
-            if(i % 2 == 0)
-                images.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
-            else
-                images.add(context.getResources().getIdentifier(theme2.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
-        }
-        numbers.clear();
-        for (int i = 0; i < cards; i++) {
-            numbers.add(i);
-            concreteCards.add(new ConcreteCard(buttons[ i ], context));
-        }
-
-        while (!numbers.isEmpty()) {
-            random = (int) (Math.random() * numbers.size());
-            position = numbers.remove(random);
-            shuffled.add(concreteCards.get(position));
-        }
-
-        for (int i = 0; i < shuffled.size(); i++) {
-            shuffled.get(i).setFrontImage(BitmapFactory.decodeResource(context.getResources(), images.get(i)));
-            shuffled.get(i).setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+        for (Card cardToAsign: concreteCards) {
+            if (cardToAsign instanceof SpecialCardDecorator) {
+                System.out.println("test aqui" + imagesChallenges.get(0));
+                int actualImage = imagesChallenges.remove(0);
+                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+                cardToAsign.setFrontName(actualImage);
+            } else if(cardToAsign instanceof  ConcreteCard) {
+                int actualImage = imagesNormal.remove(0);
+                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+                cardToAsign.setFrontName(actualImage);
+            }
         }
     }
 

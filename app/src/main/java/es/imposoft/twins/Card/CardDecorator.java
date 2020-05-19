@@ -6,7 +6,7 @@ import android.widget.Button;
 public class CardDecorator implements Card {
 
     private Card card;
-    private String frontName;
+    private int frontName;
 
     public CardDecorator(Card card) { this.card = card; }
 
@@ -27,12 +27,12 @@ public class CardDecorator implements Card {
     }
 
     @Override
-    public void setFrontName(String name) {
+    public void setFrontName(int name) {
         this.frontName = name;
     }
 
     @Override
-    public String getFrontName() {
+    public int getFrontName() {
         return frontName;
     }
 
@@ -50,7 +50,7 @@ public class CardDecorator implements Card {
 
     public boolean equals(Card concreteCard) {
         System.out.println(this.getFrontName() + " a " + concreteCard.getFrontName());
-        return this.getFrontName().equals(concreteCard.getFrontName());
+        return this.getFrontName() == concreteCard.getFrontName();
     }
 
     public int getPoints() {

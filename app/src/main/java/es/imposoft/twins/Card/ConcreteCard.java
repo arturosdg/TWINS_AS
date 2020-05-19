@@ -15,7 +15,7 @@ public class ConcreteCard implements Card {
     boolean visible, isPaired, special;
     Context contextScene;
     int points;
-    private String frontName;
+    private int frontName;
 
 
     public ConcreteCard(Button button, Context context) {
@@ -36,11 +36,11 @@ public class ConcreteCard implements Card {
         return frontImage;
     }
 
-    public void setFrontName(String name){
+    public void setFrontName(int name){
         this.frontName = name;
     }
 
-    public String getFrontName(){
+    public int getFrontName(){
         return frontName;
     }
 
@@ -79,7 +79,7 @@ public class ConcreteCard implements Card {
 
     public boolean equals(Card concreteCard) {
         System.out.println(this.getFrontName() + " a " + concreteCard.getFrontName());
-        return this.getFrontName().equals(concreteCard.getFrontName());
+        return this.getFrontName() == concreteCard.getFrontName();
     }
 
     public int getPoints() {

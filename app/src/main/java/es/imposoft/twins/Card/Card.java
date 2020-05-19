@@ -8,8 +8,8 @@ public interface Card {
     void setFrontImage(Bitmap frontImage);
     void setBackImage(Bitmap backImage);
     Button getCardButton();
-    void setFrontName(String name);
-    String getFrontName();
+    void setFrontName(int name);
+    int getFrontName();
     void setPaired();
     void turnCard();
     void turnVisibleCards();
