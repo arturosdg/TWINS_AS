@@ -114,7 +114,7 @@ public class Director {
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
-        builder.setId(7);
+        builder.setId(8);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiotiempo);
     }
@@ -127,7 +127,7 @@ public class Director {
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
-        builder.setId(7);
+        builder.setId(9);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafioperfecto2);
     }
@@ -140,7 +140,7 @@ public class Director {
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
-        builder.setId(7);
+        builder.setId(10);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiodosbarajas);
     }
