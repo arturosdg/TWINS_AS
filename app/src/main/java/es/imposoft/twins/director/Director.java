@@ -26,6 +26,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.partidaestandar);
+        builder.setMaxFails(10);
     }
 
     public void constructCasualGame(ConcreteBuilderLevel builder){
@@ -39,6 +40,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.musicapartidalibre);
+        builder.setMaxFails(5);
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
@@ -52,6 +54,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.niveltranquilo);
+        builder.setMaxFails(5);
     }
 
     public void constructLevel2(ConcreteBuilderLevel builder){
@@ -65,6 +68,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.nivelintensito);
+        builder.setMaxFails(5);
     }
 
     public void constructLevel3(ConcreteBuilderLevel builder){
@@ -78,6 +82,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.nivel3);
+        builder.setMaxFails(5);
     }
 
     public void constructLevel4(ConcreteBuilderLevel builder){
@@ -91,6 +96,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.nivel3);
+        builder.setMaxFails(5);
     }
 
     public void constructLevel5(ConcreteBuilderLevel builder){
@@ -104,6 +110,7 @@ public class Director {
         builder.setGameType(GameType.NORMAL);
 
         builder.setSong(R.raw.nivel3);
+        builder.setMaxFails(5);
     }
 
     //Tiempo justo challenge
@@ -117,6 +124,7 @@ public class Director {
         builder.setId(8);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiotiempo);
+        builder.setMaxFails(5);
     }
 
     //Perfecto challenge
@@ -130,6 +138,7 @@ public class Director {
         builder.setId(9);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafioperfecto2);
+        builder.setMaxFails(0);
     }
 
     //Mixed decks challenge
@@ -143,5 +152,6 @@ public class Director {
         builder.setId(10);
         builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiodosbarajas);
+        builder.setMaxFails(5);
     }
 }

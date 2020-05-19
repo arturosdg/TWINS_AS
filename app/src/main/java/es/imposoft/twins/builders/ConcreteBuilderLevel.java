@@ -17,6 +17,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int levelId;
     private GameType gameType;
     private int song;
+    private int maxFails;
 
     @Override
     public void setChronometer(int seconds, Chronometer type) {
@@ -57,7 +58,9 @@ public class ConcreteBuilderLevel implements LevelBuilder {
         this.song = song;
     }
 
+    public void setMaxFails(int maxFails) { this.maxFails = maxFails; }
+
     public Game getResult(){
-        return new Game(levelId, seconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song);
+        return new Game(levelId, seconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song, maxFails);
     }
 }

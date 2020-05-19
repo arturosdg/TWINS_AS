@@ -16,4 +16,5 @@ public interface LevelBuilder {
     void setGameType(GameType gameType);
     void setId(int levelId);
     void setSong(int song);
+    void setMaxFails(int maxFails);
 }

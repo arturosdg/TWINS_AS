@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
     Button[] buttons;
     ArrayList<ConcreteCard> concreteCards;
     Context context;
-    int tapCounter, pauseTapCounter, tapErrors;
+    int tapCounter, pauseTapCounter, tapErrors, maxErrors;
     Scoreboard scoreboard;
     int score, levelPlayed, challengePlayed;
 
@@ -233,11 +233,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void stopChronometer() {
-        if(tapErrors == 5) timeHandler.postDelayed(new Runnable() {
-            public void run() {
-                showGameOver();
-            }
-        }, 650);
+        if(!isCasualMode())
+            if(tapErrors == maxErrors) timeHandler.postDelayed(new Runnable() {
+                public void run() {
+                    showGameOver();
+                }
+            }, 650);
         if(restantMatches == 0) {
             chronoTimer.stop();
             timeHandler.postDelayed(new Runnable() {
@@ -372,6 +373,8 @@ public class GameActivity extends AppCompatActivity {
 
     private boolean isChallengeMode() { return gameMode.equals(GameMode.CHALLENGE);}
 
+    private boolean isCasualMode() { return gameMode.equals(GameMode.CASUAL); }
+
     private void findAndFillViewParametres() {
         pauseButton = findViewById(R.id.button_pause);
         pauseButton.setVisibility(View.INVISIBLE);
@@ -388,12 +391,13 @@ public class GameActivity extends AppCompatActivity {
         tapErrors = 0;
         maxCards = game.getCardAmount();
         restantMatches = maxCards / 2;
+        maxErrors = game.getMaxFails();
         visibleCards = 0;
         buttons = new Button[maxCards];
         concreteCards = new ArrayList<>(maxCards);
         isClickable = false;
         pausedGame = false;
-        deck =  new Deck();
+        deck = new Deck();
         gameMode = game.getGameMode();
         score = 0;
         scoreboard = new Scoreboard(game.getId());

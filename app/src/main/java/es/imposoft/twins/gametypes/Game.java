@@ -16,8 +16,9 @@ public class Game {
     private final int id;
     private GameType gameType;
     private int song;
+    private int maxFails;
 
-    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode, GameType gameType,int song){
+    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode, GameType gameType,int song, int maxFails){
         this.song = song;
         this.id = id;
         this.seconds = seconds;
@@ -29,6 +30,7 @@ public class Game {
         //this.scoreManager = scoreManager;
         this.gameMode = gameMode;
         this.gameType = gameType;
+        this.maxFails = maxFails;
     }
 
     public int getId(){ return id;}
@@ -66,6 +68,8 @@ public class Game {
     //public AbstractScore getScoreManager() { return scoreManager; }
 
     public GameType getGameType() { return gameType; }
+
+    public int getMaxFails() { return maxFails; }
 
     public String printGame() {
         return "game lasts " + seconds +
