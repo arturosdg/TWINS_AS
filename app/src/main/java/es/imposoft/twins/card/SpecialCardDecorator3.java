@@ -1,7 +1,7 @@
 package es.imposoft.twins.card;
 
-public class SpecialCardDecorator extends CardDecorator {
-    public SpecialCardDecorator(Card card) {
+public class SpecialCardDecorator3 extends CardDecorator {
+    public SpecialCardDecorator3(Card card) {
         super(card);
     }
 
@@ -10,6 +10,7 @@ public class SpecialCardDecorator extends CardDecorator {
         super.setPoints(setPointsExtended(points));
     }
     private int setPointsExtended(int points) {
-        return points * 2;
+        return points + 7;
     }
 }
+

@@ -1,25 +1,11 @@
 package es.imposoft.twins.prototype;
 
 import es.imposoft.twins.card.Card;
-import es.imposoft.twins.card.CardDecorator;
 
 public class ScoreChallenges extends AbstractScore {
-    CardDecorator cardDecorator;
 
     public ScoreChallenges() {
         super();
-    }
-
-    public int updateScore(boolean correct, Card card) {
-       /* if(card.isSpecial()) cardDecorator = new SpecialCardDecorator(card);
-        else cardDecorator = new ConcreteCardDecorator(card);
-        setCorrect(correct);
-        assignPoints();
-        calculateAndSetScore();
-        if(score<0){
-            score = 0;
-        }*/
-        return 0;
     }
 
     void assignPoints() {
@@ -30,7 +16,7 @@ public class ScoreChallenges extends AbstractScore {
         }
     }
 
-    void calculateAndSetScore(){
+    void calculateAndSetScore(Card card){
         score = getScore();
         score += toAdd;
         if (!isCorrect()) {
@@ -42,7 +28,8 @@ public class ScoreChallenges extends AbstractScore {
             successesFollowed++;
             lastCorrect = true;
         }
-        setScore(score + cardDecorator.getPoints());
+        score += card.getPoints();
+        setScore(score);
     }
 
 }

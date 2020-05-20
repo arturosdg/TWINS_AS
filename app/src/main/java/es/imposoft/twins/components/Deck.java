@@ -11,7 +11,7 @@ import java.util.List;
 
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.ConcreteCard;
-import es.imposoft.twins.card.SpecialCardDecorator;
+import es.imposoft.twins.card.SpecialCardDecorator1;
 import es.imposoft.twins.gametypes.Game;
 
 public class Deck {
@@ -70,12 +70,10 @@ public class Deck {
         //Creamos todas las cartas contando las de desafios
         for(int i = 0; i < cards; i++){
             if(i<totalChallenges){
-                //newCards.add(i);
                 ConcreteCard normalCard = new ConcreteCard(buttons[i], context);
-                SpecialCardDecorator specialCard = new SpecialCardDecorator(normalCard);
+                SpecialCardDecorator1 specialCard = new SpecialCardDecorator1(normalCard);
                 concreteCards.add(specialCard);
             } else {
-                //numbers.add(i);
                 concreteCards.add(new ConcreteCard(buttons[i], context));
             }
         }
@@ -86,7 +84,7 @@ public class Deck {
         imagesChallenges.addAll(imagesChallenges);
 
         for (Card cardToAsign: concreteCards) {
-            if (cardToAsign instanceof SpecialCardDecorator) {
+            if (cardToAsign instanceof SpecialCardDecorator1) {
                 System.out.println("test aqui" + imagesChallenges.get(0));
                 int actualImage = imagesChallenges.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));

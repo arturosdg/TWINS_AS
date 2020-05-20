@@ -22,14 +22,14 @@ public abstract class AbstractScore {
     public int updateScore(boolean correct, Card card) {
         setCorrect(correct);
         assignPoints();
-        calculateAndSetScore();
+        calculateAndSetScore(card);
         if(score<0){
             score = 0;
         }
         return score;
     }
 
-    abstract void calculateAndSetScore();
+    abstract void calculateAndSetScore(Card card);
 
     abstract void assignPoints();
 

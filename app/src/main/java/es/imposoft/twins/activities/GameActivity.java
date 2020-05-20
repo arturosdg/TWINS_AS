@@ -233,6 +233,14 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void setClickable(Button[] buttons) {
+        for (Button b: buttons) {
+            for (Card c : concreteCards)
+                if(c.getCardButton() == b) b.setClickable(isClickable);
+        }
+        isClickable = !isClickable;
+    }
+
     private void fillButtonsArray(){
         for(int i = 0; i < maxCards; i++)
             buttons[i] = findViewById(getResources().getIdentifier("imgPos" + i,"id", getPackageName()));
@@ -303,14 +311,6 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("GAME",newGame);
         startActivity(intent);
         this.finish();
-    }
-
-    private void setClickable(Button[] buttons) {
-        for (Button b: buttons) {
-            for (Card c : concreteCards)
-                if(c.getCardButton() == b) b.setClickable(isClickable);
-        }
-        isClickable = !isClickable;
     }
 
     public void onFinishPressed(View view){

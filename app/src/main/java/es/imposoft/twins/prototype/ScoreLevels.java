@@ -1,25 +1,10 @@
 package es.imposoft.twins.prototype;
 
 import es.imposoft.twins.card.Card;
-import es.imposoft.twins.card.CardDecorator;
-import es.imposoft.twins.card.SpecialCardDecorator;
 
 public class ScoreLevels extends AbstractScore {
 
-    CardDecorator cardDecorator;
-
     public ScoreLevels() { super(); }
-
-    public int updateScore(boolean correct, Card card) {
-        setCorrect(correct);
-        assignPoints();
-        calculateAndSetScore();
-        if(score<0){
-            score = 0;
-        }
-        if(correct) score += card.getPoints();
-        return score;
-    }
 
     void assignPoints() {
         if (isCorrect()) {
@@ -32,7 +17,7 @@ public class ScoreLevels extends AbstractScore {
     /**cuando acierta dos seguidas INDEPENDIENTES se le suman 15 puntos mas y si falla dos seguidas
      *INDEPENDIENTES se le restan 5 puntos mas*/
 
-    void calculateAndSetScore(){
+    void calculateAndSetScore(Card card){
         score = getScore();
 
         score += toAdd;
@@ -54,8 +39,8 @@ public class ScoreLevels extends AbstractScore {
                 successesFollowed = 1;
             }
             lastCorrect = true;
+            score += card.getPoints();
         }
-
-        setScore(score + cardDecorator.getPoints());
+        setScore(score);
     }
 }

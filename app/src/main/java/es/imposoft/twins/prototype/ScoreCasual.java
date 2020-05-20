@@ -7,16 +7,6 @@ public class ScoreCasual extends AbstractScore {
 
     public ScoreCasual() { super(); }
 
-    public int updateScore(boolean correct, Card card) {
-        setCorrect(correct);
-        assignPoints();
-        calculateAndSetScore();
-        if(score<0){
-            score = 0;
-        }
-        return score;
-    }
-
     void assignPoints() {
         if (isCorrect()) {
             toAdd = 15; //si acierta
@@ -25,7 +15,7 @@ public class ScoreCasual extends AbstractScore {
         }
     }
 
-    void calculateAndSetScore(){
+    void calculateAndSetScore(Card card){
         score = getScore();
         score += toAdd;
         setScore(score);

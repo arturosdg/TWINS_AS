@@ -1,21 +1,17 @@
 package es.imposoft.twins.prototype;
 
 import es.imposoft.twins.card.Card;
-import es.imposoft.twins.card.CardDecorator;
-import es.imposoft.twins.card.SpecialCardDecorator;
 
 public class ScoreStandard extends AbstractScore {
-    CardDecorator cardDecorator;
 
     public ScoreStandard() {
         super();
     }
 
     public int updateScore(boolean correct, Card card) {
-        //if(card.isSpecial()) cardDecorator = new SpecialCardDecorator(card);
         setCorrect(correct);
         assignPoints();
-        calculateAndSetScore();
+        calculateAndSetScore(card);
         if(score<0){
             score = 0;
         }
@@ -31,7 +27,7 @@ public class ScoreStandard extends AbstractScore {
         }
     }
 
-    void calculateAndSetScore(){
+    void calculateAndSetScore(Card card){
         score = getScore();
         score += toAdd;
         if (!isCorrect()) {
@@ -42,6 +38,7 @@ public class ScoreStandard extends AbstractScore {
                 score += Math.pow(2, successesFollowed);
             successesFollowed++;
             lastCorrect = true;
+            score += card.getPoints();
         }
         setScore(score);
     }
