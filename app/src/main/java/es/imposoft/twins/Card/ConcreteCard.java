@@ -78,7 +78,6 @@ public class ConcreteCard implements Card {
     }
 
     public boolean equals(Card concreteCard) {
-        System.out.println(this.getFrontName() + " a " + concreteCard.getFrontName());
         return this.getFrontName() == concreteCard.getFrontName();
     }
 
