@@ -15,6 +15,7 @@ public class MusicService {
     private MusicService(Context context) {
         this.context = context;
         player = MediaPlayer.create(context, R.raw.menusong);
+        auxPlayer = MediaPlayer.create(context, R.raw.clocksound);
         isEnabled = true;
     }
 
@@ -28,6 +29,8 @@ public class MusicService {
     public void stopMusic() {
         if (player.isPlaying()) player.stop();
     }
+
+    public void stopExtraSound(){if (auxPlayer.isPlaying()) auxPlayer.stop();}
 
     public void disableMusic(){
         if(isEnabled){
@@ -54,9 +57,11 @@ public class MusicService {
     }
 
     public void startExtraSound(int testUri){
-        auxPlayer = MediaPlayer.create(context,testUri);
-        auxPlayer.setLooping(false);
-        auxPlayer.setVolume(50, 50);
-        auxPlayer.start();
+        if(!auxPlayer.isPlaying() & isEnabled) {
+            auxPlayer = MediaPlayer.create(context, testUri);
+            auxPlayer.setLooping(false);
+            auxPlayer.setVolume(20, 20);
+            auxPlayer.start();
+        }
     }
 }

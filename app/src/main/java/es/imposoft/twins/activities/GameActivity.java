@@ -55,6 +55,8 @@ public class GameActivity extends AppCompatActivity {
 
     long timeWhenStarted, timeWhenStopped;
 
+    int SOUNDSECONDS = 10000;
+
     Bundle windowInfo;
     Game game;
     Gson gson;
@@ -280,11 +282,14 @@ public class GameActivity extends AppCompatActivity {
             public void onChronometerTick(Chronometer chronometer) {
                 if (timeWhenStarted + (game.getSeconds() * 1000) <= SystemClock.elapsedRealtime()) {
                     chronoTimer.stop();
+                    musicEngine.stopExtraSound();
                     timeHandler.postDelayed(new Runnable() {
                         public void run() {
                             showGameOver();
                         }
                     }, 650);
+                } else if(timeWhenStarted + (game.getSeconds() * 1000) - SOUNDSECONDS <= SystemClock.elapsedRealtime()){
+                    musicEngine.startExtraSound(R.raw.clocksound);
                 }
             }
         });
@@ -414,6 +419,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void setPaired() {
         if (pairs.get(0).equals(pairs.get(1))) {
+            musicEngine.startExtraSound(R.raw.parejaacertada);
             for (Card c : pairs) c.setPaired();
             restantMatches--;
             previousCorrect = true;
