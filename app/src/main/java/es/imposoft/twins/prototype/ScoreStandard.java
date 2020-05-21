@@ -38,7 +38,7 @@ public class ScoreStandard extends AbstractScore {
                 score += Math.pow(2, successesFollowed);
             successesFollowed++;
             lastCorrect = true;
-            score += card.getPoints();
+            score += (card.getPoints() * 2);
         }
         setScore(score);
     }

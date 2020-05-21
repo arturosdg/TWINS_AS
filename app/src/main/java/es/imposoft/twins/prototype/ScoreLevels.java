@@ -39,7 +39,7 @@ public class ScoreLevels extends AbstractScore {
                 successesFollowed = 1;
             }
             lastCorrect = true;
-            score += card.getPoints();
+            score += (card.getPoints() * 2);
         }
         setScore(score);
     }

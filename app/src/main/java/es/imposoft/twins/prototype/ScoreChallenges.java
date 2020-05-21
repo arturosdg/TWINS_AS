@@ -28,7 +28,6 @@ public class ScoreChallenges extends AbstractScore {
             successesFollowed++;
             lastCorrect = true;
         }
-        score += card.getPoints();
         setScore(score);
     }
 

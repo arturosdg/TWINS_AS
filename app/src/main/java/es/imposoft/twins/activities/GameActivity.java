@@ -437,7 +437,7 @@ public class GameActivity extends AppCompatActivity {
             }, 1000);
             for (Card c : pairs) c.getCardButton().setClickable(true);
         }
-        updateScore(pairs.get(0));
+        if(!isChallengeMode()) updateScore(pairs.get(0));
         pairs.clear();
     }
 }

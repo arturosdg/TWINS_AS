@@ -18,6 +18,7 @@ public class ScoreCasual extends AbstractScore {
     void calculateAndSetScore(Card card){
         score = getScore();
         score += toAdd;
+        score += (card.getPoints() * 2);
         setScore(score);
     }
 }
