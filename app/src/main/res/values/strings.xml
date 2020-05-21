@@ -30,4 +30,6 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="puntos_0">Puntos: 0</string>
+    <string name="premio">PREMIO</string>
+    <string name="extra">Extra:</string>
 </resources>

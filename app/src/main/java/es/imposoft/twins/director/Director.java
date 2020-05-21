@@ -130,7 +130,7 @@ public class Director {
     //Perfecto challenge
     public void constructChallenge2(ConcreteBuilderLevel builder) {
         builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
-        builder.setMinScore(50);
+        builder.setMinScore(0);
         builder.setCardAmount(24);
         builder.setRevealTime(10);
         builder.setChronometer(50, Chronometer.DESCENDING);
@@ -144,7 +144,7 @@ public class Director {
     //Mixed decks challenge
     public void constructChallenge3(ConcreteBuilderLevel builder) {
         builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
-        builder.setMinScore(50);
+        builder.setMinScore(0);
         builder.setCardAmount(24);
         builder.setRevealTime(1);
         builder.setChronometer(50, Chronometer.DESCENDING);

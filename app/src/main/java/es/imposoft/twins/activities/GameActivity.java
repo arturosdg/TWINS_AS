@@ -131,7 +131,6 @@ public class GameActivity extends AppCompatActivity {
         gson = new Gson();
         gscoreboard = gson.toJson(scoreboard);
         intent.putExtra("SCORE",gscoreboard);
-        intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
         intent.putExtra("THEME",themeCard);
         intent.putExtra("LEVELMODE", false);
         intent.putExtra("CHALLENGE", false);
@@ -142,6 +141,7 @@ public class GameActivity extends AppCompatActivity {
             succeededLevels.saveSucceededLevels(sharedPreferences);
             glevels = gson.toJson(succeededLevels);
             intent.putExtra("LEVELMODE", true);
+            intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
         } else if(isChallengeMode()){
             if(!succeededChallenges.getSuccedeedChallenges().contains(challengePlayed)) {
                 succeededChallenges.addSuccedeedChallenges(challengePlayed);
@@ -149,6 +149,10 @@ public class GameActivity extends AppCompatActivity {
             succeededChallenges.saveChallenges(sharedPreferences);
             glevels = gson.toJson(succeededChallenges);
             intent.putExtra("CHALLENGE", true);
+            intent.putExtra("CHALLENGEPLAYED", challengePlayed);
+            intent.putExtra("TYPE", PopupActivity.WindowType.CHALLENGE);
+        } else {
+            intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
         }
         startActivityForResult(intent,1);
     }
@@ -160,8 +164,8 @@ public class GameActivity extends AppCompatActivity {
         intent = new Intent(GameActivity.this, PopupActivity.class);
         gson = new Gson();
         gscoreboard = gson.toJson(scoreboard);
-        intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("TYPE", PopupActivity.WindowType.GAMEOVER);
+        intent.putExtra("SCORE",gscoreboard);
         intent.putExtra("THEME",themeCard);
         intent.putExtra("LEVELMODE", false);
         intent.putExtra("CHALLENGE", false);
@@ -174,7 +178,6 @@ public class GameActivity extends AppCompatActivity {
             succeededChallenges.saveChallenges(sharedPreferences);
             glevels = gson.toJson(succeededChallenges);
             intent.putExtra("CHALLENGE", true);
-
         }
         startActivityForResult(intent,1);
     }

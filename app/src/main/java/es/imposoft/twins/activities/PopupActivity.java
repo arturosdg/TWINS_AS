@@ -2,6 +2,7 @@ package es.imposoft.twins.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -18,7 +19,8 @@ public class PopupActivity extends Activity {
         WARNING,
         SCOREBOARD,
         OPTIONS,
-        GAMEOVER
+        GAMEOVER,
+        CHALLENGE
     }
 
     ListView scoreList;
@@ -27,6 +29,8 @@ public class PopupActivity extends Activity {
     Bundle windowInfo;
 
     DeckTheme deckTheme;
+    int points;
+    Drawable card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -243,10 +247,55 @@ public class PopupActivity extends Activity {
                     }
                 });
                 break;
+            case CHALLENGE:
+                setContentView(R.layout.activity_popupscorechallenge);
+                getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
+
+                getExtraPoints();
+
+                TextView extraPoint = findViewById(R.id.extraPoints);
+                extraPoint.setText(points + " " + extraPoint.getText());
+
+                ImageView cardWon = findViewById(R.id.cardWon);
+                cardWon.setImageDrawable(card);
+
+                cancelButton = findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
+                        musicEngine.stopMusic();
+                        musicEngine.startGameMusic(R.raw.menusong);
+                        Intent returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
+                        returnIntent.putExtra("THEME", deckTheme);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(returnIntent);
+                        finish();
+                    }
+                });
         }
     }
 
     public void changeWindowSize(int screenHeight, double widthFactor, int screenWidth, double heightFactor){
         getWindow().setLayout((int) (screenWidth*widthFactor), (int) (screenHeight*heightFactor));
+    }
+
+    private void getExtraPoints() {
+        points = 0;
+        card = null;
+        switch((int) windowInfo.get("CHALLENGEPLAYED")) {
+            case 1:
+                points = 3;
+                card = getDrawable(R.drawable.challengecard1);
+                break;
+            case 2:
+                points = 5;
+                card = getDrawable(R.drawable.challengecard2);
+                break;
+            case 3:
+                points = 7;
+                card = getDrawable(R.drawable.challengecard3);
+                break;
+        }
+
     }
 }
