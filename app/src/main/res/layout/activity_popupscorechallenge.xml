@@ -32,6 +32,7 @@
             android:id="@+id/starsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#BBDAFF"
             android:gravity="center"
             android:text="Carta especial"
             android:textSize="30sp"

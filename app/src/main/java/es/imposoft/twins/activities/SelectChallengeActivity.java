@@ -3,6 +3,8 @@ package es.imposoft.twins.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,6 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,11 +61,11 @@ public class SelectChallengeActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        /*Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
+        Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
                 getResources(),R.drawable.bg),size.x,size.y,true);
-        /* fill the background ImageView with the resized image 
+        //fill the background ImageView with the resized image
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
-        iv_background.setImageBitmap(bmp);*/
+        iv_background.setImageBitmap(bmp);
 
         succeededChallenges = new SucceededChallenges(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

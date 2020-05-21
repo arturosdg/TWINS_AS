@@ -66,7 +66,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.backgr),size.x,size.y,true);
+                getResources(),R.drawable.bg),size.x,size.y,true);
         /* fill the background ImageView with the resized image */
         ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
         iv_background.setImageBitmap(bmp);
@@ -129,7 +129,7 @@ public class SelectLevelActivity extends AppCompatActivity {
         if(levels != null) {
             for (int i = 0; i <= levels.size(); i++) {
                 levelButtons[ i ].setClickable(true);
-                levelButtons[i].setBackground(getDrawable(R.drawable.background5));
+                levelButtons[i].setBackground(getDrawable(R.drawable.card));
             }
             for (Integer i : levels) {
                 levelButtons[ i - 1 ].setClickable(true);
@@ -142,7 +142,7 @@ public class SelectLevelActivity extends AppCompatActivity {
     private void initializeLevelButtons() {
         for (int i = 1; i < levelButtons.length; i++) {
             levelButtons[i].setClickable(false);
-            levelButtons[i].setBackground(getDrawable(R.drawable.backgroundlevelblocked));
+            levelButtons[i].setBackground(getDrawable(R.drawable.cardlevelblocked));
         }
     }
 }

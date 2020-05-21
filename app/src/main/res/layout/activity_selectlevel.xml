@@ -7,13 +7,13 @@
 
     <ImageView
         android:id="@+id/iv_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/backgr" />
+        app:srcCompat="@drawable/bg" />
 
     <ImageButton
         android:id="@+id/button_goBack"
@@ -65,7 +65,7 @@
                 android:layout_height="124dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="800dp"
-                android:background="@drawable/background5"
+                android:background="@drawable/card"
                 android:onClick="goToLevel"
                 android:text="1"
                 android:textColor="@color/colorText"
@@ -81,7 +81,7 @@
                 android:layout_width="96dp"
                 android:layout_height="124dp"
                 android:layout_marginTop="22dp"
-                android:background="@drawable/background5"
+                android:background="@drawable/card"
                 android:onClick="goToLevel"
                 android:text="2"
                 android:textColor="@color/colorText"
@@ -94,7 +94,7 @@
                 android:id="@+id/button_level3"
                 android:layout_width="96dp"
                 android:layout_height="124dp"
-                android:background="@drawable/background5"
+                android:background="@drawable/card"
                 android:onClick="goToLevel"
                 android:text="3"
                 android:textColor="@color/colorText"
@@ -110,7 +110,7 @@
                 android:layout_width="96dp"
                 android:layout_height="124dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/background5"
+                android:background="@drawable/card"
                 android:onClick="goToLevel"
                 android:text="4"
                 android:textColor="@color/colorText"
@@ -125,7 +125,7 @@
                 android:layout_height="124dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
-                android:background="@drawable/background5"
+                android:background="@drawable/card"
                 android:onClick="goToLevel"
                 android:text="5"
                 android:textColor="@color/colorText"
