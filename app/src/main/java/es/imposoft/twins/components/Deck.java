@@ -11,6 +11,10 @@ import java.util.List;
 
 import es.imposoft.twins.card.*;
 import es.imposoft.twins.gametypes.Game;
+import es.imposoft.twins.strategies.DealOneDeck;
+import es.imposoft.twins.strategies.DealSpecialDecks;
+import es.imposoft.twins.strategies.DealTwoDecks;
+import es.imposoft.twins.strategies.Dealer;
 
 public class Deck {
 
@@ -32,87 +36,17 @@ public class Deck {
     }
 
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
-        //Cargamos el total de cartas
-        cards = game.getCardAmount();
-
-        int totalChallenges = 0;
-        if(challengesWon != null) totalChallenges = challengesWon.size() * 2;
-
-        //Asignamos las cartas normales aleatoriamente entre las existentes
-        numbers = randomList();
-
-        if(isChallengeOrCasual(game)) {
-            for (int i = 0; i < cards / 2; i++) {
-                //TODO hacer comprobacion de si es el juego de dosBarajas
-                if (game.getId() == 10) {
-                    if (i % 2 == 0)
-                        imagesNormal.add(context.getResources().getIdentifier(DeckTheme.EMOJI.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
-                    else
-                        imagesNormal.add(context.getResources().getIdentifier(DeckTheme.CARS.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
-                } else
-                    imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+        if(isChallengeOrCasual(game)){
+            if(game.getId() == 10){
+                Dealer cardDealer = new DealTwoDecks();
+                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
+            } else {
+                Dealer cardDealer = new DealSpecialDecks();
+                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
             }
         } else {
-            for (int i = 0; i < (cards - totalChallenges) / 2; i++)
-                imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
-        }
-        //Images es un array con una imagen de cada una de las que hay que asignar
-
-        numbers.clear();
-
-        Collections.shuffle(Arrays.asList(buttons));
-        //Creamos todas las cartas contando las de desafios
-        for(int i = 0; i < cards; i++){
-            if(i<totalChallenges && !isChallengeOrCasual(game)){
-                ConcreteCard normalCard = new ConcreteCard(buttons[i], context);
-                CardDecorator specialCard;
-
-                if(challengesWon.get(i) == 1) {
-                    specialCard = new SpecialCardDecorator1(normalCard);
-                    concreteCards.add(specialCard);
-                } else if (challengesWon.get(i) == 2) {
-                    specialCard = new SpecialCardDecorator2(normalCard);
-                    concreteCards.add(specialCard);
-                } else if (challengesWon.get(i) == 3) {
-                    specialCard = new SpecialCardDecorator3(normalCard);
-                    concreteCards.add(specialCard);
-                }
-
-            } else {
-                concreteCards.add(new ConcreteCard(buttons[i], context));
-            }
-        }
-
-        //Ya tenemos todas las cartas creadas pero sin la imagen asignada
-
-        imagesNormal.addAll(imagesNormal);
-
-        for (Card cardToAsign: concreteCards) {
-            if(!isChallengeOrCasual(game)) {
-                if (cardToAsign instanceof SpecialCardDecorator1) {
-                    cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard1", "drawable", context.getPackageName())));
-                    cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-                    cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard1", "drawable", context.getPackageName()));
-                } else if (cardToAsign instanceof SpecialCardDecorator2) {
-                    cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard2", "drawable", context.getPackageName()) ));
-                    cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-                    cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard2", "drawable", context.getPackageName()));
-                } else if (cardToAsign instanceof SpecialCardDecorator3) {
-                    cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard3", "drawable", context.getPackageName()) ));
-                    cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-                    cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard3", "drawable", context.getPackageName()));
-                } else if(cardToAsign instanceof ConcreteCard) {
-                    int actualImage = imagesNormal.remove(0);
-                    cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
-                    cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-                    cardToAsign.setFrontName(actualImage);
-                }
-            } else if(cardToAsign instanceof ConcreteCard) {
-                int actualImage = imagesNormal.remove(0);
-                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
-                cardToAsign.setFrontName(actualImage);
-            }
+            Dealer cardDealer = new DealOneDeck();
+            cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
         }
     }
 
