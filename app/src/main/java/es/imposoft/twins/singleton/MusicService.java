@@ -61,7 +61,7 @@ public class MusicService {
         if(!auxPlayer.isPlaying() & isEnabled) {
             auxPlayer = MediaPlayer.create(context, testUri);
             auxPlayer.setLooping(false);
-            auxPlayer.setVolume(20, 20);
+            auxPlayer.setVolume(30, 30);
             auxPlayer.start();
         }
     }

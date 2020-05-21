@@ -301,11 +301,17 @@ public class GameActivity extends AppCompatActivity {
         if(pauseTapCounter % 2 == 0) {
             timeWhenStopped = (chronoTimer.getBase() - SystemClock.elapsedRealtime());
             chronoTimer.stop();
+            musicEngine.stopMusic();
+            musicEngine.stopExtraSound();
             pausedGame = !pausedGame;
         }
         else {
+            timeWhenStarted = SystemClock.elapsedRealtime() + timeWhenStopped;
             chronoTimer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
             chronoTimer.start();
+            musicEngine.startGameMusic(game.getSong());
+            if(timeWhenStarted + (game.getSeconds() * 1000) - SOUNDSECONDS <= SystemClock.elapsedRealtime())
+                musicEngine.startExtraSound(R.raw.clocksound);
             pausedGame = !pausedGame;
         }
         pauseTapCounter++;
@@ -327,6 +333,7 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("THEME", themeCard);
         intent.putExtra("LEVELMODE", false);
         intent.putExtra("CHALLENGE", false);
+        musicEngine.stopExtraSound();
         if(isLevelMode()) {
             intent.putExtra("LEVELMODE", true);
         } else if (isChallengeMode()) {
