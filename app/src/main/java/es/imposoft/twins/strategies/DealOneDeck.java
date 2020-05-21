@@ -82,7 +82,4 @@ public class DealOneDeck implements Dealer {
         return aux;
     }
 
-    private boolean isChallengeOrCasual(Game game) {
-        return (game.getGameMode().equals(GameMode.CASUAL) || game.getGameMode().equals(GameMode.CHALLENGE));
-    }
 }

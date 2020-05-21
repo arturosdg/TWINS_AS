@@ -1,4 +1,4 @@
-package es.imposoft.twins;
+package es.imposoft.twins.database;
 
 import android.content.SharedPreferences;
 
@@ -7,48 +7,48 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SucceededChallenges {
+public class SucceededLevel {
 
     private List<Integer> succedeedLevels;
     private int id = 0;
 
-    public SucceededChallenges() {
+    public SucceededLevel() {
         succedeedLevels = new ArrayList();
     }
 
-    public SucceededChallenges(int id) {
+    public SucceededLevel(int id) {
         this.id = id;
         succedeedLevels = new ArrayList();
     }
 
-    public void addSuccedeedChallenges(int level) {
+    public void addSuccedeedLevel(int level) {
         succedeedLevels.add(level);
     }
 
-    public List<Integer> getSuccedeedChallenges() {
+    public List<Integer> getSuccedeedLevels() {
         return succedeedLevels;
     }
 
-    public void loadChallenges(SharedPreferences sp) {
+    public void loadSuccedeedLevels(SharedPreferences sp) {
         succedeedLevels.clear();
-        if (sp.getString("CHALLENGE" + id, null) != null) {
+        if (sp.getString("LEVEL" + id, null) != null) {
             Gson gson = new Gson();
-            SucceededChallenges levels = gson.fromJson(sp.getString("CHALLENGE" + id, null), SucceededChallenges.class);
+            SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id, null), SucceededLevel.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
-            succedeedLevels = levels.getSuccedeedChallenges();
+            succedeedLevels = levels.getSuccedeedLevels(); 
 
             mEdit1.commit();
         }
     }
 
-    public void saveChallenges(SharedPreferences sp) {
+    public void saveSucceededLevels(SharedPreferences sp) {
         SharedPreferences.Editor mEdit1 = sp.edit();
-        getSuccedeedChallenges();
+        getSuccedeedLevels();
 
         Gson gson = new Gson();
         String glevels = gson.toJson(this);
-        mEdit1.putString("CHALLENGE" + id, glevels);
+        mEdit1.putString("LEVEL" + id, glevels);
         mEdit1.commit();
     }
 }

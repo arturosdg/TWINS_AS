@@ -23,15 +23,14 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import es.imposoft.twins.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenges;
 import es.imposoft.twins.card.Card;
-import es.imposoft.twins.card.ConcreteCard;
-import es.imposoft.twins.MusicService;
-import es.imposoft.twins.SucceededLevel;
+import es.imposoft.twins.singleton.MusicService;
+import es.imposoft.twins.database.SucceededLevel;
 import es.imposoft.twins.components.Deck;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
-import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.database.Scoreboard;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 import es.imposoft.twins.prototype.*;

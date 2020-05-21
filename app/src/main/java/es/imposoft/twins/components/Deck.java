@@ -18,21 +18,20 @@ import es.imposoft.twins.strategies.Dealer;
 
 public class Deck {
 
-    ArrayList<Card> shuffled;
-    ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
     List<Integer> challengesWon;
-    ArrayList<Integer> newCards;
-    int random, position, cards;
-    //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
-    int MAX_CARD_DESIGNS = 12;
+    //ArrayList<Card> shuffled;
+    //ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
+    //ArrayList<Integer> newCards;
+    //int random, position, cards;
 
-    //Crearemos las barajas de cartas, y llamaremos a un metodo de esta clase para crear el tablero
     public Deck() {
+        /*
         shuffled = new ArrayList<>();
         imagesNormal = new ArrayList<>();
         imagesChallenges = new ArrayList<>();
         numbers = new ArrayList<>();
         newCards = new ArrayList<>();
+         */
     }
 
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
@@ -41,29 +40,13 @@ public class Deck {
                 Dealer cardDealer = new DealTwoDecks();
                 cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
             } else {
-                Dealer cardDealer = new DealSpecialDecks();
+                Dealer cardDealer = new DealOneDeck();
                 cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
             }
         } else {
-            Dealer cardDealer = new DealOneDeck();
+            Dealer cardDealer = new DealSpecialDecks();
             cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
         }
-    }
-
-    private ArrayList<Integer> randomList() {
-        ArrayList<Integer> aux = new ArrayList<>();
-        if (cards == 24) {
-            for (int i = 0; i < cards / 2; i++)
-                aux.add(i);
-        } else {
-            while (aux.size() <= cards / 2) {
-                random = (int) (Math.random() * MAX_CARD_DESIGNS);
-                if (!aux.contains(random)) {
-                    aux.add(random);
-                }
-            }
-        }
-        return aux;
     }
 
     public void addChallengesWon(List<Integer> succedeedChallenges) {

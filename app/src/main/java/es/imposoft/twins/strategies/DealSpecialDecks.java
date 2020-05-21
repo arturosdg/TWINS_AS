@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import es.imposoft.twins.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenges;
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.CardDecorator;
 import es.imposoft.twins.card.ConcreteCard;
@@ -19,7 +19,6 @@ import es.imposoft.twins.card.SpecialCardDecorator1;
 import es.imposoft.twins.card.SpecialCardDecorator2;
 import es.imposoft.twins.card.SpecialCardDecorator3;
 import es.imposoft.twins.components.DeckTheme;
-import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 
 public class DealSpecialDecks implements Dealer {

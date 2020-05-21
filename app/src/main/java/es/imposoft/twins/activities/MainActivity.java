@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import es.imposoft.twins.MusicService;
+import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
 

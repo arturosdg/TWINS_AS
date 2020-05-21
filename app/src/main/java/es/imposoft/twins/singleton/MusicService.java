@@ -1,8 +1,9 @@
-package es.imposoft.twins;
+package es.imposoft.twins.singleton;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
+
+import es.imposoft.twins.R;
 
 public class MusicService {
     private static MusicService instance;

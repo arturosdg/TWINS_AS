@@ -3,8 +3,6 @@ package es.imposoft.twins.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,7 +10,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +18,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import es.imposoft.twins.R;
-import es.imposoft.twins.SucceededChallenges;
-import es.imposoft.twins.SucceededLevel;
+import es.imposoft.twins.database.SucceededChallenges;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.GameMode;

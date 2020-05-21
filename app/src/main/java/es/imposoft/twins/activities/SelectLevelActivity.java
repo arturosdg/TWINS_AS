@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import es.imposoft.twins.SucceededLevel;
+import es.imposoft.twins.database.SucceededLevel;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;

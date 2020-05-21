@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
 
-import es.imposoft.twins.MusicService;
+import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.R;
-import es.imposoft.twins.Scoreboard;
+import es.imposoft.twins.database.Scoreboard;
 import es.imposoft.twins.components.DeckTheme;
 
 public class PopupActivity extends Activity {
@@ -127,9 +127,6 @@ public class PopupActivity extends Activity {
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
-                        }
-                        else if ((boolean) windowInfo.get("CHALLENGE")) {
-                            returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
                         }
                         returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

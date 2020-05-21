@@ -5,9 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.ref.WeakReference;
-
-import es.imposoft.twins.MusicService;
+import es.imposoft.twins.singleton.MusicService;
 
 public class BackgroundMusicActivity extends AppCompatActivity {
     public MusicService musicService;
