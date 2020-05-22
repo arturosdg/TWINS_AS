@@ -1,27 +1,19 @@
 package es.imposoft.twins.prototype;
 
 import es.imposoft.twins.card.Card;
-import es.imposoft.twins.card.ConcreteCard;
 
 public abstract class AbstractScore {
 
     int score;
-    private boolean correct;
-    protected boolean lastCorrect;
-    protected int successesFollowed;
-    protected int toAdd;
+    boolean correct;
 
     public AbstractScore(){
         score = 0;
         correct = false;
-        lastCorrect = false;
-        successesFollowed = 0;
-        toAdd = 0;
     }
 
     public int updateScore(boolean correct, Card card) {
         setCorrect(correct);
-        assignPoints();
         calculateAndSetScore(card);
         if(score<0){
             score = 0;
@@ -30,8 +22,6 @@ public abstract class AbstractScore {
     }
 
     abstract void calculateAndSetScore(Card card);
-
-    abstract void assignPoints();
 
     int getScore() {
         return score;

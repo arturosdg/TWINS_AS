@@ -31,6 +31,7 @@ public class PopupActivity extends Activity {
     DeckTheme deckTheme;
     int points;
     Drawable card;
+    MusicService musicEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -48,12 +49,14 @@ public class PopupActivity extends Activity {
         Button acceptButton;
 
         deckTheme = (DeckTheme) windowInfo.get("THEME");
+        musicEngine = MusicService.getInstance(getApplicationContext());
 
 
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupwindow);
+                musicEngine.stopExtraSound();
 
                 //Resize the screen
                 changeWindowSize(screenHeight,0.8,screenWidth,0.6);
@@ -93,6 +96,7 @@ public class PopupActivity extends Activity {
             case SCOREBOARD:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupscoreboard);
+                musicEngine.stopExtraSound();
 
                 //Resize the screen
                 changeWindowSize(screenHeight,0.85,screenWidth,0.67);
@@ -120,7 +124,7 @@ public class PopupActivity extends Activity {
                 //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
+
                         musicEngine.stopMusic();
                         musicEngine.startGameMusic(R.raw.menusong);
 
@@ -202,6 +206,7 @@ public class PopupActivity extends Activity {
             case GAMEOVER:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupgameover);
+                musicEngine.stopExtraSound();
 
                 //Resize the screen
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
@@ -248,6 +253,7 @@ public class PopupActivity extends Activity {
                 setContentView(R.layout.activity_popupscorechallenge);
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
+                musicEngine.stopExtraSound();
                 getExtraPoints();
 
                 TextView extraPoint = findViewById(R.id.extraPoints);
