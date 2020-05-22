@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:screenOrientation="portrait">
+    android:screenOrientation="portrait"
+    android:background="@drawable/bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
 
         <Chronometer
             android:id="@+id/text_timer"
@@ -68,7 +70,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -76,7 +81,7 @@
             android:id="@+id/imgPos0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -85,7 +90,7 @@
             android:id="@+id/imgPos1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -94,7 +99,7 @@
             android:id="@+id/imgPos2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -103,7 +108,7 @@
             android:id="@+id/imgPos3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -113,7 +118,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -121,7 +129,7 @@
             android:id="@+id/imgPos4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -130,7 +138,7 @@
             android:id="@+id/imgPos5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -139,7 +147,7 @@
             android:id="@+id/imgPos6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -148,7 +156,7 @@
             android:id="@+id/imgPos7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -157,7 +165,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -165,7 +176,7 @@
             android:id="@+id/imgPos8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -174,7 +185,7 @@
             android:id="@+id/imgPos9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -183,7 +194,7 @@
             android:id="@+id/imgPos10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -192,7 +203,7 @@
             android:id="@+id/imgPos11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -201,7 +212,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -209,7 +223,7 @@
             android:id="@+id/imgPos12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -218,7 +232,7 @@
             android:id="@+id/imgPos13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -227,7 +241,7 @@
             android:id="@+id/imgPos14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -236,7 +250,7 @@
             android:id="@+id/imgPos15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -245,7 +259,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -253,7 +270,7 @@
             android:id="@+id/imgPos16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -262,7 +279,7 @@
             android:id="@+id/imgPos17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -271,7 +288,7 @@
             android:id="@+id/imgPos18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -280,7 +297,7 @@
             android:id="@+id/imgPos19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -289,7 +306,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -297,7 +317,7 @@
             android:id="@+id/imgPos20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -306,7 +326,7 @@
             android:id="@+id/imgPos21"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -315,7 +335,7 @@
             android:id="@+id/imgPos22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
@@ -324,7 +344,7 @@
             android:id="@+id/imgPos23"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/card"
             android:onClick="changeSprite" />
