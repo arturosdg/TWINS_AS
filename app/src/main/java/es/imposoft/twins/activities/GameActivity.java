@@ -373,9 +373,6 @@ public class GameActivity extends AppCompatActivity {
             case STANDARD:
                 scoreManager = new ScoreStandard();
                 break;
-            case CHALLENGE:
-                scoreManager = new ScoreChallenges();
-                break;
         }
     }
 

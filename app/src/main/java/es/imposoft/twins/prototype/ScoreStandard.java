@@ -8,36 +8,11 @@ public class ScoreStandard extends AbstractScore {
         super();
     }
 
-    public int updateScore(boolean correct, Card card) {
-        setCorrect(correct);
-        assignPoints();
-        calculateAndSetScore(card);
-        if(score<0){
-            score = 0;
-        }
-        if(correct) score += card.getPoints();
-        return score;
-    }
-
-    void assignPoints() {
-        if (isCorrect()) {
-            toAdd = 0; //si acierta
-        } else {
-            toAdd = -3; //si falla
-        }
-    }
-
     void calculateAndSetScore(Card card){
         score = getScore();
-        score += toAdd;
         if (!isCorrect()) {
-            lastCorrect = false;
-            successesFollowed = 0;
+            score += -5;
         } else {
-            if (lastCorrect)
-                score += Math.pow(2, successesFollowed);
-            successesFollowed++;
-            lastCorrect = true;
             score += (card.getPoints() * 2);
         }
         setScore(score);
