@@ -29,7 +29,7 @@ public class ConcreteCard implements Card {
         isPaired = false;
         special = false;
 
-        points = 10;
+        points = 2;
     }
 
     public Bitmap getFrontImage() {

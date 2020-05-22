@@ -21,7 +21,7 @@ public class ScoreStandard extends AbstractScore {
 
     void assignPoints() {
         if (isCorrect()) {
-            toAdd = 10; //si acierta
+            toAdd = 0; //si acierta
         } else {
             toAdd = -3; //si falla
         }

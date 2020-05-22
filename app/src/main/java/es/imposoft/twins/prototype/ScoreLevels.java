@@ -8,7 +8,7 @@ public class ScoreLevels extends AbstractScore {
 
     void assignPoints() {
         if (isCorrect()) {
-            toAdd = 8; //si acierta
+            toAdd = 0; //si acierta
         } else {
             toAdd = -2; //si falla
         }

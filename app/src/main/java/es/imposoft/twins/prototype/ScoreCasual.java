@@ -9,7 +9,7 @@ public class ScoreCasual extends AbstractScore {
 
     void assignPoints() {
         if (isCorrect()) {
-            toAdd = 15; //si acierta
+            toAdd = 0; //si acierta
         } else {
             toAdd = -5; //si falla
         }
