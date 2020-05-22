@@ -69,7 +69,7 @@ public class DealTwoDecks implements Dealer {
             if(cardToAsign instanceof ConcreteCard) {
                 int actualImage = imagesNormal.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("background2", "drawable", context.getPackageName())));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(actualImage);
             }
         }

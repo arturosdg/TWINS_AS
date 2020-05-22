@@ -146,7 +146,7 @@ public class Director {
         builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
         builder.setMinScore(0);
         builder.setCardAmount(24);
-        builder.setRevealTime(1);
+        builder.setRevealTime(3);
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(10);
