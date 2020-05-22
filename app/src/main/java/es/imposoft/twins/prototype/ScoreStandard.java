@@ -13,7 +13,7 @@ public class ScoreStandard extends AbstractScore {
         if (!isCorrect()) {
             score += -5;
         } else {
-            score += (card.getPoints() * 2);
+            score += (card.getPoints() * 3);
         }
         setScore(score);
     }
