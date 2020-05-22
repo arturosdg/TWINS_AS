@@ -261,8 +261,12 @@ public class GameActivity extends AppCompatActivity {
             chronoTimer.stop();
             timeHandler.postDelayed(new Runnable() {
                 public void run() {
-                    if(score >= game.getMinScore()) showScoreboard();
-                    else showGameOver();
+                    if(score >= game.getMinScore()) {
+                        if (game.getId() != 8) showScoreboard();
+                        else if ((timeWhenStarted + (game.getSeconds() * 1000) - (SOUNDSECONDS / 3) <= SystemClock.elapsedRealtime())) {
+                            showScoreboard();
+                        } else showGameOver();
+                    }else showGameOver();
                 }
             }, 650);
         }
