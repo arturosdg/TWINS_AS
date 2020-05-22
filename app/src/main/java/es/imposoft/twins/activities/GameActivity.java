@@ -54,7 +54,7 @@ public class GameActivity extends AppCompatActivity {
 
     long timeWhenStarted, timeWhenStopped;
 
-    int SOUNDSECONDS = 10000;
+    int SOUNDSECONDS = 30000;
 
     Bundle windowInfo;
     Game game;

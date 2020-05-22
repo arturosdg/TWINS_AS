@@ -52,7 +52,7 @@ public class MusicService {
             lastSong = musicLink;
             player = MediaPlayer.create(context, musicLink);
             player.setLooping(true); // Set looping
-            player.setVolume(50, 50);
+            player.setVolume(35, 35);
             player.start();
         }
     }
@@ -61,7 +61,7 @@ public class MusicService {
         if(!auxPlayer.isPlaying() & isEnabled) {
             auxPlayer = MediaPlayer.create(context, testUri);
             auxPlayer.setLooping(false);
-            auxPlayer.setVolume(30, 30);
+            auxPlayer.setVolume(75, 75);
             auxPlayer.start();
         }
     }
