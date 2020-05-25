@@ -80,11 +80,13 @@
                 android:layout_margin="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/card"
+                android:background="@drawable/cardfront"
                 android:baselineAligned="false"
                 android:onClick="goToLevel"
-                android:text="1"
-                android:textColor="@color/colorText"
+                android:text="@string/tiempo_perfecto"
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 tools:layout_editor_absoluteX="43dp"
                 tools:layout_editor_absoluteY="56dp" />
 
@@ -100,11 +102,13 @@
                 android:layout_margin="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/card"
+                android:background="@drawable/cardfront"
                 android:baselineAligned="false"
                 android:onClick="goToLevel"
-                android:text="2"
-                android:textColor="@color/colorText" />
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:text="@string/partida_perfecta"
+                android:textColor="@color/colorPrimary" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -120,10 +124,12 @@
             android:layout_margin="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/card"
+            android:background="@drawable/cardfront"
             android:onClick="goToLevel"
-            android:text="3"
-            android:textColor="@color/colorText" />
+            android:textSize="18dp"
+            android:text="@string/dos_barajas"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 

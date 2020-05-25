@@ -32,4 +32,7 @@
     <string name="puntos_0">Puntos: 0</string>
     <string name="premio">PREMIO</string>
     <string name="extra">Extra:</string>
+    <string name="tiempo_perfecto">TIEMPO PERFECTO</string>
+    <string name="partida_perfecta">PARTIDA PERFECTA</string>
+    <string name="dos_barajas">DOS BARAJAS</string>
 </resources>
