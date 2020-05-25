@@ -22,7 +22,6 @@ import es.imposoft.twins.R;
 public class MainActivity extends AppCompatActivity {
     Context context;
     DeckTheme cardTheme;
-    MediaPlayer song;
     MusicService ms;
 
     @Override

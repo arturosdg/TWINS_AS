@@ -20,4 +20,8 @@
        <item name="android:windowFullscreen">true</item>
        <item name="windowNoTitle">true</item>
    </style>
+
+    <style name="splashactivity" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
