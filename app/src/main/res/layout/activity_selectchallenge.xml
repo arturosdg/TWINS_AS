@@ -4,21 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#454545"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
     android:tileMode="repeat"
     android:id="@+id/challengesLayout">
 
-
-    <ImageView
-        android:id="@+id/iv_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg" />
 
     <ImageButton
         android:id="@+id/button_goBack"
@@ -44,7 +34,7 @@
         android:layout_marginEnd="16dp"
         android:gravity="right"
         android:text="@string/desafios"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

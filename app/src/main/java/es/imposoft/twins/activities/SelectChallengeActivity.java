@@ -57,15 +57,6 @@ public class SelectChallengeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectchallenge);
-        /* adapt the image to the size of the display */
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.bg),size.x,size.y,true);
-        //fill the background ImageView with the resized image
-        ImageView iv_background = (ImageView) findViewById(R.id.iv_background);
-        iv_background.setImageBitmap(bmp);
 
         succeededChallenges = new SucceededChallenges(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
