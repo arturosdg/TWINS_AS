@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/iv_background"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gamebackground" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -32,22 +24,23 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="playStandardGame"
             android:text="@string/juego_estandar"
-            android:textColor="@color/colorText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
 
         <Space
             android:id="@+id/space1"
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <Button android:id="@+id/button_casualGame"
+        <Button
+            android:id="@+id/button_casualGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="playCasualGame"
-            android:textColor="@color/colorText"
             android:text="@string/juego_libre"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
 
         <Space
             android:id="@+id/space2"
@@ -61,8 +54,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="openLevelsLayout"
             android:text="@string/niveles"
-            android:textColor="@color/colorText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="@color/colorText" />
 
         <Space
             android:id="@+id/space3"
@@ -93,5 +86,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="157dp"
+        android:layout_marginTop="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/footercards" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
