@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="texto_advertencia">" Você está prestes a terminar esta partida. Seu progresso não será salvo. Deseja
+        continuar? "
+    </string>
+    <string name="sonido">Música:</string>
+    <string name="puntuacion">PONTUAÇÃO</string>
+    <string name="puntos">Pontos:</string>
+    <string name="puntos_0">Pontos: 0</string>
+    <string name="partida_perfecta">JOGO PERFEITO</string>
+    <string name="opciones">Opções</string>
+    <string name="niveles">Níveis</string>
+    <string name="jugar_tipo_partida">Jogar por modo de jogo</string>
+    <string name="jugar_modo_juego">Modos de jogo</string>
+    <string name="juego_libre">Jogo Sem Limites</string>
+    <string name="juego_estandar">Jogo Padrão</string>
+    <string name="gameover">VOCÊ PERDEU</string>
+    <string name="finalizar">Terminar</string>
+    <string name="extra">Bônus:</string>
+    <string name="elige_baraja">"Escolha um baralho de cartas: "</string>
+    <string name="dos_barajas">DOIS DECKS</string>
+    <string name="desafios">Desafios</string>
+    <string name="cerrar">Fechar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="atras">Atrás</string>
+    <string name="advertencia">Atenção</string>
+    <string name="aceptar">Aceitar</string>
+    <string name="premio">PRÊMIO</string>
+    <string name="tiempo_perfecto">POR POUCO</string>
+</resources>
