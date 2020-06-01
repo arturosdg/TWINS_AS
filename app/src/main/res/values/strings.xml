@@ -35,4 +35,7 @@
     <string name="tiempo_perfecto">TIEMPO JUSTO</string>
     <string name="partida_perfecta">PARTIDA PERFECTA</string>
     <string name="dos_barajas">DOS BARAJAS</string>
+    <string name="logIn">LOG IN</string>
+    <string name="signin_other_error">Error al intentar entrar en la cuenta</string>
+    <string name="logOut">LOG OUT</string>
 </resources>
