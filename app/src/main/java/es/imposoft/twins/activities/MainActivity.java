@@ -1,5 +1,6 @@
 package es.imposoft.twins.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -43,13 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Basic Android stuff
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
-
-         signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
 
         //Launch the music service
         Intent intent = new Intent(this, BackgroundMusicActivity.class);
@@ -67,13 +68,23 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_startgame);
 
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton = findViewById(R.id.sign_in_button);
 
         if (signInClient == null) { findViewById(R.id.sign_out_button).setVisibility(View.GONE); }
         else {
             findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         }
+
+
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        signInClient = GoogleSignIn.getClient(this, signInOptions);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startSignInIntent();
+            }
+        });
     }
 
     public void playByGameModes(View view) {
@@ -95,7 +106,10 @@ public class MainActivity extends AppCompatActivity {
         // Method executed from the popup window
 
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+            //GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            /*assert result != null;
             if (result.isSuccess()) {
                 // The signed in account is stored in the result.
                 signedInAccount = result.getSignInAccount();
@@ -106,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 new AlertDialog.Builder(this).setMessage(message)
                         .setNeutralButton(android.R.string.ok, null).show();
-            }
+            }*/
         }
         else {
             if (data != null) {
@@ -143,16 +157,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            signedInAccount = task.getResult(ApiException.class);
+        } catch (ApiException e) {
+            new AlertDialog.Builder(this).setMessage(getString(R.string.signin_other_error))
+                    .setNeutralButton(android.R.string.ok, null).show();
+        }
+    }
+
     private void startSignInIntent() {
-        signInClient = GoogleSignIn.getClient(this,
-                signInOptions);
         intent = signInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
-    private void signOut() {
-        signInClient = GoogleSignIn.getClient(this,
-                signInOptions);
+    public void signOut(View view) {
         signInClient.signOut().addOnCompleteListener(this,
                 new OnCompleteListener<Void>() {
                     @Override
@@ -160,19 +179,17 @@ public class MainActivity extends AppCompatActivity {
                         // at this point, the user is signed out.
                     }
                 });
+        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
     }
 
-    public void onClick(View view) {
-        if (view.getId() == R.id.sign_in_button) {
-            // start the asynchronous sign in flow
-            startSignInIntent();
-            //if(signInClient != null) findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-        } else if (view.getId() == R.id.sign_out_button) {
-            // sign out.
-            signOut();
-            // show sign-in button, hide the sign-out button
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+    @Override
+    protected void onStart() {
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(signedInAccount != null) {
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         }
+        super.onStart();
     }
 }

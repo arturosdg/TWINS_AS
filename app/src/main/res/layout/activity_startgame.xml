@@ -57,15 +57,15 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="onClick"
             android:text="@string/logIn"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@color/colorText" />
+
         <Space
             android:id="@+id/space3"
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="onClick"
+            android:onClick="signOut"
             android:text="@string/logOut"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@color/colorText" />
