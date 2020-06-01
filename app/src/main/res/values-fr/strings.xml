@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aceptar">Accepter</string>
+    <string name="advertencia">Attention</string>
+    <string name="atras">Retourner</string>
+    <string name="cancelar">Annuler</string>
+    <string name="cerrar">Fermer</string>
+    <string name="desafios">Défis</string>
+    <string name="dos_barajas">DEUX PONT</string>
+    <string name="elige_baraja">Choisissez un jeu de cartes:</string>
+    <string name="extra">Bonification:</string>
+    <string name="finalizar">Finaliser</string>
+    <string name="gameover">MATCH PERDU</string>
+    <string name="juego_estandar">Jeu Standard</string>
+    <string name="juego_libre">Jeu Libre</string>
+    <string name="jugar_modo_juego">Modes de jeu</string>
+    <string name="jugar_tipo_partida">Jouer par mode de jeu</string>
+    <string name="niveles">Niveaux</string>
+    <string name="opciones">Options</string>
+    <string name="partida_perfecta">JEU PARFAIT</string>
+    <string name="premio">PRIX</string>
+    <string name="puntos">Points:</string>
+    <string name="puntos_0">Points: 0</string>
+    <string name="puntuacion">SCORE</string>
+    <string name="sonido">Musique:</string>
+    <string name="texto_advertencia">Vous êtes sur le point de terminer ce match. Votre progression ne sera pas
+        enregistrée, voulez-vous continuer?
+    </string>
+    <string name="tiempo_perfecto">DE JUSTESSE</string>
+</resources>

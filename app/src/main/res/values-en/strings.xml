@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aceptar">Accept</string>
+    <string name="advertencia">Warning</string>
+    <string name="atras">Back</string>
+    <string name="cancelar">Cancel</string>
+    <string name="cerrar">Close</string>
+    <string name="desafios">Challenges</string>
+    <string name="dos_barajas">TWO DECKS</string>
+    <string name="elige_baraja">Choose a deck:</string>
+    <string name="extra">Bonus:</string>
+    <string name="finalizar">Finish</string>
+    <string name="gameover">YOU LOSE</string>
+    <string name="juego_estandar">Standard Game</string>
+    <string name="juego_libre">Free Game</string>
+    <string name="jugar_modo_juego">Gamemodes</string>
+    <string name="jugar_tipo_partida">Play by gamemode</string>
+    <string name="niveles">Levels</string>
+    <string name="opciones">Options</string>
+    <string name="partida_perfecta">PERFECT GAME</string>
+    <string name="premio">AWARD</string>
+    <string name="puntos">Points:</string>
+    <string name="puntos_0">Points: 0</string>
+    <string name="puntuacion">SCORE</string>
+    <string name="sonido">Sound:</string>
+    <string name="texto_advertencia">You are about to end this match. Your progress won\'t be saved, do you want to continue?</string>
+    <string name="tiempo_perfecto">CLOSE CALL</string>
+</resources>

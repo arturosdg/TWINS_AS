@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">TWINS</string>
-    <string name="play">PLAY</string>
-    <string name="stop">Stop</string>
-    <string name="start">Start</string>
-    <string name="score">Score</string>
+    <string name="app_name" translatable="false">TWINS</string>
+    <string name="play" translatable="false">PLAY</string>
+    <string name="stop" translatable="false">Stop</string>
+    <string name="start" translatable="false">Start</string>
+    <string name="score" translatable="false">Score</string>
     <string name="finalizar">Finalizar</string>
-    <string name="scores">Scores</string>
-    <string name="pause">Pause</string>
+    <string name="scores" translatable="false">Scores</string>
+    <string name="pause" translatable="false">Pause</string>
     <string name="advertencia">Advertencia</string>
     <string name="texto_advertencia">Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="cerrar">Cerrar</string>
-    <string name="top_scores">TOP 3</string>
-    <string name="zero">0</string>
+    <string name="top_scores" translatable="false">TOP 3</string>
+    <string name="zero" translatable="false">0</string>
     <string name="puntos">Puntos:</string>
     <string name="puntuacion">PUNTUACIÓN</string>
     <string name="juego_estandar">Juego Estandar</string>
@@ -27,8 +27,8 @@
     <string name="gameover">HAS PERDIDO</string>
     <string name="elige_baraja">Elige tu baraja:</string>
     <string name="sonido">Sonido:</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
+    <string name="on" translatable="false">ON</string>
+    <string name="off" translatable="false">OFF</string>
     <string name="puntos_0">Puntos: 0</string>
     <string name="premio">PREMIO</string>
     <string name="extra">Extra:</string>
