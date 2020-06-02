@@ -10,11 +10,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -29,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     Intent intent;
     GoogleSignInClient signInClient;
     GoogleSignInAccount signedInAccount;
+    GoogleSignInOptions signInOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
         ms = MusicService.getInstance(getApplicationContext());
         ms.startGameMusic(R.raw.menusong);
 
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        signInClient = GoogleSignIn.getClient(this, signInOptions);
         signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         //Set the screen
