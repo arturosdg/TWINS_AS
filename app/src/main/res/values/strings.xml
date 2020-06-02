@@ -38,4 +38,9 @@
     <string name="logIn">LOG IN</string>
     <string name="signin_other_error">Error al intentar entrar en la cuenta</string>
     <string name="logOut">LOG OUT</string>
+    <string name="idioma">Idioma:</string>
+    <string name="en">Ingles</string>
+    <string name="es">Español</string>
+    <string name="pt">Portugues</string>
+    <string name="fr">Frances</string>
 </resources>
