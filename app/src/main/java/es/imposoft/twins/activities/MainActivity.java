@@ -3,31 +3,21 @@ package es.imposoft.twins.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import es.imposoft.twins.singleton.MusicService;
@@ -71,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.sign_in_button);
 
-        if (signInClient == null) { findViewById(R.id.sign_out_button).setVisibility(View.GONE); }
+        if (signInClient == null) { findViewById(R.id.view_profile_button).setVisibility(View.GONE); }
         else {
-            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.view_profile_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         }
 
 
-        //signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        //signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
         signInClient = GoogleSignIn.getClient(this, signInOptions);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,23 +164,17 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
-    public void signOut(View view) {
-        signInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // at this point, the user is signed out.
-                    }
-                });
-        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+    public void viewProfile(View view) {
+        intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     @Override
     protected void onStart() {
         signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signedInAccount != null) {
-            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.view_profile_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         }
         super.onStart();
