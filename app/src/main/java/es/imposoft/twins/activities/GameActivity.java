@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
 import es.imposoft.twins.database.SucceededChallenges;
@@ -71,6 +73,8 @@ public class GameActivity extends AppCompatActivity {
     Intent intent;
     private String gscoreboard, glevels;
 
+    GoogleSignInAccount signedInAccount;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +119,7 @@ public class GameActivity extends AppCompatActivity {
             scoreText.setText("");
         }
 
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         fillButtonsArray();
         deck.assignCardTheme(themeCard, concreteCards, game, buttons, context);
     }
