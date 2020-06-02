@@ -318,16 +318,21 @@ public class PopupActivity extends Activity {
         switch (view.getId()){
             case R.id.langButtonEn:
                 setLocale("en");
+                break;
             case R.id.langButtonEsp:
                 setLocale("es");
+                break;
             case R.id.langButtonFr:
                 setLocale("fr");
+                break;
             case R.id.langButtonPt:
                 setLocale("pt");
+                break;
         }
     }
 
     public void setLocale(String lang) {
+        System.out.println("test" + lang);
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

@@ -146,6 +146,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
+                    android:onClick="languagePressed"
                     android:text="@string/es"
                     android:textColor="@color/colorText" />
             </LinearLayout>
@@ -162,6 +163,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
+                    android:onClick="languagePressed"
                     android:text="@string/pt"
                     android:textColor="@color/colorText" />
 
@@ -172,6 +174,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
+                    android:onClick="languagePressed"
                     android:text="@string/fr"
                     android:textColor="@color/colorText" />
             </LinearLayout>
