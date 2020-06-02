@@ -17,6 +17,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        //signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
         signInClient = GoogleSignIn.getClient(this, signInOptions);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
         try {
             signedInAccount = task.getResult(ApiException.class);
+            Toast.makeText(this, "Bienvenido " + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             new AlertDialog.Builder(this).setMessage(getString(R.string.signin_other_error))
                     .setNeutralButton(android.R.string.ok, null).show();
