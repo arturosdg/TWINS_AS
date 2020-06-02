@@ -37,7 +37,8 @@
         <activity android:name=".activities.SelectChallengeActivity" />
 
         <activity android:name=".activities.PopupActivity"
-                  android:theme="@style/AppTheme.PopupWindow" />
+            android:configChanges="locale|orientation"
+            android:theme="@style/AppTheme.PopupWindow" />
 
     </application>
 

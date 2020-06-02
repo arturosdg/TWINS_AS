@@ -2,6 +2,8 @@ package es.imposoft.twins.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,6 +13,16 @@ import android.widget.*;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
+
+import java.util.Locale;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+
+import java.util.Locale;
 
 import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.R;
@@ -320,4 +332,31 @@ public class PopupActivity extends Activity {
         }
 
     }
+
+    public void languagePressed(View view){
+        switch (view.getId()){
+            case R.id.langButtonEn:
+                setLocale("en");
+            case R.id.langButtonEsp:
+                setLocale("es");
+            case R.id.langButtonFr:
+                setLocale("fr");
+            case R.id.langButtonPt:
+                setLocale("pt");
+        }
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, PopupActivity.class);
+        refresh.putExtra("TYPE", PopupActivity.WindowType.OPTIONS);
+        finish();
+        //startActivity(refresh);
+    }
+
 }
