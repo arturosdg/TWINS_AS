@@ -73,7 +73,7 @@ public class GameActivity extends AppCompatActivity {
     Intent intent;
     private String gscoreboard, glevels;
 
-    GoogleSignInAccount signedInAccount;
+    //GoogleSignInAccount signedInAccount;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -119,7 +119,7 @@ public class GameActivity extends AppCompatActivity {
             scoreText.setText("");
         }
 
-        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        //signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         fillButtonsArray();
         deck.assignCardTheme(themeCard, concreteCards, game, buttons, context);
     }

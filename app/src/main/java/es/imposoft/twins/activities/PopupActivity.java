@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
 import es.imposoft.twins.singleton.MusicService;
@@ -15,6 +18,7 @@ import es.imposoft.twins.database.Scoreboard;
 import es.imposoft.twins.components.DeckTheme;
 
 public class PopupActivity extends Activity {
+
     public enum WindowType{
         WARNING,
         SCOREBOARD,
@@ -33,6 +37,8 @@ public class PopupActivity extends Activity {
     Drawable card;
     MusicService musicEngine;
 
+    GoogleSignInAccount signedInAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -50,6 +56,10 @@ public class PopupActivity extends Activity {
 
         deckTheme = (DeckTheme) windowInfo.get("THEME");
         musicEngine = MusicService.getInstance(getApplicationContext());
+
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
+        TextView user;
 
 
         switch ((WindowType) windowInfo.get("TYPE")){
@@ -120,6 +130,9 @@ public class PopupActivity extends Activity {
                 int score = scoreboard.getLastScore();
                 currentScore.setText("" + score);
                 currentStars.setText("" + scoreboard.getStarsFromScore(score));
+
+                user = findViewById(R.id.userName);
+                if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
 
                 //When the screen is canceled, the user will be sent to the main screen
                 cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +241,9 @@ public class PopupActivity extends Activity {
                 //Change the scoreboard stars to other emoji
                 currentSmileys.setText(""+ scoreboard.getSmileys());
 
+                user = findViewById(R.id.userName);
+                if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
+
                 //If he cancels the window, we go back to the main class
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -258,6 +274,9 @@ public class PopupActivity extends Activity {
 
                 TextView extraPoint = findViewById(R.id.extraPoints);
                 extraPoint.setText(points + " " + extraPoint.getText());
+
+                user = findViewById(R.id.userName);
+                if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
 
                 ImageView cardWon = findViewById(R.id.cardWon);
                 cardWon.setImageDrawable(card);
