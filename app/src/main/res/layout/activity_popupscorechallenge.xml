@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:background="#BBDAFF"
             android:gravity="center"
-            android:text="Carta especial"
+            android:text="@string/carta_especial"
             android:textSize="30sp"
             android:textStyle="bold" />
 

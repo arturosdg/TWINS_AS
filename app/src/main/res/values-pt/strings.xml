@@ -27,4 +27,14 @@
     <string name="aceptar">Aceitar</string>
     <string name="premio">PRÊMIO</string>
     <string name="tiempo_perfecto">POR POUCO</string>
+    <string name="logIn">LOG IN</string>
+    <string name="signin_other_error">Erro ao tentar fazer login</string>
+    <string name="logOut">LOG OUT</string>
+    <string name="idioma">Língua:</string>
+    <string name="en">Inglês</string>
+    <string name="es">Espaghol</string>
+    <string name="pt">Português</string>
+    <string name="fr">Francês</string>
+    <string name="viewProfile">Ver Perfil</string>
+    <string name="carta_especial">Carta especial</string>
 </resources>
