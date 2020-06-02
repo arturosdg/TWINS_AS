@@ -182,6 +182,7 @@ public class PopupActivity extends Activity {
                         setResult(Activity.RESULT_OK, returnIntent);
                         returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("SOUND",1);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -193,6 +194,7 @@ public class PopupActivity extends Activity {
                         setResult(Activity.RESULT_OK, returnIntent);
                         returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("SOUND",2);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -202,6 +204,7 @@ public class PopupActivity extends Activity {
                     public void onClick(View v) {
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra("WINDOW",-1);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -213,6 +216,7 @@ public class PopupActivity extends Activity {
                         setResult(Activity.RESULT_OK, returnIntent);
                         returnIntent.putExtra("WINDOW",2);
                         returnIntent.putExtra("CARD",1);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -224,6 +228,7 @@ public class PopupActivity extends Activity {
                         returnIntent.putExtra("CARD",2);
                         returnIntent.putExtra("WINDOW",2);
                         setResult(Activity.RESULT_OK, returnIntent);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -358,10 +363,12 @@ public class PopupActivity extends Activity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, PopupActivity.class);
+        /*Intent refresh = new Intent(this, PopupActivity.class);
         refresh.putExtra("TYPE", PopupActivity.WindowType.OPTIONS);
+        //refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
-        //startActivity(refresh);
+        startActivity(refresh);*/
+        this.recreate();
     }
 
 }
