@@ -72,12 +72,12 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/sign_out_button"
+            android:id="@+id/view_profile_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="signOut"
-            android:text="@string/logOut"
+            android:onClick="viewProfile"
+            android:text="@string/viewProfile"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@color/colorText" />
 
