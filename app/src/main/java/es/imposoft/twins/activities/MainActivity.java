@@ -100,24 +100,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Method executed from the popup window
-
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-            //GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            /*assert result != null;
-            if (result.isSuccess()) {
-                // The signed in account is stored in the result.
-                signedInAccount = result.getSignInAccount();
-            } else {
-                String message = result.getStatus().getStatusMessage();
-                if (message == null || message.isEmpty()) {
-                    message = getString(R.string.signin_other_error);
-                }
-                new AlertDialog.Builder(this).setMessage(message)
-                        .setNeutralButton(android.R.string.ok, null).show();
-            }*/
         }
         else {
             if (data != null) {
