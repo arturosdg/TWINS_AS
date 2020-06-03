@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 
 import es.imposoft.twins.R;
 import es.imposoft.twins.components.DeckTheme;
+import es.imposoft.twins.database.SucceededChallenges;
 import es.imposoft.twins.singleton.MusicService;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -65,8 +66,10 @@ public class ProfileActivity extends AppCompatActivity {
         Glide.with(this).load(signedInAccount.getPhotoUrl()).into(userProfileImage);
         TextView userName = findViewById(R.id.userName);
         TextView userEmail = findViewById(R.id.userEmail);
+        TextView challenges = findViewById(R.id.succeededChallenges);
         userName.setText(signedInAccount.getDisplayName());
         userEmail.setText(signedInAccount.getEmail());
+        challenges.setText(challenges.getText() + String.valueOf(SucceededChallenges.getChallenges()));
     }
 
     public void goBack(View view) {

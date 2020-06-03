@@ -37,4 +37,5 @@
     <string name="carta_especial">Carta especial</string>
     <string name="top_scores">PONTUAÇÃO</string>
     <string name="val">VALENCIAN</string>
+    <string name="desafios_superados">Desafios superados: </string>
 </resources>

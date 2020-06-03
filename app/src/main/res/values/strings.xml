@@ -46,4 +46,5 @@
     <string name="viewProfile">Ver Perfil</string>
     <string name="carta_especial">Carta especial</string>
     <string name="val">Valenciano</string>
+    <string name="desafios_superados">Desafíos superados: </string>
 </resources>

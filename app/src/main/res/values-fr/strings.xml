@@ -37,4 +37,5 @@
     <string name="carta_especial">Carte spéciale</string>
     <string name="top_scores">TOP 3 SCORES</string>
     <string name="val">VALENCIEN</string>
+    <string name="desafios_superados">Défis dépassé: </string>
 </resources>

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SucceededChallenges {
 
-    private List<Integer> succedeedLevels;
+    private static List<Integer> succedeedLevels;
     private int id = 0;
 
     public SucceededChallenges() {
@@ -19,6 +19,10 @@ public class SucceededChallenges {
     public SucceededChallenges(int id) {
         this.id = id;
         succedeedLevels = new ArrayList();
+    }
+
+    public static int getChallenges() {
+        return succedeedLevels.size();
     }
 
     public void addSuccedeedChallenges(int level) {
