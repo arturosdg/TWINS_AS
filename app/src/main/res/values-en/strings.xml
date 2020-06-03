@@ -25,9 +25,7 @@
     <string name="sonido">Sound:</string>
     <string name="texto_advertencia">You are about to end this match. Your progress won\'t be saved, do you want to continue?</string>
     <string name="tiempo_perfecto">CLOSE CALL</string>
-    <string name="logIn">LOG IN</string>
     <string name="signin_other_error">Error trying to login</string>
-    <string name="logOut">LOG OUT</string>
     <string name="idioma">Language:</string>
     <string name="en">English</string>
     <string name="es">Spanish</string>
@@ -35,6 +33,8 @@
     <string name="fr">French</string>
     <string name="viewProfile">View Profile</string>
     <string name="carta_especial">Special card</string>
+    <string name="val">Valencian</string>
+    <string name="top_scores">TOP 3 SCORES</string>
     <string name="desafios_superados">Succeeded challenges: </string>
     <string name="total_scores">Total scores: </string>
 </resources>

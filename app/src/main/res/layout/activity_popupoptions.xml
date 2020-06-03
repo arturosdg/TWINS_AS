@@ -107,7 +107,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="173dp"
+        android:layout_height="191dp"
         android:orientation="vertical">
 
         <TextView
@@ -120,7 +120,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="159dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -153,7 +153,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="58dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -178,13 +178,25 @@
                     android:text="@string/fr"
                     android:textColor="@color/colorText" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/langButtonVal"
+                android:layout_width="163dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="languagePressed"
+                android:text="@string/val"
+                android:textColor="@color/colorText" />
+
         </LinearLayout>
 
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="54dp" />
 
     <Button
         android:id="@+id/acceptButton"

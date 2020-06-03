@@ -8,11 +8,11 @@
     <string name="scores" translatable="false">Scores</string>
     <string name="pause" translatable="false">Pause</string>
     <string name="advertencia">Advertencia</string>
-    <string name="texto_advertencia">Estas apunto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?</string>
+    <string name="texto_advertencia">Estas a punto de finalizar la partida. No se guardara tu progreso, ¿estas seguro?</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="cerrar">Cerrar</string>
-    <string name="top_scores" translatable="false">TOP 3 PUNTUACIONES</string>
+    <string name="top_scores">TOP 3 PUNTUACIONES</string>
     <string name="zero" translatable="false">0</string>
     <string name="puntos">Puntos:</string>
     <string name="puntuacion">PUNTUACIÓN</string>
@@ -35,16 +35,17 @@
     <string name="tiempo_perfecto">TIEMPO JUSTO</string>
     <string name="partida_perfecta">PARTIDA PERFECTA</string>
     <string name="dos_barajas">DOS BARAJAS</string>
-    <string name="logIn">LOG IN</string>
+    <string name="logIn" translatable="false">LOG IN</string>
     <string name="signin_other_error">Error al intentar entrar en la cuenta</string>
-    <string name="logOut">LOG OUT</string>
+    <string name="logOut" translatable="false">LOG OUT</string>
     <string name="idioma">Idioma:</string>
     <string name="en">Ingles</string>
     <string name="es">Español</string>
     <string name="pt">Portugues</string>
-    <string name="fr">Frances</string>
+    <string name="fr">Francés</string>
     <string name="viewProfile">Ver Perfil</string>
     <string name="carta_especial">Carta especial</string>
+    <string name="val">Valenciano</string>
     <string name="desafios_superados">Desafíos superados: </string>
     <string name="total_scores">Puntuación total acumulada: </string>
 </resources>

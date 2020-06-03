@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="finalizar">Finalitzar</string>
+    <string name="advertencia">Advertència</string>
+    <string name="texto_advertencia">Estàs a punt de finalitzar la partida. No es guardarà el teu progrés, estàs segur?</string>
+    <string name="aceptar">Acceptar</string>
+    <string name="cancelar">Cancel·lar</string>
+    <string name="cerrar">Tancar</string>
+    <string name="top_scores">TOP 3 PUNTUACIONS</string>
+    <string name="puntos">Punts:</string>
+    <string name="puntuacion">PUNTUACIÓ</string>
+    <string name="juego_estandar">Joc estàndar</string>
+    <string name="juego_libre">Joc lliure</string>
+    <string name="niveles">Nivells</string>
+    <string name="desafios">Desafiaments</string>
+    <string name="atras">Enrere</string>
+    <string name="jugar_modo_juego">Maneres de joc</string>
+    <string name="jugar_tipo_partida">Jugar per Tipus de partida</string>
+    <string name="opciones">Opcions</string>
+    <string name="gameover">HAS PERDUT</string>
+    <string name="elige_baraja">Tria la teua baralla:</string>
+    <string name="sonido">So:</string>
+    <string name="puntos_0">Punts: 0</string>
+    <string name="premio">PREMI</string>
+    <string name="extra">Extra:</string>
+    <string name="tiempo_perfecto">TEMPS AJUSTAT</string>
+    <string name="partida_perfecta">PARTIDA PERFECTA</string>
+    <string name="dos_barajas">DOS BARALLES</string>
+    <string name="signin_other_error">Error en intentar entrar al compte</string>
+    <string name="idioma">Idioma:</string>
+    <string name="en">Anglés</string>
+    <string name="es">Espanyol</string>
+    <string name="pt">Portugués</string>
+    <string name="fr">Francés</string>
+    <string name="viewProfile">Veure Perfil</string>
+    <string name="carta_especial">Carta especial</string>
+    <string name="val">Valencià</string>
+</resources>

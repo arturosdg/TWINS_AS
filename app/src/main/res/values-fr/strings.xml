@@ -27,9 +27,7 @@
         enregistrée, voulez-vous continuer?
     </string>
     <string name="tiempo_perfecto">DE JUSTESSE</string>
-    <string name="logIn">LOG IN</string>
     <string name="signin_other_error">Erreur lors de la tentative de connexion</string>
-    <string name="logOut">LOG OUT</string>
     <string name="idioma">Langage:</string>
     <string name="en">Anglais</string>
     <string name="es">Espagnol</string>
@@ -37,6 +35,8 @@
     <string name="fr">Français</string>
     <string name="viewProfile">Voir le Profil</string>
     <string name="carta_especial">Carte spéciale</string>
+    <string name="top_scores">TOP 3 SCORES</string>
+    <string name="val">VALENCIEN</string>
     <string name="desafios_superados">Défis dépassé: </string>
     <string name="total_scores">Score total cumulé: </string>
 </resources>
