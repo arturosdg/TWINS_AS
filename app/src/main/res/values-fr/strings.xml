@@ -37,4 +37,5 @@
     <string name="fr">Français</string>
     <string name="viewProfile">Voir le Profil</string>
     <string name="carta_especial">Carte spéciale</string>
+    <string name="desafios_superados">Défis dépassé: </string>
 </resources>

@@ -35,4 +35,5 @@
     <string name="fr">French</string>
     <string name="viewProfile">View Profile</string>
     <string name="carta_especial">Special card</string>
+    <string name="desafios_superados">Succeeded challenges: </string>
 </resources>
