@@ -35,4 +35,6 @@
     <string name="viewProfile">Veure Perfil</string>
     <string name="carta_especial">Carta especial</string>
     <string name="val">Valencià</string>
+    <string name="desafios_superados">Desafiaments aconseguits: </string>
+    <string name="total_scores">Puntuació total acumulada: </string>
 </resources>
