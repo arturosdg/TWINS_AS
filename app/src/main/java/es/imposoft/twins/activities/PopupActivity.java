@@ -352,6 +352,9 @@ public class PopupActivity extends Activity {
             case R.id.langButtonPt:
                 setLocale("pt");
                 break;
+            case R.id.langButtonVal:
+                setLocale("ca");
+                break;
         }
     }
 
