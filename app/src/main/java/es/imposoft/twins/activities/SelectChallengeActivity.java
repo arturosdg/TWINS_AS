@@ -3,16 +3,11 @@ package es.imposoft.twins.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +16,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import es.imposoft.twins.R;
-import es.imposoft.twins.database.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenge;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.GameMode;
@@ -31,7 +26,7 @@ import es.imposoft.twins.gametypes.Game;
 public class SelectChallengeActivity extends AppCompatActivity {
     private Context context;
     private Director director;
-    private SucceededChallenges succeededChallenges;
+    private SucceededChallenge succeededChallenge;
     private ConcreteBuilderLevel levelBuilder;
     private List<Integer> challenges;
     private DeckTheme deckTheme;
@@ -58,12 +53,12 @@ public class SelectChallengeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectchallenge);
 
-        succeededChallenges = new SucceededChallenges(GameMode.LEVELS.ordinal());
+        succeededChallenge = new SucceededChallenge(GameMode.LEVELS.ordinal());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        succeededChallenges.loadChallenges(sp);
-        if(succeededChallenges != null) {
-            challenges = succeededChallenges.getSuccedeedChallenges();
-            succeededChallenges.saveChallenges(sp);
+        succeededChallenge.loadChallenges(sp);
+        if(succeededChallenge != null) {
+            challenges = succeededChallenge.getSuccedeedChallenges();
+            succeededChallenge.saveChallenges(sp);
         }
 
         fillArray();
@@ -90,7 +85,7 @@ public class SelectChallengeActivity extends AppCompatActivity {
         String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
         intent.putExtra("CHALLENGE", currentChallenge);
-        String gChallenges = gson.toJson(succeededChallenges);
+        String gChallenges = gson.toJson(succeededChallenge);
 
         startActivity(intent);
         this.finish();

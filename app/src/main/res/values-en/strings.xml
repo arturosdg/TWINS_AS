@@ -36,4 +36,5 @@
     <string name="viewProfile">View Profile</string>
     <string name="carta_especial">Special card</string>
     <string name="desafios_superados">Succeeded challenges: </string>
+    <string name="total_scores">Total scores: </string>
 </resources>

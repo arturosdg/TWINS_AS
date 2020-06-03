@@ -11,13 +11,15 @@ public class SucceededLevel {
 
     private List<Integer> succedeedLevels;
     private int id = 0;
+    private String email;
 
     public SucceededLevel() {
         succedeedLevels = new ArrayList();
     }
 
-    public SucceededLevel(int id) {
+    public SucceededLevel(int id, String email) {
         this.id = id;
+        this.email = email;
         succedeedLevels = new ArrayList();
     }
 

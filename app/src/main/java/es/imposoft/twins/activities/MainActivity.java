@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.sign_in_button);
 
-        if (signedInAccount == null) { findViewById(R.id.view_profile_button).setVisibility(View.GONE); }
+        if (signedInAccount == null) {
+            findViewById(R.id.view_profile_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+        }
         else {
             findViewById(R.id.view_profile_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
@@ -143,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
         try {
             signedInAccount = task.getResult(ApiException.class);
+            this.recreate();
             Toast.makeText(this, "Bienvenido " + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             new AlertDialog.Builder(this).setMessage(getString(R.string.signin_other_error))

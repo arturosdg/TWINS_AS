@@ -7,40 +7,42 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SucceededChallenges {
+public class SucceededChallenge {
 
-    private static List<Integer> succedeedLevels;
+    private static List<Integer> succeededChallenges;
     private int id = 0;
+    private String email;
 
-    public SucceededChallenges() {
-        succedeedLevels = new ArrayList();
+    public SucceededChallenge() {
+        succeededChallenges = new ArrayList();
     }
 
-    public SucceededChallenges(int id) {
-        this.id = id;
-        succedeedLevels = new ArrayList();
+    public SucceededChallenge(String email) {
+        //this.id = id;
+        this.email = email;
+        succeededChallenges = new ArrayList();
     }
 
     public static int getChallenges() {
-        return succedeedLevels.size();
+        return succeededChallenges.size();
     }
 
     public void addSuccedeedChallenges(int level) {
-        succedeedLevels.add(level);
+        succeededChallenges.add(level);
     }
 
     public List<Integer> getSuccedeedChallenges() {
-        return succedeedLevels;
+        return succeededChallenges;
     }
 
     public void loadChallenges(SharedPreferences sp) {
-        succedeedLevels.clear();
+        succeededChallenges.clear();
         if (sp.getString("CHALLENGE" + id, null) != null) {
             Gson gson = new Gson();
-            SucceededChallenges levels = gson.fromJson(sp.getString("CHALLENGE" + id, null), SucceededChallenges.class);
+            SucceededChallenge levels = gson.fromJson(sp.getString("CHALLENGE" + id, null), SucceededChallenge.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
-            succedeedLevels = levels.getSuccedeedChallenges();
+            succeededChallenges = levels.getSuccedeedChallenges();
 
             mEdit1.commit();
         }
@@ -49,6 +51,7 @@ public class SucceededChallenges {
     public void saveChallenges(SharedPreferences sp) {
         SharedPreferences.Editor mEdit1 = sp.edit();
         getSuccedeedChallenges();
+
 
         Gson gson = new Gson();
         String glevels = gson.toJson(this);

@@ -38,4 +38,5 @@
     <string name="viewProfile">Voir le Profil</string>
     <string name="carta_especial">Carte spéciale</string>
     <string name="desafios_superados">Défis dépassé: </string>
+    <string name="total_scores">Score total cumulé: </string>
 </resources>

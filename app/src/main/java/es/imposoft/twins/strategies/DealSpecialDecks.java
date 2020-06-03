@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import es.imposoft.twins.database.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenge;
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.card.CardDecorator;
 import es.imposoft.twins.card.ConcreteCard;
@@ -39,7 +39,7 @@ public class DealSpecialDecks implements Dealer {
         newCards = new ArrayList<>();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SucceededChallenges challengesProgress = new SucceededChallenges();
+        SucceededChallenge challengesProgress = new SucceededChallenge();
         challengesProgress.loadChallenges(sharedPreferences);
 
         challengesWon = challengesProgress.getSuccedeedChallenges();

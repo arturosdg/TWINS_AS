@@ -10,23 +10,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import es.imposoft.twins.R;
-import es.imposoft.twins.components.DeckTheme;
-import es.imposoft.twins.database.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenge;
 import es.imposoft.twins.singleton.MusicService;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -69,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView challenges = findViewById(R.id.succeededChallenges);
         userName.setText(signedInAccount.getDisplayName());
         userEmail.setText(signedInAccount.getEmail());
-        challenges.setText(challenges.getText() + String.valueOf(SucceededChallenges.getChallenges()));
+        challenges.setText(challenges.getText() + String.valueOf(SucceededChallenge.getChallenges()));
     }
 
     public void goBack(View view) {

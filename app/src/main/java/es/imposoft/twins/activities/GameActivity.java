@@ -25,7 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
-import es.imposoft.twins.database.SucceededChallenges;
+import es.imposoft.twins.database.SucceededChallenge;
 import es.imposoft.twins.card.Card;
 import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.database.SucceededLevel;
@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
     Gson gson;
     AbstractScore scoreManager;
     SucceededLevel succeededLevels;
-    private SucceededChallenges succeededChallenges;
+    private SucceededChallenge succeededChallenge;
     Deck deck;
 
     SharedPreferences sharedPreferences;
@@ -71,9 +71,9 @@ public class GameActivity extends AppCompatActivity {
     MusicService musicEngine;
     Handler timeHandler;
     Intent intent;
-    private String gscoreboard, glevels;
+    private String gscoreboard, glevels, email;
 
-    //GoogleSignInAccount signedInAccount;
+    GoogleSignInAccount signedInAccount;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -101,6 +101,10 @@ public class GameActivity extends AppCompatActivity {
         musicEngine.startExtraSound(R.raw.sonidoareproducir);
          */
 
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(signedInAccount == null) email = "";
+        else email = signedInAccount.getEmail();
+
         selectLayout();
         findAndFillViewParametres();
         initializeVariables();
@@ -110,16 +114,16 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
         if(isLevelMode()) {
-            succeededLevels = new SucceededLevel(gameMode.ordinal());
+            succeededLevels = new SucceededLevel(gameMode.ordinal(), email);
             succeededLevels.loadSuccedeedLevels(sharedPreferences);
         } else if(isChallengeMode()){
-            succeededChallenges = new SucceededChallenges();
-            succeededChallenges.loadChallenges(sharedPreferences);
-            deck.addChallengesWon(succeededChallenges.getSuccedeedChallenges());
+            succeededChallenge = new SucceededChallenge(email);
+            succeededChallenge.loadChallenges(sharedPreferences);
+            deck.addChallengesWon(succeededChallenge.getSuccedeedChallenges());
             scoreText.setText("");
         }
 
-        //signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
         fillButtonsArray();
         deck.assignCardTheme(themeCard, concreteCards, game, buttons, context);
     }
@@ -147,11 +151,11 @@ public class GameActivity extends AppCompatActivity {
             intent.putExtra("LEVELMODE", true);
             intent.putExtra("TYPE", PopupActivity.WindowType.SCOREBOARD);
         } else if(isChallengeMode()){
-            if(!succeededChallenges.getSuccedeedChallenges().contains(challengePlayed)) {
-                succeededChallenges.addSuccedeedChallenges(challengePlayed);
+            if(!succeededChallenge.getSuccedeedChallenges().contains(challengePlayed)) {
+                succeededChallenge.addSuccedeedChallenges(challengePlayed);
             }
-            succeededChallenges.saveChallenges(sharedPreferences);
-            glevels = gson.toJson(succeededChallenges);
+            succeededChallenge.saveChallenges(sharedPreferences);
+            glevels = gson.toJson(succeededChallenge);
             intent.putExtra("CHALLENGE", true);
             intent.putExtra("CHALLENGEPLAYED", challengePlayed);
             intent.putExtra("TYPE", PopupActivity.WindowType.CHALLENGE);
@@ -179,8 +183,8 @@ public class GameActivity extends AppCompatActivity {
             intent.putExtra("LEVELMODE", true);
         }
         else if(isChallengeMode()){
-            succeededChallenges.saveChallenges(sharedPreferences);
-            glevels = gson.toJson(succeededChallenges);
+            succeededChallenge.saveChallenges(sharedPreferences);
+            glevels = gson.toJson(succeededChallenge);
             intent.putExtra("CHALLENGE", true);
         }
         startActivityForResult(intent,1);
