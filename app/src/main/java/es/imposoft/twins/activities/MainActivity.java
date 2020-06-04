@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        refresh();
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -139,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                 }
             }
-            this.recreate();
+            //this.recreate();
+            //refresh();
         }
     }
 
@@ -177,5 +179,14 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         }
         super.onStart();
+    }
+
+    private void refresh() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 }

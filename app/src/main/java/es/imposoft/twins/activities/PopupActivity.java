@@ -202,9 +202,10 @@ public class PopupActivity extends Activity {
                 //When the user clicks the accept button he will close the options menu
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent returnIntent = new Intent();
+                        /*Intent returnIntent = new Intent();
                         returnIntent.putExtra("WINDOW",-1);
-                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
+                        //getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         finish();
                     }
                 });
@@ -371,7 +372,16 @@ public class PopupActivity extends Activity {
         //refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
         startActivity(refresh);*/
-        this.recreate();
+        refresh();
+    }
+
+    private void refresh() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 
 }
