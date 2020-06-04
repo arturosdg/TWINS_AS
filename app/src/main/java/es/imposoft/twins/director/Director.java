@@ -133,7 +133,7 @@ public class Director {
         builder.setMinScore(0);
         builder.setCardAmount(24);
         builder.setRevealTime(10);
-        builder.setChronometer(50, Chronometer.DESCENDING);
+        builder.setChronometer(0, Chronometer.NONE);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(9);
         builder.setGameType(GameType.NORMAL);

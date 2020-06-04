@@ -18,7 +18,7 @@ import es.imposoft.twins.strategies.Dealer;
 
 public class Deck {
 
-    List<Integer> challengesWon;
+    List<String> challengesWon;
     //ArrayList<Card> shuffled;
     //ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
     //ArrayList<Integer> newCards;
@@ -49,7 +49,7 @@ public class Deck {
         }
     }
 
-    public void addChallengesWon(List<Integer> succedeedChallenges) {
+    public void addChallengesWon(List<String> succedeedChallenges) {
         this.challengesWon = succedeedChallenges;
     }
 

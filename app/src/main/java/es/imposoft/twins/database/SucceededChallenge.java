@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SucceededChallenge {
 
-    private static List<Integer> succeededChallenges;
+    private static List<String> succeededChallenges;
     private String email;
 
     public SucceededChallenge() {
@@ -26,21 +28,21 @@ public class SucceededChallenge {
     }
 
     public void addSuccedeedChallenges(int challenge) {
-        succeededChallenges.add(challenge);
+        succeededChallenges.add(challenge+"");
     }
 
-    public List<Integer> getSuccedeedChallenges() {
+    public List<String> getSuccedeedChallenges() {
         return succeededChallenges;
     }
 
     public void loadChallenges(SharedPreferences sp) {
         succeededChallenges.clear();
-        if (sp.getString("CHALLENGE" + email, null) != null) {
-            Gson gson = new Gson();
-            SucceededChallenge challenges = gson.fromJson(sp.getString("CHALLENGE" + email, null), SucceededChallenge.class);
-
+        if (sp.getStringSet("CHALLENGE" + email, null) != null) {
+            Set<String> challenges = sp.getStringSet("CHALLENGE" + email, null);
+            sp.getStringSet("CHALLENGE" + email, null);
             SharedPreferences.Editor mEdit1 = sp.edit();
-            succeededChallenges = challenges.getSuccedeedChallenges();
+            succeededChallenges.clear();
+            succeededChallenges.addAll(challenges);
 
             mEdit1.commit();
         }
@@ -50,10 +52,11 @@ public class SucceededChallenge {
         SharedPreferences.Editor mEdit1 = sp.edit();
         getSuccedeedChallenges();
 
+        //Set the values
+        Set<String> set = new HashSet<>();
+        set.addAll(succeededChallenges);
 
-        Gson gson = new Gson();
-        String gchallenge = gson.toJson(this);
-        mEdit1.putString("CHALLENGE" + email, gchallenge);
+        mEdit1.putStringSet("CHALLENGE" + email, set);
         mEdit1.commit();
     }
 }

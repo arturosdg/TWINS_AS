@@ -24,7 +24,7 @@ import es.imposoft.twins.gametypes.Game;
 public class DealSpecialDecks implements Dealer {
     ArrayList<Card> shuffled;
     ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
-    List<Integer> challengesWon;
+    List<String> challengesWon;
     ArrayList<Integer> newCards;
     int random, position, cards;
     //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
@@ -62,19 +62,20 @@ public class DealSpecialDecks implements Dealer {
 
         numbers.clear();
 
+        challengesWon.addAll(challengesWon);
         Collections.shuffle(Arrays.asList(buttons));
         //Creamos todas las cartas contando las de desafios
         for(int i = 0; i < cards; i++){
             if(i<totalChallenges){
                 ConcreteCard normalCard = new ConcreteCard(buttons[i], context);
                 CardDecorator specialCard;
-                if(challengesWon.get(i) == 1) {
+                if(challengesWon.get(i).equals("1")) {
                     specialCard = new SpecialCardDecorator1(normalCard);
                     concreteCards.add(specialCard);
-                } else if (challengesWon.get(i) == 2) {
+                } else if (challengesWon.get(i).equals("2")) {
                     specialCard = new SpecialCardDecorator2(normalCard);
                     concreteCards.add(specialCard);
-                } else if (challengesWon.get(i) == 3) {
+                } else if (challengesWon.get(i).equals("3")) {
                     specialCard = new SpecialCardDecorator3(normalCard);
                     concreteCards.add(specialCard);
                 }
