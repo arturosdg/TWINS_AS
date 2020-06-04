@@ -29,7 +29,6 @@ public class SelectChallengeActivity extends AppCompatActivity {
     private Context context;
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
-    private List<Integer> challenges;
     private DeckTheme deckTheme;
     private Game game;
     private int currentChallenge;
@@ -73,7 +72,6 @@ public class SelectChallengeActivity extends AppCompatActivity {
         String newGame = gson.toJson(game);
         intent.putExtra("GAME",newGame);
         intent.putExtra("CHALLENGE", currentChallenge);
-        String gChallenges = gson.toJson(succeededChallenge);
 
         startActivity(intent);
         this.finish();

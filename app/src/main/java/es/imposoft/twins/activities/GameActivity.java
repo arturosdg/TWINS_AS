@@ -71,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
     MusicService musicEngine;
     Handler timeHandler;
     Intent intent;
-    private String gscoreboard, glevels, email;
+    private String gscoreboard, glevels, gchallenge, email;
 
     GoogleSignInAccount signedInAccount;
 
@@ -155,7 +155,7 @@ public class GameActivity extends AppCompatActivity {
                 succeededChallenge.addSuccedeedChallenges(challengePlayed);
             }
             succeededChallenge.saveChallenges(sharedPreferences);
-            glevels = gson.toJson(succeededChallenge);
+            gchallenge = gson.toJson(succeededChallenge);
             intent.putExtra("CHALLENGE", true);
             intent.putExtra("CHALLENGEPLAYED", challengePlayed);
             intent.putExtra("TYPE", PopupActivity.WindowType.CHALLENGE);
@@ -184,7 +184,7 @@ public class GameActivity extends AppCompatActivity {
         }
         else if(isChallengeMode()){
             succeededChallenge.saveChallenges(sharedPreferences);
-            glevels = gson.toJson(succeededChallenge);
+            gchallenge = gson.toJson(succeededChallenge);
             intent.putExtra("CHALLENGE", true);
         }
         startActivityForResult(intent,1);
