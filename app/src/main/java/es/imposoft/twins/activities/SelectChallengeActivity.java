@@ -28,7 +28,6 @@ import es.imposoft.twins.gametypes.Game;
 public class SelectChallengeActivity extends AppCompatActivity {
     private Context context;
     private Director director;
-    private SucceededChallenge succeededChallenge;
     private ConcreteBuilderLevel levelBuilder;
     private List<Integer> challenges;
     private DeckTheme deckTheme;
@@ -37,8 +36,6 @@ public class SelectChallengeActivity extends AppCompatActivity {
     private final int MAX_CHALLENGES = 3;
     private Button[] challengeButtons = new Button[MAX_CHALLENGES];
     Intent intent;
-    private GoogleSignInAccount signedInAccount;
-    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,28 +49,11 @@ public class SelectChallengeActivity extends AppCompatActivity {
         director = new Director(deckTheme);
         levelBuilder =  new ConcreteBuilderLevel();
 
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectchallenge);
 
-        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        if(signedInAccount == null) email = "";
-        else email = signedInAccount.getEmail();
-
-        succeededChallenge = new SucceededChallenge(email);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        succeededChallenge.loadChallenges(sp);
-        if(succeededChallenge != null) {
-            challenges = succeededChallenge.getSuccedeedChallenges();
-            succeededChallenge.saveChallenges(sp);
-        }
-
         fillArray();
-    }
-
-    private void setScreenSettings() {
-
     }
 
     public void goBack(View view) {

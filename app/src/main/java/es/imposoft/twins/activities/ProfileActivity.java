@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -35,6 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
     GoogleSignInAccount signedInAccount;
     GoogleSignInOptions signInOptions;
 
+    SucceededChallenge challenges;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Basic Android stuff
@@ -58,6 +62,11 @@ public class ProfileActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
 
+        challenges = new SucceededChallenge(signedInAccount.getEmail());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        challenges.loadChallenges(sp);
+        int challengesSucceeded = challenges.getChallenges();
+
         //Initialize the user parametres
         ImageView userProfileImage = findViewById(R.id.userProfilePic);
         Glide.with(this).load(signedInAccount.getPhotoUrl()).into(userProfileImage);
@@ -67,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView score = findViewById(R.id.score);
         userName.setText(signedInAccount.getDisplayName());
         userEmail.setText(signedInAccount.getEmail());
-        challenges.setText(String.valueOf(SucceededChallenge.getChallenges()));
+        challenges.setText(String.valueOf(challengesSucceeded));
         //TODO mostrar las maximas puntuaciones del usuario, o la suma de las puntuaciones
         score.setText(String.valueOf(Scoreboard.getTotalScore()));
     }

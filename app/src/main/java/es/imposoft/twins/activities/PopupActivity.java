@@ -248,6 +248,7 @@ public class PopupActivity extends Activity {
                 scoreList.setAdapter(arrayAdapter2);
                 arrayAdapter2.notifyDataSetChanged();
                 if ((boolean) windowInfo.get("CHALLENGE")) scoreList.setVisibility(View.GONE);
+                else scoreList.setVisibility(View.VISIBLE);
 
                 //Find all elements in the scene
                 TextView currentSmileys = findViewById(R.id.smileysText);

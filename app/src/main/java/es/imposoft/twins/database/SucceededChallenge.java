@@ -23,7 +23,7 @@ public class SucceededChallenge {
         succeededChallenges = new ArrayList();
     }
 
-    public static int getChallenges() {
+    public int getChallenges() {
         return succeededChallenges.size();
     }
 
