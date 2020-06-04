@@ -39,4 +39,5 @@
     <string name="val">VALENCIEN</string>
     <string name="desafios_superados">Défis dépassé: </string>
     <string name="total_scores">Score total cumulé: </string>
+    <string name="puntos_extra">Bonus points</string>
 </resources>

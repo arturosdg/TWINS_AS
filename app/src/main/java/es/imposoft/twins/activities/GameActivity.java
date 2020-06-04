@@ -125,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         fillButtonsArray();
-        deck.assignCardTheme(themeCard, concreteCards, game, buttons, context);
+        deck.assignCardTheme(themeCard, concreteCards, game, buttons, context, email);
     }
 
     public void showScoreboard(){

@@ -37,4 +37,5 @@
     <string name="top_scores">TOP 3 SCORES</string>
     <string name="desafios_superados">Succeeded challenges: </string>
     <string name="total_scores">Total score: </string>
+    <string name="puntos_extra">Extra points</string>
 </resources>

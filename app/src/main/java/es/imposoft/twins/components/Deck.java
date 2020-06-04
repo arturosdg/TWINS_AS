@@ -34,18 +34,18 @@ public class Deck {
          */
     }
 
-    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
+    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
         if(isChallengeOrCasual(game)){
             if(game.getId() == 10){
                 Dealer cardDealer = new DealTwoDecks();
-                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
+                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context, email);
             } else {
                 Dealer cardDealer = new DealOneDeck();
-                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
+                cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context, email);
             }
         } else {
             Dealer cardDealer = new DealSpecialDecks();
-            cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context);
+            cardDealer.assignCardTheme(theme, concreteCards, game, buttons, context, email);
         }
     }
 

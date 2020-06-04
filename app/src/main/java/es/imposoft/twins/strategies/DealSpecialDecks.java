@@ -31,7 +31,7 @@ public class DealSpecialDecks implements Dealer {
     int MAX_CARD_DESIGNS = 12;
 
     @Override
-    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
+    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
         shuffled = new ArrayList<>();
         imagesNormal = new ArrayList<>();
         imagesChallenges = new ArrayList<>();
@@ -39,7 +39,7 @@ public class DealSpecialDecks implements Dealer {
         newCards = new ArrayList<>();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SucceededChallenge challengesProgress = new SucceededChallenge();
+        SucceededChallenge challengesProgress = new SucceededChallenge(email);
         challengesProgress.loadChallenges(sharedPreferences);
 
         challengesWon = challengesProgress.getSuccedeedChallenges();

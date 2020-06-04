@@ -29,7 +29,7 @@ public class DealTwoDecks implements Dealer {
     int MAX_CARD_DESIGNS = 12;
 
     @Override
-    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context) {
+    public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
         shuffled = new ArrayList<>();
         imagesNormal = new ArrayList<>();
         imagesChallenges = new ArrayList<>();

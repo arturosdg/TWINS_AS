@@ -37,4 +37,5 @@
     <string name="val">Valencià</string>
     <string name="desafios_superados">Desafiaments aconseguits: </string>
     <string name="total_scores">Puntuació total acumulada: </string>
+    <string name="puntos_extra">Punts extra</string>
 </resources>
