@@ -430,7 +430,7 @@ public class GameActivity extends AppCompatActivity {
         deck = new Deck();
         gameMode = game.getGameMode();
         score = 0;
-        scoreboard = new Scoreboard(game.getId());
+        scoreboard = new Scoreboard(game.getId(), email);
         previousCorrect = false;
         gscoreboard = ""; glevels = "";
         themeCard = game.getDeckTheme();

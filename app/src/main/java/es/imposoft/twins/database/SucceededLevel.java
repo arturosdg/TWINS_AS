@@ -35,7 +35,7 @@ public class SucceededLevel {
         succedeedLevels.clear();
         if (sp.getString("LEVEL" + id, null) != null) {
             Gson gson = new Gson();
-            SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id, null), SucceededLevel.class);
+            SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id + email, null), SucceededLevel.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
             succedeedLevels = levels.getSuccedeedLevels(); 
@@ -50,7 +50,7 @@ public class SucceededLevel {
 
         Gson gson = new Gson();
         String glevels = gson.toJson(this);
-        mEdit1.putString("LEVEL" + id, glevels);
+        mEdit1.putString("LEVEL" + id + email, glevels);
         mEdit1.commit();
     }
 }

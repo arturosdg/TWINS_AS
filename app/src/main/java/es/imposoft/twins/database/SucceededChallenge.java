@@ -39,7 +39,7 @@ public class SucceededChallenge {
         succeededChallenges.clear();
         if (sp.getString("CHALLENGE" + id, null) != null) {
             Gson gson = new Gson();
-            SucceededChallenge levels = gson.fromJson(sp.getString("CHALLENGE" + id, null), SucceededChallenge.class);
+            SucceededChallenge levels = gson.fromJson(sp.getString("CHALLENGE" + id + email, null), SucceededChallenge.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
             succeededChallenges = levels.getSuccedeedChallenges();
@@ -55,7 +55,7 @@ public class SucceededChallenge {
 
         Gson gson = new Gson();
         String glevels = gson.toJson(this);
-        mEdit1.putString("CHALLENGE" + id, glevels);
+        mEdit1.putString("CHALLENGE" + id + email, glevels);
         mEdit1.commit();
     }
 }

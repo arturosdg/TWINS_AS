@@ -13,14 +13,16 @@ public class Scoreboard {
     private int MAX_SCORES = 3;
     private int lastScore;
     private int id = 0;
+    private String email;
 
     public Scoreboard(){
         lastScore = 0;
         highscores = new ArrayList();
     }
 
-    public Scoreboard(int id){
+    public Scoreboard(int id, String email){
         this.id = id;
+        this.email = email;
         lastScore = 0;
         highscores = new ArrayList();
     }
@@ -44,7 +46,7 @@ public class Scoreboard {
         highscores.clear();
         if(sp.getString("SCORE"+id,null) != null){
             Gson gson = new Gson();
-            Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE"+id,null),Scoreboard.class);
+            Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE" + id + email,null),Scoreboard.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
             highscores = scoreboard.getHighscores();
@@ -59,7 +61,7 @@ public class Scoreboard {
 
         Gson gson = new Gson();
         String gscoreboard = gson.toJson(this);
-        mEdit1.putString("SCORE"+id, gscoreboard);
+        mEdit1.putString("SCORE" + id + email, gscoreboard);
         mEdit1.commit();
     }
 

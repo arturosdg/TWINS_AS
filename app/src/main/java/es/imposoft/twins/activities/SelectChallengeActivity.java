@@ -11,6 +11,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -35,6 +37,8 @@ public class SelectChallengeActivity extends AppCompatActivity {
     private final int MAX_CHALLENGES = 3;
     private Button[] challengeButtons = new Button[MAX_CHALLENGES];
     Intent intent;
+    private GoogleSignInAccount signedInAccount;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,11 @@ public class SelectChallengeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectchallenge);
 
-        succeededChallenge = new SucceededChallenge(GameMode.LEVELS.ordinal());
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(signedInAccount == null) email = "";
+        else email = signedInAccount.getEmail();
+
+        succeededChallenge = new SucceededChallenge(email);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         succeededChallenge.loadChallenges(sp);
         if(succeededChallenge != null) {
