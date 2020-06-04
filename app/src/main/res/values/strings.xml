@@ -14,7 +14,7 @@
     <string name="cerrar">Cerrar</string>
     <string name="top_scores">TOP 3 PUNTUACIONES</string>
     <string name="zero" translatable="false">0</string>
-    <string name="puntos">Puntos:</string>
+    <string name="puntos">Puntos: </string>
     <string name="puntuacion">PUNTUACIÓN</string>
     <string name="juego_estandar">Juego Estandar</string>
     <string name="juego_libre">Juego Libre</string>

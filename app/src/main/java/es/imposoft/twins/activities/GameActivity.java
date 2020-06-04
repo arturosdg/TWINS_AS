@@ -229,7 +229,7 @@ public class GameActivity extends AppCompatActivity {
     private void updateScore(Card card) {
         if(!isChallengeMode()) {
             score = scoreManager.updateScore(previousCorrect, card);
-            scoreText.setText("Puntos: " + score);
+            scoreText.setText(R.string.puntos + score);
         }
     }
 

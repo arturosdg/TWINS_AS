@@ -10,7 +10,6 @@ import java.util.List;
 public class SucceededChallenge {
 
     private static List<Integer> succeededChallenges;
-    private int id = 0;
     private String email;
 
     public SucceededChallenge() {
@@ -18,7 +17,6 @@ public class SucceededChallenge {
     }
 
     public SucceededChallenge(String email) {
-        //this.id = id;
         this.email = email;
         succeededChallenges = new ArrayList();
     }
@@ -27,8 +25,8 @@ public class SucceededChallenge {
         return succeededChallenges.size();
     }
 
-    public void addSuccedeedChallenges(int level) {
-        succeededChallenges.add(level);
+    public void addSuccedeedChallenges(int challenge) {
+        succeededChallenges.add(challenge);
     }
 
     public List<Integer> getSuccedeedChallenges() {
@@ -39,10 +37,10 @@ public class SucceededChallenge {
         succeededChallenges.clear();
         if (sp.getString("CHALLENGE" + email, null) != null) {
             Gson gson = new Gson();
-            SucceededChallenge levels = gson.fromJson(sp.getString("CHALLENGE" + email, null), SucceededChallenge.class);
+            SucceededChallenge challenges = gson.fromJson(sp.getString("CHALLENGE" + email, null), SucceededChallenge.class);
 
             SharedPreferences.Editor mEdit1 = sp.edit();
-            succeededChallenges = levels.getSuccedeedChallenges();
+            succeededChallenges = challenges.getSuccedeedChallenges();
 
             mEdit1.commit();
         }
@@ -54,8 +52,8 @@ public class SucceededChallenge {
 
 
         Gson gson = new Gson();
-        String glevels = gson.toJson(this);
-        mEdit1.putString("CHALLENGE" + email, glevels);
+        String gchallenge = gson.toJson(this);
+        mEdit1.putString("CHALLENGE" + email, gchallenge);
         mEdit1.commit();
     }
 }
