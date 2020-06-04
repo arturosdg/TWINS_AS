@@ -40,7 +40,7 @@ public class DealSpecialDecks implements Dealer {
         newCards = new ArrayList<>();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SucceededChallenge challengesProgress = new SucceededChallenge(email);
+        challengesProgress = new SucceededChallenge(email);
         challengesProgress.loadChallenges(sharedPreferences);
 
         challengesWon = challengesProgress.getSuccedeedChallenges();
@@ -49,8 +49,8 @@ public class DealSpecialDecks implements Dealer {
         int totalChallenges = 0;
         if(challengesWon != null) totalChallenges = challengesWon.size() * 2;
 
-        challengesWon.addAll(challengesWon);
-        System.out.println(challengesWon.toString());
+        /*challengesWon.addAll(challengesWon);
+        System.out.println(challengesWon.toString());*/
 
         //Asignamos las cartas normales aleatoriamente entre las existentes
         numbers = randomList();

@@ -247,6 +247,7 @@ public class PopupActivity extends Activity {
                 final ArrayAdapter<Integer> arrayAdapter2 = new ArrayAdapter<Integer>(this, R.layout.simple_list_item_centered, scoreboard.getHighscores());
                 scoreList.setAdapter(arrayAdapter2);
                 arrayAdapter2.notifyDataSetChanged();
+                if ((boolean) windowInfo.get("CHALLENGE")) scoreList.setVisibility(View.GONE);
 
                 //Find all elements in the scene
                 TextView currentSmileys = findViewById(R.id.smileysText);
@@ -363,12 +364,8 @@ public class PopupActivity extends Activity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        /*Intent refresh = new Intent(this, PopupActivity.class);
-        refresh.putExtra("TYPE", PopupActivity.WindowType.OPTIONS);
-        //refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
-        startActivity(refresh);*/
-        refresh();
+        //refresh();
 
     }
 
