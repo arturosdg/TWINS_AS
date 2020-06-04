@@ -33,7 +33,7 @@ public class SucceededLevel {
 
     public void loadSuccedeedLevels(SharedPreferences sp) {
         succedeedLevels.clear();
-        if (sp.getString("LEVEL" + id, null) != null) {
+        if (sp.getString("LEVEL" + id + email, null) != null) {
             Gson gson = new Gson();
             SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id + email, null), SucceededLevel.class);
 

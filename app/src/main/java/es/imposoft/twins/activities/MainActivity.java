@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        refresh();
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -140,9 +139,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                 }
             }
-            //this.recreate();
-            //refresh();
         }
+        refresh();
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
@@ -189,4 +187,5 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
+
 }

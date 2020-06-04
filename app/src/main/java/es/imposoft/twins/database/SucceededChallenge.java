@@ -37,7 +37,7 @@ public class SucceededChallenge {
 
     public void loadChallenges(SharedPreferences sp) {
         succeededChallenges.clear();
-        if (sp.getString("CHALLENGE" + id, null) != null) {
+        if (sp.getString("CHALLENGE" + id + email, null) != null) {
             Gson gson = new Gson();
             SucceededChallenge levels = gson.fromJson(sp.getString("CHALLENGE" + id + email, null), SucceededChallenge.class);
 

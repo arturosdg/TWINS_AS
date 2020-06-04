@@ -44,7 +44,7 @@ public class Scoreboard {
 
     public void loadHighscores(SharedPreferences sp) {
         highscores.clear();
-        if(sp.getString("SCORE"+id,null) != null){
+        if(sp.getString("SCORE"+id+email,null) != null){
             Gson gson = new Gson();
             Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE" + id + email,null),Scoreboard.class);
 
