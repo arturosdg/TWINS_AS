@@ -16,6 +16,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -43,6 +45,8 @@ public class SelectLevelActivity extends AppCompatActivity {
     List<Integer> levels;
 
     Intent intent;
+    private GoogleSignInAccount signedInAccount;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,11 @@ public class SelectLevelActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectlevel);
 
-        succeededLevels = new SucceededLevel(GameMode.LEVELS.ordinal());
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(signedInAccount == null) email = "";
+        else email = signedInAccount.getEmail();
+
+        succeededLevels = new SucceededLevel(GameMode.LEVELS.ordinal(), email);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         succeededLevels.loadSuccedeedLevels(sp);
         if(succeededLevels != null) {
