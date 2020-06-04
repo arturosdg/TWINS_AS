@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Scoreboard {
+    private static int totalScore;
     private List<Integer> highscores;
     private int MAX_SCORES = 3;
     private int lastScore;
@@ -25,11 +26,13 @@ public class Scoreboard {
         this.email = email;
         lastScore = 0;
         highscores = new ArrayList();
+        totalScore = 0;
     }
 
     public void addScore(int newScore){
         lastScore = newScore;
         highscores.add(newScore);
+        totalScore += newScore;
     }
 
     public List<Integer> getHighscores(){
@@ -44,7 +47,7 @@ public class Scoreboard {
 
     public void loadHighscores(SharedPreferences sp) {
         highscores.clear();
-        if(sp.getString("SCORE"+id+email,null) != null){
+        if(sp.getString("SCORE" + id + email,null) != null){
             Gson gson = new Gson();
             Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE" + id + email,null),Scoreboard.class);
 
@@ -94,5 +97,9 @@ public class Scoreboard {
 
     public String getSmileys() {
         return "\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14\uD83D\uDE14";
+    }
+
+    public static int getTotalScore() {
+        return totalScore;
     }
 }

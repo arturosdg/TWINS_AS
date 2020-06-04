@@ -19,7 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 import es.imposoft.twins.R;
+import es.imposoft.twins.database.Scoreboard;
 import es.imposoft.twins.database.SucceededChallenge;
 import es.imposoft.twins.singleton.MusicService;
 
@@ -60,10 +63,13 @@ public class ProfileActivity extends AppCompatActivity {
         Glide.with(this).load(signedInAccount.getPhotoUrl()).into(userProfileImage);
         TextView userName = findViewById(R.id.userName);
         TextView userEmail = findViewById(R.id.userEmail);
-        TextView challenges = findViewById(R.id.succeededChallenges);
+        TextView challenges = findViewById(R.id.challenges);
+        TextView score = findViewById(R.id.score);
         userName.setText(signedInAccount.getDisplayName());
         userEmail.setText(signedInAccount.getEmail());
-        challenges.setText(challenges.getText() + String.valueOf(SucceededChallenge.getChallenges()));
+        challenges.setText(String.valueOf(SucceededChallenge.getChallenges()));
+        //TODO mostrar las maximas puntuaciones del usuario, o la suma de las puntuaciones
+        score.setText(String.valueOf(Scoreboard.getTotalScore()));
     }
 
     public void goBack(View view) {

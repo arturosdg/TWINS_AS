@@ -29,6 +29,7 @@ public class DealSpecialDecks implements Dealer {
     int random, position, cards;
     //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
     int MAX_CARD_DESIGNS = 12;
+    SucceededChallenge challengesProgress;
 
     @Override
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
