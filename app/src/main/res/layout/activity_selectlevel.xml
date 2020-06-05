@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     <TextView
-        android:id="@+id/text_levels"
+        android:id="@+id/textview_levels"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_levels">
+        app:layout_constraintTop_toBottomOf="@+id/textview_levels">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

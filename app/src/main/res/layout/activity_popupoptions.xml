@@ -36,7 +36,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/firstCard"
+            android:id="@+id/button_firstCard"
             android:layout_width="180dp"
             android:layout_height="220dp"
             android:layout_weight="1"
@@ -50,7 +50,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/secondCard"
+            android:id="@+id/button_secondCard"
             android:layout_width="180dp"
             android:layout_height="220dp"
             android:layout_weight="1"
@@ -83,7 +83,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/soundButtonOn"
+                android:id="@+id/button_soundOn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -93,7 +93,7 @@
                 android:textColor="@color/colorText" />
 
             <Button
-                android:id="@+id/soundButtonOff"
+                android:id="@+id/button_soundOff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -129,7 +129,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/langButtonEn"
+                    android:id="@+id/button_langEN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -140,7 +140,7 @@
                     android:textColor="@color/colorText" />
 
                 <Button
-                    android:id="@+id/langButtonEsp"
+                    android:id="@+id/button_langES"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -157,7 +157,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/langButtonPt"
+                    android:id="@+id/button_langPT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -168,7 +168,7 @@
                     android:textColor="@color/colorText" />
 
                 <Button
-                    android:id="@+id/langButtonFr"
+                    android:id="@+id/button_langFR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -179,16 +179,32 @@
                     android:textColor="@color/colorText" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/langButtonVal"
-                android:layout_width="163dp"
-                android:layout_height="33dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:onClick="languagePressed"
-                android:text="@string/val"
-                android:textColor="@color/colorText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_langVAL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:onClick="languagePressed"
+                    android:text="@string/val"
+                    android:textColor="@color/colorText" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -199,7 +215,7 @@
         android:layout_height="54dp" />
 
     <Button
-        android:id="@+id/acceptButton"
+        android:id="@+id/button_accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

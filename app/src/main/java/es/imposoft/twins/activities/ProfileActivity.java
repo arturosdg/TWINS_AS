@@ -21,8 +21,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.List;
-
 import es.imposoft.twins.R;
 import es.imposoft.twins.database.Scoreboard;
 import es.imposoft.twins.database.SucceededChallenge;
@@ -70,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         //Initialize the user parametres
         ImageView userProfileImage = findViewById(R.id.userProfilePic);
         Glide.with(this).load(signedInAccount.getPhotoUrl()).into(userProfileImage);
-        TextView userName = findViewById(R.id.userName);
+        TextView userName = findViewById(R.id.textview_userName);
         TextView userEmail = findViewById(R.id.userEmail);
         TextView challenges = findViewById(R.id.challenges);
         TextView score = findViewById(R.id.score);

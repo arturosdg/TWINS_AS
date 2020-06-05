@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/textview_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -28,7 +28,7 @@
             android:layout_height="24dp" />
 
         <TextView
-            android:id="@+id/starsText"
+            android:id="@+id/textview_stars"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -65,7 +65,7 @@
                 android:paddingEnd="8dp" />
 
             <TextView
-                android:id="@+id/currentScore"
+                android:id="@+id/textview_currentScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,15 +94,15 @@
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/scoreList"
+        android:id="@+id/listview_scoreList"
         android:layout_width="match_parent"
         android:layout_height="173dp"
-        android:layout_above="@id/cancelButton"
+        android:layout_above="@id/button_close"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="0dp" />
 
     <Button
-        android:id="@+id/cancelButton"
+        android:id="@+id/button_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

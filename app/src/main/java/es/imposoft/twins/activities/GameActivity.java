@@ -410,8 +410,8 @@ public class GameActivity extends AppCompatActivity {
         pauseButton.setVisibility(View.INVISIBLE);
         restartButton = findViewById(R.id.button_restart);
         restartButton.setVisibility(View.INVISIBLE);
-        scoreText = findViewById(R.id.text_score);
-        chronoTimer = findViewById(R.id.text_timer);
+        scoreText = findViewById(R.id.textview_score);
+        chronoTimer = findViewById(R.id.textview_timer);
     }
 
     private void initializeVariables() {

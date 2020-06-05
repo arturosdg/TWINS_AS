@@ -15,14 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 
 import java.util.Locale;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-
-import java.util.Locale;
 
 import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.R;
@@ -84,8 +76,8 @@ public class PopupActivity extends Activity {
                 changeWindowSize(screenHeight,0.8,screenWidth,0.6);
 
                 //Find the buttons on the scene
-                acceptButton = findViewById(R.id.acceptButton);
-                cancelButton = findViewById(R.id.cancelButton);
+                acceptButton = findViewById(R.id.button_accept);
+                cancelButton = findViewById(R.id.button_close);
 
                 //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +116,7 @@ public class PopupActivity extends Activity {
                 changeWindowSize(screenHeight,0.85,screenWidth,0.67);
 
                 //We load the scoreboard from the saved data
-                scoreList = findViewById(R.id.scoreList);
+                scoreList = findViewById(R.id.listview_scoreList);
                 gson = new Gson();
                 scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
@@ -134,16 +126,16 @@ public class PopupActivity extends Activity {
                 arrayAdapter.notifyDataSetChanged();
 
                 //Find all items from the scene
-                TextView currentScore = findViewById(R.id.currentScore);
-                TextView currentStars = findViewById(R.id.starsText);
-                cancelButton = findViewById(R.id.cancelButton);
+                TextView currentScore = findViewById(R.id.textview_currentScore);
+                TextView currentStars = findViewById(R.id.textview_stars);
+                cancelButton = findViewById(R.id.button_close);
 
                 //Show the score on the scoreboard and the stars
                 int score = scoreboard.getLastScore();
                 currentScore.setText("" + score);
                 currentStars.setText("" + scoreboard.getStarsFromScore(score));
 
-                user = findViewById(R.id.userName);
+                user = findViewById(R.id.textview_userName);
                 if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
 
                 //When the screen is canceled, the user will be sent to the main screen
@@ -169,11 +161,11 @@ public class PopupActivity extends Activity {
                 setContentView(R.layout.activity_popupoptions);
 
                 //Find all items from the scene
-                acceptButton = findViewById(R.id.acceptButton);
-                Button firstCard = findViewById(R.id.firstCard);
-                Button secondCard = findViewById(R.id.secondCard);
-                Button soundButtonOn = findViewById(R.id.soundButtonOn);
-                Button soundButtonOff = findViewById(R.id.soundButtonOff);
+                acceptButton = findViewById(R.id.button_accept);
+                Button firstCard = findViewById(R.id.button_firstCard);
+                Button secondCard = findViewById(R.id.button_secondCard);
+                Button soundButtonOn = findViewById(R.id.button_soundOn);
+                Button soundButtonOff = findViewById(R.id.button_soundOff);
 
                 //Called when the user selects Sound ON
                 soundButtonOn.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +231,7 @@ public class PopupActivity extends Activity {
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
                 //Load the scoreboard from saved data
-                scoreList = findViewById(R.id.scoreList);
+                scoreList = findViewById(R.id.listview_scoreList);
                 gson = new Gson();
                 scoreboard = gson.fromJson(getIntent().getStringExtra("SCORE"),Scoreboard.class);
 
@@ -251,13 +243,13 @@ public class PopupActivity extends Activity {
                 else scoreList.setVisibility(View.VISIBLE);
 
                 //Find all elements in the scene
-                TextView currentSmileys = findViewById(R.id.smileysText);
-                cancelButton = findViewById(R.id.cancelButton);
+                TextView currentSmileys = findViewById(R.id.textview_smileys);
+                cancelButton = findViewById(R.id.button_close);
 
                 //Change the scoreboard stars to other emoji
                 currentSmileys.setText(""+ scoreboard.getSmileys());
 
-                user = findViewById(R.id.userName);
+                user = findViewById(R.id.textview_userName);
                 if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
 
                 //If he cancels the window, we go back to the main class
@@ -288,16 +280,16 @@ public class PopupActivity extends Activity {
                 musicEngine.stopExtraSound();
                 getExtraPoints();
 
-                TextView extraPoint = findViewById(R.id.extraPoints);
+                TextView extraPoint = findViewById(R.id.textview_extraPoints);
                 extraPoint.setText(points + " " + extraPoint.getText());
 
-                user = findViewById(R.id.userName);
+                user = findViewById(R.id.textview_userName);
                 if(signedInAccount != null) user.setText(signedInAccount.getDisplayName());
 
-                ImageView cardWon = findViewById(R.id.cardWon);
+                ImageView cardWon = findViewById(R.id.imageview_cardWon);
                 cardWon.setImageDrawable(card);
 
-                cancelButton = findViewById(R.id.cancelButton);
+                cancelButton = findViewById(R.id.button_close);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         MusicService musicEngine = MusicService.getInstance(getApplicationContext());
@@ -339,19 +331,19 @@ public class PopupActivity extends Activity {
 
     public void languagePressed(View view){
         switch (view.getId()){
-            case R.id.langButtonEn:
+            case R.id.button_langEN:
                 setLocale("en");
                 break;
-            case R.id.langButtonEsp:
+            case R.id.button_langES:
                 setLocale("es");
                 break;
-            case R.id.langButtonFr:
+            case R.id.button_langFR:
                 setLocale("fr");
                 break;
-            case R.id.langButtonPt:
+            case R.id.button_langPT:
                 setLocale("pt");
                 break;
-            case R.id.langButtonVal:
+            case R.id.button_langVAL:
                 setLocale("ca");
                 break;
         }
@@ -365,8 +357,8 @@ public class PopupActivity extends Activity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        finish();
-        //refresh();
+        //finish();
+        refresh();
 
     }
 

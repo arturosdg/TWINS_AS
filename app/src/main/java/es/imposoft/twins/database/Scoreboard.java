@@ -13,10 +13,11 @@ public class Scoreboard {
     private List<Integer> highscores;
     private int MAX_SCORES = 3;
     private int lastScore;
-    private int id = 0;
+    private int id;
     private String email;
 
     public Scoreboard(){
+        id = 0;
         lastScore = 0;
         highscores = new ArrayList();
     }
@@ -45,27 +46,27 @@ public class Scoreboard {
         return highscores;
     }
 
-    public void loadHighscores(SharedPreferences sp) {
+    public void loadHighscores(SharedPreferences sharedPreferences) {
         highscores.clear();
-        if(sp.getString("SCORE" + id + email,null) != null){
+        if(sharedPreferences.getString("SCORE" + id + email,null) != null){
             Gson gson = new Gson();
-            Scoreboard scoreboard = gson.fromJson(sp.getString("SCORE" + id + email,null),Scoreboard.class);
+            Scoreboard scoreboard = gson.fromJson(sharedPreferences.getString("SCORE" + id + email,null),Scoreboard.class);
 
-            SharedPreferences.Editor mEdit1 = sp.edit();
+            SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
             highscores = scoreboard.getHighscores();
 
-            mEdit1.commit();
+            editedSharedPreferences.commit();
         }
     }
 
-    public void saveHighscores(SharedPreferences sp) {
-        SharedPreferences.Editor mEdit1 = sp.edit();
+    public void saveHighscores(SharedPreferences sharedPreferences) {
+        SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
         getHighscores();
 
         Gson gson = new Gson();
         String gscoreboard = gson.toJson(this);
-        mEdit1.putString("SCORE" + id + email, gscoreboard);
-        mEdit1.commit();
+        editedSharedPreferences.putString("SCORE" + id + email, gscoreboard);
+        editedSharedPreferences.commit();
     }
 
     public String getStarsFromScore(int score){

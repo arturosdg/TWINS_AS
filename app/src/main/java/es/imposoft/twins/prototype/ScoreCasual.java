@@ -8,10 +8,10 @@ public class ScoreCasual extends AbstractScore {
 
     void calculateAndSetScore(Card card){
         score = getScore();
-        if (isCorrect()) {
-            score += (card.getPoints() * 5); //si acierta
+        if (!isCorrect()) {
+            score += -4;
         } else {
-            score += -4; //si falla
+            score += (card.getPoints() * 5);
         }
         setScore(score);
     }

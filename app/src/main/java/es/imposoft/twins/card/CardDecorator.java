@@ -26,12 +26,10 @@ public class CardDecorator implements Card {
         return card.getCardButton();
     }
 
-    @Override
     public void setFrontName(int name) {
         this.frontName = name;
     }
 
-    @Override
     public int getFrontName() {
         return frontName;
     }
@@ -49,7 +47,6 @@ public class CardDecorator implements Card {
     }
 
     public boolean equals(Card concreteCard) {
-        System.out.println(this.getFrontName() + " a " + concreteCard.getFrontName());
         return this.getFrontName() == concreteCard.getFrontName();
     }
 
@@ -57,17 +54,14 @@ public class CardDecorator implements Card {
         return card.getPoints();
     }
 
-    @Override
     public void setPoints(int points) {
         card.setPoints(points);
     }
 
-    @Override
     public boolean isSpecial() {
         return card.isSpecial();
     }
 
-    @Override
     public void setSpecial(boolean special) {
         card.setSpecial(special);
     }

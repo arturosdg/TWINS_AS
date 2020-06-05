@@ -35,28 +35,28 @@ public class SucceededChallenge {
         return succeededChallenges;
     }
 
-    public void loadChallenges(SharedPreferences sp) {
+    public void loadChallenges(SharedPreferences sharedPreferences) {
         succeededChallenges.clear();
-        if (sp.getStringSet("CHALLENGE" + email, null) != null) {
-            Set<String> challenges = sp.getStringSet("CHALLENGE" + email, null);
-            sp.getStringSet("CHALLENGE" + email, null);
-            SharedPreferences.Editor mEdit1 = sp.edit();
+        if (sharedPreferences.getStringSet("CHALLENGE" + email, null) != null) {
+            Set<String> challenges = sharedPreferences.getStringSet("CHALLENGE" + email, null);
+            sharedPreferences.getStringSet("CHALLENGE" + email, null);
+            SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
             succeededChallenges.clear();
             succeededChallenges.addAll(challenges);
 
-            mEdit1.commit();
+            editedSharedPreferences.commit();
         }
     }
 
-    public void saveChallenges(SharedPreferences sp) {
-        SharedPreferences.Editor mEdit1 = sp.edit();
+    public void saveChallenges(SharedPreferences sharedPreferences) {
+        SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
         getSuccedeedChallenges();
 
         //Set the values
         Set<String> set = new HashSet<>();
         set.addAll(succeededChallenges);
 
-        mEdit1.putStringSet("CHALLENGE" + email, set);
-        mEdit1.commit();
+        editedSharedPreferences.putStringSet("CHALLENGE" + email, set);
+        editedSharedPreferences.commit();
     }
 }
