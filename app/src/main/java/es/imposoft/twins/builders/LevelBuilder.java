@@ -6,12 +6,11 @@ import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.components.GameType;
 
 public interface LevelBuilder {
-    void setChronometer(int seconds, Chronometer type); //Poner un tiempo no un int
-    void setMinScore(int score);
-    void setCardAmount(int amount); //Yo haria mas bien 3 tipos de partidas por cantidad de cartas (para facilitar programar)
-    void setRevealTime(int tiempo);
+    void setChronometer(int chronometerSeconds, Chronometer chronometerType);
+    void setMinScore(int minScore);
+    void setCardAmount(int cardAmount);
+    void setRevealTime(int revealTime);
     void setCardTheme(DeckTheme deckTheme);
-    //void setScoreManager(AbstractScore scoreManager);
     void setGameMode(GameMode gameMode);
     void setGameType(GameType gameType);
     void setId(int levelId);
