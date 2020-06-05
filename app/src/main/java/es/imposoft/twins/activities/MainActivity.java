@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1;
     Context context;
     DeckTheme cardTheme;
-    MusicService ms;
+    MusicService musicService;
     GoogleSignInOptions signInOptions;
     GoogleSignInClient signInClient;
     GoogleSignInAccount signedInAccount;
@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Basic Android stuff
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -48,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
 
         //Start the music
-        ms = MusicService.getInstance(getApplicationContext());
-        ms.startGameMusic(R.raw.menusong);
+        musicService = MusicService.getInstance(getApplicationContext());
+        musicService.startGameMusic(R.raw.menusong);
 
         //Set default card theme
         cardTheme = DeckTheme.EMOJI;
@@ -72,12 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        //signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
         signInClient = GoogleSignIn.getClient(this, signInOptions);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                MainActivity.this.startSignInIntent();
+            public void onClick(View view) { MainActivity.this.startSignInIntent();
             }
         });
     }
@@ -125,10 +122,10 @@ public class MainActivity extends AppCompatActivity {
                                 chosenVolume = (int) returnInfo.get("SOUND");
                             switch (chosenVolume) {
                                 case 1:
-                                    ms.enableMusic();
+                                    musicService.enableMusic();
                                     break;
                                 case 2:
-                                    ms.disableMusic();
+                                    musicService.disableMusic();
                                     break;
                             }
                         }
@@ -141,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
         try {
             signedInAccount = task.getResult(ApiException.class);
-            this.recreate();
-            Toast.makeText(this, "Bienvenido " + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
+            this.refresh();
+            Toast.makeText(this, R.string.bienvenido + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             new AlertDialog.Builder(this).setMessage(getString(R.string.signin_other_error))
                     .setNeutralButton(android.R.string.ok, null).show();

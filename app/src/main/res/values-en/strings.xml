@@ -31,11 +31,12 @@
     <string name="es">Spanish</string>
     <string name="pt">Portuguese</string>
     <string name="fr">French</string>
-    <string name="viewProfile">View Profile</string>
+    <string name="ver_perfil">View Profile</string>
     <string name="carta_especial">Special card</string>
     <string name="val">Valencian</string>
     <string name="top_scores">TOP 3 SCORES</string>
     <string name="desafios_superados">Succeeded challenges: </string>
-    <string name="total_scores">Total score: </string>
+    <string name="puntuacion_total">Total score: </string>
     <string name="puntos_extra">Extra points</string>
+    <string name="bienvenido">Welcome </string>
 </resources>

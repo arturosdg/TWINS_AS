@@ -33,11 +33,12 @@
     <string name="es">Espagnol</string>
     <string name="pt">Portugais</string>
     <string name="fr">Français</string>
-    <string name="viewProfile">Voir le Profil</string>
+    <string name="ver_perfil">Voir le Profil</string>
     <string name="carta_especial">Carte spéciale</string>
     <string name="top_scores">TOP 3 SCORES</string>
     <string name="val">VALENCIEN</string>
     <string name="desafios_superados">Défis dépassé: </string>
-    <string name="total_scores">Score total cumulé: </string>
+    <string name="puntuacion_total">Score total cumulé: </string>
     <string name="puntos_extra">Bonus points</string>
+    <string name="bienvenido">"Bienvenue "</string>
 </resources>

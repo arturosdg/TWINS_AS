@@ -45,18 +45,18 @@ public class GameActivity extends AppCompatActivity {
 
     int maxCards, visibleCards, restantMatches;
     Button[] buttons;
-    ArrayList<Card> concreteCards;
+    ArrayList<Card> cards;
     Context context;
     int tapCounter, pauseTapCounter, tapErrors, maxErrors;
     Scoreboard scoreboard;
     int score, levelPlayed, challengePlayed;
 
-    boolean previousCorrect, pausedGame, isClickable;
+    boolean previousCorrect, isGamePaused, isClickable;
     List<Card> pairs = new ArrayList<>();
 
     long timeWhenStarted, timeWhenStopped;
 
-    int SOUNDSECONDS = 15000;
+    final int SOUNDSECONDS = 15000;
 
     Bundle windowInfo;
     Game game;
@@ -97,10 +97,6 @@ public class GameActivity extends AppCompatActivity {
         musicEngine.stopMusic();
         musicEngine.startGameMusic(game.getSong());
 
-        /*Reproducir un sonido por encima:
-        musicEngine.startExtraSound(R.raw.sonidoareproducir);
-         */
-
         signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signedInAccount == null) email = "";
         else email = signedInAccount.getEmail();
@@ -113,6 +109,9 @@ public class GameActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         scoreboard.loadHighscores(sharedPreferences);
+
+        scoreText.setVisibility(View.VISIBLE);
+
         if(isLevelMode()) {
             succeededLevels = new SucceededLevel(gameMode.ordinal(), email);
             succeededLevels.loadSuccedeedLevels(sharedPreferences);
@@ -120,12 +119,11 @@ public class GameActivity extends AppCompatActivity {
             succeededChallenge = new SucceededChallenge(email);
             succeededChallenge.loadChallenges(sharedPreferences);
             deck.addChallengesWon(succeededChallenge.getSuccedeedChallenges());
-            scoreText.setText("");
+            scoreText.setVisibility(View.GONE);
         }
 
-
         fillButtonsArray();
-        deck.assignCardTheme(themeCard, concreteCards, game, buttons, context, email);
+        deck.assignCardTheme(themeCard, cards, game, buttons, context, email);
     }
 
     public void showScoreboard(){
@@ -201,8 +199,8 @@ public class GameActivity extends AppCompatActivity {
                 }
             }, game.getRevealSeconds() * 1000);
         } else {
-            for (Card concreteCard : concreteCards) {
-                if(visibleCards < 2 && !pausedGame)
+            for (Card concreteCard : cards) {
+                if(visibleCards < 2 && !isGamePaused)
                     if (concreteCard.getCardButton().getId() == view.getId()) {
                         concreteCard.turnCard();
                         visibleCards++;
@@ -234,21 +232,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void turnAllCards() {
-        for (Card concreteCard : concreteCards) {
+        for (Card concreteCard : cards) {
             concreteCard.turnCard();
         }
         setClickable(buttons);
     }
 
     private void turnVisibleCards() {
-        for (Card concreteCard : concreteCards) {
+        for (Card concreteCard : cards) {
             concreteCard.turnVisibleCards();
         }
     }
 
     private void setClickable(Button[] buttons) {
         for (Button b: buttons) {
-            for (Card c : concreteCards)
+            for (Card c : cards)
                 if(c.getCardButton() == b) b.setClickable(isClickable);
         }
         isClickable = !isClickable;
@@ -316,7 +314,7 @@ public class GameActivity extends AppCompatActivity {
             chronoTimer.stop();
             musicEngine.stopMusic();
             musicEngine.stopExtraSound();
-            pausedGame = !pausedGame;
+            isGamePaused = !isGamePaused;
         }
         else {
             timeWhenStarted = SystemClock.elapsedRealtime() + timeWhenStopped;
@@ -325,7 +323,7 @@ public class GameActivity extends AppCompatActivity {
             musicEngine.startGameMusic(game.getSong());
             if(timeWhenStarted + (game.getSeconds() * 1000) - SOUNDSECONDS <= SystemClock.elapsedRealtime())
                 musicEngine.startExtraSound(R.raw.clocksound);
-            pausedGame = !pausedGame;
+            isGamePaused = !isGamePaused;
         }
         pauseTapCounter++;
     }
@@ -424,9 +422,9 @@ public class GameActivity extends AppCompatActivity {
         maxErrors = game.getMaxFails();
         visibleCards = 0;
         buttons = new Button[maxCards];
-        concreteCards = new ArrayList<>(maxCards);
+        cards = new ArrayList<>(maxCards);
         isClickable = false;
-        pausedGame = false;
+        isGamePaused = false;
         deck = new Deck();
         gameMode = game.getGameMode();
         score = 0;
@@ -458,5 +456,11 @@ public class GameActivity extends AppCompatActivity {
         }
         if(!isChallengeMode()) updateScore(pairs.get(0));
         pairs.clear();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isGamePaused = false;
     }
 }

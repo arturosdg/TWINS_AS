@@ -43,10 +43,11 @@
     <string name="es">Español</string>
     <string name="pt">Portugues</string>
     <string name="fr">Francés</string>
-    <string name="viewProfile">Ver Perfil</string>
+    <string name="ver_perfil">Ver Perfil</string>
     <string name="carta_especial">Carta especial</string>
     <string name="val">Valenciano</string>
     <string name="desafios_superados">Desafíos superados: </string>
-    <string name="total_scores">Puntuación total acumulada: </string>
+    <string name="puntuacion_total">Puntuación total acumulada: </string>
     <string name="puntos_extra">Puntos extra</string>
+    <string name="bienvenido">Bienvenido </string>
 </resources>

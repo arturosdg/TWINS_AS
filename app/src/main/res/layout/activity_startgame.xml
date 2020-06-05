@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="viewProfile"
-            android:text="@string/viewProfile"
+            android:text="@string/ver_perfil"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@color/colorText" />
 

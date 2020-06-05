@@ -32,10 +32,11 @@
     <string name="es">Espanyol</string>
     <string name="pt">Portugués</string>
     <string name="fr">Francés</string>
-    <string name="viewProfile">Veure Perfil</string>
+    <string name="ver_perfil">Veure Perfil</string>
     <string name="carta_especial">Carta especial</string>
     <string name="val">Valencià</string>
     <string name="desafios_superados">Desafiaments aconseguits: </string>
-    <string name="total_scores">Puntuació total acumulada: </string>
+    <string name="puntuacion_total">Puntuació total acumulada: </string>
     <string name="puntos_extra">Punts extra</string>
+    <string name="bienvenido">Benvingut </string>
 </resources>

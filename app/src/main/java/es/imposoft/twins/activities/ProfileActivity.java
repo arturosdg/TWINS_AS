@@ -29,17 +29,17 @@ import es.imposoft.twins.singleton.MusicService;
 public class ProfileActivity extends AppCompatActivity {
 
     Context context;
-    MusicService ms;
+    MusicService musicService;
     Intent intent;
     GoogleSignInClient signInClient;
     GoogleSignInAccount signedInAccount;
     GoogleSignInOptions signInOptions;
 
     SucceededChallenge challenges;
+    Scoreboard scores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Basic Android stuff
         context = getApplicationContext();
         super.onCreate(savedInstanceState);
 
@@ -48,8 +48,8 @@ public class ProfileActivity extends AppCompatActivity {
         startService(intent);
 
         //Start the music
-        ms = MusicService.getInstance(getApplicationContext());
-        ms.startGameMusic(R.raw.menusong);
+        musicService = MusicService.getInstance(getApplicationContext());
+        musicService.startGameMusic(R.raw.menusong);
 
         signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         signInClient = GoogleSignIn.getClient(this, signInOptions);
@@ -61,8 +61,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         challenges = new SucceededChallenge(signedInAccount.getEmail());
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        challenges.loadChallenges(sp);
+        scores = new Scoreboard();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        challenges.loadChallenges(sharedPreferences);
         int challengesSucceeded = challenges.getChallenges();
 
         //Initialize the user parametres
@@ -76,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         userEmail.setText(signedInAccount.getEmail());
         challenges.setText(String.valueOf(challengesSucceeded));
         //TODO mostrar las maximas puntuaciones del usuario, o la suma de las puntuaciones
-        score.setText(String.valueOf(Scoreboard.getTotalScore()));
+        score.setText(String.valueOf(scores.getTotalScore()));
     }
 
     public void goBack(View view) {

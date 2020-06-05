@@ -77,7 +77,7 @@ public class PopupActivity extends Activity {
 
                 //Find the buttons on the scene
                 acceptButton = findViewById(R.id.button_accept);
-                cancelButton = findViewById(R.id.button_close);
+                cancelButton = findViewById(R.id.button_cancel);
 
                 //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class PopupActivity extends Activity {
                 //Find all items from the scene
                 TextView currentScore = findViewById(R.id.textview_currentScore);
                 TextView currentStars = findViewById(R.id.textview_stars);
-                cancelButton = findViewById(R.id.button_close);
+                cancelButton = findViewById(R.id.button_cancel);
 
                 //Show the score on the scoreboard and the stars
                 int score = scoreboard.getLastScore();
@@ -161,7 +161,7 @@ public class PopupActivity extends Activity {
                 setContentView(R.layout.activity_popupoptions);
 
                 //Find all items from the scene
-                acceptButton = findViewById(R.id.button_accept);
+                cancelButton = findViewById(R.id.button_cancel);
                 Button firstCard = findViewById(R.id.button_firstCard);
                 Button secondCard = findViewById(R.id.button_secondCard);
                 Button soundButtonOn = findViewById(R.id.button_soundOn);
@@ -192,7 +192,7 @@ public class PopupActivity extends Activity {
                 });
 
                 //When the user clicks the accept button he will close the options menu
-                acceptButton.setOnClickListener(new View.OnClickListener() {
+                cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         finish();
                     }
@@ -244,7 +244,7 @@ public class PopupActivity extends Activity {
 
                 //Find all elements in the scene
                 TextView currentSmileys = findViewById(R.id.textview_smileys);
-                cancelButton = findViewById(R.id.button_close);
+                cancelButton = findViewById(R.id.button_cancel);
 
                 //Change the scoreboard stars to other emoji
                 currentSmileys.setText(""+ scoreboard.getSmileys());
@@ -289,7 +289,7 @@ public class PopupActivity extends Activity {
                 ImageView cardWon = findViewById(R.id.imageview_cardWon);
                 cardWon.setImageDrawable(card);
 
-                cancelButton = findViewById(R.id.button_close);
+                cancelButton = findViewById(R.id.button_cancel);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         MusicService musicEngine = MusicService.getInstance(getApplicationContext());
@@ -350,14 +350,12 @@ public class PopupActivity extends Activity {
     }
 
     public void setLocale(String lang) {
-        System.out.println("test" + lang);
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        //finish();
         refresh();
 
     }

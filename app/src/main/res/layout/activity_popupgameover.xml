@@ -68,12 +68,12 @@
         android:id="@+id/listview_scoreList"
         android:layout_width="match_parent"
         android:layout_height="173dp"
-        android:layout_above="@id/button_close"
+        android:layout_above="@id/button_cancel"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="0dp" />
 
     <Button
-        android:id="@+id/button_close"
+        android:id="@+id/button_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

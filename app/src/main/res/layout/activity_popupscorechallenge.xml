@@ -77,7 +77,7 @@
 
 
     <Button
-        android:id="@+id/button_close"
+        android:id="@+id/button_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -91,7 +91,7 @@
         android:id="@+id/imageview_cardWon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_close"
+        android:layout_above="@+id/button_cancel"
         android:layout_below="@+id/gameStars"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

@@ -52,12 +52,12 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     }
 
     public static void fixBackgroundRepeat(View view) {
-        Drawable bg = view.getBackground();
-        if (bg != null) {
-            if (bg instanceof BitmapDrawable) {
-                BitmapDrawable bmp = (BitmapDrawable) bg;
-                bmp.mutate(); // make sure that we aren't sharing state anymore
-                bmp.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Drawable background = view.getBackground();
+        if (background != null) {
+            if (background instanceof BitmapDrawable) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) background;
+                bitmapDrawable.mutate(); // make sure that we aren't sharing state anymore
+                bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
             }
         }
     }

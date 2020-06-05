@@ -71,11 +71,11 @@ public class SelectLevelActivity extends AppCompatActivity {
         else email = signedInAccount.getEmail();
 
         succeededLevels = new SucceededLevel(GameMode.LEVELS.ordinal(), email);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        succeededLevels.loadSuccedeedLevels(sp);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        succeededLevels.loadSuccedeedLevels(sharedPreferences);
         if(succeededLevels != null) {
             levels = succeededLevels.getSuccedeedLevels();
-            succeededLevels.saveSucceededLevels(sp);
+            succeededLevels.saveSucceededLevels(sharedPreferences);
         }
 
         fillArray();
