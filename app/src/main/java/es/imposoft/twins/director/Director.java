@@ -24,7 +24,6 @@ public class Director {
         builder.setGameMode(GameMode.STANDARD);
         builder.setId(1);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.partidaestandar);
         builder.setMaxFails(10);
     }
@@ -38,7 +37,6 @@ public class Director {
         builder.setGameMode(GameMode.CASUAL);
         builder.setId(2);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.musicapartidalibre);
         builder.setMaxFails(5);
     }
@@ -52,7 +50,6 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(3);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.niveltranquilo);
         builder.setMaxFails(5);
     }
@@ -66,7 +63,6 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(4);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.nivelintensito);
         builder.setMaxFails(5);
     }
@@ -80,13 +76,12 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(5);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
 
     public void constructLevel4(ConcreteBuilderLevel builder){
-        builder.setCardTheme(DeckTheme.CARS);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.CARS);
         builder.setMinScore(55);
         builder.setCardAmount(20);
         builder.setRevealTime(1);
@@ -94,13 +89,12 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(6);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
 
     public void constructLevel5(ConcreteBuilderLevel builder){
-        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(50);
         builder.setCardAmount(24);
         builder.setRevealTime(1);
@@ -108,14 +102,13 @@ public class Director {
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
         builder.setGameType(GameType.NORMAL);
-
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
 
-    //Tiempo justo challenge
+    //Close call challenge
     public void constructChallenge1(ConcreteBuilderLevel builder) {
-        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(0);
         builder.setCardAmount(16);
         builder.setRevealTime(3);
@@ -127,9 +120,9 @@ public class Director {
         builder.setMaxFails(5);
     }
 
-    //Perfecto challenge
+    //Perfect Challenge
     public void constructChallenge2(ConcreteBuilderLevel builder) {
-        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(0);
         builder.setCardAmount(24);
         builder.setRevealTime(10);
@@ -143,7 +136,7 @@ public class Director {
 
     //Mixed decks challenge
     public void constructChallenge3(ConcreteBuilderLevel builder) {
-        builder.setCardTheme(DeckTheme.EMOJI);//Deck.EMOJI
+        builder.setCardTheme(DeckTheme.EMOJI);
         builder.setMinScore(0);
         builder.setCardAmount(24);
         builder.setRevealTime(3);

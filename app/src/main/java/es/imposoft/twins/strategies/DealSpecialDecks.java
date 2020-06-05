@@ -22,50 +22,42 @@ import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.gametypes.Game;
 
 public class DealSpecialDecks implements Dealer {
-    ArrayList<Card> shuffled;
-    ArrayList<Integer> numbers, imagesNormal, imagesChallenges;
-    List<String> challengesWon;
-    ArrayList<Integer> newCards;
-    int random, position, cards;
-    //ESTE NUMERO VARIA EN FUNCION DEL NUMERO DE CARTAS EXISTENTES PARA CADA TIPO DE BARAJA
-    int MAX_CARD_DESIGNS = 12;
-    SucceededChallenge challengesProgress;
+    private ArrayList<Integer> randomNumbers, imagesNormal;
+    private List<String> challengesWon;
+    private int totalCards;
+    private int MAX_CARD_DESIGNS = 12;
+    private SucceededChallenge challengesProgress;
 
     @Override
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
-        shuffled = new ArrayList<>();
+        //Initialize arrays
         imagesNormal = new ArrayList<>();
-        imagesChallenges = new ArrayList<>();
-        numbers = new ArrayList<>();
-        newCards = new ArrayList<>();
+        randomNumbers = new ArrayList<>();
 
+        //Load won challenges
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         challengesProgress = new SucceededChallenge(email);
         challengesProgress.loadChallenges(sharedPreferences);
-
         challengesWon = challengesProgress.getSuccedeedChallenges();
-        cards = game.getCardAmount();
+
+        totalCards = game.getCardAmount();
 
         int totalChallenges = 0;
         if(challengesWon != null) totalChallenges = challengesWon.size() * 2;
 
-        /*challengesWon.addAll(challengesWon);
-        System.out.println(challengesWon.toString());*/
-
-        //Asignamos las cartas normales aleatoriamente entre las existentes
-        numbers = randomList();
-
-        for (int i = 0; i < (cards - totalChallenges) / 2; i++){
-            imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase() + numbers.get(i), "drawable", context.getPackageName()));
+        //Load the right amount of cards randomly on imagesNormal
+        randomNumbers = randomList();
+        for (int i = 0; i < (totalCards - totalChallenges) / 2; i++){
+            imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase()
+                    + randomNumbers.get(i), "drawable", context.getPackageName()));
         }
-        //Images es un array con una imagen de cada una de las que hay que asignar
 
-        numbers.clear();
-
+        //Duplicate all the challengesWon to have the right amount
         challengesWon.addAll(challengesWon);
+
+        //We shuffle the card buttons to assign a Card randomly
         Collections.shuffle(Arrays.asList(buttons));
-        //Creamos todas las cartas contando las de desafios
-        for(int i = 0; i < cards; i++){
+        for(int i = 0; i < totalCards; i++){
             if(i<totalChallenges){
                 ConcreteCard normalCard = new ConcreteCard(buttons[i], context);
                 CardDecorator specialCard;
@@ -84,10 +76,8 @@ public class DealSpecialDecks implements Dealer {
             }
         }
 
-        //Ya tenemos todas las cartas creadas pero sin la imagen asignada
-
+        //Duplicate the cards so we have 2 of each kind and assign the right card image
         imagesNormal.addAll(imagesNormal);
-
         for (Card cardToAsign: concreteCards) {
             if (cardToAsign instanceof SpecialCardDecorator1) {
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard1", "drawable", context.getPackageName())));
@@ -111,18 +101,18 @@ public class DealSpecialDecks implements Dealer {
     }
 
     private ArrayList<Integer> randomList() {
-        ArrayList<Integer> aux = new ArrayList<>();
-        if (cards == 24) {
-            for (int i = 0; i < cards / 2; i++)
-                aux.add(i);
+        ArrayList<Integer> cardNumbers = new ArrayList<>();
+        if (totalCards == 24) {
+            for (int i = 0; i < totalCards / 2; i++)
+                cardNumbers.add(i);
         } else {
-            while (aux.size() <= cards / 2) {
-                random = (int) (Math.random() * MAX_CARD_DESIGNS);
-                if (!aux.contains(random)) {
-                    aux.add(random);
+            while (cardNumbers.size() <= totalCards / 2) {
+                int random = (int) (Math.random() * MAX_CARD_DESIGNS);
+                if (!cardNumbers.contains(random)) {
+                    cardNumbers.add(random);
                 }
             }
         }
-        return aux;
+        return cardNumbers;
     }
 }

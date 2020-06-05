@@ -7,16 +7,16 @@ import es.imposoft.twins.R;
 
 public class MusicService {
     private static MusicService instance;
-    public Context context;
-    public MediaPlayer player;
-    public MediaPlayer auxPlayer;
-    public boolean isEnabled;
-    public int lastSong;
+    private Context context;
+    private MediaPlayer musicPlayer;
+    private MediaPlayer soundPlayer;
+    private boolean isEnabled;
+    private int lastSong;
 
     private MusicService(Context context) {
         this.context = context;
-        player = MediaPlayer.create(context, R.raw.menusong);
-        auxPlayer = MediaPlayer.create(context, R.raw.clocksound);
+        musicPlayer = MediaPlayer.create(context, R.raw.menusong);
+        soundPlayer = MediaPlayer.create(context, R.raw.clocksound);
         isEnabled = true;
     }
 
@@ -28,10 +28,10 @@ public class MusicService {
     }
 
     public void stopMusic() {
-        if (player.isPlaying()) player.stop();
+        if (musicPlayer.isPlaying()) musicPlayer.stop();
     }
 
-    public void stopExtraSound(){if (auxPlayer.isPlaying()) auxPlayer.stop();}
+    public void stopExtraSound(){if (soundPlayer.isPlaying()) soundPlayer.stop();}
 
     public void disableMusic(){
         if(isEnabled){
@@ -47,22 +47,24 @@ public class MusicService {
         }
     }
 
-    public void startGameMusic(int musicLink) {
-        if(!player.isPlaying() & isEnabled) {
-            lastSong = musicLink;
-            player = MediaPlayer.create(context, musicLink);
-            player.setLooping(true); // Set looping
-            player.setVolume(35, 35);
-            player.start();
+    //Plays the game music
+    public void startGameMusic(int newSong) {
+        if(!musicPlayer.isPlaying() & isEnabled) {
+            lastSong = newSong;
+            musicPlayer = MediaPlayer.create(context, newSong);
+            musicPlayer.setLooping(true);
+            musicPlayer.setVolume(35, 35);
+            musicPlayer.start();
         }
     }
 
+    //Plays a sound on top of the music
     public void startExtraSound(int testUri){
-        if(!auxPlayer.isPlaying() & isEnabled) {
-            auxPlayer = MediaPlayer.create(context, testUri);
-            auxPlayer.setLooping(false);
-            auxPlayer.setVolume(75, 75);
-            auxPlayer.start();
+        if(!soundPlayer.isPlaying() & isEnabled) {
+            soundPlayer = MediaPlayer.create(context, testUri);
+            soundPlayer.setLooping(false);
+            soundPlayer.setVolume(75, 75);
+            soundPlayer.start();
         }
     }
 }

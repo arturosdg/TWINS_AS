@@ -27,7 +27,6 @@ public class Game {
         this.cardAmount = cardAmount;
         this.revealSeconds = revealSeconds;
         this.deckTheme = deckTheme;
-        //this.scoreManager = scoreManager;
         this.gameMode = gameMode;
         this.gameType = gameType;
         this.maxFails = maxFails;
@@ -65,20 +64,5 @@ public class Game {
         return song;
     }
 
-    //public AbstractScore getScoreManager() { return scoreManager; }
-
-    public GameType getGameType() { return gameType; }
-
     public int getMaxFails() { return maxFails; }
-
-    public String printGame() {
-        return "game lasts " + seconds +
-                " with chronometer " + chronometerType
-                + "with minscore of " + minScore
-                + "and this cards " + cardAmount
-                + "revealed for " +revealSeconds
-                + "Game deck " + deckTheme
-                + "Game mode " + gameMode
-                + "Game type" + gameType;
-    }
 }
