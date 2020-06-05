@@ -23,7 +23,7 @@ import es.imposoft.twins.R;
 import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
-
+import es.imposoft.twins.singleton.MusicService;
 
 
 public class SelectionGameModeActivity extends AppCompatActivity {
@@ -33,6 +33,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     Bundle windowInfo;
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
+    private MusicService musicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +44,15 @@ public class SelectionGameModeActivity extends AppCompatActivity {
         windowInfo = getIntent().getExtras();
         deckTheme = (DeckTheme) windowInfo.get("THEME");
         director = new Director(deckTheme);
-        levelBuilder =  new ConcreteBuilderLevel();
+        levelBuilder = new ConcreteBuilderLevel();
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectgamemode);
+
+        musicService = MusicService.getInstance(getApplicationContext());
+        musicService.startGameMusic(R.raw.menusong);
     }
 
     public static void fixBackgroundRepeat(View view) {
@@ -85,7 +89,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         String newGame = gson.toJson(game);
-        intent.putExtra("GAME",newGame);
+        intent.putExtra("GAME", newGame);
 
         startActivity(intent);
         this.finish();
@@ -99,7 +103,7 @@ public class SelectionGameModeActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         String newGame = gson.toJson(game);
-        intent.putExtra("GAME",newGame);
+        intent.putExtra("GAME", newGame);
 
         startActivity(intent);
         this.finish();

@@ -39,7 +39,7 @@ public class PopupActivity extends Activity {
     DeckTheme deckTheme;
     int points;
     Drawable card;
-    MusicService musicEngine;
+    MusicService musicService;
 
     GoogleSignInAccount signedInAccount;
 
@@ -59,18 +59,17 @@ public class PopupActivity extends Activity {
         Button acceptButton;
 
         deckTheme = (DeckTheme) windowInfo.get("THEME");
-        musicEngine = MusicService.getInstance(getApplicationContext());
+        musicService = MusicService.getInstance(getApplicationContext());
 
         signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         TextView user;
 
-
         switch ((WindowType) windowInfo.get("TYPE")){
             case WARNING:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupwindow);
-                musicEngine.stopExtraSound();
+                musicService.stopExtraSound();
 
                 //Resize the screen
                 changeWindowSize(screenHeight,0.8,screenWidth,0.6);
@@ -82,9 +81,9 @@ public class PopupActivity extends Activity {
                 //If the user accepts, he will be sent to the main screen
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
-                        musicEngine.stopMusic();
-                        musicEngine.startGameMusic(R.raw.menusong);
+                        musicService = MusicService.getInstance(getApplicationContext());
+                        musicService.stopMusic();
+                        musicService.startGameMusic(R.raw.menusong);
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
                             returnIntent = new Intent(getBaseContext(), SelectLevelActivity.class);
@@ -110,7 +109,7 @@ public class PopupActivity extends Activity {
             case SCOREBOARD:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupscoreboard);
-                musicEngine.stopExtraSound();
+                musicService.stopExtraSound();
 
                 //Resize the screen
                 changeWindowSize(screenHeight,0.85,screenWidth,0.67);
@@ -142,8 +141,8 @@ public class PopupActivity extends Activity {
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
 
-                        musicEngine.stopMusic();
-                        musicEngine.startGameMusic(R.raw.menusong);
+                        musicService.stopMusic();
+                        musicService.startGameMusic(R.raw.menusong);
 
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
@@ -225,7 +224,7 @@ public class PopupActivity extends Activity {
             case GAMEOVER:
                 //We change the screen showed
                 setContentView(R.layout.activity_popupgameover);
-                musicEngine.stopExtraSound();
+                musicService.stopExtraSound();
 
                 //Resize the screen
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
@@ -255,9 +254,9 @@ public class PopupActivity extends Activity {
                 //If he cancels the window, we go back to the main class
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
-                        musicEngine.stopMusic();
-                        musicEngine.startGameMusic(R.raw.menusong);
+                        musicService = MusicService.getInstance(getApplicationContext());
+                        musicService.stopMusic();
+                        musicService.startGameMusic(R.raw.menusong);
                         
                         Intent returnIntent = new Intent(getBaseContext(), SelectionGameModeActivity.class);
                         if((boolean) windowInfo.get("LEVELMODE")) {
@@ -277,7 +276,7 @@ public class PopupActivity extends Activity {
                 setContentView(R.layout.activity_popupscorechallenge);
                 getWindow().setLayout((int) (screenWidth*.85), (int) (screenHeight*.67));
 
-                musicEngine.stopExtraSound();
+                musicService.stopExtraSound();
                 getExtraPoints();
 
                 TextView extraPoint = findViewById(R.id.textview_extraPoints);
@@ -292,9 +291,9 @@ public class PopupActivity extends Activity {
                 cancelButton = findViewById(R.id.button_cancel);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        MusicService musicEngine = MusicService.getInstance(getApplicationContext());
-                        musicEngine.stopMusic();
-                        musicEngine.startGameMusic(R.raw.menusong);
+                        musicService = MusicService.getInstance(getApplicationContext());
+                        musicService.stopMusic();
+                        musicService.startGameMusic(R.raw.menusong);
                         Intent returnIntent = new Intent(getBaseContext(), SelectChallengeActivity.class);
                         returnIntent.putExtra("THEME", deckTheme);
                         returnIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

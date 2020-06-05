@@ -29,6 +29,7 @@ import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
+import es.imposoft.twins.singleton.MusicService;
 
 public class SelectLevelActivity extends AppCompatActivity {
     private final int MAX_LEVELS = 5;
@@ -143,4 +144,5 @@ public class SelectLevelActivity extends AppCompatActivity {
             levelButtons[i].setBackground(getDrawable(R.drawable.cardlevelblocked));
         }
     }
+
 }

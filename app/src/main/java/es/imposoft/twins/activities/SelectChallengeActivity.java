@@ -24,6 +24,7 @@ import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.director.Director;
 import es.imposoft.twins.gametypes.Game;
+import es.imposoft.twins.singleton.MusicService;
 
 public class SelectChallengeActivity extends AppCompatActivity {
     private Context context;
@@ -91,4 +92,5 @@ public class SelectChallengeActivity extends AppCompatActivity {
         else if (id == challengeButtons[1].getId()) { director.constructChallenge2(levelBuilder); currentChallenge = 2; }
         else if (id == challengeButtons[2].getId()) { director.constructChallenge3(levelBuilder); currentChallenge = 3; }
     }
+
 }

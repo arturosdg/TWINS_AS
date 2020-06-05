@@ -458,9 +458,4 @@ public class GameActivity extends AppCompatActivity {
         pairs.clear();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        isGamePaused = false;
-    }
 }
