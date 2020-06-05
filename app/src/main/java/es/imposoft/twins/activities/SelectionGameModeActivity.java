@@ -33,7 +33,6 @@ public class SelectionGameModeActivity extends AppCompatActivity {
     Bundle windowInfo;
     private Director director;
     private ConcreteBuilderLevel levelBuilder;
-    private MusicService musicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,6 @@ public class SelectionGameModeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_selectgamemode);
 
-        musicService = MusicService.getInstance(getApplicationContext());
-        musicService.startGameMusic(R.raw.menusong);
     }
 
     public static void fixBackgroundRepeat(View view) {
