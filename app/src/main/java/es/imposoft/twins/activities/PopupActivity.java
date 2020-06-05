@@ -365,8 +365,8 @@ public class PopupActivity extends Activity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        finish();
-        //refresh();
+        //finish();
+        refresh();
 
     }
 
