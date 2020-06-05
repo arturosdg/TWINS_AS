@@ -7,7 +7,7 @@ import es.imposoft.twins.components.GameType;
 import es.imposoft.twins.gametypes.Game;
 
 public class ConcreteBuilderLevel implements LevelBuilder {
-    private int seconds;
+    private int chronometerSeconds;
     private Chronometer chronometerType;
     private int minScore;
     private int cardAmount;
@@ -20,24 +20,24 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int maxFails;
 
     @Override
-    public void setChronometer(int seconds, Chronometer type) {
-        this.seconds = seconds;
-        this.chronometerType = type;
+    public void setChronometer(int chronometerSeconds, Chronometer chronometerType) {
+        this.chronometerSeconds = chronometerSeconds;
+        this.chronometerType = chronometerType;
     }
 
     @Override
-    public void setMinScore(int score) {
-        this.minScore = score;
+    public void setMinScore(int minScore) {
+        this.minScore = minScore;
     }
 
     @Override
-    public void setCardAmount(int amount) {
-        this.cardAmount = amount;
+    public void setCardAmount(int cardAmount) {
+        this.cardAmount = cardAmount;
     }
 
     @Override
-    public void setRevealTime(int gameTime) {
-        this.revealSeconds = gameTime;
+    public void setRevealTime(int revealTime) {
+        this.revealSeconds = revealTime;
     }
 
     @Override
@@ -61,6 +61,6 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     public void setMaxFails(int maxFails) { this.maxFails = maxFails; }
 
     public Game getResult(){
-        return new Game(levelId, seconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song, maxFails);
+        return new Game(levelId, chronometerSeconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song, maxFails);
     }
 }
