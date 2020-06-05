@@ -7,10 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -22,8 +19,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-
-import java.util.Locale;
 
 import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.components.DeckTheme;
@@ -64,15 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_startgame);
 
-        signInButton = findViewById(R.id.sign_in_button);
+        signInButton = findViewById(R.id.button_signIn);
 
         if (signedInAccount == null) {
-            findViewById(R.id.view_profile_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_viewProfile).setVisibility(View.GONE);
+            findViewById(R.id.button_signIn).setVisibility(View.VISIBLE);
         }
         else {
-            findViewById(R.id.view_profile_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.button_viewProfile).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_signIn).setVisibility(View.GONE);
         }
 
 
@@ -169,12 +164,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(signedInAccount != null) {
-            findViewById(R.id.view_profile_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.button_viewProfile).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_signIn).setVisibility(View.GONE);
         }
         else {
-            findViewById(R.id.view_profile_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_viewProfile).setVisibility(View.GONE);
+            findViewById(R.id.button_signIn).setVisibility(View.VISIBLE);
         }
         super.onStart();
     }
@@ -187,5 +182,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
+
 
 }
