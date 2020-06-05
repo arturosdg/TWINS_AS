@@ -10,10 +10,11 @@ import java.util.List;
 public class SucceededLevel {
 
     private List<Integer> succedeedLevels;
-    private int id = 0;
+    private int id;
     private String email;
 
     public SucceededLevel() {
+        id = 0;
         succedeedLevels = new ArrayList();
     }
 
@@ -31,26 +32,26 @@ public class SucceededLevel {
         return succedeedLevels;
     }
 
-    public void loadSuccedeedLevels(SharedPreferences sp) {
+    public void loadSuccedeedLevels(SharedPreferences sharedPreferences) {
         succedeedLevels.clear();
-        if (sp.getString("LEVEL" + id + email, null) != null) {
+        if (sharedPreferences.getString("LEVEL" + id + email, null) != null) {
             Gson gson = new Gson();
-            SucceededLevel levels = gson.fromJson(sp.getString("LEVEL" + id + email, null), SucceededLevel.class);
+            SucceededLevel levels = gson.fromJson(sharedPreferences.getString("LEVEL" + id + email, null), SucceededLevel.class);
 
-            SharedPreferences.Editor mEdit1 = sp.edit();
+            SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
             succedeedLevels = levels.getSuccedeedLevels(); 
 
-            mEdit1.commit();
+            editedSharedPreferences.commit();
         }
     }
 
-    public void saveSucceededLevels(SharedPreferences sp) {
-        SharedPreferences.Editor mEdit1 = sp.edit();
+    public void saveSucceededLevels(SharedPreferences sharedPreferences) {
+        SharedPreferences.Editor editedSharedPreferences = sharedPreferences.edit();
         getSuccedeedLevels();
 
         Gson gson = new Gson();
         String glevels = gson.toJson(this);
-        mEdit1.putString("LEVEL" + id + email, glevels);
-        mEdit1.commit();
+        editedSharedPreferences.putString("LEVEL" + id + email, glevels);
+        editedSharedPreferences.commit();
     }
 }

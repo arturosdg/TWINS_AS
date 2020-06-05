@@ -10,31 +10,26 @@ import es.imposoft.twins.R;
 
 public class ConcreteCard implements Card {
 
-    Bitmap frontImage, backImage;
-    Button cardButton;
-    boolean visible, isPaired, special;
-    Context contextScene;
-    int points;
+    private Bitmap frontImage, backImage;
+    private Button cardButton;
+    private boolean isVisible, isPaired, isSpecial;
+    private Context contextScene;
+    private int points;
     private int frontName;
 
 
     public ConcreteCard(Button button, Context context) {
         contextScene = context;
-        Bitmap bitBack = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.background2),
-                bitFront = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.cars0);
-        backImage = bitBack;
-        frontImage = bitFront;
+        backImage = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.background2);
+        frontImage = BitmapFactory.decodeResource(contextScene.getResources(), R.drawable.cars0);
         cardButton = button;
-        visible = false;
+        isVisible = false;
         isPaired = false;
-        special = false;
-
+        isSpecial = false;
         points = 2;
     }
 
-    public Bitmap getFrontImage() {
-        return frontImage;
-    }
+    public Bitmap getFrontImage() { return frontImage; }
 
     public void setFrontName(int name){
         this.frontName = name;
@@ -62,18 +57,18 @@ public class ConcreteCard implements Card {
     }
 
     public void turnCard() {
-        if (!visible) {
+        if (!isVisible) {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(), frontImage));
         } else {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(), backImage));
         }
-        visible = !visible;
+        isVisible = !isVisible;
     }
 
     public void turnVisibleCards() {
-        if (visible && !isPaired) {
+        if (isVisible && !isPaired) {
             cardButton.setBackground(new BitmapDrawable(contextScene.getResources(), backImage));
-            visible = !visible;
+            isVisible = !isVisible;
         }
     }
 
@@ -90,10 +85,10 @@ public class ConcreteCard implements Card {
     }
 
     public void setSpecial(boolean special) {
-        this.special = special;
+        this.isSpecial = special;
     }
 
     public boolean isSpecial() {
-        return special;
+        return isSpecial;
     }
 }
