@@ -17,6 +17,12 @@ public class ConcreteCard implements Card {
     private int points;
     private int frontName;
 
+    public ConcreteCard() {
+        isVisible = false;
+        isPaired = false;
+        isSpecial = false;
+        points = 2;
+    }
 
     public ConcreteCard(Button button, Context context) {
         contextScene = context;
