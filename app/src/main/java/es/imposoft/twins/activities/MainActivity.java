@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient signInClient;
     GoogleSignInAccount signedInAccount;
     SignInButton signInButton;
-
     Intent intent;
 
     @SuppressLint("WrongViewCast")
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startgame);
 
         signInButton = findViewById(R.id.button_signIn);
-
         if (signedInAccount == null) {
             findViewById(R.id.button_viewProfile).setVisibility(View.GONE);
             findViewById(R.id.button_signIn).setVisibility(View.VISIBLE);
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.button_viewProfile).setVisibility(View.VISIBLE);
             findViewById(R.id.button_signIn).setVisibility(View.GONE);
         }
-
 
         signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         signInClient = GoogleSignIn.getClient(this, signInOptions);
