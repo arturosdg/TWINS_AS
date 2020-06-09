@@ -28,7 +28,6 @@ public class DealTwoDecks implements Dealer {
         //Initialize arrays
         imagesNormal = new ArrayList<>();
         randomNumbers = new ArrayList<>();
-
         totalCards = game.getCardAmount();
 
         //Load the right amount of cards randomly on imagesNormal
@@ -45,9 +44,8 @@ public class DealTwoDecks implements Dealer {
 
         //We shuffle the card buttons to assign a Card randomly
         Collections.shuffle(Arrays.asList(buttons));
-        for(int i = 0; i < totalCards; i++){
+        for(int i = 0; i < totalCards; i++)
             concreteCards.add(new ConcreteCard(buttons[i], context));
-        }
 
         //Duplicate the cards so we have 2 of each kind and assign the right card image
         imagesNormal.addAll(imagesNormal);
@@ -55,7 +53,8 @@ public class DealTwoDecks implements Dealer {
             if(cardToAsign instanceof ConcreteCard) {
                 int actualImage = imagesNormal.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(actualImage);
             }
         }

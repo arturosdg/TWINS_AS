@@ -46,10 +46,9 @@ public class DealSpecialDecks implements Dealer {
 
         //Load the right amount of cards randomly on imagesNormal
         randomNumbers = DealerServant.randomList(totalCards);
-        for (int i = 0; i < (totalCards - totalChallenges) / 2; i++){
+        for (int i = 0; i < (totalCards - totalChallenges) / 2; i++)
             imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase()
                     + randomNumbers.get(i), "drawable", context.getPackageName()));
-        }
 
         //Duplicate all the challengesWon to have the right amount
         challengesWon.addAll(challengesWon);
@@ -79,21 +78,28 @@ public class DealSpecialDecks implements Dealer {
         imagesNormal.addAll(imagesNormal);
         for (Card cardToAsign: concreteCards) {
             if (cardToAsign instanceof SpecialCardDecorator1) {
-                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard1", "drawable", context.getPackageName())));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
+                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("challengecard1", "drawable", context.getPackageName())));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard1", "drawable", context.getPackageName()));
             } else if (cardToAsign instanceof SpecialCardDecorator2) {
-                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard2", "drawable", context.getPackageName()) ));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
+                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("challengecard2", "drawable", context.getPackageName()) ));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard2", "drawable", context.getPackageName()));
             } else if (cardToAsign instanceof SpecialCardDecorator3) {
-                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("challengecard3", "drawable", context.getPackageName()) ));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
+                cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("challengecard3", "drawable", context.getPackageName()) ));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(context.getResources().getIdentifier("challengecard3", "drawable", context.getPackageName()));
             } else if(cardToAsign instanceof ConcreteCard) {
                 int actualImage = imagesNormal.remove(0);
                 cardToAsign.setFrontImage(BitmapFactory.decodeResource(context.getResources(), actualImage));
-                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources().getIdentifier("card", "drawable", context.getPackageName())));
+                cardToAsign.setBackImage(BitmapFactory.decodeResource(context.getResources(), context.getResources()
+                        .getIdentifier("card", "drawable", context.getPackageName())));
                 cardToAsign.setFrontName(actualImage);
             }
         }
