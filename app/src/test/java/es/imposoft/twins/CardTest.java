@@ -1,11 +1,7 @@
 package es.imposoft.twins;
 
-import android.content.Context;
-
 import org.junit.Test;
-
 import es.imposoft.twins.card.ConcreteCard;
-
 import static org.junit.Assert.*;
 
 public class CardTest {

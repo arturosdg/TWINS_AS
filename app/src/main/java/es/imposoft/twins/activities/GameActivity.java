@@ -235,7 +235,7 @@ public class GameActivity extends AppCompatActivity {
 
     private String getLocalePointsText() {
         Locale current = getResources().getConfiguration().locale;
-        String poinsText = "Not loaded" + current;
+        String poinsText = "Not loaded" + current.toLanguageTag();
         switch(current.toLanguageTag()){
             case "en-US":
             case "en":
@@ -253,6 +253,8 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case "ca":
                 poinsText = "Punts: ";
+            case "en-GB":
+                poinsText = "Points: ";
         }
         return poinsText;
     }
