@@ -242,6 +242,7 @@ public class GameActivity extends AppCompatActivity {
                 poinsText = "Points: ";
                 break;
             case "es":
+            case "es-ES":
                 poinsText = "Puntos: ";
                 break;
             case "pt":

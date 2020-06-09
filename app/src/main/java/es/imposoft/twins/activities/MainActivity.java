@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 welcomeText = "Welcome ";
                 break;
             case "es":
+            case "es-ES":
                 welcomeText = "Bienvenido ";
                 break;
             case "pt":
