@@ -25,7 +25,6 @@ public class DealSpecialDecks implements Dealer {
     private ArrayList<Integer> randomNumbers, imagesNormal;
     private List<String> challengesWon;
     private int totalCards;
-    private int MAX_CARD_DESIGNS = 12;
     private SucceededChallenge challengesProgress;
 
     @Override
@@ -46,7 +45,7 @@ public class DealSpecialDecks implements Dealer {
         if(challengesWon != null) totalChallenges = challengesWon.size() * 2;
 
         //Load the right amount of cards randomly on imagesNormal
-        randomNumbers = randomList();
+        randomNumbers = DealerServant.randomList(totalCards);
         for (int i = 0; i < (totalCards - totalChallenges) / 2; i++){
             imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase()
                     + randomNumbers.get(i), "drawable", context.getPackageName()));
@@ -98,21 +97,5 @@ public class DealSpecialDecks implements Dealer {
                 cardToAsign.setFrontName(actualImage);
             }
         }
-    }
-
-    private ArrayList<Integer> randomList() {
-        ArrayList<Integer> cardNumbers = new ArrayList<>();
-        if (totalCards == 24) {
-            for (int i = 0; i < totalCards / 2; i++)
-                cardNumbers.add(i);
-        } else {
-            while (cardNumbers.size() <= totalCards / 2) {
-                int random = (int) (Math.random() * MAX_CARD_DESIGNS);
-                if (!cardNumbers.contains(random)) {
-                    cardNumbers.add(random);
-                }
-            }
-        }
-        return cardNumbers;
     }
 }

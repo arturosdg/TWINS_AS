@@ -16,7 +16,6 @@ import es.imposoft.twins.gametypes.Game;
 public class DealOneDeck implements Dealer {
     ArrayList<Integer> randomNumbers, imagesNormal;
     int totalCards;
-    int MAX_CARD_DESIGNS = 12;
 
     @Override
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
@@ -27,7 +26,7 @@ public class DealOneDeck implements Dealer {
         totalCards = game.getCardAmount();
 
         //Load the right amount of cards randomly on imagesNormal
-        randomNumbers = randomList();
+        randomNumbers = DealerServant.randomList(totalCards);
         for (int i = 0; i < totalCards / 2; i++) {
             imagesNormal.add(context.getResources().getIdentifier(theme.toString().toLowerCase()
                     + randomNumbers.get(i), "drawable", context.getPackageName()));
@@ -48,21 +47,4 @@ public class DealOneDeck implements Dealer {
                 cardToAssign.setFrontName(actualImage);
         }
     }
-
-    private ArrayList<Integer> randomList() {
-        ArrayList<Integer> cardNumbers = new ArrayList<>();
-        if (totalCards == 24) {
-            for (int i = 0; i < totalCards / 2; i++)
-                cardNumbers.add(i);
-        } else {
-            while (cardNumbers.size() <= totalCards / 2) {
-                int random = (int) (Math.random() * MAX_CARD_DESIGNS);
-                if (!cardNumbers.contains(random)) {
-                    cardNumbers.add(random);
-                }
-            }
-        }
-        return cardNumbers;
-    }
-
 }

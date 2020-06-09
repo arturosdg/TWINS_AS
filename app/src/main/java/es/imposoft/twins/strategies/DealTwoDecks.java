@@ -20,27 +20,26 @@ import es.imposoft.twins.components.GameMode;
 import es.imposoft.twins.gametypes.Game;
 
 public class DealTwoDecks implements Dealer {
-    ArrayList<Integer> numbers, imagesNormal;
+    ArrayList<Integer> randomNumbers, imagesNormal;
     int totalCards;
-    int MAX_CARD_DESIGNS = 12;
 
     @Override
     public void assignCardTheme(DeckTheme theme, ArrayList<Card> concreteCards, Game game, Button[] buttons, Context context, String email) {
         //Initialize arrays
         imagesNormal = new ArrayList<>();
-        numbers = new ArrayList<>();
+        randomNumbers = new ArrayList<>();
 
         totalCards = game.getCardAmount();
 
         //Load the right amount of cards randomly on imagesNormal
-        numbers = randomList();
+        randomNumbers = DealerServant.randomList(totalCards);
         for (int i = 0; i < totalCards / 2; i++) {
             if (i % 2 == 0) {
                 imagesNormal.add(context.getResources().getIdentifier(DeckTheme.EMOJI.toString().toLowerCase()
-                        + numbers.get(i), "drawable", context.getPackageName()));
+                        + randomNumbers.get(i), "drawable", context.getPackageName()));
             } else {
                 imagesNormal.add(context.getResources().getIdentifier(DeckTheme.CARS.toString().toLowerCase()
-                        + numbers.get(i), "drawable", context.getPackageName()));
+                        + randomNumbers.get(i), "drawable", context.getPackageName()));
             }
         }
 
@@ -60,21 +59,5 @@ public class DealTwoDecks implements Dealer {
                 cardToAsign.setFrontName(actualImage);
             }
         }
-    }
-
-    private ArrayList<Integer> randomList() {
-        ArrayList<Integer> cardNumbers = new ArrayList<>();
-        if (totalCards == 24) {
-            for (int i = 0; i < totalCards / 2; i++)
-                cardNumbers.add(i);
-        } else {
-            while (cardNumbers.size() <= totalCards / 2) {
-                int random = (int) (Math.random() * MAX_CARD_DESIGNS);
-                if (!cardNumbers.contains(random)) {
-                    cardNumbers.add(random);
-                }
-            }
-        }
-        return cardNumbers;
     }
 }

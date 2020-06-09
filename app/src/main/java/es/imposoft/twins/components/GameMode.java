@@ -4,6 +4,5 @@ public enum GameMode {
     CASUAL,
     STANDARD,
     LEVELS,
-    CHALLENGE,
-    TOURNAMENT
+    CHALLENGE
 }

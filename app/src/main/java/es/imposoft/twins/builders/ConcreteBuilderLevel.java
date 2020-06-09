@@ -3,7 +3,6 @@ package es.imposoft.twins.builders;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.GameMode;
-import es.imposoft.twins.components.GameType;
 import es.imposoft.twins.gametypes.Game;
 
 public class ConcreteBuilderLevel implements LevelBuilder {
@@ -15,7 +14,6 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private DeckTheme deckTheme;
     private GameMode gameMode;
     private int levelId;
-    private GameType gameType;
     private int song;
     private int maxFails;
 
@@ -46,8 +44,6 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     @Override
     public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
 
-    public void setGameType(GameType gameType) { this.gameType = gameType; }
-
     @Override
     public void setId(int levelId){
         this.levelId = levelId;
@@ -61,6 +57,6 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     public void setMaxFails(int maxFails) { this.maxFails = maxFails; }
 
     public Game getResult(){
-        return new Game(levelId, chronometerSeconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, gameType, song, maxFails);
+        return new Game(levelId, chronometerSeconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, song, maxFails);
     }
 }

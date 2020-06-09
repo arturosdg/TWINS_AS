@@ -5,7 +5,6 @@ import es.imposoft.twins.builders.ConcreteBuilderLevel;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.GameMode;
-import es.imposoft.twins.components.GameType;
 
 public class Director {
 
@@ -20,10 +19,9 @@ public class Director {
         builder.setMinScore(0);
         builder.setCardAmount(20);
         builder.setRevealTime(3);
-        builder.setChronometer(45, Chronometer.NORMAL);
+        builder.setChronometer(0, Chronometer.NORMAL);
         builder.setGameMode(GameMode.STANDARD);
         builder.setId(1);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.partidaestandar);
         builder.setMaxFails(10);
     }
@@ -36,9 +34,8 @@ public class Director {
         builder.setChronometer(90, Chronometer.NONE);
         builder.setGameMode(GameMode.CASUAL);
         builder.setId(2);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.musicapartidalibre);
-        builder.setMaxFails(5);
+        builder.setMaxFails(10000);
     }
 
     public void constructLevel1(ConcreteBuilderLevel builder){
@@ -49,7 +46,6 @@ public class Director {
         builder.setChronometer(60, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(3);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.niveltranquilo);
         builder.setMaxFails(5);
     }
@@ -62,7 +58,6 @@ public class Director {
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(4);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.nivelintensito);
         builder.setMaxFails(5);
     }
@@ -75,7 +70,6 @@ public class Director {
         builder.setChronometer(60, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(5);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
@@ -88,7 +82,6 @@ public class Director {
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(6);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
@@ -101,7 +94,6 @@ public class Director {
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.LEVELS);
         builder.setId(7);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.nivel3);
         builder.setMaxFails(5);
     }
@@ -115,7 +107,6 @@ public class Director {
         builder.setChronometer(18, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(8);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiotiempo);
         builder.setMaxFails(5);
     }
@@ -129,7 +120,6 @@ public class Director {
         builder.setChronometer(0, Chronometer.NONE);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(9);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafioperfecto2);
         builder.setMaxFails(1);
     }
@@ -143,7 +133,6 @@ public class Director {
         builder.setChronometer(50, Chronometer.DESCENDING);
         builder.setGameMode(GameMode.CHALLENGE);
         builder.setId(10);
-        builder.setGameType(GameType.NORMAL);
         builder.setSong(R.raw.desafiodosbarajas);
         builder.setMaxFails(5);
     }

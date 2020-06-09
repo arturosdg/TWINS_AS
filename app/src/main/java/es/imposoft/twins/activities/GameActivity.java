@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -227,8 +228,32 @@ public class GameActivity extends AppCompatActivity {
     private void updateScore(Card card) {
         if(!isChallengeMode()) {
             score = scoreManager.updateScore(previousCorrect, card);
-            scoreText.setText(R.string.puntos + score);
+            String poinsText = getLocalePointsText();
+            scoreText.setText(poinsText + score);
         }
+    }
+
+    private String getLocalePointsText() {
+        String poinsText = "Not loaded";
+        Locale current = getResources().getConfiguration().locale;
+        switch(current.toLanguageTag()){
+            case "en-US":
+            case "en":
+                poinsText = "Points: ";
+                break;
+            case "es":
+                poinsText = "Puntos: ";
+                break;
+            case "pt":
+                poinsText = "Pontos: ";
+                break;
+            case "fr":
+                poinsText = "Points: ";
+                break;
+            case "ca":
+                poinsText = "Punts: ";
+        }
+        return poinsText;
     }
 
     private void turnAllCards() {

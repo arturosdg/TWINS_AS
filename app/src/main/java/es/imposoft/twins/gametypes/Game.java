@@ -3,22 +3,37 @@ package es.imposoft.twins.gametypes;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.components.Chronometer;
 import es.imposoft.twins.components.GameMode;
-import es.imposoft.twins.components.GameType;
 
 public class Game {
+    //Podrian ser un componente Chronometer, 3 productos concretos segun el chronometer(?)
     private final int seconds;
     private final Chronometer chronometerType;
+
+    //Solo en partida libre
     private final int minScore;
-    private final int cardAmount;
-    private final int revealSeconds;
-    private final DeckTheme deckTheme;
-    private final GameMode gameMode;
-    private final int id;
-    private GameType gameType;
-    private int song;
+
+    //En todos menos partida libre
     private int maxFails;
 
-    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode, GameType gameType,int song, int maxFails){
+    //En todos
+    private final int revealSeconds;
+
+    //Podria establecerse en funcion del builder, cada gamemode un producto game concreto
+    private final GameMode gameMode;
+
+    //Poner la logica de crear el tablero y asignarselo a la clase game
+    private final int cardAmount;
+
+    //Algunas partidas te dejan elegir, otras no Challenges no
+    private final DeckTheme deckTheme;
+
+    //Solo ponemos id si son niveles o challenges(?) o son 2 productos concretos distintos
+    private final int id;
+
+    //Podriamos meter la logica de poner la cancion en la creacion del objeto(?)
+    private int song;
+
+    public Game(int id, int seconds, Chronometer chronometerType, int minScore, int cardAmount, int revealSeconds, DeckTheme deckTheme, GameMode gameMode,int song, int maxFails){
         this.song = song;
         this.id = id;
         this.seconds = seconds;
@@ -28,7 +43,6 @@ public class Game {
         this.revealSeconds = revealSeconds;
         this.deckTheme = deckTheme;
         this.gameMode = gameMode;
-        this.gameType = gameType;
         this.maxFails = maxFails;
     }
 

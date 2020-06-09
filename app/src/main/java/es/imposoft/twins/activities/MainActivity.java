@@ -20,6 +20,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Locale;
+
 import es.imposoft.twins.singleton.MusicService;
 import es.imposoft.twins.components.DeckTheme;
 import es.imposoft.twins.R;
@@ -139,11 +141,36 @@ public class MainActivity extends AppCompatActivity {
         try {
             signedInAccount = task.getResult(ApiException.class);
             this.refresh();
-            Toast.makeText(this, R.string.bienvenido + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
+            String welcomeText = getLocaleLoginText();
+            Toast.makeText(this, welcomeText + signedInAccount.getDisplayName(), Toast.LENGTH_SHORT).show();
         } catch (ApiException e) {
             new AlertDialog.Builder(this).setMessage(getString(R.string.signin_other_error))
                     .setNeutralButton(android.R.string.ok, null).show();
         }
+    }
+
+    private String getLocaleLoginText() {
+        String welcomeText = "Not loaded";
+        Locale current = getResources().getConfiguration().locale;
+        switch(current.toLanguageTag()){
+            case "en-US":
+            case "en":
+                welcomeText = "Welcome ";
+                break;
+            case "es":
+                welcomeText = "Bienvenido ";
+                break;
+            case "pt":
+                welcomeText = "Bem-vinda ";
+                break;
+            case "fr":
+                welcomeText = "Bienvenue ";
+                break;
+            case "ca":
+                welcomeText = "Benvingut ";
+                break;
+        }
+        return welcomeText;
     }
 
     private void startSignInIntent() {
