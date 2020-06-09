@@ -314,23 +314,26 @@ public class GameActivity extends AppCompatActivity {
         chronoTimer.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void isTimeOver(){
-        chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if (timeWhenStarted + (game.getSeconds() * 1000) <= SystemClock.elapsedRealtime()) {
-                    chronoTimer.stop();
-                    musicEngine.stopExtraSound();
-                    timeHandler.postDelayed(new Runnable() {
-                        public void run() {
-                            showGameOver();
-                        }
-                    }, 650);
-                } else if(timeWhenStarted + (game.getSeconds() * 1000) - SOUNDSECONDS <= SystemClock.elapsedRealtime()){
-                    musicEngine.startExtraSound(R.raw.clocksound);
+        if(chronoTimer.isCountDown()) {
+            chronoTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    if (timeWhenStarted + (game.getSeconds() * 1000) <= SystemClock.elapsedRealtime()) {
+                        chronoTimer.stop();
+                        musicEngine.stopExtraSound();
+                        timeHandler.postDelayed(new Runnable() {
+                            public void run() {
+                                showGameOver();
+                            }
+                        }, 650);
+                    } else if (timeWhenStarted + (game.getSeconds() * 1000) - SOUNDSECONDS <= SystemClock.elapsedRealtime()) {
+                        musicEngine.startExtraSound(R.raw.clocksound);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public void pauseGame(View view) {

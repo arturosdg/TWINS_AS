@@ -18,34 +18,27 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     private int maxFails;
 
     @Override
-    public void setChronometer(int chronometerSeconds, Chronometer chronometerType) {
+    public void setChronometerParameters(int chronometerSeconds, Chronometer chronometerType) {
         this.chronometerSeconds = chronometerSeconds;
         this.chronometerType = chronometerType;
     }
 
     @Override
-    public void setMinScore(int minScore) {
+    public void setScoreParameters(int minScore, int maxFails) {
+        this.maxFails = maxFails;
         this.minScore = minScore;
     }
 
     @Override
-    public void setCardAmount(int cardAmount) {
-        this.cardAmount = cardAmount;
-    }
-
-    @Override
-    public void setRevealTime(int revealTime) {
+    public void setTableParameters(int cardAmount, int revealTime, DeckTheme deckTheme) {
         this.revealSeconds = revealTime;
+        this.cardAmount = cardAmount;
+        this.deckTheme = deckTheme;
     }
 
     @Override
-    public void setCardTheme(DeckTheme deckTheme) { this.deckTheme = deckTheme; }
-
-    @Override
-    public void setGameMode(GameMode gameMode) {this.gameMode = gameMode; }
-
-    @Override
-    public void setId(int levelId){
+    public void setGameParameters(GameMode gameMode, int levelId) {
+        this.gameMode = gameMode;
         this.levelId = levelId;
     }
 
@@ -53,8 +46,6 @@ public class ConcreteBuilderLevel implements LevelBuilder {
     public void setSong(int song) {
         this.song = song;
     }
-
-    public void setMaxFails(int maxFails) { this.maxFails = maxFails; }
 
     public Game getResult(){
         return new Game(levelId, chronometerSeconds,  chronometerType, minScore, cardAmount, revealSeconds, deckTheme, gameMode, song, maxFails);
