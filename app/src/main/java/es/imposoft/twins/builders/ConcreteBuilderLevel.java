@@ -124,6 +124,7 @@ public class ConcreteBuilderLevel implements LevelBuilder {
 
     @Override
     public void setSong(int song) {
+        this.song = song;
     }
 
     public Game getResult(){
