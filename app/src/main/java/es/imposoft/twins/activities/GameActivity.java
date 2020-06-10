@@ -241,6 +241,9 @@ public class GameActivity extends AppCompatActivity {
             case "en":
                 poinsText = "Points: ";
                 break;
+            case "en-GB":
+                poinsText = "Points: ";
+                break;
             case "es":
             case "es-ES":
                 poinsText = "Puntos: ";
@@ -253,8 +256,7 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case "ca":
                 poinsText = "Punts: ";
-            case "en-GB":
-                poinsText = "Points: ";
+                break;
         }
         return poinsText;
     }

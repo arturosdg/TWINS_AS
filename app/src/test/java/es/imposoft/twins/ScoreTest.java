@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class ScoreTest {
     @Test
-    public void testPoints(){
+    public void testPointsNormal(){
         //Arrange/Act
         ConcreteCard concreteCard = new ConcreteCard();
         AbstractScore scoreCasual = new ScoreCasual();
