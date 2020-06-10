@@ -2,9 +2,10 @@ package es.imposoft.twins.strategies;
 
 import java.util.ArrayList;
 
-public class DealerServant {
-    static int MAX_CARD_DESIGNS = 12;
-    public static ArrayList<Integer> randomList(int totalCards) {
+class DealerServant {
+    private static final int MAX_CARD_DESIGNS = 12;
+
+    static ArrayList<Integer> randomList(int totalCards) {
         ArrayList<Integer> cardNumbers = new ArrayList<>();
         if (totalCards == 24) {
             for (int i = 0; i < totalCards / 2; i++)

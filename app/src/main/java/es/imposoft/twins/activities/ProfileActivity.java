@@ -76,7 +76,6 @@ public class ProfileActivity extends AppCompatActivity {
         userName.setText(signedInAccount.getDisplayName());
         userEmail.setText(signedInAccount.getEmail());
         challenges.setText(String.valueOf(challengesSucceeded));
-        //TODO mostrar las maximas puntuaciones del usuario, o la suma de las puntuaciones
         score.setText(String.valueOf(scores.getTotalScore()));
     }
 
