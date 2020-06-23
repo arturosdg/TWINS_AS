@@ -6,7 +6,7 @@ Arturo Sánchez Díaz-Güemes
 
 Noemi Almohano Vidick
 
-Memoria de TWINS
+# Memoria de TWINS
 
 Documentación sobre el proyecto TWINS desarrollado por el grupo
 Imposoft. Se incluye información sobre los patrones de diseño
