@@ -1,13 +1,11 @@
 package es.imposoft.twins;
 
-import android.content.Context;
-
 import org.junit.Test;
 
-import es.imposoft.twins.card.ConcreteCard;
-import es.imposoft.twins.card.SpecialCardDecorator1;
-import es.imposoft.twins.card.SpecialCardDecorator2;
-import es.imposoft.twins.card.SpecialCardDecorator3;
+import es.imposoft.twins.logic.card.ConcreteCard;
+import es.imposoft.twins.logic.card.SpecialCardDecorator1;
+import es.imposoft.twins.logic.card.SpecialCardDecorator2;
+import es.imposoft.twins.logic.card.SpecialCardDecorator3;
 
 import static org.junit.Assert.*;
 

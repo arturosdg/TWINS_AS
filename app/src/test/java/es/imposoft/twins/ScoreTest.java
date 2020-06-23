@@ -1,8 +1,8 @@
 package es.imposoft.twins;
 
 import org.junit.Test;
-import es.imposoft.twins.card.*;
-import es.imposoft.twins.prototype.*;
+import es.imposoft.twins.logic.card.*;
+import es.imposoft.twins.logic.prototype.*;
 import static org.junit.Assert.*;
 
 public class ScoreTest {

@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/icono"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".view.activities.ProfileActivity"></activity>
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".view.activities.SplashScreenActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/splashactivity"
@@ -24,16 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.SelectionGameModeActivity" />
+        <activity android:name=".view.activities.MainActivity" />
+        <activity android:name=".view.activities.SelectionGameModeActivity" />
         <activity
-            android:name=".activities.GameActivity"
+            android:name=".view.activities.GameActivity"
             android:theme="@style/generalnotitle" />
-        <activity android:name=".activities.SelectLevelActivity" />
-        <activity android:name=".activities.BackgroundMusicActivity" />
-        <activity android:name=".activities.SelectChallengeActivity" />
+        <activity android:name=".view.activities.SelectLevelActivity" />
+        <activity android:name=".view.activities.BackgroundMusicActivity" />
+        <activity android:name=".view.activities.SelectChallengeActivity" />
         <activity
-            android:name=".activities.PopupActivity"
+            android:name=".view.activities.PopupActivity"
             android:configChanges="locale|orientation"
             android:theme="@style/AppTheme.PopupWindow" />
     </application>

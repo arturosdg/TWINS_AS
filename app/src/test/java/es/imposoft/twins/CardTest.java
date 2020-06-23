@@ -1,7 +1,7 @@
 package es.imposoft.twins;
 
 import org.junit.Test;
-import es.imposoft.twins.card.ConcreteCard;
+import es.imposoft.twins.logic.card.ConcreteCard;
 import static org.junit.Assert.*;
 
 public class CardTest {
